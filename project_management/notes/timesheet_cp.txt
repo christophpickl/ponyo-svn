@@ -1,0 +1,11 @@
+29.03. - 22:00 -  2h - project setup
+30.03. - 00:00 -  h - setup of openni-playground project
+              ~~  2h~~
+
+
+=================================================
+IDEAS
+=================================================
+- @cpp: unit testing framework?
+- @cpp: logging framework?
+- @cpp: doxygen?

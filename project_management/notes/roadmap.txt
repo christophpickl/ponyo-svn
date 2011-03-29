@@ -1,4 +1,8 @@
 
+=================================================
+UPNEXT
+=================================================
+
 1. C++ Single-kinected (NiEnhanced.cpp)
 	a. get single Kinect running with OpenNI
 		- use initFromXML() // no programatically configuration yet
@@ -10,7 +14,8 @@
 	c. learn mex usage
 		+ other way round: access matlab code from C++
 	d. implement own mex wrapper (MexNiEnhanced.cpp)
-	*e. implement user detection algorithm
+	!e. implement user detection algorithm
+	!f. visualization using glut + opencv
 
 3. C++ Multiple-kinected
 	- see forum for guides [groups.google.com/group/openni-dev]
@@ -20,3 +25,12 @@
 4. Matlab Multiple-kinected
 	a. update MexNiEnhanced.cpp wrapper for multiple kinects
 	*b. implement multiple camera calibration logic
+
+
+=================================================
+FUTURE
+=================================================
+
+- JNI wrapper
+- investigate libfreenect
+- implement ~osceleton; keep running "server" instance to avoid time-consuming (re)start

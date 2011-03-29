@@ -136,19 +136,29 @@ void NiEnhanced::initFromXml(string xmlPath) {
 }
 
 /*
-Reading Data
- Data Generators constantly receive new data. However, the application may still be using older data (for example, the previous frame of the depth map). As a result of this, any generator should internally store new data, until explicitly requested to update to the newest available data.
- This means that Data Generators "hide" new data internally, until explicitly requested to expose the most updated data to the application, using the UpdateData request function. OpenNI enables the application to wait for new data to be available, and then update it using the xn::Generator::WaitAndUpdateData() function.
- In certain cases, the application holds more than one node, and wants all the nodes to be updated. OpenNI provides several functions to do this, according to the specifications of what should occur before the UpdateData occurs:
- xn::Context::WaitAnyUpdateAll(): Waits for any node to have new data. Once new data is available from any node, all nodes are updated.
- xn::Context::WaitOneUpdateAll(): Waits for a specific node to have new data. Once new data is available from this node, all nodes are updated. This is especially useful when several nodes are producing data, but only one determines the progress of the application.
- xn::Context::WaitNoneUpdateAll(): Does not wait for anything. All nodes are immediately updated.
- xn::Context::WaitAndUpdateAll(): Waits for all nodes to have new data available, and then updates them.
+Reading Data INFO
+-------------------------------------------------------------------------------------
+Data Generators constantly receive new data. However, the application may still be using older data (for example, the
+previous frame of the depth map). As a result of this, any generator should internally store new data, until explicitly
+requested to update to the newest available data. This means that Data Generators "hide" new data internally, until
+explicitly requested to expose the most updated data to the application, using the UpdateData request function.
+
+OpenNI enables the application to wait for new data to be available, and then update it using the function
+	xn::Generator::WaitAndUpdateData()
+
+In certain cases, the application holds more than one node, and wants all the nodes to be updated.
+OpenNI provides several functions to do this, according to the specifications of what should occur before the UpdateData occurs:
+ A) xn::Context::WaitAnyUpdateAll(): Waits for any node to have new data. Once new data is available from any node, all nodes are updated.
+ B) xn::Context::WaitOneUpdateAll(): Waits for a specific node to have new data. Once new data is available from this node, all nodes are updated.
+                                     This is especially useful when several nodes are producing data, but only one determines the progress of the application.
+ C) xn::Context::WaitNoneUpdateAll(): Does not wait for anything. All nodes are immediately updated.
+ D) xn::Context::WaitAndUpdateAll(): Waits for all nodes to have new data available, and then updates them.
 */
-void NiEnhanced::waitAndUpdateAll() {
-//	printf("waitAndUpdateAll() ...\n");
+void NiEnhanced::waitForUpdate() {
+//	printf("waitForUpdate() ...\n");
+//	this->context.WaitAnyUpdateAll();
 	this->context.WaitAndUpdateAll();
-//	printf("waitAndUpdateAll() ... TRIGGERED!\n");
+//	printf("waitForUpdate() ... TRIGGERED!\n");
 }
 
 

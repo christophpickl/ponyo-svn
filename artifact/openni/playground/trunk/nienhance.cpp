@@ -6,6 +6,8 @@
 using namespace std;
 
 NiEnhanced* ni;
+bool isRunning = false;
+bool shouldTerminate = false;
 
 void shutdown(int returnCode) {
 	printf("shutdown(returnCode=%d)\n", returnCode);
@@ -19,14 +21,18 @@ void shutdown(int returnCode) {
 
 void onSignalReceived(int signalCode) {
 	printf("onSignalReceived(signalCode=%d)\n", signalCode);
-	shutdown(signalCode); // TODO set boolean value quit to true, and use it in while loop in main!
+	if(isRunning == true) {
+		shouldTerminate = true;
+	} else {
+		shutdown(signalCode); // force quit while being in setup code
+	}
 }
 
 int main(void) {
 	printf("main() START\n");
 
-	signal(SIGINT, onSignalReceived); // hit CTRL-C keys in terminal
-	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT
+	signal(SIGINT, onSignalReceived); // hit CTRL-C keys in terminal (2)
+	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)
 
 	ni = new NiEnhanced();
 	string xmlConfigPath = "/openni/niconfig.xml";
@@ -40,20 +46,19 @@ int main(void) {
 	printf("Connection established ...\n");
 
 	printf("Hit CTRL-C to terminate the application.\n");
-	while(true){
-		ni->waitAndUpdateAll(); // TODO this one is blocking, right?
+	isRunning = true;
+	while(shouldTerminate == false) {
+		ni->waitForUpdate(); // this method call is blocking
 	 // Process the data
 	 //		g_DepthGenerator.GetMetaData(depthMD);
 	 //		g_UserGenerator.GetUserPixels(0, sceneMD);
 	 //		DrawDepthMap(depthMD, sceneMD);
 	 }
 
-
 //	printf("Hit ENTER to QUIT\n");
 //	string line;
 //	getline(cin, line, '\n');
 
-	// TODO dead code: will never be reached, as infinite loop above will be aborted by signal
 	printf("main() END\n");
 	shutdown(0);
 }

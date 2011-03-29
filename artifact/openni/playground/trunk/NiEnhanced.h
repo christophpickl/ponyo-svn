@@ -12,7 +12,7 @@ public:
 	virtual ~NiEnhanced();
 
 	void initFromXml(std::string);
-	void waitAndUpdateAll();
+	void waitForUpdate();
 	void close();
 
 private:

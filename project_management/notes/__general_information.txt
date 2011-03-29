@@ -1,0 +1,10 @@
+
+LINKS
+======================================================
+
+* project @sourceforge
+	https://sourceforge.net/projects/ponyo/
+
+* project @google code (svn repo only)
+	http://code.google.com/p/ponyo-svn/
+

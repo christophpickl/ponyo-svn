@@ -1,0 +1,22 @@
+
+1. C++ Single-kinected (NiEnhanced.cpp)
+	a. get single Kinect running with OpenNI
+		- use initFromXML() // no programatically configuration yet
+		- create depth and user generators (for easy verification if its working; could also store image to disk)
+
+2. Matlab Single-kinected
+	a. learn beginner stuff
+	b. get [sf.net/projects/kinect-mex] running (single camera only)
+	c. learn mex usage
+		+ other way round: access matlab code from C++
+	d. implement own mex wrapper (MexNiEnhanced.cpp)
+	*e. implement user detection algorithm
+
+3. C++ Multiple-kinected
+	- see forum for guides [groups.google.com/group/openni-dev]
+	// USB issue??
+	// remember to start generate each generator explicitly (no startAll)!
+	
+4. Matlab Multiple-kinected
+	a. update MexNiEnhanced.cpp wrapper for multiple kinects
+	*b. implement multiple camera calibration logic

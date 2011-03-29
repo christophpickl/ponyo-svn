@@ -4,8 +4,36 @@
 
 
 =================================================
-IDEAS
+TODOs
+=================================================
+- go through openni forum entries for multiple kinects
+- go through github openni sourcecode: https://github.com/search?q=openni&type=Everything&repo=&langOverride=&start_value=1
+- go through project sourcecode
+	* https://github.com/roxlu/ofxOpenNI
+	* https://github.com/johnboiles/JBKinectHacks
+		eg: https://github.com/johnboiles/JBKinectHacks/blob/master/MouseController/main-MouseController.cpp
+	* https://github.com/pixelnerve/BlockOpenNI
+		eg: https://github.com/pixelnerve/BlockOpenNI/blob/master/src/VOpenNIDevice.cpp
+	
+
+=================================================
+IDEAs
 =================================================
 - @cpp: unit testing framework?
 - @cpp: logging framework?
 - @cpp: doxygen?
+
+
+=================================================
+LINKs
+=================================================
+
+Matlab
+-------------------------------------------------
+- matlab tutorials
+	http://mechanical.poly.edu/faculty/vkapila/matlabtutor.htm
+
+OpenNI
+-------------------------------------------------
+- wiki with good faq
+	http://wiki.openni.org/mediawiki/index.php/Main_Page

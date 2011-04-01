@@ -13,26 +13,33 @@
 #include <boost/thread/xtime.hpp>
 #include <iostream>
 
+using namespace std;
+
 struct thread_alarm {
     thread_alarm(int secs) : m_secs(secs) { }
     void operator()() {
         boost::xtime xt;
         boost::xtime_get(&xt, boost::TIME_UTC);
         xt.sec += m_secs;
-		
+
+        cout << "thread_alarm.sleep(xt) ... started" << endl;
         boost::thread::sleep(xt);
-		
-        std::cout << "alarm sounded..." << std::endl;
+        cout << "thread_alarm.sleep(xt) ... ended" << endl;
     }
 	
     int m_secs;
 };
 
 int main(int argc, char* argv[]) {
-    int secs = 5;
-    std::cout << "setting alarm for 5 seconds..." << std::endl;
+    cout << "main() START" << endl;
+
+    const int sleepSeconds = 5;
+    cout << "setting alarm for " << sleepSeconds << " seconds..." << endl;
 	
-    thread_alarm alarm(secs);
-    boost::thread thrd(alarm);
-    thrd.join();
+    thread_alarm alarm(sleepSeconds);
+    boost::thread myThread(alarm);
+    cout << "myThread.join()" << endl;
+    myThread.join();
+
+    cout << "main() END" << endl;
 }

@@ -1,18 +1,12 @@
 #include <stdio.h>
 #include <iostream>
 //#include <sstream>
-#include "NiEnhanced.h"
 #include <time.h>
 
-using namespace std;
+#include "ponyo_common.h"
+#include "NiEnhanced.h"
 
-// TODO throw an exception with ERROR CODE only (map to java afterwards with proper message!)
-#define THROW_XN_EXCEPTION(errorMessage, returnCode) \
-string ss;                                            \
-ss.append(errorMessage);                              \
-ss.append(": ");                                      \
-ss.append(xnGetStatusString(returnCode));             \
-throw ss;
+using namespace std;
 
 NiEnhanced::NiEnhanced() {
 	printf("new NiEnhanced()\n");
@@ -24,8 +18,8 @@ NiEnhanced::~NiEnhanced() {
 	delete this->imageSaver;
 }
 
-void NiEnhanced::initFromXml(string xmlPath) {
-	printf("NiEnhanced.initByXml(xmlPath);\n");
+void NiEnhanced::initFromXml(string xmlConfigPath) {
+	printf("NiEnhanced.initByXml(xmlConfigPath);\n");
 	XnStatus returnCode;
 
 	printf("Initializing context ...\n");
@@ -33,9 +27,9 @@ void NiEnhanced::initFromXml(string xmlPath) {
 	if(returnCode != XN_STATUS_OK) { THROW_XN_EXCEPTION("Initialisation failed!", returnCode); }
 
 	// -------------------------------------------------------
-	cout << "Loading configuration from XML: " << xmlPath << endl;
+	cout << "Loading configuration from XML: " << xmlConfigPath << endl;
 	xn::EnumerationErrors errors;
-	returnCode = this->context.InitFromXmlFile(xmlPath.c_str(), &errors);
+	returnCode = this->context.InitFromXmlFile(xmlConfigPath.c_str(), &errors);
 	if(returnCode == XN_STATUS_NO_NODE_PRESENT) {
 		XnChar errorsToStringBuffer[1024];
 		errors.ToString(errorsToStringBuffer, 1024);
@@ -167,17 +161,20 @@ void NiEnhanced::waitForUpdate() {
 	this->context.WaitAndUpdateAll();
 //	printf("waitForUpdate() ... TRIGGERED!\n");
 
-	int num = time(NULL);
-	char framenumber[10];
-    sprintf(framenumber,"%06d", num);
-    std::stringstream ss;
-    std::string str_frame_number;
-    ss << framenumber;
-    ss >> str_frame_number;
 
-	this->imageGenerator.GetMetaData(this->imageMetaData);
-	std::string targetFileName = "CapturedFrames/image_RGB_"+ str_frame_number +".jpg";
-	this->imageSaver->saveToFile(this->imageMetaData, targetFileName);
+
+	// SAVE IMAGE
+//	int num = time(NULL);
+//	char framenumber[10];
+//    sprintf(framenumber,"%06d", num);
+//    std::stringstream ss;
+//    std::string str_frame_number;
+//    ss << framenumber;
+//    ss >> str_frame_number;
+//
+//	this->imageGenerator.GetMetaData(this->imageMetaData);
+//	std::string targetFileName = "CapturedFrames/image_RGB_"+ str_frame_number +".jpg";
+//	this->imageSaver->saveToFile(this->imageMetaData, targetFileName);
 }
 
 

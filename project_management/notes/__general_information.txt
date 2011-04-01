@@ -2,9 +2,12 @@
 LINKS
 ======================================================
 
-* project @sourceforge
+* Ponyo @SourceForge
 	https://sourceforge.net/projects/ponyo/
 
-* project @google code (svn repo only)
+* Ponyo @Google Code (Subversion Repository only)
 	http://code.google.com/p/ponyo-svn/
+
+* OpenNI Wiki
+	http://wiki.openni.org/mediawiki/index.php/Main_Page
 

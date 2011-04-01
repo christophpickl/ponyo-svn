@@ -1,13 +1,15 @@
 29.03. - 22:00 -  2h - project setup
 30.03. - 00:00 -  1h - setup of openni-playground project
 30.03. - 01:00 -  1h - matlab setup + kinect-mex first (failed) mex build tries
-01.04. - 15:00 -   h - saving kinect image via cpp
-              ~~  4h~~
+01.04. - 15:00 -  1h - saving kinect image with opencv
+01.04. - 16:00 -   h - getting multiple kinects working
+              ~~  5h~~
 
 
 =================================================
 TODOs
 =================================================
+! get access to motor/led
 - go through openni forum entries for multiple kinects
 - go through github openni sourcecode: https://github.com/search?q=openni&type=Everything&repo=&langOverride=&start_value=1
 - go through project sourcecode
@@ -39,3 +41,10 @@ OpenNI
 -------------------------------------------------
 - wiki with good faq
 	http://wiki.openni.org/mediawiki/index.php/Main_Page
+
+
+Tools
+-------------------------------------------------
+- OpenCV (Open Source Computer Vision)
+	http://opencv.willowgarage.com/wiki/
+	

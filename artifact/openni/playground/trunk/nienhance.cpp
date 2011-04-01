@@ -1,11 +1,15 @@
 #include <stdio.h>
 #include <iostream>
 //#include <stdlib.h>
+
 #include "NiEnhanced.h"
+#include "MultipleKinects.h"
 
 using namespace std;
 
-NiEnhanced* ni;
+//NiEnhanced* ni;
+MultipleKinects* ni;
+
 bool isRunning = false;
 bool shouldTerminate = false;
 
@@ -34,7 +38,8 @@ int main(void) {
 	signal(SIGINT, onSignalReceived); // hit CTRL-C keys in terminal (2)
 	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)
 
-	ni = new NiEnhanced();
+//	ni = new NiEnhanced();
+	ni = new MultipleKinects();
 	string xmlConfigPath = "/openni/niconfig.xml";
 	try {
 		ni->initFromXml(xmlConfigPath);
@@ -47,13 +52,14 @@ int main(void) {
 
 	printf("Hit CTRL-C to terminate the application.\n");
 	isRunning = true;
-	while(shouldTerminate == false) {
+//	while(shouldTerminate == false) {
 		ni->waitForUpdate(); // this method call is blocking
 	 // Process the data
 	 //		g_DepthGenerator.GetMetaData(depthMD);
 	 //		g_UserGenerator.GetUserPixels(0, sceneMD);
 	 //		DrawDepthMap(depthMD, sceneMD);
-	 }
+//	 }
+	isRunning = false;
 
 //	printf("Hit ENTER to QUIT\n");
 //	string line;

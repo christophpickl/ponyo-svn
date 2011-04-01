@@ -8,6 +8,20 @@ NiDevice::NiDevice(xn::NodeInfo& pDeviceInfo, xn::NodeInfo& pImageInfo, xn::Imag
 	  imageSaver(pImageSaver) {
 
 	printf("new NiDevice(deviceInfo, imageInfo)\n");
+	sscanf(this->deviceInfo.GetCreationInfo(), "%hx/%hx@%hhu/%hhu", &this->vendorId, &this->productId, &this->bus, &this->address);
+
+//	std::stringstream ss;
+//	ss << this->bus;
+//	ss << "_";
+//	ss << this->address;
+//	ss >> this->busAndAddress;
+	std::string s;
+	std::ostringstream outStream;
+	outStream << this->bus;
+	outStream << "_";
+	outStream << this->address;
+	this->busAndAddress = outStream.str();
+
 
 	XnCallbackHandle TODO_What_todo_with_this_imageCallbackHandle;
 	XnStatus returnCode = this->imageGenerator.RegisterToNewDataAvailable(&NiDevice::onImageDataAvailable, this, TODO_What_todo_with_this_imageCallbackHandle);
@@ -48,14 +62,14 @@ void NiDevice::start() {
 }
 
 /*static*/ void NiDevice::onImageDataAvailable(xn::ProductionNode& node, void* cookie) {
-	printf("NiDevice.onImageDataAvailable()\n");
+	printf("NiDevice.onImageDataAvailable() ... \n");
 	NiDevice* tthis = reinterpret_cast<NiDevice*>(cookie);
 
     tthis->imageGenerator.WaitAndUpdateData();
     xn::ImageMetaData imageData;
     tthis->imageGenerator.GetMetaData(imageData);
 
-    tthis->imageSaver->saveToDefault(imageData);
+    tthis->imageSaver->saveToDefault(imageData, tthis->busAndAddress);
 }
 
 void NiDevice::close() {
@@ -71,14 +85,17 @@ void NiDevice::close() {
 
 void NiDevice::printToString() {
 	printf("NiDevice: %s\n", this->deviceInfo.GetCreationInfo());
-	/*
-	 * eg: 045e/02ae@36/62
-	 *     045e/02ae@38/13
-	 *
-	 * unsigned short vendor_id;
-	 * unsigned short product_id;
-	 * unsigned char bus;
-	 * unsigned char address;
-	 * sscanf (deviceInfo.GetCreationInfo(), "%hx/%hx@%hhu/%hhu", &vendor_id, &product_id, &bus, &address);
-	 */
+}
+
+unsigned short NiDevice::getVendorId() {
+	return this->vendorId;
+}
+unsigned short NiDevice::getProductId() {
+	return this->productId;
+}
+unsigned char NiDevice::getBus() {
+	return this->bus;
+}
+unsigned char NiDevice::getAddress() {
+	return this->address;
 }

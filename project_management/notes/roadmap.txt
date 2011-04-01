@@ -3,34 +3,46 @@
 UPNEXT
 =================================================
 
-1. C++ Single-kinected (NiEnhanced.cpp)
-	a. get single Kinect running with OpenNI
+v0.1
+-------------------------------------------------
+* get kinect-mex running [sf.net/projects/kinect-mex] and learn basic usage
+* platform independent build (make)
+
+DONE *  get single Kinect running with OpenNI (NiEnhanced.cpp)
 		- use initFromXML() // no programatically configuration yet
 		- create depth and user generators (for easy verification if its working; could also store image to disk)
+DONE * get multiple Kinects running // see forum for guides [groups.google.com/group/openni-dev]
 
-2. Matlab Single-kinected
-	a. learn beginner stuff
-	b. get [sf.net/projects/kinect-mex] running (single camera only)
-	c. learn mex usage
-		+ other way round: access matlab code from C++
-	d. implement own mex wrapper (MexNiEnhanced.cpp)
-	!e. implement user detection algorithm
-	!f. visualization using glut + opencv
 
-3. C++ Multiple-kinected
-	- see forum for guides [groups.google.com/group/openni-dev]
-	// USB issue??
-	// remember to start generate each generator explicitly (no startAll)!
-	
-4. Matlab Multiple-kinected
-	a. update MexNiEnhanced.cpp wrapper for multiple kinects
-	*b. implement multiple camera calibration logic
+v0.2
+-------------------------------------------------
+* get mex+openni running on mac
+* implement own mex wrapper
+  * implement multiple camera calibration logic!
+* implement mex user detection algorithm
+* visualization using glut + opencv
+
+
+v0.3
+-------------------------------------------------
+* enhance c++ codebase: cppunit, logging, exceptions, namespace, threads(?)
+
+
+v0.???
+-------------------------------------------------
+* access matlab code from within C++ ?!
+* implement JNI wrapper
+* OSCServer
+* @Build: use CMake (and pkg-config like openCV does)
+* investigate libFreeNect => access motor/led?!
+	// forum entry: => " I hope they add motor support as well to OpenNI soon!" :(
+
+* minor: support oni record/playback
+* minor: use doxygen
+
 
 
 =================================================
-FUTURE
+DONE
 =================================================
 
-- JNI wrapper
-- investigate libfreenect
-- implement ~osceleton; keep running "server" instance to avoid time-consuming (re)start

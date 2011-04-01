@@ -10,16 +10,17 @@ ImageSaver::~ImageSaver() {
 	printf("delete ~ImageSaver()\n");
 }
 
-void ImageSaver::saveToDefault(const xn::ImageMetaData& image) {
-	printf("ImageSaver.saveToDefault(image)\n");
+void ImageSaver::saveToDefault(const xn::ImageMetaData& image, const std::string& fileNameSuffix) {
+	printf("ImageSaver.saveToDefault(image, fileNameSuffix)\n");
 	int num = time(NULL);
 	char framenumber[10];
 	sprintf(framenumber,"%06d", num);
 	std::stringstream ss;
 	std::string str_frame_number;
 	ss << framenumber;
+
 	ss >> str_frame_number;
-	std::string targetFileName = "CapturedFrames/image_RGB_"+ str_frame_number +".jpg";
+	std::string targetFileName = "CapturedFrames/image_RGB_"+ str_frame_number +"-" + fileNameSuffix + ".jpg";
 
 	this->saveToFile(image, targetFileName);
 }

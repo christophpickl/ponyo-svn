@@ -7,4 +7,5 @@ TIMESHEET CP
 30.03. - 01:00 -  1h - matlab setup + kinect-mex first (failed) mex build tries
 01.04. - 15:00 -  1h - saving kinect image with opencv
 01.04. - 16:00 -  3h - got multiple kinects working :)
-              ~~  8h~~
+01.04. - 19:00 -  2h - mainly project mgmt (organisation, planning)
+              ~~ 10h~~

@@ -2,6 +2,7 @@
 #include <iostream>
 //#include <sstream>
 #include "NiEnhanced.h"
+#include <time.h>
 
 using namespace std;
 
@@ -15,10 +16,12 @@ throw ss;
 
 NiEnhanced::NiEnhanced() {
 	printf("new NiEnhanced()\n");
+	this->imageSaver = new ImageSaver();
 }
 
 NiEnhanced::~NiEnhanced() {
-	printf("~NiEnhanced()\n");
+	printf("delete ~NiEnhanced()\n");
+	delete this->imageSaver;
 }
 
 void NiEnhanced::initFromXml(string xmlPath) {
@@ -43,8 +46,12 @@ void NiEnhanced::initFromXml(string xmlPath) {
 
 	// -------------------------------------------------------
 	cout << "Checking configuration for existing nodes ..." << endl;
+
 	returnCode = this->context.FindExistingNode(XN_NODE_TYPE_DEPTH, this->depthGenerator);
 	if(returnCode != XN_STATUS_OK) { THROW_XN_EXCEPTION("Depth generator not found!", returnCode); }
+
+	returnCode = this->context.FindExistingNode(XN_NODE_TYPE_IMAGE, this->imageGenerator);
+	if(returnCode != XN_STATUS_OK) { THROW_XN_EXCEPTION("Image generator not found!", returnCode); }
 
 	returnCode = this->context.FindExistingNode(XN_NODE_TYPE_USER, this->userGenerator);
 	if(returnCode != XN_STATUS_OK) { // fallback
@@ -159,6 +166,18 @@ void NiEnhanced::waitForUpdate() {
 //	this->context.WaitAnyUpdateAll();
 	this->context.WaitAndUpdateAll();
 //	printf("waitForUpdate() ... TRIGGERED!\n");
+
+	int num = time(NULL);
+	char framenumber[10];
+    sprintf(framenumber,"%06d", num);
+    std::stringstream ss;
+    std::string str_frame_number;
+    ss << framenumber;
+    ss >> str_frame_number;
+
+	this->imageGenerator.GetMetaData(this->imageMetaData);
+	std::string targetFileName = "CapturedFrames/image_RGB_"+ str_frame_number +".jpg";
+	this->imageSaver->saveToFile(this->imageMetaData, targetFileName);
 }
 
 

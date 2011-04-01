@@ -1,6 +1,8 @@
 29.03. - 22:00 -  2h - project setup
-30.03. - 00:00 -  h - setup of openni-playground project
-              ~~  2h~~
+30.03. - 00:00 -  1h - setup of openni-playground project
+30.03. - 01:00 -  1h - matlab setup + kinect-mex first (failed) mex build tries
+01.04. - 15:00 -   h - saving kinect image via cpp
+              ~~  4h~~
 
 
 =================================================

@@ -1,6 +1,6 @@
-CXXFLAGS =	-O2 -g -Wall -fmessage-length=0
+CXXFLAGS =	-O2 -g -Wall -fmessage-length=0 -L/usr/local/lib -I/usr/local/include
 OBJS = app.o
-LIBS =
+LIBS = -lboost_thread
 TARGET = app
 
 $(TARGET):	$(OBJS)

@@ -1,0 +1,47 @@
+
+=================================================
+TODOs
+=================================================
+! @CODE: wrapper klasse fuer openni aufrufe mit check returnCode+throw exception (? heisst das alle klassen, nicht nur context, einen wrapper schreiben?!)
+! get rid of XML config => programatically!
+- XnCallbackHandle purpose => Optional. Will be filled with a handle to be passed to @ref UnregisterFromGenerationRunningChange().
+- go through openni forum entries for multiple kinects
+- go through github openni sourcecode: https://github.com/search?q=openni&type=Everything&repo=&langOverride=&start_value=1
+- go through project sourcecode
+	* https://github.com/roxlu/ofxOpenNI
+	* https://github.com/johnboiles/JBKinectHacks
+		eg: https://github.com/johnboiles/JBKinectHacks/blob/master/MouseController/main-MouseController.cpp
+	* https://github.com/pixelnerve/BlockOpenNI
+		eg: https://github.com/pixelnerve/BlockOpenNI/blob/master/src/VOpenNIDevice.cpp
+// get access to motor/led ... => " I hope they add motor support as well to OpenNI soon! " :(
+	
+
+=================================================
+IDEAs
+=================================================
+- @cpp: unit testing framework?
+- @cpp: logging framework?
+- @cpp: doxygen?
+? #include <boost/thread.hpp>
+
+=================================================
+LINKs
+=================================================
+
+Matlab
+-------------------------------------------------
+- matlab tutorials
+	http://mechanical.poly.edu/faculty/vkapila/matlabtutor.htm
+
+OpenNI
+-------------------------------------------------
+- wiki with good faq
+	http://wiki.openni.org/mediawiki/index.php/Main_Page
+
+
+Tools
+-------------------------------------------------
+- OpenCV (Open Source Computer Vision)
+	http://opencv.willowgarage.com/wiki/
+	
+	

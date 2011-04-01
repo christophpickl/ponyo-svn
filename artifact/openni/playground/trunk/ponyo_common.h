@@ -9,7 +9,7 @@
 #define THROW_XN_EXCEPTION(errorMessage, returnCode) \
 std::string ss;                                      \
 ss.append(errorMessage);                             \
-ss.append(": ");                                     \
+ss.append(" - ");                                    \
 ss.append(xnGetStatusString(returnCode));            \
 throw ss;
 

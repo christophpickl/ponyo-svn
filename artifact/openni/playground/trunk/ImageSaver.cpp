@@ -1,4 +1,5 @@
 
+#include <time.h>
 #include "ImageSaver.h"
 
 ImageSaver::ImageSaver() {
@@ -7,6 +8,20 @@ ImageSaver::ImageSaver() {
 
 ImageSaver::~ImageSaver() {
 	printf("delete ~ImageSaver()\n");
+}
+
+void ImageSaver::saveToDefault(const xn::ImageMetaData& image) {
+	printf("ImageSaver.saveToDefault(image)\n");
+	int num = time(NULL);
+	char framenumber[10];
+	sprintf(framenumber,"%06d", num);
+	std::stringstream ss;
+	std::string str_frame_number;
+	ss << framenumber;
+	ss >> str_frame_number;
+	std::string targetFileName = "CapturedFrames/image_RGB_"+ str_frame_number +".jpg";
+
+	this->saveToFile(image, targetFileName);
 }
 
 void ImageSaver::saveToFile(const xn::ImageMetaData& image, const std::string& targetFileName) {

@@ -6,19 +6,21 @@
 
 MultipleKinects::MultipleKinects() {
 	printf("new MultipleKinects()\n");
+	this->imageSaver = new ImageSaver();
 }
 
 MultipleKinects::~MultipleKinects() {
+	printf("delete ~MultipleKinects()\n");
+
 	for (unsigned i = 0; i < this->devices.size(); i++) {
 		delete this->devices[i];
 	}
-
-	printf("delete ~MultipleKinects()\n");
+	delete this->imageSaver;
 }
 
 // most code came from: http://groups.google.com/group/openni-dev/browse_thread/thread/cde3217c242a3687/3c1463337f6f2951?lnk=gst&q=multiple#3c1463337f6f2951
-void MultipleKinects::initFromXml(std::string xmlConfigPath) {
-	printf("MultipleKinects.initFromXml(xmlConfigPath)\n");
+void MultipleKinects::init() {
+	printf("MultipleKinects.init()\n");
 
 	XnStatus returnCode;
 
@@ -87,10 +89,18 @@ void MultipleKinects::initFromXml(std::string xmlConfigPath) {
 		returnCode = imageInfo.GetInstance (imageGenerator);
 		if(returnCode != XN_STATUS_OK) { THROW_XN_EXCEPTION("Creating image generator instance failed!", returnCode); }
 
-		NiDevice* device = new NiDevice(deviceInfo, imageInfo, imageGenerator);
+		NiDevice* device = new NiDevice(deviceInfo, imageInfo, imageGenerator, this->imageSaver);
 		device->printToString();
-//		device->start();
+		device->init();
 		this->devices.push_back(device);
+	}
+}
+
+void MultipleKinects::start() {
+	printf("MultipleKinects.start()\n");
+
+	for (unsigned i = 0; i < this->devices.size(); i++) {
+		this->devices[i]->start();
 	}
 }
 
@@ -102,4 +112,7 @@ void MultipleKinects::waitForUpdate() {
 void MultipleKinects::close() {
 	printf("MultipleKinects.close()\n");
 
+	for (unsigned i = 0; i < this->devices.size(); i++) {
+		this->devices[i]->close();
+	}
 }

@@ -14,6 +14,8 @@ public:
 	ImageSaver();
 	virtual ~ImageSaver();
 
+	/** Stores image to some predefined folder with a timestamp in its filename. */
+	void saveToDefault(const xn::ImageMetaData&);
 	void saveToFile(const xn::ImageMetaData&, const std::string&);
 };
 

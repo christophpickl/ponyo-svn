@@ -3,7 +3,7 @@ SOMEFLAGS = -arch i386 -arch x86_64 -DNDEBUG -msse3 -lOpenNI
 OPENCV_LIBS =  -lopencv_core -lopencv_highgui
 CXXFLAGS =	-O2 -g -Wall -fmessage-length=0 -I/usr/include/ni -I/usr/local/include/opencv/ $(SOMEFLAGS) $(OPENCV_LIBS)
 
-OBJS = nienhance.o ponyo_common.o NiEnhanced.o MultipleKinects.o
+OBJS = nienhance.o ponyo_common.o NiEnhanced.o MultipleKinects.o NiDevice.o
 
 # OpenCV
 #

@@ -1,3 +1,4 @@
+// FROM: https://github.com/Sensebloom/OSCeleton
 /***********************************************************************
 
     OSCeleton - OSC proxy for kinect skeleton data.

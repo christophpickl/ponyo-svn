@@ -3,7 +3,9 @@
 #define MULTIPLEKINECTS_H_
 
 #include <string>
+#include <vector.h>
 #include <XnCppWrapper.h>
+#include "NiDevice.h"
 
 class MultipleKinects {
 public:
@@ -16,6 +18,7 @@ public:
 
 private:
 	xn::Context context;
+	vector<NiDevice*> devices;
 };
 
 #endif /* MULTIPLEKINECTS_H_ */

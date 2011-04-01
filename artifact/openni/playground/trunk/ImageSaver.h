@@ -4,12 +4,10 @@
 #include <string.h>
 #include <XnCppWrapper.h>
 
-//#include <opencv2/opencv.hpp>
+// we want to be very specific about what we want to include #include <opencv2/opencv.hpp>
 #include <opencv2/core/core.hpp>
 // highgui contains imwrite function
 #include <opencv2/highgui/highgui.hpp>
-//#include <opencv2/imgproc/imgproc.hpp>
-//#include <opencv2/features2d/features2d.hpp>
 
 class ImageSaver {
 public:

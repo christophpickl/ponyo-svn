@@ -40,7 +40,9 @@ int main(void) {
 
 //	ni = new NiEnhanced();
 	ni = new MultipleKinects();
-	string xmlConfigPath = "/openni/niconfig.xml";
+//	string xmlConfigPath = "/niconfig/multiple_kinects.xml";
+	string xmlConfigPath = "/niconfig/simple_config.xml";
+
 	try {
 		ni->initFromXml(xmlConfigPath);
 	} catch (string ex) { // TODO could create own Exception class (message + stacktrace)

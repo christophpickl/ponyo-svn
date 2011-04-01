@@ -1,10 +1,58 @@
+"I'm sorry to say that although technically there's no problem with
+	supporting this and it's supported in all the "low level" parts of our
+	SDK, it was not implemented at the OpenNI level yet.
+	We are going to add it soon and will let you know when it's ready."
+	Using OpenNI and PS Driver for multiple Kinect on same machine 
+		http://groups.google.com/group/openni-dev/browse_thread/thread/648b350d9d61a139/f37bd06ef8d8b002?lnk=gst&q=multiple#f37bd06ef8d8b002
+
+"The kinect uses almost all of the bandwidth on a single USB 2.0
+	controller. If you want to use another video capture source (or
+	multiple) simultaneously it must be connected to a different root hub
+	on your computer. If you only have a laptop you may be out of luck,
+	unless you use can equip an expresscard to add a separate USB host
+	controller and ports.
+	I was getting BSOD and other various bugs until I realized this."
+	Multiple Kinects and or Multiple Webcams...
+		http://groups.google.com/group/openni-dev/browse_thread/thread/8a1ec0927ee27ed6/457812e2973c74fc?lnk=gst&q=multiple#457812e2973c74fc 
+
+- ROS driver supports multiple devices: https://github.com/ros-pkg-git/
 
 OPENNI-DEV THREADS
 ==============================
 
+GOOD
 ------------------------------
-
+	Multiples Kinects (avin2 SensorKinect) in Windows 
+		http://groups.google.com/group/openni-dev/browse_thread/thread/a667d6066d144d71/a054fcf78ca03149?lnk=gst&q=multiple#a054fcf78ca03149
+	Nobody succeeds multiple kinects' connection? 
+		http://groups.google.com/group/openni-dev/browse_thread/thread/82df137754cd7c01/f95ca4f61bc9fb20?lnk=gst&q=multiple#f95ca4f61bc9fb20
+	OpenNI and multiple kinects (avin2 SensorKinect), Ubuntu 10.10
+		http://groups.google.com/group/openni-dev/browse_thread/thread/72f5f6ac787bdee7/807644d1bf0200db?lnk=gst&q=multiple#807644d1bf0200db
+	Is it possible to use multiple kinects on avin2-SensorKinect windows driver? 
+		http://groups.google.com/group/openni-dev/browse_thread/thread/b8ee95201de2f387/51df93ad5317a59d?lnk=gst&q=multiple#51df93ad5317a59d
+	// sample code how to enumerate all available devices
+		Multiple Device support
+			http://groups.google.com/group/openni-dev/browse_thread/thread/cde3217c242a3687/3c1463337f6f2951?lnk=gst&q=multiple#3c1463337f6f2951
+		OpenNI and multiple kinects (avin2 SensorKinect), Ubuntu 10.10
+			http://groups.google.com/group/openni-dev/browse_thread/thread/72f5f6ac787bdee7/b50412ca7bdb59cd?lnk=gst&q=multiple#b50412ca7bdb59cd
+	
+SO LA LA
+------------------------------
+	Is it possible to use multiple kinects on avin2-SensorKinect windows driver? 
+		http://groups.google.com/group/openni-dev/browse_thread/thread/b8ee95201de2f387/32a517301878c187?lnk=gst&q=multiple#32a517301878c187
+	Is it possible to use multiple kinects on avin2-SensorKinect windows driver?
+		http://groups.google.com/group/openni-dev/browse_thread/thread/b8ee95201de2f387/4ab9d9a4ffd27eff?lnk=gst&q=multiple#4ab9d9a4ffd27eff
+	
+	
 CRAP
 ------------------------------
 	2-Kinect Setup
 		http://groups.google.com/group/openni-dev/browse_thread/thread/10fff4c768fd6f77/b124c7041311dcc1?lnk=gst&q=multiple#b124c7041311dcc1
+	Progress on using multiple Kinects?
+		http://groups.google.com/group/openni-dev/browse_thread/thread/2a235a13f665d0a3/6ec96920d993bb83?lnk=gst&q=multiple#6ec96920d993bb83
+	Recording multiple Kinects
+		http://groups.google.com/group/openni-dev/browse_thread/thread/d421814cf549fdcd/333dbd54b7cb9b85?lnk=gst&q=multiple#333dbd54b7cb9b85
+	Nobody succeeds multiple kinects' connection?
+		http://groups.google.com/group/openni-dev/browse_thread/thread/82df137754cd7c01/a238bbf8a1646d61?lnk=gst&q=multiple#a238bbf8a1646d61
+	Progress on using multiple Kinects?
+		http://groups.google.com/group/openni-dev/browse_thread/thread/2a235a13f665d0a3/b33fa53f8218124c?lnk=gst&q=multiple#b33fa53f8218124c

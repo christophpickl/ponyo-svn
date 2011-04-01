@@ -1,0 +1,21 @@
+
+
+=================================================
+COMMON
+=================================================
+subclipse
+GrepConsole: http://eclipse.musgit.com
+m2eclipse
+
+=================================================
+JAVA
+=================================================
+TestNG
+jadclipse
+
+=================================================
+C++
+=================================================
+CDT: http://eclipse.org/downloads/packages/eclipse-ide-cc-developers/heliossr2
+
+CxxUnit: http://web-cat.cs.vt.edu/eclipse/

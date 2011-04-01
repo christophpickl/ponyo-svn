@@ -9,3 +9,6 @@ TIMESHEET CP
 01.04. - 16:00 -  3h - got multiple kinects working :)
 01.04. - 19:00 -  2h - mainly project mgmt (organisation, planning)
               ~~ 10h~~
+02.04. - 00:00 -  1h - investigating cxxunit and boost
+02.04. - 01:00 -   h - investigating glut
+              ~~ 11h~~

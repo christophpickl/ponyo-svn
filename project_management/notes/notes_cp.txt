@@ -4,6 +4,11 @@ TODOs
 =================================================
 ! @CODE: wrapper klasse fuer openni aufrufe mit check returnCode+throw exception (? heisst das alle klassen, nicht nur context, einen wrapper schreiben?!)
 ! improve programatic node configuration (introduce custom object)
+! @BUILD: cpp maven integration (inclusive cxxunit)
+! logging for cpp
+! threading/boost for cpp
+- dependency injection for cpp?
+- @Test: mocking for cpp?
 - INFO: XnCallbackHandle purpose => Optional. Will be filled with a handle to be passed to @ref UnregisterFromGenerationRunningChange().
 - go through github sourcecode related to openni: https://github.com/search?q=openni&type=Everything&repo=&langOverride=&start_value=1
 - go through project sourcecode
@@ -41,6 +46,14 @@ Tools
 -------------------------------------------------
 - OpenCV (Open Source Computer Vision)
 	http://opencv.willowgarage.com/wiki/
+- CxxUnit
+	http://cxxunit.sourceforge.net/
+- Boost
+	http://www.boost.org
+	http://www.boost.org/doc/libs/1_31_0/libs/thread/example/
+	http://www.highscore.de/cpp/boost/multithreading.html
+	http://programmingexamples.net/index.php?title=CPP/Boost/Threads
+	http://drdobbs.com/cpp/184401518
 
 Misc	
 -------------------------------------------------

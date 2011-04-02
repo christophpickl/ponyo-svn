@@ -1,4 +1,3 @@
-
 LIB_DIRS=
 INC_DIRS=
 USED_LIBS=OpenNI
@@ -19,25 +18,19 @@ endif
 INC_DIRS_OPTION = $(foreach dir,$(INC_DIRS),-I$(dir))
 LIB_DIRS_OPTION = $(foreach dir,$(LIB_DIRS),-L$(dir))# -L$(OUT_DIR)
 USED_LIBS_OPTION = $(foreach lib,$(USED_LIBS),-l$(lib))
+CFLAGS = $(INC_DIRS_OPTION) $(LIB_DIRS_OPTION) $(USED_LIBS_OPTION) 
+
 
 #############################################################################
 # Targets
 #############################################################################
+
 .PHONY: all
-
-#SRCS=$(wildcard *.c)
-#OBJS=$(SRCS:.c=.o)
-#all: $(OBJS)
-
-#SRC = $(wildcard '*.c')
-CFLAGS = $(INC_DIRS_OPTION) $(LIB_DIRS_OPTION) $(USED_LIBS_OPTION) 
 
 all: app.o
 	-@echo "Linking ..."
-#    g++ -o $@ $^ $(CFLAGS)
 	g++ -o $(TARGET) $(LIB_DIRS_OPTION) $(USED_LIBS_OPTION) app.o
 
-#$(TARGET): $(SRC)
 app.o:
 	-@echo "Compiling ..."
 	g++ -c -o app.o $(INC_DIRS_OPTION) app.cpp
@@ -45,6 +38,17 @@ app.o:
 clean:
 	rm -f app.exe app.o
 	
+
+
+#    g++ -o $@ $^ $(CFLAGS)
+#$(TARGET): $(SRC)
+	
+#SRC = $(wildcard '*.c')
+	
+#SRCS=$(wildcard *.c)
+#OBJS=$(SRCS:.c=.o)
+#all: $(OBJS)
+
 #CPP_FILES := $(wildcard src/*.cpp)
 #OBJ_FILES := $(addprefix obj/,$(notdir $(CPP_FILES:.cpp=.o)))
 #LD_FLAGS := ...

@@ -4,6 +4,8 @@
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
 
+	(void) plhs; // unused parameters
+
 //	#ifdef _WIN32
 	mexPrintf("Helloooooooooo from C++ Mex!\n");
 //	#else

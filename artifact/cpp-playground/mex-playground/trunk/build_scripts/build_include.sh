@@ -68,8 +68,10 @@ function compile_mex {
 	COMP_CMD="${COMP_CMD} -arch x86_64" # someone (gnu or mex) complained about something being wrong with archetypes ... -arch i386 -arch x86_64
 	COMP_CMD="${COMP_CMD} -fno-common -no-cpp-precomp -fexceptions"
 	COMP_CMD="${COMP_CMD} -msse3 -DNDEBUG -O2"
+	# ... delme?! -g -Wall -fmessage-length=0
 	COMP_CMD="${COMP_CMD} -o ${OBJ_PATH}"
 	COMP_CMD="${COMP_CMD} ${CPP_PATH}"
+	
 	echo "[DEBUG] >> g++ ${COMP_CMD}"
 	g++ ${COMP_CMD}
 	

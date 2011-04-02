@@ -6,7 +6,6 @@ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
 
 	mexPrintf("mxInOut ... \n");
 
-    int i;
     mexPrintf("There are %d right-hand-side argument(s).\n", nrhs);
     for(int i = 0; i < nrhs; i++)  {
     	mexPrintf("\targument %i class name: %s\n", (i+1), mxGetClassName(prhs[i]));

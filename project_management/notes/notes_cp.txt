@@ -12,6 +12,7 @@ TODOs
 	// eg in make: OSTYPE := $(shell uname -s) ... ifneq ("$(OSTYPE)","Darwin")
 	// eg in c++: #if defined(__APPLE__) || defined(MACOSX)
 - improve programatic node configuration (introduce custom object)
+-- @MEX: mexErrMsgIdAndTxt("MATLAB:mexcpp:nargout", "MEXCPP requires no output argument.");
 - @GLUT: continue reading glut tutorial: http://www.lighthouse3d.com/tutorials/glut-tutorial/keyboard/
 - @Test: mocking for cpp?
 -- logging for cpp
@@ -40,6 +41,8 @@ Matlab
 -------------------------------------------------
 - matlab tutorials
 	http://mechanical.poly.edu/faculty/vkapila/matlabtutor.htm
+- mex tutorials
+	http://www.mathworks.com/help/techdoc/matlab_external/f29502.html
 
 OpenNI
 -------------------------------------------------

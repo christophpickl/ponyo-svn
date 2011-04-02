@@ -13,4 +13,5 @@ TIMESHEET CP
 02.04. - 01:00 -  1h - investigating glut; get ni glut sample running
 02.04. - 10:00 -  1h - got first mex prototype working
 02.04. - 11:00 -  2h - getting deeper into mex programming (in/out-args, build environment)
-              ~~ 15h~~
+02.04. - 13:00 -  1h - implementing basic jni playground
+              ~~ 16h~~

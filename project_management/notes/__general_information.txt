@@ -1,5 +1,5 @@
 
-
+======================================================
 LINKS
 ======================================================
 
@@ -16,6 +16,7 @@ LINKS
 	https://github.com/ros-pkg-git/ni/
 
 
+======================================================
 TOOLSTACK
 ======================================================
 
@@ -24,12 +25,14 @@ TOOLSTACK
 - avin2 sensor
 - Matlab R2010b + mex
 
+- glut ... simple GUI with OpenGL toolkit
+- openCV ... some misc image processing (eg save image to file)
 - CxxUnit ... Unit Testing Framework (not CppUnit!)
-- glut ... OpenGL GUI
 ?? logging?
 ?? mocking?
 ?? dependency injection?
-// - boost ... Multi Threading
+// - boost ... Timing, Multi Threading
 
 - g++ ... GNU C++ Compiler
-- make ... build tool // CMake
+- make ... build tool
+// - CMake

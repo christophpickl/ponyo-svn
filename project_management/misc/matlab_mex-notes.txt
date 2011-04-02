@@ -1,0 +1,32 @@
+
+- create own opts file, eg: /Applications/Develop/MATLAB_R2010b.app/bin/macgccopts.sh
+- load opts file in matlab via: mex -setup // select proper option (and confirm overwrite)
+
+
+- mex function signature ==> http://www.mathworks.com/help/techdoc/apiref/mexfunction.html
+	mexFunction(
+		int nlhs, ... Number of expected output mxArrays
+		mxArray *plhs[], ... Array of pointers to the expected output mxArrays
+		int nrhs, ... Number of input mxArrays
+		const mxArray *prhs[] ... Array of pointers to the input mxArrays (READ ONLY!)
+		)
+	A) reading arguments:
+		> 
+	B) passing result:
+		> 
+
+- how to print out compiler stuff:
+	$ cpp = mex.getCompilerConfigurations('C++')
+	$ cpp.Details.CompilerFlags // READ ONLY :-/
+	
+	$ cc = mex.getCompilerConfigurations
+	$ for i = 1:3; disp(cc(i).Name); end;
+
+
+
+
+======================================================
+LINKS
+======================================================
+man mex
+	http://www.mathworks.com/help/techdoc/ref/mex.html

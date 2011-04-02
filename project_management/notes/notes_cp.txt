@@ -2,12 +2,18 @@
 =================================================
 TODOs
 =================================================
+!! get joint data ... afterwards implement callibration
+!! refactor Device logic; add depthGenerator
+! @MEX: how to call matlab code from within cpp?
+! @C++: howto custom namespace? (modularization in general a la java packages; static vs dyn libs?)
 ! @CODE: wrapper klasse fuer openni aufrufe mit check returnCode+throw exception (? heisst das alle klassen, nicht nur context, einen wrapper schreiben?!)
 ! improve programatic node configuration (introduce custom object)
-! @BUILD: cpp maven integration (inclusive cxxunit)
-! @MAKE BUILD: OSTYPE := $(shell uname -s) ... ifneq ("$(OSTYPE)","Darwin")
-! logging for cpp
-! threading/boost for cpp
+- @MAKE BUILD: have a look at openni make files
+	// eg in make: OSTYPE := $(shell uname -s) ... ifneq ("$(OSTYPE)","Darwin")
+	// eg in c++: #if defined(__APPLE__) || defined(MACOSX)
+- logging for cpp
+- NO: threading/boost for cpp
+- @BUILD: cpp maven integration (inclusive cxxunit)
 - dependency injection for cpp?
 - @Test: mocking for cpp?
 - INFO: XnCallbackHandle purpose => Optional. Will be filled with a handle to be passed to @ref UnregisterFromGenerationRunningChange().

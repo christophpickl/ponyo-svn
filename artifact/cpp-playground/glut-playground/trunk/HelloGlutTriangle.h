@@ -10,6 +10,7 @@ public:
 
 private:
 	static /*glut callback*/ void renderScene();
+	static /*glut callback*/ void changeSize(int, int);
 
 };
 

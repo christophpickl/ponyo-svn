@@ -2,37 +2,35 @@
 =================================================
 TODOs
 =================================================
-!! get joint data ... afterwards implement callibration
+!! register openni callbacks for joint data (skeleton tracking)
 !! refactor Device logic; add depthGenerator
+! @C++: get familiar with building: static vs dynamic lib, proper makefile, cmake
 ! @MEX: how to call matlab code from within cpp?
 ! @C++: howto custom namespace? (modularization in general a la java packages; static vs dyn libs?)
 ! @CODE: wrapper klasse fuer openni aufrufe mit check returnCode+throw exception (? heisst das alle klassen, nicht nur context, einen wrapper schreiben?!)
-! improve programatic node configuration (introduce custom object)
 - @MAKE BUILD: have a look at openni make files
 	// eg in make: OSTYPE := $(shell uname -s) ... ifneq ("$(OSTYPE)","Darwin")
 	// eg in c++: #if defined(__APPLE__) || defined(MACOSX)
-- logging for cpp
-- NO: threading/boost for cpp
-- @BUILD: cpp maven integration (inclusive cxxunit)
-- dependency injection for cpp?
+- improve programatic node configuration (introduce custom object)
+- @GLUT: continue reading glut tutorial: http://www.lighthouse3d.com/tutorials/glut-tutorial/keyboard/
 - @Test: mocking for cpp?
-- INFO: XnCallbackHandle purpose => Optional. Will be filled with a handle to be passed to @ref UnregisterFromGenerationRunningChange().
-- go through github sourcecode related to openni: https://github.com/search?q=openni&type=Everything&repo=&langOverride=&start_value=1
-- go through project sourcecode
+-- logging for cpp
+-- NO: threading/boost for cpp
+-- @BUILD: cpp maven integration (inclusive cxxunit)
+--- dependency injection for cpp?
+-- go through github sourcecode related to openni: https://github.com/search?q=openni&type=Everything&repo=&langOverride=&start_value=1
+-- go through project sourcecode
 	* https://github.com/roxlu/ofxOpenNI
 	* https://github.com/johnboiles/JBKinectHacks
 		eg: https://github.com/johnboiles/JBKinectHacks/blob/master/MouseController/main-MouseController.cpp
 	* https://github.com/pixelnerve/BlockOpenNI
 		eg: https://github.com/pixelnerve/BlockOpenNI/blob/master/src/VOpenNIDevice.cpp
-	
+// INFO: XnCallbackHandle purpose => Optional. Will be filled with a handle to be passed to @ref UnregisterFromGenerationRunningChange().
 
 =================================================
 IDEAs
 =================================================
-- @cpp: unit testing framework?
-- @cpp: logging framework?
-- @cpp: doxygen?
-? #include <boost/thread.hpp>
+
 
 =================================================
 LINKs
@@ -66,7 +64,12 @@ Tools
 	http://programmingexamples.net/index.php?title=CPP/Boost/Threads
 	http://drdobbs.com/cpp/184401518
 
-Misc	
+Misc
 -------------------------------------------------
+- JNI documentation
+	http://java.sun.com/docs/books/jni/html/start.html
+	http://java.sun.com/developer/onlineTraining/Programming/JDCBook/jniexamp.html
+- Make documentation
+	http://www.gnu.org/software/make/manual/make.html
 - openFrameworks forum
 	http://www.openframeworks.cc/forum

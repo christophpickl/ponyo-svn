@@ -16,10 +16,12 @@ void ImageSaver::saveToDefault(const xn::ImageMetaData& image, const std::string
 	char framenumber[10];
 	sprintf(framenumber,"%06d", num);
 	std::stringstream ss;
-	std::string str_frame_number;
 	ss << framenumber;
 
-	ss >> str_frame_number;
+//	std::string str_frame_number;
+//	ss >> str_frame_number;
+	std::string str_frame_number = ss.str();
+
 	std::string targetFileName = "CapturedFrames/image_RGB_"+ str_frame_number +"-" + fileNameSuffix + ".jpg";
 
 	this->saveToFile(image, targetFileName);

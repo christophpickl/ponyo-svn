@@ -14,7 +14,7 @@ LIBS = -L/usr/lib -L/usr/local/lib
 
 TARGET = nienhance.exe
 
-$(TARGET):	$(OBJS)
+$(TARGET): $(OBJS)
 	$(CXX) $(CXXFLAGS) -o $(TARGET) $(OBJS) $(LIBS)
 
 all:	$(TARGET)

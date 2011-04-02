@@ -10,5 +10,5 @@ TIMESHEET CP
 01.04. - 19:00 -  2h - mainly project mgmt (organisation, planning)
               ~~ 10h~~
 02.04. - 00:00 -  1h - investigating cxxunit and boost
-02.04. - 01:00 -   h - investigating glut
-              ~~ 11h~~
+02.04. - 01:00 -  1h - investigating glut; get ni glut sample running
+              ~~ 12h~~

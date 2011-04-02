@@ -5,6 +5,7 @@ TODOs
 ! @CODE: wrapper klasse fuer openni aufrufe mit check returnCode+throw exception (? heisst das alle klassen, nicht nur context, einen wrapper schreiben?!)
 ! improve programatic node configuration (introduce custom object)
 ! @BUILD: cpp maven integration (inclusive cxxunit)
+! @MAKE BUILD: OSTYPE := $(shell uname -s) ... ifneq ("$(OSTYPE)","Darwin")
 ! logging for cpp
 ! threading/boost for cpp
 - dependency injection for cpp?
@@ -46,11 +47,15 @@ Tools
 -------------------------------------------------
 - OpenCV (Open Source Computer Vision)
 	http://opencv.willowgarage.com/wiki/
+- glut
+	http://www.lighthouse3d.com/opengl/glut/
+	http://www.opengl.org/documentation/specs/glut/spec3/spec3.html
 - CxxUnit
 	http://cxxunit.sourceforge.net/
 - Boost
 	http://www.boost.org
-	http://www.boost.org/doc/libs/1_31_0/libs/thread/example/
+	http://www.boost.org/doc/libs/1_41_0/libs/thread/example/
+	http://www.boost.org/doc/libs/1_41_0/libs/iostreams/doc/installation.html
 	http://www.highscore.de/cpp/boost/multithreading.html
 	http://programmingexamples.net/index.php?title=CPP/Boost/Threads
 	http://drdobbs.com/cpp/184401518

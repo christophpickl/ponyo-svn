@@ -1,4 +1,5 @@
 
+
 LINKS
 ======================================================
 
@@ -13,3 +14,22 @@ LINKS
 
 * ROS SourceCode
 	https://github.com/ros-pkg-git/ni/
+
+
+TOOLSTACK
+======================================================
+
+- OpenNI
+- Nite
+- avin2 sensor
+- Matlab R2010b + mex
+
+- CxxUnit ... Unit Testing Framework (not CppUnit!)
+- glut ... OpenGL GUI
+?? logging?
+?? mocking?
+?? dependency injection?
+// - boost ... Multi Threading
+
+- g++ ... GNU C++ Compiler
+- make ... build tool // CMake

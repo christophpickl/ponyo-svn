@@ -26,16 +26,21 @@ struct thread_alarm {
         boost::thread::sleep(xt);
         cout << "thread_alarm.sleep(xt) ... ended" << endl;
     }
-	
+
     int m_secs;
 };
+
+void simpleSleep() {
+//	boost::posix_time::seconds workTime(3);
+//	boost::this_thread::sleep(workTime);
+}
 
 int main(int argc, char* argv[]) {
     cout << "main() START" << endl;
 
     const int sleepSeconds = 5;
     cout << "setting alarm for " << sleepSeconds << " seconds..." << endl;
-	
+
     thread_alarm alarm(sleepSeconds);
     boost::thread myThread(alarm);
     cout << "myThread.join()" << endl;

@@ -14,6 +14,8 @@ public:
 
 	// IService implementation
 	void sayHello();
+	void connect() throw (ConnectionException);
+
 };
 
 //}

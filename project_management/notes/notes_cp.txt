@@ -33,6 +33,46 @@ TODOs
 		eg: https://github.com/pixelnerve/BlockOpenNI/blob/master/src/VOpenNIDevice.cpp
 // INFO: XnCallbackHandle purpose => Optional. Will be filled with a handle to be passed to @ref UnregisterFromGenerationRunningChange().
 
+
+=================================================
+MAKE
+=================================================
+? proper *.o compilation
+* check for operating system:
+	OSTYPE := $(shell uname -s)
+	ifeq ("$(OSTYPE)","Darwin") ...
+	// or: OSTYPE is not set by default on Mac OS X.  Should end up being "darwin"
+		ifndef OSTYPE
+			OSTYPE = $(shell uname -s|awk '{print tolower($$0)}')
+		endif + ifeq ($(OSTYPE),linux) ... 
+* prefix command with "@" to suppress echoing command
+* echo -n "xyz" to suppress newline
+* relevant flags:
+	"-lstdc++" ... adds standard C++ library
+* merge options:
+	INCLUDES += /usr/local/include
+	INCLUDES_MERGED = $(foreach dir,$(INCLUDES),-I$(dir))
+* predefined variables:
+	$< ... whatever the depencies are
+	$@ ... the target
+* relevant g++ options:
+	-g ... Put debugging information for gdb into the object or executable file. Should be specified for both compilation and linking (Compilation and link option)
+	-c ... Compile only. Produces .o files from source files without doing any linking (Compilation option) 
+	-Dname=value ... In the program being compiled, define name as if there were a line (Compilation option)
+	-Wall ... Produce warning messages about a number of things that are legal but dubious (Compilation option)
+		// I strongly suggest that you always specify this and that you treat every warning as an error to be fixed.
+	-O2 ... optimize code; see: http://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html
+
+	#if defined(__APPLE__)
+	#include <GLUT/glut.h>
+	#include <OpenGL/gl.h>
+	#include <OpenGL/glu.h>
+	#else
+	#include <GL/glut.h>
+	#include <GL/gl.h>
+	#include <GL/glu.h>
+	#endif
+
 =================================================
 IDEAs
 =================================================
@@ -90,14 +130,7 @@ Misc
 - openFrameworks forum
 	http://www.openframeworks.cc/forum
 	
-	
-
-#if defined(__APPLE__)
-#include <GLUT/glut.h>
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#else
-#include <GL/glut.h>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#endif
+C++
+-------------------------------------------------
+- Understanding C++ Exception Handling
+	http://www.gamedev.net/page/resources/_/reference/programming/languages/c-and-c/understanding-c-exception-handling-r953

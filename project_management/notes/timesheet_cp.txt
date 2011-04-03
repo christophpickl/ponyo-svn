@@ -18,5 +18,6 @@ TIMESHEET CP
 02.04. - 17:00 -  2h - assisting oliver with environment setup
               ~~ 20h~~
 03.04. - 11:00 -  1h - other projects investigation (libfreenect, lts2)
-03.04. - 12:00 -   h - 
-              ~~ 21h~~
+03.04. - 12:00 -  2h - learn cpp: oop, interfaces, exceptions
+03.04. - 14:00 -  h - 
+              ~~ 23h~~

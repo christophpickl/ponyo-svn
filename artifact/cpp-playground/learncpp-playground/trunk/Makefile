@@ -1,23 +1,34 @@
 
+EXECUTABLES += interfaces
+EXECUTABLES += exceptions
+SOURCES += Util.cpp
+SOURCES += Exception.cpp
+SOURCES += ConnectionException.cpp
+SOURCES += MyService.cpp
+OBJECTS=$(SOURCES:.cpp=.o)
+
 INCLUDES += /usr/include
 INCLUDES += /usr/local/include
+CC=g++
 
-_INCLUDES_MERGED = $(foreach dir,$(INCLUDES),-I$(dir))
-_CFLAGS = $(_INCLUDES_MERGED)
-all: interfaces exceptions
+INCLUDES_MERGED = $(foreach dir,$(INCLUDES),-I$(dir))
+EXECUTABLES_MERGED = $(foreach dir,$(EXECUTABLES),$(dir))
+CFLAGS = -c -Wall $(INCLUDES_MERGED)
+LFLAGS = 
 
-interfaces: MyService.o main_interfaces.o
-	g++ $(_CFLAGS) MyService.o main_interfaces.o -o interfaces
+.PHONY: all clean
 
-main_interfaces.o:
-	g++ -c $(_CFLAGS) -o main_interfaces.o main_interfaces.cpp
-	
-MyService.o:
-	g++ -c $(_CFLAGS) -o MyService.o MyService.cpp
+all: $(SOURCES) $(EXECUTABLES_MERGED)
+	@echo "executables: $(EXECUTABLES_MERGED)"
 
-exceptions:
-	g++ $(_CFLAGS) -o exceptions main_exceptions.cpp
+interfaces: $(OBJECTS) main_interfaces.o
+	$(CC) $(LFLAGS) $(OBJECTS) main_$(@).o -o $@
+
+exceptions: $(OBJECTS) main_exceptions.o
+	$(CC) $(LFLAGS) $(OBJECTS) main_$(@).o -o $@
+
+%.o: %.cpp
+	$(CC) $(CFLAGS) $(INCLUDES_MERGED) -c $< -o $@
 
 clean:
-	rm -f *.o
-	rm interfaces exceptions
+	rm -f $(EXECUTABLES_MERGED) *.o

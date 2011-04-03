@@ -3,12 +3,15 @@
 
 //namespace pn {
 
+#include "ConnectionException.hpp"
+
 class IService {
 
 public:
 
 	virtual void sayHello() = 0;
 
+	virtual void connect() throw (ConnectionException) = 0;
 };
 
 //}

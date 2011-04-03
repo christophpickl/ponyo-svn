@@ -15,3 +15,8 @@ MyService::~MyService() {
 void MyService::sayHello() {
 	printf("saaaaaaaay hellooooooo!\n");
 }
+
+void MyService::connect() throw (ConnectionException) {
+	printf("Connecting... will throw exception\n");
+	throw ConnectionException("Connection failed!", AT);
+}

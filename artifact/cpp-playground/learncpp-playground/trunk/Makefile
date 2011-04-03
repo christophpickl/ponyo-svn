@@ -8,38 +8,48 @@ SOURCES += Exception.cpp
 SOURCES += ConnectionException.cpp
 SOURCES += DummyServiceListener.cpp
 SOURCES += MyService.cpp
-OBJECTS=$(SOURCES:.cpp=.o)
 
 INCLUDES += /usr/include
 INCLUDES += /usr/local/include
 CC=g++
 
-INCLUDES_MERGED = $(foreach dir,$(INCLUDES),-I$(dir))
-EXECUTABLES_MERGED = $(foreach dir,$(EXECUTABLES),$(dir))
+INCLUDES_MERGED = $(foreach i,$(INCLUDES),-I$(i))
+EXECUTABLES_MERGED = $(foreach i,$(EXECUTABLES),$(i))
 CFLAGS = -c -Wall $(INCLUDES_MERGED)
 LFLAGS = #-L/usr/lib -L/usr/local/lib
+TARGET=target
+OBJECTS =$(SOURCES:.cpp=.o)
+OBJECTS_PATH = $(foreach i,$(OBJECTS),$(TARGET)/$(i))
 
-.PHONY: all clean
+.PHONY: all init clean
 
-all: $(SOURCES) $(EXECUTABLES_MERGED)
-	@echo "executables: $(EXECUTABLES_MERGED)"
+all: init $(SOURCES) $(EXECUTABLES_MERGED)
 	@echo "================================================="
 	@echo
 
+init:
+	@echo "CFLAGS: $(CFLAGS)"
+	@echo "INCLUDES_MERGED: $(INCLUDES_MERGED)"
+	@echo "LFLAGS: $(LFLAGS)"
+	@echo "OBJECTS: $(OBJECTS)"
+	@echo "EXECUTABLES_MERGED: $(EXECUTABLES_MERGED)"
+	@echo
+	mkdir -p $(TARGET)
+
 templates: $(OBJECTS) main_templates.o
-	$(CC) $(LFLAGS) $(OBJECTS) main_$(@).o -o $@
+	$(CC) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
 	
 datastructures: $(OBJECTS) main_datastructures.o
-	$(CC) $(LFLAGS) $(OBJECTS) main_$(@).o -o $@
+	$(CC) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
 
 interfaces: $(OBJECTS) main_interfaces.o
-	$(CC) $(LFLAGS) $(OBJECTS) main_$(@).o -o $@
+	$(CC) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
 
 exceptions: $(OBJECTS) main_exceptions.o
-	$(CC) $(LFLAGS) $(OBJECTS) main_$(@).o -o $@
+	$(CC) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) $(INCLUDES_MERGED) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDES_MERGED) -c $< -o $(TARGET)/$@
 
 clean:
-	rm -f $(EXECUTABLES_MERGED) *.o
+	rm -rf $(TARGET)

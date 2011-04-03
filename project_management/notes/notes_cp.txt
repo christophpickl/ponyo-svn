@@ -17,10 +17,12 @@ TODOs
 -- @MEX: mexErrMsgIdAndTxt("MATLAB:mexcpp:nargout", "MEXCPP requires no output argument.");
 - @GLUT: continue reading glut tutorial: http://www.lighthouse3d.com/tutorials/glut-tutorial/keyboard/
 - @Test: mocking for cpp?
+- read c++ guide: http://stackoverflow.com/questions/30373/what-c-pitfalls-should-i-avoid
 - have a look at libfreenect project ideas:
 	http://openkinect.org/wiki/Project_ideas
 	http://openkinect.org/wiki/Gallery
 -- logging for cpp
+-- enums for c++: enum directions {up, down};
 -- NO: threading/boost for cpp
 -- @BUILD: cpp maven integration (inclusive cxxunit)
 --- dependency injection for cpp?
@@ -114,6 +116,7 @@ Tools
 	http://cxxunit.sourceforge.net/
 - Boost
 	http://www.boost.org
+	goood tutorial: http://antonym.org/2009/05/threading-with-boost---part-i-creating-threads.html
 	http://www.boost.org/doc/libs/1_41_0/libs/thread/example/
 	http://www.boost.org/doc/libs/1_41_0/libs/iostreams/doc/installation.html
 	http://www.highscore.de/cpp/boost/multithreading.html
@@ -134,3 +137,7 @@ C++
 -------------------------------------------------
 - Understanding C++ Exception Handling
 	http://www.gamedev.net/page/resources/_/reference/programming/languages/c-and-c/understanding-c-exception-handling-r953
+- C++ STL (Standard Template Library) Tutorial and Examples
+	http://www.yolinux.com/TUTORIALS/LinuxTutorialC++STL.html
+- C++ Class Templates
+	http://www.codersource.net/c/c-tutorial-on-templates/c-class-templates.aspx

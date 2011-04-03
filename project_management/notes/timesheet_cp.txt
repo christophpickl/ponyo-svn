@@ -19,5 +19,7 @@ TIMESHEET CP
               ~~ 20h~~
 03.04. - 11:00 -  1h - other projects investigation (libfreenect, lts2)
 03.04. - 12:00 -  2h - learn cpp: oop, interfaces, exceptions
-03.04. - 14:00 -  h - 
-              ~~ 23h~~
+03.04. - 14:00 -  2h - learn cpp: templates, own async/listeners
+03.04. - 16:00 -  2h - finished boost playground: multithreaded worker and mutex for data snapshot (future rgb and depth meta data storage)
+03.04. - 18:00 -  h - 
+              ~~ 27h~~

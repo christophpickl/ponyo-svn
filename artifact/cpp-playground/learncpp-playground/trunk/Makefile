@@ -11,7 +11,7 @@ SOURCES += MyService.cpp
 
 INCLUDES += /usr/include
 INCLUDES += /usr/local/include
-CC=g++
+CXX=g++
 
 INCLUDES_MERGED = $(foreach i,$(INCLUDES),-I$(i))
 EXECUTABLES_MERGED = $(foreach i,$(EXECUTABLES),$(i))
@@ -37,19 +37,19 @@ init:
 	mkdir -p $(TARGET)
 
 templates: $(OBJECTS) main_templates.o
-	$(CC) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
+	$(CXX) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
 	
 datastructures: $(OBJECTS) main_datastructures.o
-	$(CC) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
+	$(CXX) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
 
 interfaces: $(OBJECTS) main_interfaces.o
-	$(CC) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
+	$(CXX) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
 
 exceptions: $(OBJECTS) main_exceptions.o
-	$(CC) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
+	$(CXX) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
 
 %.o: %.cpp
-	$(CC) $(CFLAGS) $(INCLUDES_MERGED) -c $< -o $(TARGET)/$@
+	$(CXX) $(CFLAGS) $(INCLUDES_MERGED) -c $< -o $(TARGET)/$@
 
 clean:
 	rm -rf $(TARGET)

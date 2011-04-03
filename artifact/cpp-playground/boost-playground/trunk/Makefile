@@ -5,8 +5,9 @@ LIBS = -lboost_thread -framework OpenGL -framework GLUT -L/usr/lib -L/usr/local/
 #OBJS = app.o
 #TARGET = app
 
-OBJS += DeviceDataGobbler.o
+OBJS += Lockable.o
 OBJS += DataSnapshot.o
+OBJS += DeviceDataGobbler.o
 OBJS += main_threading.o
 TARGET = main_threading
 

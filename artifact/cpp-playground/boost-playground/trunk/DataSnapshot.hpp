@@ -2,13 +2,12 @@
 #ifndef DATASNAPSHOT_H_
 #define DATASNAPSHOT_H_
 
-class DataSnapshot {
-public:
-	DataSnapshot();
-	virtual ~DataSnapshot();
+#include "Lockable.hpp"
 
-	void lock();
-	void unlock();
+class DataSnapshot : public Lockable {
+public:
+	DataSnapshot(pthread_mutex_t);
+	virtual ~DataSnapshot();
 
 	int getNumber();
 	void setNumber(int);

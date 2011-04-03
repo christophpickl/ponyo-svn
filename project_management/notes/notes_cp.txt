@@ -6,8 +6,10 @@ TODOs
 !! refactor Device logic; add depthGenerator
 ! @C++: get familiar with building: static vs dynamic lib, proper makefile, cmake
 ! @MEX: how to call matlab code from within cpp?
+! @MEX: compile c++ from matlab code: mcc -B csharedlib:libmyfoo foo1.m foo2.m // http://www.mathworks.com/support/tech-notes/1600/1622.html
 ! @C++: howto custom namespace? (modularization in general a la java packages; static vs dyn libs?)
 ! @CODE: wrapper klasse fuer openni aufrufe mit check returnCode+throw exception (? heisst das alle klassen, nicht nur context, einen wrapper schreiben?!)
+- either use boost or investigate <pthread.h>
 - @MAKE BUILD: have a look at openni make files
 	// eg in make: OSTYPE := $(shell uname -s) ... ifneq ("$(OSTYPE)","Darwin")
 	// eg in c++: #if defined(__APPLE__) || defined(MACOSX)
@@ -15,6 +17,9 @@ TODOs
 -- @MEX: mexErrMsgIdAndTxt("MATLAB:mexcpp:nargout", "MEXCPP requires no output argument.");
 - @GLUT: continue reading glut tutorial: http://www.lighthouse3d.com/tutorials/glut-tutorial/keyboard/
 - @Test: mocking for cpp?
+- have a look at libfreenect project ideas:
+	http://openkinect.org/wiki/Project_ideas
+	http://openkinect.org/wiki/Gallery
 -- logging for cpp
 -- NO: threading/boost for cpp
 -- @BUILD: cpp maven integration (inclusive cxxunit)
@@ -31,7 +36,13 @@ TODOs
 =================================================
 IDEAs
 =================================================
-
+- collaborate with others:
+	* libfreenect community
+	* Swiss university / Prof. Vandergheynst 
+		- http://lts2www.epfl.ch
+	* casala company
+		- http://www.youtube.com/watch?v=fxnMMVy9tFU
+		- http://www.casala.ie/collaborate-with-us.html
 
 =================================================
 LINKs
@@ -43,6 +54,8 @@ Matlab
 	http://mechanical.poly.edu/faculty/vkapila/matlabtutor.htm
 - mex tutorials
 	http://www.mathworks.com/help/techdoc/matlab_external/f29502.html
+- matlab engine
+	http://www.mathworks.com/help/techdoc/matlab_external/f29148.html
 
 OpenNI
 -------------------------------------------------
@@ -76,3 +89,15 @@ Misc
 	http://www.gnu.org/software/make/manual/make.html
 - openFrameworks forum
 	http://www.openframeworks.cc/forum
+	
+	
+
+#if defined(__APPLE__)
+#include <GLUT/glut.h>
+#include <OpenGL/gl.h>
+#include <OpenGL/glu.h>
+#else
+#include <GL/glut.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#endif

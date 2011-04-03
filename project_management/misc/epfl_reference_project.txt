@@ -1,0 +1,40 @@
+==> http://www.youtube.com/watch?v=x--xlKWBTAE
+
+
+Contact: Alexandre Alahi, alexandre.alahi@epfl.ch
+(Group: Prof. P. Vandergheynst)
+
+=================================================
+OFFERED PROJECTS
+=================================================
+see: http://lts2www.epfl.ch/Main/StudentProjects
+
+1.3 Kinect project: Self-Calibration of Several Depth Cameras
+	We developped a system to detect and track people with several Kinect cameras.
+	In order to enable cameras to collaborate, they need to be calibrated.
+	Current calibration step requieres to put some markers in the scene.
+	The goal of this project is to calibrate cameras without any markers.
+	Given the depth captured by the cameras, the cameras should detect
+	the ground plane and similar object to auto calibrate themselves.
+
+1.5 Kinect project: Gesture Recognition
+	A natural way of human-computer interaction is through gestures.
+	Microsoft has recently offered to naviguate within the Xbox interface
+	with natural gestures given the depth captured by their Kinect camera.
+	The goal of this project is to develop similar algorithm to recognize
+	natural gesture to naviguate within a database of media content. 
+
+1.6 Kinect project: A Virtual Golf Teacher
+	The aim of this project is to bring a personal instructor in every home.
+	It is proposed to develop a virtual instructor to teach and enhance human gestures.
+	The potential applications can be in arts as well as in sports.
+	The trainee will perform the gestures of interest in front of a Kinect Camera
+	and the Virtual Instructor (Artificial Intelligence) will give feedbacks.
+	The first application will be to teach golf gestures. 
+
+1.7 Kinect project: Face Recogntion in Dark
+	Face recognition is widely used to enter secured sites.
+	However, most of the algorithms are sensitive to the scene illumination and lighting conditions.
+	The goal of this project is to recognize face regardless the lighting conditions.
+	The noisy depth information captured by the Kinect will be used.
+	The student will evaluate the performance of noisy 3D models to extract features and classify them. 

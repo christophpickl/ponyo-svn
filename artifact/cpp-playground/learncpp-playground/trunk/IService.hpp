@@ -1,11 +1,13 @@
+#pragma once
 #ifndef ISERVICE_HPP_
 #define ISERVICE_HPP_
 
-//namespace pn {
-
 #include "ConnectionException.hpp"
+#include "Async.hpp"
+#include "IServiceListener.hpp"
 
-class IService {
+namespace pn {
+class IService : public Async<IServiceListener*> {
 
 public:
 
@@ -13,7 +15,6 @@ public:
 
 	virtual void connect() throw (ConnectionException) = 0;
 };
-
-//}
+}
 
 #endif /* ISERVICE_HPP_ */

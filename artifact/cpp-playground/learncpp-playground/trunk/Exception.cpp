@@ -26,16 +26,16 @@ const char* Exception::getMessage() {
 void Exception::printBacktrace() {
 	void* tracesArray[STACKTRACE_MAX_SIZE];
 	size_t traceSize = backtrace(tracesArray, STACKTRACE_MAX_SIZE);
+	int traceSizeInt = (int) traceSize;
 	char** traceSymbols = backtrace_symbols(tracesArray, traceSize);
 
-//	printf ("Obtained %zd stack frames.\n", traceSize);
 	fprintf(stderr, "Backtrace %s#%i:\n", this->sourceFile, this->sourceLine);
 	if(traceSymbols != NULL) {
-		for (int i = 1/*skip this*/; i < traceSize; ++i) {
+		for (int i = 1/*skip this*/; i < traceSizeInt; ++i) {
 			fprintf(stderr, "\t(%d) %s\n", i, traceSymbols[i]);
 		}
 		free(traceSymbols);
 	} else {
-		fprintf(stderr, "");
+		fprintf(stderr, "No symbols available :(");
 	}
 }

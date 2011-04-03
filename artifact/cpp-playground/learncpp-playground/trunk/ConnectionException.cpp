@@ -9,3 +9,4 @@ ConnectionException::ConnectionException(const char* message, const char* source
 ConnectionException::~ConnectionException() {
 	printf("~ConnectionException()\n");
 }
+

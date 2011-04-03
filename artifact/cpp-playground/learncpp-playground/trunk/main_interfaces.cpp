@@ -3,7 +3,7 @@
 #include "Util.hpp"
 #include "MyService.hpp"
 
-void useIt(IService* service) {
+void useIt(pn::IService* service) {
 	service->sayHello();
 	try {
 		service->connect();
@@ -16,7 +16,7 @@ void useIt(IService* service) {
 int main() {
 	printf("main() START\n");
 	try {
-		MyService* service = new MyService();
+		pn::MyService* service = new pn::MyService();
 
 		useIt(service);
 	} catch(Exception& e) {

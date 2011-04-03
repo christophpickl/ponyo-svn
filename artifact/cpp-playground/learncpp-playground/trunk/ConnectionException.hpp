@@ -1,3 +1,4 @@
+#pragma once
 #ifndef CONNECTIONEXCEPTION_H_
 #define CONNECTIONEXCEPTION_H_
 

@@ -1,10 +1,11 @@
+#pragma once
 #ifndef MYSERVICE_HPP_
 #define MYSERVICE_HPP_
 
 #include "IService.hpp"
+#include "Async.hpp"
 
-//namespace pn {
-
+namespace pn {
 class MyService : public IService {
 
 public:
@@ -16,8 +17,10 @@ public:
 	void sayHello();
 	void connect() throw (ConnectionException);
 
-};
+private:
+	static void dispatchHelloEvent();
 
-//}
+};
+}
 
 #endif /* MYSERVICE_HPP_ */

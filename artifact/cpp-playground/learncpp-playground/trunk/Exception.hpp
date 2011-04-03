@@ -1,3 +1,4 @@
+#pragma once
 #ifndef EXCEPTION_H_
 #define EXCEPTION_H_
 

@@ -4,6 +4,7 @@ EXECUTABLES += datastructures
 EXECUTABLES += interfaces
 EXECUTABLES += exceptions
 SOURCES += Util.cpp
+SOURCES += ToStringType.cpp
 SOURCES += Exception.cpp
 SOURCES += ConnectionException.cpp
 SOURCES += DummyServiceListener.cpp

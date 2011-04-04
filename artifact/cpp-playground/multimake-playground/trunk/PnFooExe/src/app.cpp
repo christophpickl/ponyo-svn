@@ -8,6 +8,7 @@ int main() {
 	printf("main() version: %s\n", PNFOOEXE_VERSION);
 
 	MyCommon* comm = new MyCommon();
+	printf("calling MyCommon stuf...\n");
 	comm->printVersion();
 
 	return 0;

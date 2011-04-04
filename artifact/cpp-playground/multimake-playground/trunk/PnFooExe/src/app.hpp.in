@@ -1,1 +1,7 @@
+#pragma once
+#ifndef APP_HPP_
+#define APP_HPP_
+
 #define PNFOOEXE_VERSION @PNFOOEXE_VERSION@
+
+#endif // APP_HPP_

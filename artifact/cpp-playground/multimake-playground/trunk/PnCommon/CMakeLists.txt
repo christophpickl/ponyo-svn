@@ -1,4 +1,6 @@
+message("==============> PnCommon")
 
-SET(CMAKE_SOURCE_DIR src)
+set (PROJECT_SOURCE_DIR src)
+message("PROJECT_SOURCE_DIR = ${PROJECT_SOURCE_DIR}")
 
-add_library (PnCommon MyCommon.cpp)
+add_library (PnCommon ${PROJECT_SOURCE_DIR}/MyCommon.cpp)

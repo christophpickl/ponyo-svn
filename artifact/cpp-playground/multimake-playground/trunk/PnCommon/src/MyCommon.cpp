@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-#include "MyCommon.h"
+#include "MyCommon.hpp"
 
 namespace pn {
 

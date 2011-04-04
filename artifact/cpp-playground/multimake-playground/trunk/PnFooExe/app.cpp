@@ -1,10 +1,11 @@
 #include <stdio.h>
+#include "app.hpp"
 //#include <PnCommon>
 
 //using namespace pn;
 
 int main() {
-	printf("main()\n");
+	printf("main() version: %s\n", PNFOOEXE_VERSION);
 
 //	MyCommon* comm = new MyCommon();
 //	comm->printVersion();

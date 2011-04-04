@@ -1,76 +1,15 @@
 
+project (PnFooExe)
 
-SET(VERSION_MAJOR 0)
-SET(VERSION_MINOR 1)
- 
+set (PNFOOEXE_VERSION \"0.1-SNAPSHOT\")
 
-#SET(CMAKE_SOURCE_DIR src)
+# configure a header file to pass some of the CMake settings to the source code
+configure_file (
+  "${PROJECT_SOURCE_DIR}/app.hpp.in"
+  "${PROJECT_BINARY_DIR}/app.hpp"
+)
 
-# SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D__WXGTK__")
-
-LINK_DIRECTORIES(${LINK_DIRECTORIES} /usr/local/lib)
-INCLUDE_DIRECTORIES(/usr/local/include)
-INCLUDE_DIRECTORIES(${CMAKE_SOURCE_DIR})
-#include_directories (${PNCOMMON_SOURCE_DIR})
-#link_directories (${PNCOMMON_BINARY_DIR})
+# add the binary tree to the search path for include files so that we will find app.hpp
+include_directories("${PROJECT_BINARY_DIR}")
 
 add_executable (pnFoo.exe app.cpp)
-#target_link_libraries (pnFoo.exe PnCommon)    
-
-get_property(inc_dirs DIRECTORY PROPERTY INCLUDE_DIRECTORIES)
-message("inc_dirs = ${inc_dirs}")
-
-MESSAGE("Hello world; version major: ${VERSION_MAJOR}")
-#\verb|MESSAGE("$ENV{PATH}")
-
-
-#IF(WIN32)
-#  ...do something...
-#ELSE(WIN32)
-#  ...do something else...
-#ENDIF(WIN32)
-
-
-# cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=/usr/mylocation ../
-# ccmake ../../src/boost -DCMAKE_IS_EXPERIMENTAL=YES_I_KNOW
-
-
-
-
-########## BOOST
-# Add to the environment:
-#export BOOST_ROOT="/home/doriad/src/boost"
-#export BOOST_LIBRARYDIR="/home/doriad/bin/boost/lib"
-#Then in the CMakeLists.txt use:
-#SET(Boost_USE_MULTITHREAD ON) #set a flag
-#FIND_PACKAGE(Boost 1.34.1 COMPONENTS date_time filesystem)
-#INCLUDE_DIRECTORIES(${INCLUDE_DIRECTORIES} ${Boost_INCLUDE_DIRS})
-#LINK_DIRECTORIES(${LINK_DIRECTORIES} ${Boost_LIBRARY_DIRS})
-
-############ OPENCV
-#Add to the environment:
-#export OpenCV_DIR=/home/doriad/bin/OpenCV
-#Then in the CMakeLists.txt use:
-#FIND_PACKAGE(OpenCV REQUIRED )
-#INCLUDE_DIRECTORIES( ${OPENCV_INCLUDE_DIR} )
-#ADD_EXECUTABLE(Scalar Scalar.cxx)
-#TARGET_LINK_LIBRARIES(Scalar ${OpenCV_LIBS})
-
-
-#Get Help Using a Library
-#cmake --help-module FindBoost
-
-#Add new libraries to CMake
-#/usr/share/cmake/Modules/FindOpenGL.cmake|
-
-#Dependency Graph
-#ccmake ../src/Program/ --graphviz=test.graph 
-#dotty test.graph
-
-
-#ctest -I 622,625
-#ctest -R "itkTransformPoint*"|
-
-
-#Create a library
-#add_library(MatlabLibrary ./MatlabDll/LidarK.cpp)

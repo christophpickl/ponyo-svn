@@ -1,31 +1,56 @@
 #include <stdio.h>
+#include <stdlib.h> // exit()
 #include "log/LogFactory.hpp"
 #include "common.hpp"
 #include "Exception.hpp"
 #include "MainWindow.hpp"
+#include "MainWindowListener.hpp"
+#include "OpenNiManager.hpp"
 
 using namespace pn;
 
-NEW_LOG(__FILE__)
+Log* LOG_APP = NEW_LOG(__FILE__)
 
-class App {
+class App : public MainWindowListener {
 public:
-	App() : window(new MainWindow()) {
-		LOG->debug("new App()");
+	App() :
+		window(new MainWindow()),
+		manager(new OpenNiManager()) {
+		LOG_APP->debug("new App()");
+
+		this->window->addListener(this);
 	}
+
 	~App() {
-		LOG->debug("~App()");
+		LOG_APP->debug("~App()");
+
+		this->window->removeListener(this);
+
 		delete this->window;
+		delete this->manager;
 	}
 
 	void main(int argc, char** argv) {
-		LOG->info("main()");
+		LOG_APP->info("main()");
 
-		this->window->startInfiniteLoop(argc, argv);
+		this->window->init(argc, argv);
+		this->window->display();
+	}
+
+	void onListDevices() {
+		LOG_APP->info("monListDevicesain()");
+//		this->manager->
+	}
+
+	void onQuit() {
+		LOG_APP->info("onQuit()");
+		exit(1);
 	}
 
 private:
 	MainWindow* window;
+	OpenNiManager* manager;
+	static Log LOG;
 
 };
 

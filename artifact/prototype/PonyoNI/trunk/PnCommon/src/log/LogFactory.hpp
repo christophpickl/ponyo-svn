@@ -4,7 +4,8 @@
 
 #include "log/Log.hpp"
 
-#define NEW_LOG(sourceFile) Log* LOG = LogFactory::getLog(sourceFile);
+#define AT __FILE__, __LINE__
+#define NEW_LOG(sourceFile) LogFactory::getLog(sourceFile);
 
 namespace pn {
 class LogFactory {

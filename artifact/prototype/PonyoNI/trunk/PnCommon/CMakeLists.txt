@@ -1,5 +1,8 @@
-message("CMake ==============> PnCommon")
+message("")
+message("==============> PnCommon")
 
 set (PROJECT_SOURCE_DIR src)
 
-add_library(PnCommon ${PROJECT_SOURCE_DIR}/log/LogFactory.cpp ${PROJECT_SOURCE_DIR}/Exception.cpp ${PROJECT_SOURCE_DIR}/common.cpp)
+file(GLOB_RECURSE CPP_FILES "${PROJECT_SOURCE_DIR}/*.cpp")
+message("CPP_FILES: ${CPP_FILES}")
+add_library(PnCommon ${CPP_FILES})

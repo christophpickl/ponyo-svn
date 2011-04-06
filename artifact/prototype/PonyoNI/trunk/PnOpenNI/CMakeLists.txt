@@ -1,5 +1,9 @@
-message("CMake ==============> PnOpenNI")
+message("")
+message("==============> PnOpenNI")
 
 set (PROJECT_SOURCE_DIR src)
 
-add_library(PnOpenNI ${PROJECT_SOURCE_DIR}/OpenNiException.cpp)
+file(GLOB_RECURSE CPP_FILES "${PROJECT_SOURCE_DIR}/*.cpp")
+message("CPP_FILES: ${CPP_FILES}")
+add_library(PnOpenNI ${CPP_FILES})
+

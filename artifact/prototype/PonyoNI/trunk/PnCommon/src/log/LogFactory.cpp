@@ -11,4 +11,8 @@ LogFactory::LogFactory() {
 LogFactory::~LogFactory() {
 }
 
+/*static*/ Log* LogFactory::getLog(const char* sourceFile) {
+	return new Log(sourceFile);
+}
+
 }

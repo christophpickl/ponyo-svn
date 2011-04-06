@@ -2,11 +2,17 @@
 #ifndef LOGFACTORY_HPP_
 #define LOGFACTORY_HPP_
 
+#include "log/Log.hpp"
+
+#define NEW_LOG(sourceFile) Log* LOG = LogFactory::getLog(sourceFile);
+
 namespace pn {
 class LogFactory {
 public:
 	LogFactory();
 	virtual ~LogFactory();
+
+	static Log* getLog(const char*);
 };
 }
 

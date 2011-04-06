@@ -3,10 +3,6 @@ message("==============> ROOT")
 cmake_minimum_required (VERSION 2.8) 
 project (PonyoNI)
 
-
-#find_package(GLUT)
-#find_package(OpenGL)
-
 set(CMAKE_CXX_FLAGS "-g -Wall -O2")
 
 
@@ -33,5 +29,21 @@ set(EXTRA_LIBS ${EXTRA_LIBS} PnOpenNI)
 ##############################################################
 
 add_subdirectory(PonyoNIApp)
-add_executable (PonyoNIApp.exe ${PROJECT_SOURCE_DIR}/PonyoNIApp/src/app.cpp)
+
+message("EXTRA_LIBS: ${EXTRA_LIBS}")
+IF(APPLE)
+	message("APPLE detected, setting glut specific paths")
+   INCLUDE_DIRECTORIES ( /System/Library/Frameworks )
+   FIND_LIBRARY(GLUT_LIBRARY GLUT )
+   FIND_LIBRARY(OpenGL_LIBRARY OpenGL )
+   MARK_AS_ADVANCED (GLUT_LIBRARY
+                     OpenGL_LIBRARY)
+   SET(EXTRA_LIBS ${EXTRA_LIBS} ${GLUT_LIBRARY} ${OpenGL_LIBRARY})
+ENDIF (APPLE)
+message("EXTRA_LIBS: ${EXTRA_LIBS}")
+
+set(PONYONIAPP_SRC_FOLDER "${PROJECT_SOURCE_DIR}/PonyoNIApp/src")
+file(GLOB_RECURSE CPP_FILES "${PONYONIAPP_SRC_FOLDER}/*.cpp")
+message("CPP_FILES: ${CPP_FILES}")
+add_executable (PonyoNIApp.exe ${CPP_FILES})
 target_link_libraries (PonyoNIApp.exe ${EXTRA_LIBS})

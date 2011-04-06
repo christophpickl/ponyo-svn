@@ -1,14 +1,17 @@
 #include <stdio.h>
+#include "common.hpp"
 #include "Exception.hpp"
+#include "log/LogFactory.hpp"
 
 using namespace pn;
 
 int main() {
-	printf("main() START\n");
+	println("main() START");
 
 	new Exception();
+	new LogFactory();
 
-	printf("main() END\n");
+	println("main() END");
 	return 0;
 }
 

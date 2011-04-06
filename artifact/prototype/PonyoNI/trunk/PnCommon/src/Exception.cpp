@@ -1,11 +1,11 @@
 #include <stdio.h>
-
+#include "common.hpp"
 #include "Exception.hpp"
 
 namespace pn {
 
 Exception::Exception() {
-	printf("new Exception()");
+	println("new Exception()");
 }
 
 Exception::~Exception() {

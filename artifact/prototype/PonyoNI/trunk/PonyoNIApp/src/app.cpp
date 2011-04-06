@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include "Exception.hpp"
 
+using namespace pn;
+
 int main() {
 	printf("main() START\n");
 

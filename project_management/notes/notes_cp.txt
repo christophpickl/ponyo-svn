@@ -2,30 +2,38 @@
 =================================================
 TODOs
 =================================================
+* use cmake + cxxtest
+* use cmake + openni lib
+* get matlab engine running
+* use cmake + matlab engine (no mex!)
+! @C++: get familiar with building: static vs dynamic lib
+
+! asus competition: http://event.asus.com/wavi/gallery/Event_Term.aspx
 !! register openni callbacks for joint data (skeleton tracking)
 !! refactor Device logic; add depthGenerator
-! @C++: get familiar with building: static vs dynamic lib, proper makefile, cmake
-! @MEX: how to call matlab code from within cpp?
-! @MEX: compile c++ from matlab code: mcc -B csharedlib:libmyfoo foo1.m foo2.m // http://www.mathworks.com/support/tech-notes/1600/1622.html
-! @C++: howto custom namespace? (modularization in general a la java packages; static vs dyn libs?)
+! @c++: get a guru in pointers and const and tha-like ;)
 ! @CODE: wrapper klasse fuer openni aufrufe mit check returnCode+throw exception (? heisst das alle klassen, nicht nur context, einen wrapper schreiben?!)
-- either use boost or investigate <pthread.h>
+! @BUILD: investigate pkg-config (see openCV)
+! investige openNi skeleton tracking facilities (confidence value, orientation, ...)
+! fix OpenNI strange behaviour, of depth camera points different from rgb (as camera is slightly positioned a bit to the left/right) => apply some correction value, just as calibration-delta
+	==> DepthGenerator.GetAlternativeViewPointCap().SetViewPoint(ImageGenerator) "
 - @MAKE BUILD: have a look at openni make files
 	// eg in make: OSTYPE := $(shell uname -s) ... ifneq ("$(OSTYPE)","Darwin")
 	// eg in c++: #if defined(__APPLE__) || defined(MACOSX)
+// sehr gute uni arbeit (predator): http://www.youtube.com/watch?v=1GhNXHCQGsM
+- experimental investigate NITE framework (pre-built gestures (wave, circle, ..), etc)
+- @MEX: compile c++ from matlab code: mcc -B csharedlib:libmyfoo foo1.m foo2.m // http://www.mathworks.com/support/tech-notes/1600/1622.html
 - improve programatic node configuration (introduce custom object)
--- @MEX: mexErrMsgIdAndTxt("MATLAB:mexcpp:nargout", "MEXCPP requires no output argument.");
 - @GLUT: continue reading glut tutorial: http://www.lighthouse3d.com/tutorials/glut-tutorial/keyboard/
 - @Test: mocking for cpp?
 - read c++ guide: http://stackoverflow.com/questions/30373/what-c-pitfalls-should-i-avoid
 - have a look at libfreenect project ideas:
 	http://openkinect.org/wiki/Project_ideas
 	http://openkinect.org/wiki/Gallery
--- logging for cpp
+-- @MEX: mexErrMsgIdAndTxt("MATLAB:mexcpp:nargout", "MEXCPP requires no output argument.");
 -- enums for c++: enum directions {up, down};
--- NO: threading/boost for cpp
--- @BUILD: cpp maven integration (inclusive cxxunit)
---- dependency injection for cpp?
+-- @BUILD: cpp maven integration (maybe via cmake?!)
+-- dependency injection for cpp?
 -- go through github sourcecode related to openni: https://github.com/search?q=openni&type=Everything&repo=&langOverride=&start_value=1
 -- go through project sourcecode
 	* https://github.com/roxlu/ofxOpenNI
@@ -104,6 +112,29 @@ OpenNI
 - wiki with good faq
 	http://wiki.openni.org/mediawiki/index.php/Main_Page
 
+Boost
+-------------------------------------------------
+- official site
+	http://www.boost.org
+- goood tutorial
+	http://antonym.org/2009/05/threading-with-boost---part-i-creating-threads.html
+- misc
+	http://www.boost.org/doc/libs/1_41_0/libs/thread/example/
+	http://www.boost.org/doc/libs/1_41_0/libs/iostreams/doc/installation.html
+	http://www.highscore.de/cpp/boost/multithreading.html
+	http://programmingexamples.net/index.php?title=CPP/Boost/Threads
+	http://drdobbs.com/cpp/184401518
+
+CMake
+-------------------------------------------------
+- official site
+	http://www.cmake.org/Wiki/CMake
+- documentation
+	http://www.cmake.org/cmake/help/documentation.html
+- examples
+	http://www.cmake.org/cmake/help/examples.html
+- more examples
+	http://www.vtk.org/Wiki/CMake/Examples
 
 Tools
 -------------------------------------------------
@@ -114,14 +145,6 @@ Tools
 	http://www.opengl.org/documentation/specs/glut/spec3/spec3.html
 - CxxUnit
 	http://cxxunit.sourceforge.net/
-- Boost
-	http://www.boost.org
-	goood tutorial: http://antonym.org/2009/05/threading-with-boost---part-i-creating-threads.html
-	http://www.boost.org/doc/libs/1_41_0/libs/thread/example/
-	http://www.boost.org/doc/libs/1_41_0/libs/iostreams/doc/installation.html
-	http://www.highscore.de/cpp/boost/multithreading.html
-	http://programmingexamples.net/index.php?title=CPP/Boost/Threads
-	http://drdobbs.com/cpp/184401518
 
 Misc
 -------------------------------------------------

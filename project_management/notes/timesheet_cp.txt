@@ -22,4 +22,6 @@ TIMESHEET CP
 03.04. - 14:00 -  2h - learn cpp: templates, own async/listeners
 03.04. - 16:00 -  2h - finished boost playground: multithreaded worker and mutex for data snapshot (future rgb and depth meta data storage)
 03.04. - 18:00 -  1h - started custom logging framework
-              ~~ 28h~~
+04.04. - 10:00 -  2h - cmake investigation (see multimake-playground)
+              ~~ 30h~~
+06.04. - 18:00 -   h - learn cpp: pointers&co*

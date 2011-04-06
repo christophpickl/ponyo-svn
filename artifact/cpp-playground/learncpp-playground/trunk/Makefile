@@ -1,4 +1,5 @@
 
+EXECUTABLES += pointers
 EXECUTABLES += templates
 EXECUTABLES += datastructures
 EXECUTABLES += interfaces
@@ -37,6 +38,9 @@ init:
 	@echo
 	mkdir -p $(TARGET)
 
+pointers: $(OBJECTS) main_pointers.o
+	$(CXX) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
+	
 templates: $(OBJECTS) main_templates.o
 	$(CXX) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
 	

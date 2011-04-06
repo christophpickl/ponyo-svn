@@ -1,34 +1,49 @@
-#include <stdio.h>
+#include <string.h>
 #include <iostream>
 #include "common.hpp"
 #include "Log.hpp"
 
-Log::Log(const char* pSourceFile) : sourceFile(pSourceFile) {
-	printf("[LOGLOG] new Log(sourceFile=%s)\n", pSourceFile);
+namespace pn {
+
+int Log::LEVEL_INFO = 40;
+
+Log::Log(const char* pLogeeName) {
+	std::string pSourceFileStr = std::string(pLogeeName);
+	int strX = 30; // "/Users/phudy/_dev/cpp/PonyoNI/"
+	int strN = pSourceFileStr.size() - strX - 4 /*.cpp*/;
+	this->logeeName = pSourceFileStr.substr(strX, strN);
+	printf("[LOGLOG] new Log(logeeName=%s)\n", this->logeeName.c_str());
 }
 
 Log::~Log() {
-	printf("[LOGLOG] ~Log() ... this->sourceFile=[%s]\n", this->sourceFile);
+	printf("[LOGLOG] ~Log() ... this->logeeName=[%s]\n", this->logeeName.c_str());
 }
-// TODO rework Log as stream, to use it a la: "LOG << "foo" << bar << endl;"
-// TODO vararg arguments for log methods!!!
 
+inline void Log::writeLog(const char* message, int logLevel, const char* label /* TODO: , Exception& exception = NULL */) {
+	// TODO make use of logLevel
+	std::cout << label << " " << this->logeeName << " -- " << message << std::endl;
+}
+// TODO vararg arguments for log methods!!!
 // TODO add timestamp
-// TODO merge printing to internal _log method
 // TODO configurable loglevels/logsources (runtime config via configfile)
+void Log::fatal(const char* message) {
+	this->writeLog(message, Log::LEVEL_FATAL, LABEL_LEVEL_FATAL);
+}
+
 void Log::error(const char* message) {
-	printf("[ERROR] %s -- %s\n", this->sourceFile, message);
+	this->writeLog(message, Log::LEVEL_ERROR, LABEL_LEVEL_ERROR);
 }
 
 void Log::info(const char* message) {
-	std::cout << "[INFO] " << this->sourceFile << " -- " << message << std::endl;
-//	printf("[INFO] %s -- %s\n", this->sourceFile, message);
+	this->writeLog(message, Log::LEVEL_INFO, LABEL_LEVEL_INFO);
 }
 
 void Log::debug(const char* message) {
-	printf("[DEBUG] %s -- %s\n", this->sourceFile, message);
+	this->writeLog(message, Log::LEVEL_DEBUG, LABEL_LEVEL_DEBUG);
 }
 
 void Log::trace(const char* message) {
-	printf("[TRACE] %s -- %s\n", this->sourceFile, message);
+	this->writeLog(message, Log::LEVEL_TRACE, LABEL_LEVEL_TRACE);
+}
+
 }

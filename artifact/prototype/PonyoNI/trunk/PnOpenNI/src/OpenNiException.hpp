@@ -2,11 +2,16 @@
 #ifndef OPENNIEXCEPTION_H_
 #define OPENNIEXCEPTION_H_
 
+#include "common.hpp"
+#include "Exception.hpp"
+
 namespace pn {
-class OpenNiException {
+class OpenNiException : public Exception {
 public:
-	OpenNiException();
+	OpenNiException(const char*, const char*, int);
 	virtual ~OpenNiException();
+private:
+	static Log* LOG;
 };
 }
 

@@ -3,8 +3,23 @@ message("==============> ROOT")
 cmake_minimum_required (VERSION 2.8) 
 project (PonyoNI)
 
-set(CMAKE_CXX_FLAGS "-g -Wall -O2")
+# adding optimizer flag, otherwise build will fail with:
+#Undefined symbols:
+#  "_xnShutdown", referenced from:
+#      xn::Context::Shutdown() 
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 
+FIND_LIBRARY(OpenNI_LIBRARY OpenNI )
+SET(EXTRA_LIBS ${EXTRA_LIBS} ${OpenNI_LIBRARY} )
+
+#message("EXTRA_LIBS: ${EXTRA_LIBS}")
+#message("CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
+
+
+IF(APPLE)
+	message("APPLE detected, setting OpenNI specific paths")
+	INCLUDE_DIRECTORIES( /usr/include/ni )
+ENDIF(APPLE)
 
 ##############################################################
 # PnCommon
@@ -33,14 +48,14 @@ add_subdirectory(PonyoNIApp)
 message("EXTRA_LIBS: ${EXTRA_LIBS}")
 IF(APPLE)
 	message("APPLE detected, setting glut specific paths")
-   INCLUDE_DIRECTORIES ( /System/Library/Frameworks )
+   INCLUDE_DIRECTORIES( /System/Library/Frameworks )
    FIND_LIBRARY(GLUT_LIBRARY GLUT )
    FIND_LIBRARY(OpenGL_LIBRARY OpenGL )
    MARK_AS_ADVANCED (GLUT_LIBRARY
                      OpenGL_LIBRARY)
    SET(EXTRA_LIBS ${EXTRA_LIBS} ${GLUT_LIBRARY} ${OpenGL_LIBRARY})
 ENDIF (APPLE)
-message("EXTRA_LIBS: ${EXTRA_LIBS}")
+#message("EXTRA_LIBS: ${EXTRA_LIBS}")
 
 set(PONYONIAPP_SRC_FOLDER "${PROJECT_SOURCE_DIR}/PonyoNIApp/src")
 file(GLOB_RECURSE CPP_FILES "${PONYONIAPP_SRC_FOLDER}/*.cpp")

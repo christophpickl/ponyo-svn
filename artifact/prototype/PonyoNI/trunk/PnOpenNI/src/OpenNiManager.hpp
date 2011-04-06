@@ -2,18 +2,22 @@
 #ifndef OPENNIMANAGER_HPP_
 #define OPENNIMANAGER_HPP_
 
-#include "log/Log.hpp"
-#include "OpenNiException.hpp"
+#include "common_openni.hpp"
+#include "DeviceInitializer.hpp"
 
 namespace pn {
 class OpenNiManager {
 public:
-	OpenNiManager();
+	OpenNiManager(DeviceInitializer*);
 	virtual ~OpenNiManager();
 
-	void init() throw (OpenNiException);;
+	void init() throw (OpenNiException);
+	void listDevices();
+	void shutdown();
 
 private:
+	DeviceInitializer* initializer;
+	xn::Context context;
 	static Log* LOG;
 };
 }

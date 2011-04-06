@@ -62,6 +62,12 @@ void MainWindow::onGlutKeyboard(unsigned char key, int x, int y) {
 			listener->onQuit();
 		}
 		break;
+	case 'l':
+		for(int i=0, n=this->listeners.size(); i < n; i++) {
+			MainWindowListener* listener = this->listeners.at(i);
+			listener->onListDevices();
+		}
+		break;
 	}
 }
 

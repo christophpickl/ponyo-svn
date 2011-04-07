@@ -16,7 +16,7 @@ public:
 	CamCalibrator(ImageDetector*, ImageConverter*, ImageSaver*, cv::Mat* templateImage);
 	virtual ~CamCalibrator();
 
-	void calibrate(std::vector<Cam*>& cams);
+	bool calibrate(std::vector<Cam*>& cams, std::vector<cv::Point*>& foundTemplatePositions);
 private:
 	static Log* LOG;
 

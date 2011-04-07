@@ -5,8 +5,8 @@ namespace pn {
 
 Log* ImageSaver::LOG = NEW_LOG(__FILE__)
 
-ImageSaver::ImageSaver() {
-	LOG->debug("new ImageSaver()");
+ImageSaver::ImageSaver(ImageConverter* pConverter) : converter(pConverter) {
+	LOG->debug("new ImageSaver(converter)");
 }
 
 ImageSaver::~ImageSaver() {
@@ -30,41 +30,15 @@ void ImageSaver::saveToDefault(const xn::ImageMetaData* image, const std::string
 	this->saveToFile(image, targetFileName);
 }
 
-void ImageSaver::saveToFile(const xn::ImageMetaData* image, const std::string& targetFileName) {
+void ImageSaver::saveToFile(const xn::ImageMetaData* imageMetaData, const std::string& targetFileName) {
 	LOG->debug("saveToFile(image, targetFileName)");
 
-	const XnRGB24Pixel* currentImageRow = image->RGB24Data();
-	const XnRGB24Pixel* currentPixel;
-	const int xResolution = image->XRes();
-	const int yResolution = image->YRes();
-
-	cv::Mat colorArray[3];
-	colorArray[0] = cv::Mat(yResolution, xResolution, CV_8U);
-	colorArray[1] = cv::Mat(yResolution, xResolution, CV_8U);
-	colorArray[2] = cv::Mat(yResolution, xResolution, CV_8U);
-
-	for (int y = 0; y < yResolution; y++)  {
-		uchar* blueValue = colorArray[0].ptr<uchar>(y);
-		uchar* greenValue = colorArray[1].ptr<uchar>(y);
-		uchar* redValue = colorArray[2].ptr<uchar>(y);
-
-		currentPixel = currentImageRow;
-		for (int x = 0; x < xResolution; x++)  {
-			blueValue[x] = currentPixel->nBlue;
-			greenValue[x] = currentPixel->nGreen;
-			redValue[x] = currentPixel->nRed;
-
-			currentPixel++;
-		}
-
-		currentImageRow += xResolution;
-	}
-
 	cv::Mat colorImage;
-	cv::merge(colorArray, 3, colorImage);
+	this->converter->convertMeta2Mat(colorImage, imageMetaData);
 
 //    IplImage bgrIpl = colorImage; // create a IplImage header for the cv::Mat bgrImage ==> ??? WHAT FOR ???
     // bool imwrite(const string& filename, const Mat& img, const vector<int>& params=vector<int>()) ... see: http://opencv.willowgarage.com/documentation/cpp/reading_and_writing_images_and_video.html#cv-imwrite
+
     cv::imwrite(targetFileName, colorImage);
 //    cvSaveImage(targetFileNameChars, &bgrIpl);
 }

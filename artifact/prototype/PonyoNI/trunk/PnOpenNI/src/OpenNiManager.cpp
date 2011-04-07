@@ -63,7 +63,17 @@ void OpenNiManager::startGenerateImageForAllCams() {
 void OpenNiManager::calibrate() {
 	LOG->info("calibrate()");
 
-	this->camCalibrator->calibrate(this->cams);
+	std::vector<cv::Point*> foundTemplatePositions;
+	bool calibrationSuccessful = this->camCalibrator->calibrate(this->cams, foundTemplatePositions);
+	if(calibrationSuccessful == false) {
+		return;
+	}
+
+	printf("OpenNiManager ... Calibration points:\n\n");
+	for(int i=0, n=foundTemplatePositions.size(); i < n; i++) {
+		cv::Point* p = foundTemplatePositions.at(i);
+		printf("\t%i. point: %ix%i\n", (i+1), p->x, p->y);
+	}
 }
 
 void OpenNiManager::shutdown() {

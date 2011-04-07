@@ -28,9 +28,10 @@ cv::Point ImageDetector::match(cv::Mat& sourceImage, cv::Mat& templateImage) thr
 	cv::Point minLoc;
 	cv::Point maxLoc;
 	try {
+		// finds global minimum and maximum array elements and returns their values and their locations
 		cv::minMaxLoc(matchResult, &minValue, &maxValue, &minLoc, &maxLoc/*, const Mat& mask=Mat()*/);
-		printf("minMaxLoc result:\n\t- minValue: %f\n\t- maxValue: %f\n\t- minLoc: %ix%i\n\t- maxLoc: %ix%i\n\n",
-				minValue, maxValue, minLoc.x, minLoc.y, maxLoc.x, maxLoc.y);
+//		printf("ImageDetector ... minMaxLoc result:\n\t- minValue: %f\n\t- maxValue: %f\n\t- minLoc: %ix%i\n\t- maxLoc: %ix%i\n\n",
+//				minValue, maxValue, minLoc.x, minLoc.y, maxLoc.x, maxLoc.y);
 	} catch(cv::Exception& ex) {
 		fprintf(stderr, "Internal exception: %s\n", ex.what());
 		throw ImageDetectorException("cv::minMaxLoc() failed!", AT);

@@ -11,7 +11,7 @@ public:
 	ImageConverter();
 	virtual ~ImageConverter();
 
-	void convertImageMetaData2cvMat(cv::Mat& targetMat, const xn::ImageMetaData* sourceData);
+	void convertMeta2Mat(cv::Mat& targetMat, const xn::ImageMetaData* sourceMeta);
 private:
 	static Log* LOG;
 };

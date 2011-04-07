@@ -106,7 +106,7 @@ private:
 		// wire objects
 		this->imageDetector = new ImageDetector();
 		this->imageConverter = new ImageConverter();
-		this->imageSaver = new ImageSaver();
+		this->imageSaver = new ImageSaver(this->imageConverter);
 		this->camCalibrator = new CamCalibrator(this->imageDetector, this->imageConverter, this->imageSaver, this->templateImage);
 
 		this->camInitializer = new CamInitializer();

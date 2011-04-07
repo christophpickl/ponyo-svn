@@ -18,10 +18,9 @@ void CamInitializer::fetchDevices(xn::Context& context) {
 	this->workerThread = boost::thread(&CamInitializer::run, this, context);
 }
 
-/*private*/ void CamInitializer::loadDeviceInfos(std::vector<xn::NodeInfo>& deviceInfos, xn::Context& context) {
+/*private*/ void CamInitializer::loadDeviceInfos(std::vector<xn::NodeInfo>& deviceInfos, xn::NodeInfoList& deviceInfoList, xn::Context& context) {
 	LOG->debug("loadDeviceInfos(context)");
 
-	xn::NodeInfoList deviceInfoList;
 	LOG->trace(">> context.EnumerateProductionTrees(XN_NODE_TYPE_DEVICE, ..)");
 	XnStatus returnCode = context.EnumerateProductionTrees(XN_NODE_TYPE_DEVICE, NULL, deviceInfoList); // XnStatus EnumerateProductionTrees(XnProductionNodeType Type, Query* pQuery, NodeInfoList& TreesList, EnumerationErrors* pErrors = NULL) const
 	if(returnCode != XN_STATUS_OK) {
@@ -47,8 +46,10 @@ void CamInitializer::fetchDevices(xn::Context& context) {
 	LOG->debug("run() ... THREAD started");
 
 	std::vector<Cam*> cams;
+
 	std::vector<xn::NodeInfo> deviceInfos;
-	this->loadDeviceInfos(deviceInfos, context);
+	xn::NodeInfoList deviceInfoList;
+	this->loadDeviceInfos(deviceInfos, deviceInfoList, context);
 
 	if(!deviceInfos.empty()) {
 		//	printf("Looking for available depth generators...\n");

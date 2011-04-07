@@ -19,7 +19,7 @@ private:
 	boost::thread workerThread;
 
 	void run(xn::Context& context);
-	void loadDeviceInfos(std::vector<xn::NodeInfo>& deviceInfos, xn::Context& context);
+	void loadDeviceInfos(std::vector<xn::NodeInfo>& deviceInfos, xn::NodeInfoList& deviceInfoList, xn::Context& context);
 	Cam* createCamInstance(xn::ImageGenerator& imageGenerator, xn::NodeInfo& deviceInfo);
 	void dispatchEvent(std::vector<Cam*>& cams);
 };

@@ -9,10 +9,17 @@ project (PonyoNI)
 #      xn::Context::Shutdown() 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 
+
+
+
+
+
+
+
 FIND_LIBRARY(OpenNI_LIBRARY OpenNI )
 SET(EXTRA_LIBS ${EXTRA_LIBS} ${OpenNI_LIBRARY} )
 
-#message("EXTRA_LIBS: ${EXTRA_LIBS}")
+message("[ROOT] EXTRA_LIBS: ${EXTRA_LIBS}")
 #message("CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 
 
@@ -20,6 +27,7 @@ IF(APPLE)
 	message("APPLE detected, setting OpenNI specific paths")
 	INCLUDE_DIRECTORIES( /usr/include/ni )
 ENDIF(APPLE)
+
 
 ##############################################################
 # PnCommon
@@ -62,3 +70,14 @@ file(GLOB_RECURSE CPP_FILES "${PONYONIAPP_SRC_FOLDER}/*.cpp")
 message("CPP_FILES: ${CPP_FILES}")
 add_executable (PonyoNIApp.exe ${CPP_FILES})
 target_link_libraries (PonyoNIApp.exe ${EXTRA_LIBS})
+
+
+
+# LIB - Boost
+##############################################################
+
+set(BOOST_LIBS thread date_time system)
+find_package(Boost COMPONENTS ${BOOST_LIBS} REQUIRED)
+target_link_libraries(PonyoNIApp.exe ${Boost_LIBRARIES})
+find_package(Threads REQUIRED)
+target_link_libraries(PonyoNIApp.exe ${CMAKE_THREAD_LIBS_INIT})

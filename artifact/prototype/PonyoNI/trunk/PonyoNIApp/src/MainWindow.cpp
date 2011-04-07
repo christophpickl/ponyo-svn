@@ -68,6 +68,12 @@ void MainWindow::onGlutKeyboard(unsigned char key, int x, int y) {
 			listener->onListDevices();
 		}
 		break;
+	case 's':
+		for(int i=0, n=this->listeners.size(); i < n; i++) {
+			MainWindowListener* listener = this->listeners.at(i);
+			listener->onStartGenerating();
+		}
+		break;
 	}
 }
 

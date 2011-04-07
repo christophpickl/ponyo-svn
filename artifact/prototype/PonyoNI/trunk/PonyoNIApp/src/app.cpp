@@ -14,8 +14,8 @@ public:
 	App() : window(new MainWindow()) {
 		LOG_APP->debug("new App()");
 
-		this->deviceInitializer = new DeviceInitializer();
-		this->manager = new OpenNiManager(this->deviceInitializer);
+		this->camInitializer = new CamInitializer();
+		this->manager = new OpenNiManager(this->camInitializer);
 
 		this->window->addListener(this);
 	}
@@ -27,7 +27,7 @@ public:
 
 		delete this->window;
 		delete this->manager;
-		delete this->deviceInitializer;
+		delete this->camInitializer;
 	}
 
 	void main(int argc, char** argv) {
@@ -48,6 +48,11 @@ public:
 		}
 	}
 
+	void onStartGenerating() {
+		LOG_APP->info("onStartGenerating()");
+		this->manager->startGenerateImageForAllCams();
+	}
+
 	void onQuit() {
 		LOG_APP->info("onQuit()");
 		this->manager->shutdown();
@@ -57,7 +62,7 @@ public:
 private:
 	MainWindow* window;
 	OpenNiManager* manager;
-	DeviceInitializer* deviceInitializer;
+	CamInitializer* camInitializer;
 	static Log LOG;
 
 };

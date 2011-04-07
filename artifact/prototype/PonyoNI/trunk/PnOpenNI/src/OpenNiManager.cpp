@@ -7,14 +7,17 @@ namespace pn {
 
 Log* OpenNiManager::LOG = NEW_LOG(__FILE__)
 
-OpenNiManager::OpenNiManager(CamInitializer* pInitializer) : initializer(pInitializer) { //  throw (ConnectionException) {
+OpenNiManager::OpenNiManager(CamInitializer* pCamInitializer, ImageSaver* pImageSaver) :
+		camInitializer(pCamInitializer),
+		imageSaver(pImageSaver) {
+
 	LOG->debug("new OpenNiManager()");
-	this->initializer->addListener(this);
+	this->camInitializer->addListener(this);
 }
 
 OpenNiManager::~OpenNiManager() {
 	LOG->debug("~OpenNiManager()");
-	this->initializer->removeListener(this);
+	this->camInitializer->removeListener(this);
 }
 
 void OpenNiManager::init() throw (OpenNiException) {
@@ -22,10 +25,10 @@ void OpenNiManager::init() throw (OpenNiException) {
 
 	CHECK_RC(this->context.Init(), "context.Init()");
 }
-void OpenNiManager::listDevices() {
+void OpenNiManager::listDevices() { // TODO throw (ConnectionException) {
 	// TODO if(!initedYet) throw IllegalStateException
 	LOG->info("listDevices()");
-	this->initializer->fetchDevices(this->context);
+	this->camInitializer->fetchDevices(this->context);
 }
 
 void OpenNiManager::onInitializedCams(std::vector<Cam*> cams) {
@@ -43,11 +46,21 @@ void OpenNiManager::onInitializedCams(std::vector<Cam*> cams) {
 
 void OpenNiManager::startGenerateImageForAllCams() {
 	LOG->info("startGenerateImageForAllCams()");
+
 	for(int i = 0, n = this->cams.size(); i < n; i++) {
 		Cam* currentCam = cams.at(i);
 		std::cout << (i+1) << ". " << currentCam->toString() << std::endl;
 		xn::ImageGenerator generator = currentCam->getImageGenerator();
 		CHECK_RC(generator.StartGenerating(), "generator.StartGenerating()");
+	}
+}
+void OpenNiManager::createImageForAllCams() {
+	LOG->info("createImageForAllCams()");
+
+	for(int i = 0, n = this->cams.size(); i < n; i++) {
+		Cam* currentCam = cams.at(i);
+		const xn::ImageMetaData* imageData = currentCam->getRecentImageData();
+		this->imageSaver->saveToDefault(imageData, currentCam->getCleanId());
 	}
 }
 
@@ -56,7 +69,6 @@ void OpenNiManager::shutdown() {
 
 	for(int i = 0, n = this->cams.size(); i < n; i++) {
 		Cam* currentCam = cams.at(i);
-		std::cout << (i+1) << ". " << currentCam->toString() << std::endl;
 		xn::ImageGenerator generator = currentCam->getImageGenerator();
 		if(generator.IsGenerating()) {
 			printf("stop generating cam %s\n", currentCam->toString().c_str());

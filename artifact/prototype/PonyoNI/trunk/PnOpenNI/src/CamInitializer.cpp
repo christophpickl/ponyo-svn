@@ -105,9 +105,22 @@ void CamInitializer::fetchDevices(xn::Context& context) {
 		unsigned short productId;
 		unsigned char bus;
 		unsigned char address;
+
+		const XnChar* creationInfoXn = deviceInfo.GetCreationInfo();
+		std::string cleanId = std::string(creationInfoXn); // "045e/02ae@36/6"
+
+		printf("creationInfoXn=[%s]\n", creationInfoXn);
+		std::cout << "creationInfo: " << cleanId << std::endl;
+
+		std::string escapeStr("_");
+		cleanId.replace(4, 1, escapeStr); // "045e_02ae@36/6"
+		cleanId.replace(9, 1, escapeStr); // "045e_02ae_36/6"
+		cleanId.replace(12, 1, escapeStr); // "045e_02ae_36_6"
+		std::cout << "cleanId: " << cleanId << std::endl;
+
 		sscanf(deviceInfo.GetCreationInfo(), "%hx/%hx@%hhu/%hhu", &vendorId, &productId, &bus, &address);
 
-		Cam* newCam = new Cam(imageGenerator, vendorId, productId, bus, address);
+		Cam* newCam = new Cam(imageGenerator, cleanId, vendorId, productId, bus, address);
 		cams.push_back(newCam);
 //		NiDevice* device = new NiDevice(deviceInfo, imageInfo, imageGenerator, this->imageSaver);
 //		device->printToString();

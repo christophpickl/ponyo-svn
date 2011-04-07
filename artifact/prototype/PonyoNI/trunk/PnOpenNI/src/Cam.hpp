@@ -9,7 +9,7 @@
 namespace pn {
 class Cam {
 public:
-	Cam(xn::ImageGenerator&, const unsigned short, const unsigned short, const unsigned char, const unsigned char);
+	Cam(xn::ImageGenerator&, std::string, const unsigned short, const unsigned short, const unsigned char, const unsigned char);
 	virtual ~Cam();
 
 	// deviceInfo.GetCreationInfo result example: "045e/02ae@36/62" (or: "045e/02ae@38/13")
@@ -18,18 +18,21 @@ public:
 	//   bus: 36
 	//   address: 62
 	const xn::ImageGenerator& getImageGenerator() const;
+	const xn::ImageMetaData* getRecentImageData() const;
 
 	unsigned short getVendorId() const;
 	unsigned short getProductId() const;
 	unsigned char getBus() const;
 	unsigned char getAddress() const;
+	std::string getCleanId() const;
 
 	std::string toString();
 	friend std::ostream& operator<<(std::ostream& os, const Cam& stringee) { // TODO operator does not work properly :-|
 //		return os << "Cam[address=" << stringee.address << "]";
 		os << "Cam[";
-		os << "address=xx";
-//		os << stringee.address;
+		os << "address=";
+		os << stringee.cleanId;
+//		os << reinterpret_cast<const char*>(stringee.address);
 		os << "]";
 		return os;
 	}
@@ -37,7 +40,8 @@ private:
 	static Log* LOG;
 
 	xn::ImageGenerator imageGenerator;
-
+	xn::ImageMetaData recentImageData;
+	std::string cleanId;
 	unsigned short vendorId;
 	unsigned short productId;
 	unsigned char bus;

@@ -5,6 +5,14 @@
 #include "MainWindow.hpp"
 #include "OpenNiManager.hpp"
 
+/*
+
+l ... list
+s ... start
+c ... create image (calibrate)
+q ... quit
+
+ */
 using namespace pn;
 
 Log* LOG_APP = NEW_LOG(__FILE__)
@@ -15,7 +23,8 @@ public:
 		LOG_APP->debug("new App()");
 
 		this->camInitializer = new CamInitializer();
-		this->manager = new OpenNiManager(this->camInitializer);
+		this->imageSaver = new ImageSaver();
+		this->manager = new OpenNiManager(this->camInitializer, this->imageSaver);
 
 		this->window->addListener(this);
 	}
@@ -28,6 +37,7 @@ public:
 		delete this->window;
 		delete this->manager;
 		delete this->camInitializer;
+		delete this->imageSaver;
 	}
 
 	void main(int argc, char** argv) {
@@ -53,6 +63,11 @@ public:
 		this->manager->startGenerateImageForAllCams();
 	}
 
+	void onCreateImage() {
+		LOG_APP->info("onCreateImage()");
+		this->manager->createImageForAllCams();
+	}
+
 	void onQuit() {
 		LOG_APP->info("onQuit()");
 		this->manager->shutdown();
@@ -63,6 +78,7 @@ private:
 	MainWindow* window;
 	OpenNiManager* manager;
 	CamInitializer* camInitializer;
+	ImageSaver* imageSaver;
 	static Log LOG;
 
 };

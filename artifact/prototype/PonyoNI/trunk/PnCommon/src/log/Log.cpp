@@ -1,11 +1,16 @@
-#include <string.h>
 #include <iostream>
-#include "common.hpp"
 #include "Log.hpp"
 
 namespace pn {
 
-int Log::LEVEL_INFO = 40;
+int Log::LEVEL_NONE = 999;
+int Log::LEVEL_FATAL = 800;
+int Log::LEVEL_ERROR = 700;
+int Log::LEVEL_WARN = 600;
+int Log::LEVEL_INFO = 300;
+int Log::LEVEL_DEBUG = 200;
+int Log::LEVEL_TRACE = 100;
+int Log::LEVEL_ANY = 42;
 
 Log::Log(const char* pLogeeName) {
 	std::string pSourceFileStr = std::string(pLogeeName);
@@ -20,7 +25,7 @@ Log::~Log() {
 }
 
 inline void Log::writeLog(const char* message, int logLevel, const char* label /* TODO: , Exception& exception = NULL */) {
-	// TODO make use of logLevel
+	// TODO check logLevel
 	std::cout << label << " " << this->logeeName << " -- " << message << std::endl;
 }
 // TODO vararg arguments for log methods!!!
@@ -32,6 +37,10 @@ void Log::fatal(const char* message) {
 
 void Log::error(const char* message) {
 	this->writeLog(message, Log::LEVEL_ERROR, LABEL_LEVEL_ERROR);
+}
+
+void Log::warn(const char* message) {
+	this->writeLog(message, Log::LEVEL_WARN, LABEL_LEVEL_WARN);
 }
 
 void Log::info(const char* message) {

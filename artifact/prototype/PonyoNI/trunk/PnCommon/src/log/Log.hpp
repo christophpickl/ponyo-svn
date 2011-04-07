@@ -21,17 +21,20 @@ public:
 
 	void fatal(const char*);
 	void error(const char*);
+	void warn(const char*);
 	void info(const char*);
 	void debug(const char*);
 	void trace(const char*);
 
 private:
+	static int LEVEL_NONE;
 	static int LEVEL_FATAL;
 	static int LEVEL_ERROR;
 	static int LEVEL_WARN;
 	static int LEVEL_INFO;
 	static int LEVEL_DEBUG;
 	static int LEVEL_TRACE;
+	static int LEVEL_ANY;
 
 	std::string logeeName;
 

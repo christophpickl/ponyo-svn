@@ -6,8 +6,10 @@
 // highgui contains imwrite function
 #include <opencv2/highgui/highgui.hpp>
 
-#define IMG_TEMPLATE "images/blue_ball_template.jpg"
+#define IMG_BLUE_TEMPLATE "images/blue_ball_template.jpg"
+#define IMG_RED_TEMPLATE "images/red_ball_template.jpg"
 #define IMG_SNAPSHOT1 "images/snapshot1.jpg"
+#define IMG_SNAPSHOT2 "images/snapshot2.jpg"
 
 /**
  * @param matchTemplateMethod one of: { CV_TM_SQDIFF, CV_TM_SQDIFF_NORMED, CV_TM_CCORR, CV_TM_CCORR_NORMED, CV_TM_CCOEFF, CV_TM_CCOEFF_NORMED }
@@ -62,8 +64,8 @@ int main() {
 	// image.convertTo(double_I, CV_64F); ... http://efreedom.com/Question/1-3188352/Changing-Dataype-Mat-Class-Instance-OpenCV-CPlusPlus-Interface
 
 	printf("Loading images ...\n");
-	IplImage* imgSource = cvLoadImage(IMG_SNAPSHOT1);
-	IplImage* imgTemplate = cvLoadImage(IMG_TEMPLATE);
+	IplImage* imgSource = cvLoadImage(IMG_SNAPSHOT2);
+	IplImage* imgTemplate = cvLoadImage(IMG_BLUE_TEMPLATE);
 	cv::Mat matSource(imgSource);
 	cv::Mat matTemplate(imgTemplate);
 

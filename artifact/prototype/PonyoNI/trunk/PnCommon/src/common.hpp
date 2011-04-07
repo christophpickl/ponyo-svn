@@ -4,6 +4,9 @@
 
 #define AT __FILE__, __LINE__
 
+#include <string.h>
+#include <vector>
+
 #include "Exception.hpp"
 #include "log/LogFactory.hpp"
 

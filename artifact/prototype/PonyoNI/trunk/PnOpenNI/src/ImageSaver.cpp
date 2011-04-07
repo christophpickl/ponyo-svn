@@ -68,4 +68,5 @@ void ImageSaver::saveToFile(const xn::ImageMetaData* image, const std::string& t
     cv::imwrite(targetFileName, colorImage);
 //    cvSaveImage(targetFileNameChars, &bgrIpl);
 }
+
 }

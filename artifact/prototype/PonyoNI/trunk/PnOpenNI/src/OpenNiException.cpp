@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include "common.hpp"
 #include "OpenNiException.hpp"
 
 namespace pn {

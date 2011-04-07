@@ -26,7 +26,7 @@ private:
 
 	void onHandleLoadDevices();
 	void onHandleStartGenerating();
-	void onHandleCaptureFrame();
+	void onHandleCalibrate();
 	void onHandleQuit();
 
 //	static void onGlutMenuStatus(int, int, int);

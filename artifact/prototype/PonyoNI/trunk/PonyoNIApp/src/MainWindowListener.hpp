@@ -7,7 +7,7 @@ class MainWindowListener {
 public:
 	virtual void onListDevices() = 0;
 	virtual void onStartGenerating() = 0;
-	virtual void onCreateImage() = 0;
+	virtual void onCalibrate() = 0;
 	virtual void onQuit() = 0;
 };
 }

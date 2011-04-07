@@ -1,4 +1,4 @@
-#include "myglut.h"
+#include "pninclude_glut.h"
 #include "common.hpp"
 
 #include "MainWindow.hpp"
@@ -9,7 +9,7 @@ Log* MainWindow::LOG = NEW_LOG(__FILE__)
 
 const int MENU_LOAD_DEVICES = 10;
 const int MENU_START_GENERATING = 20;
-const int MENU_CAPTURE_FRAME = 30;
+const int MENU_CALIBRATE = 30;
 const int MENU_QUIT = 666;
 MainWindow* tthis = NULL;
 
@@ -72,7 +72,7 @@ void MainWindow::display() {
 	int menid = glutCreateMenu(MainWindow::onMenuItemClicked);
 	glutAddMenuEntry("(l) Load Devices", MENU_LOAD_DEVICES);
 	glutAddMenuEntry("(s) Start Generating", MENU_START_GENERATING);
-	glutAddMenuEntry("(c) Capture Frame", MENU_CAPTURE_FRAME);
+	glutAddMenuEntry("(c) Calibrate", MENU_CALIBRATE);
 	glutAddMenuEntry("(q) Quit", MENU_QUIT);
 	glutAttachMenu(GLUT_LEFT_BUTTON);
 }
@@ -82,11 +82,12 @@ void MainWindow::display() {
 //}
 
 /*static*/ void MainWindow::onMenuItemClicked(int menuItemId) {
-	printf("onMenuItemClicked(menuItemId=%i)\n", menuItemId);
+	LOG->debug("onMenuItemClicked(menuItemId)");
+
 	switch(menuItemId) {
 		case MENU_LOAD_DEVICES:     tthis->onHandleLoadDevices();     break;
 		case MENU_START_GENERATING: tthis->onHandleStartGenerating(); break;
-		case MENU_CAPTURE_FRAME:    tthis->onHandleCaptureFrame();    break;
+		case MENU_CALIBRATE:        tthis->onHandleCalibrate();       break;
 		case MENU_QUIT:             tthis->onHandleQuit();            break;
 		default: throw Exception("Unhandled menu item!", AT);
 	}
@@ -107,11 +108,11 @@ void MainWindow::display() {
 		listener->onStartGenerating();
 	}
 }
-/*private*/ void MainWindow::onHandleCaptureFrame() {
+/*private*/ void MainWindow::onHandleCalibrate() {
 	LOG->info("onHandleCaptureFrame()");
 	for(int i=0, n=this->listeners.size(); i < n; i++) {
 		MainWindowListener* listener = this->listeners.at(i);
-		listener->onCreateImage();
+		listener->onCalibrate();
 	}
 }
 /*private*/ void MainWindow::onHandleQuit() {
@@ -130,7 +131,7 @@ void MainWindow::display() {
 		case 'q': tthis->onHandleQuit();            break;
 		case 'l': tthis->onHandleLoadDevices();     break;
 		case 's': tthis->onHandleStartGenerating(); break;
-		case 'c': tthis->onHandleCaptureFrame();    break;
+		case 'c': tthis->onHandleCalibrate();       break;
 	}
 	LOG->info("onGlutKeyboard(key, x, y) END");
 }

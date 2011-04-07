@@ -13,13 +13,15 @@ public:
 	CamInitializer();
 	virtual ~CamInitializer();
 
-	void fetchDevices/*start()*/(xn::Context&);
+	void fetchDevices/*start()*/(xn::Context& context);
 private:
 	static Log* LOG;
 	boost::thread workerThread;
 
 	void run(xn::Context& context);
-	void dispatchEvent(std::vector<Cam*>&);
+	void loadDeviceInfos(std::vector<xn::NodeInfo>& deviceInfos, xn::Context& context);
+	Cam* createCamInstance(xn::ImageGenerator& imageGenerator, xn::NodeInfo& deviceInfo);
+	void dispatchEvent(std::vector<Cam*>& cams);
 };
 }
 

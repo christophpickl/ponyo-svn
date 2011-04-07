@@ -2,7 +2,6 @@
 #ifndef COMMON_OPENNI_HPP_
 #define COMMON_OPENNI_HPP_
 
-#include <string.h>
 #include <XnCppWrapper.h>
 
 #include "common.hpp"

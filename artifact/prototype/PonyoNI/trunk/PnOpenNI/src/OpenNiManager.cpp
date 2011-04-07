@@ -7,9 +7,13 @@ namespace pn {
 
 Log* OpenNiManager::LOG = NEW_LOG(__FILE__)
 
-OpenNiManager::OpenNiManager(CamInitializer* pCamInitializer, ImageSaver* pImageSaver) :
+OpenNiManager::OpenNiManager(
+		CamInitializer* pCamInitializer,
+		CamCalibrator* pCamCalibrator
+		) :
 		camInitializer(pCamInitializer),
-		imageSaver(pImageSaver) {
+		camCalibrator(pCamCalibrator)
+{
 
 	LOG->debug("new OpenNiManager()");
 	this->camInitializer->addListener(this);
@@ -23,8 +27,15 @@ OpenNiManager::~OpenNiManager() {
 void OpenNiManager::init() throw (OpenNiException) {
 	LOG->info("init()");
 
-	CHECK_RC(this->context.Init(), "context.Init()");
+	LOG->trace(">> this->context.Init(); START");
+
+	XnStatus returnCode = this->context.Init();
+	printf("returnCode: %i\n", returnCode);
+//	CHECK_RC(this->context.Init(), "context.Init()");
+
+	LOG->trace(">> this->context.Init(); END");
 }
+
 void OpenNiManager::listDevices() { // TODO throw (ConnectionException) {
 	// TODO if(!initedYet) throw IllegalStateException
 	LOG->info("listDevices()");
@@ -37,11 +48,12 @@ void OpenNiManager::onInitializedCams(std::vector<Cam*> cams) {
 	this->cams = cams;
 
 	const int n = (int) (int) cams.size();
-	printf("cams.size=%i\n", n);
+	printf("Successfully found %i cam(s):\n--------------------------\n\n", n);
 	for(int i = 0; i < n; i++) {
 		Cam* currentCam = cams.at(i);
-		std::cout << (i+1) << ". " << currentCam->toString() << std::endl;
+		std::cout << "\t" << (i+1) << ". " << currentCam->toString() << std::endl;
 	}
+	printf("\n");
 }
 
 void OpenNiManager::startGenerateImageForAllCams() {
@@ -54,14 +66,10 @@ void OpenNiManager::startGenerateImageForAllCams() {
 		CHECK_RC(generator.StartGenerating(), "generator.StartGenerating()");
 	}
 }
-void OpenNiManager::createImageForAllCams() {
-	LOG->info("createImageForAllCams()");
+void OpenNiManager::calibrate() {
+	LOG->info("calibrate()");
 
-	for(int i = 0, n = this->cams.size(); i < n; i++) {
-		Cam* currentCam = cams.at(i);
-		const xn::ImageMetaData* imageData = currentCam->getRecentImageData();
-		this->imageSaver->saveToDefault(imageData, currentCam->getCleanId());
-	}
+	this->camCalibrator->calibrate(this->cams);
 }
 
 void OpenNiManager::shutdown() {

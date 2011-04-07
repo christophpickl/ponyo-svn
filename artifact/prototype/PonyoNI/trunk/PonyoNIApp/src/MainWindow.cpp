@@ -1,11 +1,16 @@
 #include "myglut.h"
 #include "common.hpp"
+
 #include "MainWindow.hpp"
 
 namespace pn {
 
 Log* MainWindow::LOG = NEW_LOG(__FILE__)
 
+const int MENU_LOAD_DEVICES = 10;
+const int MENU_START_GENERATING = 20;
+const int MENU_CAPTURE_FRAME = 30;
+const int MENU_QUIT = 666;
 MainWindow* tthis = NULL;
 
 MainWindow::MainWindow() {
@@ -19,7 +24,6 @@ MainWindow::MainWindow() {
 
 MainWindow::~MainWindow() {
 	LOG->debug("~MainWindow()");
-
 }
 
 void MainWindow::init(int argc, char** argv) {
@@ -29,58 +33,106 @@ void MainWindow::init(int argc, char** argv) {
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowPosition(100,100);
 	glutInitWindowSize(640, 480);
-	/*int windowHandle = */glutCreateWindow("PonyoNI Prototype");
+	this->mainWindowHandler = glutCreateWindow("PonyoNI Prototype");
 
-	glutKeyboardFunc(MainWindow::_onGlutKeyboard);
+	// dbwin = glutCreateSubWindow(glutGetWindow(), 0, 0, glutGet(GLUT_WINDOW_WIDTH), glutGet(GLUT_WINDOW_HEIGHT));
+
+	glutKeyboardFunc(MainWindow::onGlutKeyboard);
 	glutDisplayFunc(MainWindow::onGlutDisplay);
-//	glutReshapeFunc(&MainWindow::changeSize);
-//	glutIdleFunc(&MainWindow::renderScene);
+//	glutMenuStatusFunc(MainWindow::onGlutMenuStatus);
+//	glutReshapeFunc(MainWindow::onGlutReshape);
+//	glutIdleFunc(MainWindow::onGlutIdle);
+
+	this->initMenuBar();
+
+	glClearColor(1.0,1.0,1.0,0.0);
+	glColor3f(0.0f, 0.0f, 0.0f);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
 }
 
 void MainWindow::display() {
-	LOG->info("display()");
+	LOG->info("display() starting glutMainLoop()");
 
 	glutMainLoop();
 }
 
 /*static*/ void MainWindow::onGlutDisplay() {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear Color and Depth Buffers
-	glLoadIdentity(); // reset transformations
+//	glLoadIdentity(); // reset transformations
+//	glClear(GL_COLOR_BUFFER_BIT);
 
 	glutSwapBuffers();
+//	glFlush();
 }
 
-/*static*/ void MainWindow::_onGlutKeyboard(unsigned char key, int x, int y) {
-	tthis->onGlutKeyboard(key, x, y);
+/*private*/ void MainWindow::initMenuBar() {
+//	int submenid = glutCreateMenu(menu);
+//	glutAddMenuEntry("Teapot", 2);
+	int menid = glutCreateMenu(MainWindow::onMenuItemClicked);
+	glutAddMenuEntry("(l) Load Devices", MENU_LOAD_DEVICES);
+	glutAddMenuEntry("(s) Start Generating", MENU_START_GENERATING);
+	glutAddMenuEntry("(c) Capture Frame", MENU_CAPTURE_FRAME);
+	glutAddMenuEntry("(q) Quit", MENU_QUIT);
+	glutAttachMenu(GLUT_LEFT_BUTTON);
 }
-void MainWindow::onGlutKeyboard(unsigned char key, int x, int y) {
-	LOG->info("onGlutKeyboard(key, x, y)");
-	switch (key) {
-	case 'q':
-		for(int i=0, n=this->listeners.size(); i < n; i++) {
-			MainWindowListener* listener = this->listeners.at(i);
-			listener->onQuit();
-		}
-		break;
-	case 'l':
-		for(int i=0, n=this->listeners.size(); i < n; i++) {
-			MainWindowListener* listener = this->listeners.at(i);
-			listener->onListDevices();
-		}
-		break;
-	case 's':
-		for(int i=0, n=this->listeners.size(); i < n; i++) {
-			MainWindowListener* listener = this->listeners.at(i);
-			listener->onStartGenerating();
-		}
-		break;
-	case 'c':
-		for(int i=0, n=this->listeners.size(); i < n; i++) {
-			MainWindowListener* listener = this->listeners.at(i);
-			listener->onCreateImage();
-		}
-		break;
+
+///*static*/ void MainWindow::onGlutMenuStatus(int status, int x, int y) {
+//	LOG->debug("onGlutMenuStatus(..)");
+//}
+
+/*static*/ void MainWindow::onMenuItemClicked(int menuItemId) {
+	printf("onMenuItemClicked(menuItemId=%i)\n", menuItemId);
+	switch(menuItemId) {
+		case MENU_LOAD_DEVICES:     tthis->onHandleLoadDevices();     break;
+		case MENU_START_GENERATING: tthis->onHandleStartGenerating(); break;
+		case MENU_CAPTURE_FRAME:    tthis->onHandleCaptureFrame();    break;
+		case MENU_QUIT:             tthis->onHandleQuit();            break;
+		default: throw Exception("Unhandled menu item!", AT);
 	}
+	// glutPostRedisplay();
+}
+
+/*private*/ void MainWindow::onHandleLoadDevices() {
+	LOG->info("onHandleLoadDevices()");
+	for(int i=0, n=this->listeners.size(); i < n; i++) {
+		MainWindowListener* listener = this->listeners.at(i);
+		listener->onListDevices();
+	}
+}
+/*private*/ void MainWindow::onHandleStartGenerating() {
+	LOG->info("onHandleStartGenerating()");
+	for(int i=0, n=this->listeners.size(); i < n; i++) {
+		MainWindowListener* listener = this->listeners.at(i);
+		listener->onStartGenerating();
+	}
+}
+/*private*/ void MainWindow::onHandleCaptureFrame() {
+	LOG->info("onHandleCaptureFrame()");
+	for(int i=0, n=this->listeners.size(); i < n; i++) {
+		MainWindowListener* listener = this->listeners.at(i);
+		listener->onCreateImage();
+	}
+}
+/*private*/ void MainWindow::onHandleQuit() {
+	LOG->info("onHandleQuit()");
+	glutDestroyWindow(this->mainWindowHandler);
+	for(int i=0, n=this->listeners.size(); i < n; i++) {
+		MainWindowListener* listener = this->listeners.at(i);
+		listener->onQuit();
+	}
+}
+
+/*static*/ void MainWindow::onGlutKeyboard(unsigned char key, int x, int y) {
+	LOG->info("onGlutKeyboard(key, x, y) START");
+
+	switch (key) {
+		case 'q': tthis->onHandleQuit();            break;
+		case 'l': tthis->onHandleLoadDevices();     break;
+		case 's': tthis->onHandleStartGenerating(); break;
+		case 'c': tthis->onHandleCaptureFrame();    break;
+	}
+	LOG->info("onGlutKeyboard(key, x, y) END");
 }
 
 }

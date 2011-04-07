@@ -20,10 +20,18 @@ public:
 
 private:
 	static Log* LOG;
+	int mainWindowHandler;
 
-	static void _onGlutKeyboard(unsigned char, int, int);
-	void onGlutKeyboard(unsigned char, int, int);
+	void initMenuBar();
 
+	void onHandleLoadDevices();
+	void onHandleStartGenerating();
+	void onHandleCaptureFrame();
+	void onHandleQuit();
+
+//	static void onGlutMenuStatus(int, int, int);
+	static void onGlutKeyboard(unsigned char, int, int);
+	static void onMenuItemClicked(int);
 	static void onGlutDisplay();
 
 };

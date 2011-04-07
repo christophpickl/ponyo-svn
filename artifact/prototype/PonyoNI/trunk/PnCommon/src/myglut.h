@@ -3,6 +3,9 @@
 #define MYGLUT_H_
 
 
+//#include <GL/gl.h>
+//#include <GL/glut.h>
+
 //#ifdef LOCAL_IDE_HACK
 //#include <glut.h>
 //#else

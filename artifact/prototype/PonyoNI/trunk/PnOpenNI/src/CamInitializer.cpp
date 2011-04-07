@@ -27,8 +27,12 @@ void CamInitializer::fetchDevices(xn::Context& context) {
 	// XnStatus EnumerateProductionTrees(XnProductionNodeType Type, Query* pQuery, NodeInfoList& TreesList, EnumerationErrors* pErrors = NULL) const
 	LOG->trace(">> context.EnumerateProductionTrees(XN_NODE_TYPE_DEVICE, ..)");
 
-	// FIXME if no kinect is connected, this will throw an error! => catch and dispatch empty vector instead!
-	CHECK_RC(context.EnumerateProductionTrees(XN_NODE_TYPE_DEVICE, NULL, deviceInfoList), "context.EnumerateProductionTrees(DEVICE)");
+	XnStatus returnCode = context.EnumerateProductionTrees(XN_NODE_TYPE_DEVICE, NULL, deviceInfoList);
+	if(returnCode != XN_STATUS_OK) {
+		printf("Fetching devices failed (Probably no devices connected?!)\nOpenNI error message: %s\n", xnGetStatusString(returnCode));
+		this->dispatchEvent(cams);
+		return;
+	}
 
 	if(deviceInfoList.Begin() == deviceInfoList.End()) {
 		println("Device node list is empty! (Probably no devices connected?!)");

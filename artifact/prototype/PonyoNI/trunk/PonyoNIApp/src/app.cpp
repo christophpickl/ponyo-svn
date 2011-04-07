@@ -8,6 +8,13 @@
 
 #define IMG_BLUE_TEMPLATE "images/blue_ball_template.jpg"
 #define IMG_RED_TEMPLATE "images/red_ball_template.jpg"
+#define IMG_TEMPLATE IMG_BLUE_TEMPLATE
+
+#define CAM_ENABLE_IMAGE_GENERATOR true
+#define CAM_ENABLE_USER_GENERATOR false
+#define IMAGE_OUTPUT_MODE_WIDTH 640
+#define IMAGE_OUTPUT_MODE_HEIGHT 480
+#define IMAGE_OUTPUT_MODE_FPS 30
 
 /*
 
@@ -25,6 +32,16 @@ class App : public MainWindowListener {
 public:
 	App(const char* pTemplateImagePath) : templateImagePath(pTemplateImagePath) {
 		LOG_APP->debug("new App(templateImagePath)");
+
+		this->imageOutputMode.nXRes = IMAGE_OUTPUT_MODE_WIDTH;
+		this->imageOutputMode.nYRes = IMAGE_OUTPUT_MODE_HEIGHT;
+		this->imageOutputMode.nFPS = IMAGE_OUTPUT_MODE_FPS;
+
+		this->initDescriptor = new CamInitDescriptor(
+			/*imageGeneratorRequired*/ CAM_ENABLE_IMAGE_GENERATOR,
+			/*userGeneratorRequired*/ CAM_ENABLE_USER_GENERATOR,
+			this->imageOutputMode
+		);
 	}
 
 	~App() {
@@ -34,7 +51,10 @@ public:
 
 		delete this->window;
 		delete this->manager;
+
 		delete this->camInitializer;
+		delete this->userManager;
+
 		delete this->camCalibrator;
 		delete this->imageSaver;
 		delete this->imageConverter;
@@ -60,7 +80,7 @@ public:
 		LOG_APP->info("onListDevices()");
 
 		try {
-			this->manager->listDevices();
+			this->manager->listDevices(this->initDescriptor);
 		} catch (Exception& e) {
 			fprintf(stderr, "Exception was thrown while listing devices: %s\n", e.getMessage());
 			e.printBacktrace();
@@ -69,7 +89,13 @@ public:
 
 	void onStartGenerating() {
 		LOG_APP->info("onStartGenerating()");
-		this->manager->startGenerateImageForAllCams();
+
+		try {
+			this->manager->startAll();
+		} catch (Exception& e) {
+			fprintf(stderr, "Exception was thrown while starting up: %s\n", e.getMessage());
+			e.printBacktrace();
+		}
 	}
 
 	void onCalibrate() {
@@ -89,9 +115,17 @@ public:
 	}
 
 private:
+	/** configuration value */
+	XnMapOutputMode imageOutputMode;
+	/** configuration value */
+	CamInitDescriptor* initDescriptor;
+
 	MainWindow* window;
 	OpenNiManager* manager;
+
 	CamInitializer* camInitializer;
+	UserManager* userManager;
+
 	CamCalibrator* camCalibrator;
 	ImageDetector* imageDetector;
 	ImageConverter * imageConverter;
@@ -109,8 +143,9 @@ private:
 		this->imageSaver = new ImageSaver(this->imageConverter);
 		this->camCalibrator = new CamCalibrator(this->imageDetector, this->imageConverter, this->imageSaver, this->templateImage);
 
-		this->camInitializer = new CamInitializer();
-		this->manager = new OpenNiManager(this->camInitializer, this->camCalibrator);
+		this->userManager = new UserManager();
+		this->camInitializer = new CamInitializer(this->userManager);
+		this->manager = new OpenNiManager(this->camInitializer, this->camCalibrator, this->userManager);
 
 		this->window = new MainWindow();
 		this->window->addListener(this);
@@ -121,7 +156,7 @@ private:
 int main(int argc, char** argv) {
 	println("main() START");
 
-	App app(IMG_BLUE_TEMPLATE);
+	App app(IMG_TEMPLATE);
 	app.main(argc, argv);
 
 	println("main() END");

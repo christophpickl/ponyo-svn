@@ -6,18 +6,21 @@ namespace pn {
 
 Log* Cam::LOG = NEW_LOG(__FILE__);
 
-Cam::Cam(xn::ImageGenerator& pImageGenerator, std::string pCleanId, const unsigned short pVendorId, const unsigned short pProductId, const unsigned char pBus, const unsigned char pAddress) :
+Cam::Cam(xn::ImageGenerator& pImageGenerator, std::string pCleanId, CamInitDescriptor* pInitDescriptor) : // const unsigned short pVendorId, const unsigned short pProductId, const unsigned char pBus, const unsigned char pAddress) :
 	imageGenerator(pImageGenerator),
 	cleanId(pCleanId),
-	vendorId(pVendorId),
-	productId(pProductId),
-	bus(pBus),
-	address(pAddress)
+	initDescriptor(pInitDescriptor)
+//	vendorId(pVendorId),
+//	productId(pProductId),
+//	bus(pBus),
+//	address(pAddress)
 	{
 	LOG->debug("new Cam(..)");
 
-	XnCallbackHandle TODO_What_todo_with_this_imageCallbackHandle;
-	CHECK_RC(this->imageGenerator.RegisterToNewDataAvailable(&Cam::onImageDataAvailable, this, TODO_What_todo_with_this_imageCallbackHandle), "imageGenerator.RegisterToNewDataAvailable(..)");
+	if(this->initDescriptor->isImageGeneratorRequired()) {
+		XnCallbackHandle TODO_What_todo_with_this_imageCallbackHandle;
+		CHECK_RC(this->imageGenerator.RegisterToNewDataAvailable(&Cam::onImageDataAvailable, this, TODO_What_todo_with_this_imageCallbackHandle), "imageGenerator.RegisterToNewDataAvailable(..)");
+	}
 }
 
 Cam::~Cam() {
@@ -46,18 +49,18 @@ const xn::ImageMetaData* Cam::getRecentImageData() const {
 	return &this->recentImageData;
 }
 
-unsigned short Cam::getVendorId() const {
-	return this->vendorId;
-}
-unsigned short Cam::getProductId() const {
-	return this->productId;
-}
-unsigned char Cam::getBus() const {
-	return this->bus;
-}
-unsigned char Cam::getAddress() const {
-	return this->address;
-}
+//unsigned short Cam::getVendorId() const {
+//	return this->vendorId;
+//}
+//unsigned short Cam::getProductId() const {
+//	return this->productId;
+//}
+//unsigned char Cam::getBus() const {
+//	return this->bus;
+//}
+//unsigned char Cam::getAddress() const {
+//	return this->address;
+//}
 
 std::string Cam::toString() {
 	std::stringstream ss;

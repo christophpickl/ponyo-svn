@@ -3,7 +3,6 @@
 #define IMAGEDETECTOREXCEPTION_HPP_
 
 #include "common.hpp"
-#include "Exception.hpp"
 
 namespace pn {
 class ImageDetectorException : public Exception {

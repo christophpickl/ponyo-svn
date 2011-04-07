@@ -10,6 +10,7 @@ class CamInitializerListener {
 
 public:
 	virtual void onInitializedCams(std::vector<Cam*>) = 0;
+	virtual void onException(Exception&) = 0;
 
 };
 }

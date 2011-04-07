@@ -9,22 +9,27 @@
 namespace pn {
 class OpenNiManager : public CamInitializerListener {
 public:
-	OpenNiManager(CamInitializer*, CamCalibrator*);
+	OpenNiManager(CamInitializer*, CamCalibrator*, UserManager*);
 	virtual ~OpenNiManager();
 
 	void init() throw (OpenNiException);
-	void listDevices(); // TODO rename to loadDevices()
-	void startGenerateImageForAllCams();
+	void listDevices(CamInitDescriptor*); // TODO rename to loadDevices()
+	void startAll();
 	void calibrate();
 	void shutdown();
 
 	/** implements CamInitializerListener */
 	void onInitializedCams(std::vector<Cam*>);
+	/** implements CamInitializerListener */
+	void onException(Exception&);
 
 private:
 	xn::Context context;
 	CamInitializer* camInitializer;
 	CamCalibrator* camCalibrator;
+	UserManager* userManager;
+
+	/*transient*/ CamInitDescriptor* initDescriptor;
 
 	static Log* LOG;
 	std::vector<Cam*> cams;

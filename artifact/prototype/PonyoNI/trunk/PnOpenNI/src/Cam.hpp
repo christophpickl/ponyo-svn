@@ -2,14 +2,14 @@
 #ifndef CAM_HPP_
 #define CAM_HPP_
 
-#include "common_openni.hpp"
 #include <iostream>
-#include <string.h>
+#include "common_openni.hpp"
+#include "CamInitDescriptor.hpp"
 
 namespace pn {
 class Cam {
 public:
-	Cam(xn::ImageGenerator&, std::string, const unsigned short, const unsigned short, const unsigned char, const unsigned char);
+	Cam(xn::ImageGenerator&, std::string, CamInitDescriptor*); //const unsigned short, const unsigned short, const unsigned char, const unsigned char);
 	virtual ~Cam();
 
 	// deviceInfo.GetCreationInfo result example: "045e/02ae@36/62" (or: "045e/02ae@38/13")
@@ -20,10 +20,10 @@ public:
 	const xn::ImageGenerator& getImageGenerator() const;
 	const xn::ImageMetaData* getRecentImageData() const;
 
-	unsigned short getVendorId() const;
-	unsigned short getProductId() const;
-	unsigned char getBus() const;
-	unsigned char getAddress() const;
+//	unsigned short getVendorId() const;
+//	unsigned short getProductId() const;
+//	unsigned char getBus() const;
+//	unsigned char getAddress() const;
 	std::string getCleanId() const;
 
 	std::string toString();
@@ -42,10 +42,11 @@ private:
 	xn::ImageGenerator imageGenerator;
 	xn::ImageMetaData recentImageData;
 	std::string cleanId;
-	unsigned short vendorId;
-	unsigned short productId;
-	unsigned char bus;
-	unsigned char address;
+	CamInitDescriptor* initDescriptor;
+//	unsigned short vendorId;
+//	unsigned short productId;
+//	unsigned char bus;
+//	unsigned char address;
 
 	static void XN_CALLBACK_TYPE onImageDataAvailable(xn::ProductionNode&, void*);
 

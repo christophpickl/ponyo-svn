@@ -1,7 +1,7 @@
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
 #include "engine.h"
 
 // http://www.mathworks.com/help/techdoc/matlab_external/f29148.html
@@ -15,6 +15,15 @@ int main() {
 		fprintf(stderr, "Could not start MATLAB engine!\n");
 		return EXIT_FAILURE;
 	}
+
+
+	// mxArray *T = NULL, *result = NULL;
+	// double time[10] = { 0.0, 1.0, 2.0, 3.0, 4.0, 5.0, 6.0, 7.0, 8.0, 9.0 };
+//	T = mxCreateDoubleMatrix(1, 10, mxREAL);
+//	memcpy((void *)mxGetPr(T), (void *)time, sizeof(time));
+		// engPutVariable(ep, "T", T);
+	// engEvalString(ep, "D = .5.*(-9.8).*T.^2;");
+	// engEvalString(ep, "plot(T,D);");
 
 //	mxDestroyArray(result);
 	engClose(engine);

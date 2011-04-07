@@ -1,0 +1,30 @@
+SOURCE: http://groups.google.com/group/openni-dev/browse_thread/thread/a667d6066d144d71
+
+status = context.Init();
+status = context.EnumerateProductionTrees(cNodeType,
+NULL,image_node_info_list, NULL);
+int i = 0;
+           for (xn::NodeInfoList::Iterator nodeIt
+=image_node_info_list.Begin(); nodeIt != image_node_info_list.End();
+++nodeIt, ++i) {
+                xn::NodeInfo info = *nodeIt;
+                const XnProductionNodeDescription& description =
+info.GetDescription();
+                printf("image: vendor %s name %s, instance
+%s\n",description.strVendor, description.strName, info.GetInstanceName());
+
+                status = context.CreateProductionTree (info);
+                status = info.GetInstance (genImage);
+                XnMapOutputMode mode;
+                mode.nXRes = 640;
+                mode.nYRes = 480;
+                mode.nFPS = 30;
+                genImage.SetMapOutputMode(mode);
+                status=genImage.StartGenerating();
+                status=genImage.WaitAndUpdateData();
+                genImage.GetMetaData(imMD);
+                status=genImage.StopGenerating();
+                char filename[1024];
+                sprintf(filename, "test_i%d.png", i);
+                Kovari::Kinect::Save(imMD, filename);
+           } 

@@ -1,4 +1,5 @@
 
+- rename namespace pn to ponyo (verschachtelte sogar moeglich)
 =================================================
 TODOs
 =================================================
@@ -6,34 +7,22 @@ TODOs
 * use cmake + openni lib
 * get matlab engine running
 * use cmake + matlab engine (no mex!)
-! @C++: get familiar with building: static vs dynamic lib
+
 
 ! asus competition: http://event.asus.com/wavi/gallery/Event_Term.aspx
 !! register openni callbacks for joint data (skeleton tracking)
 !! refactor Device logic; add depthGenerator
-! @c++: get a guru in pointers and const and tha-like ;)
+! have a look at "g_DepthGenerator.ConvertProjectiveToRealWorld ( (XnUInt32)npixels, pt_proj, pt_world);"
 ! @CODE: wrapper klasse fuer openni aufrufe mit check returnCode+throw exception (? heisst das alle klassen, nicht nur context, einen wrapper schreiben?!)
 ! @BUILD: investigate pkg-config (see openCV)
 ! investige openNi skeleton tracking facilities (confidence value, orientation, ...)
 ! fix OpenNI strange behaviour, of depth camera points different from rgb (as camera is slightly positioned a bit to the left/right) => apply some correction value, just as calibration-delta
-	==> DepthGenerator.GetAlternativeViewPointCap().SetViewPoint(ImageGenerator) "
-- @MAKE BUILD: have a look at openni make files
-	// eg in make: OSTYPE := $(shell uname -s) ... ifneq ("$(OSTYPE)","Darwin")
-	// eg in c++: #if defined(__APPLE__) || defined(MACOSX)
-// sehr gute uni arbeit (predator): http://www.youtube.com/watch?v=1GhNXHCQGsM
+	==> DepthGenerator.GetAlternativeViewPointCap().SetViewPoint(ImageGenerator)"
 - experimental investigate NITE framework (pre-built gestures (wave, circle, ..), etc)
 - @MEX: compile c++ from matlab code: mcc -B csharedlib:libmyfoo foo1.m foo2.m // http://www.mathworks.com/support/tech-notes/1600/1622.html
-- improve programatic node configuration (introduce custom object)
 - @GLUT: continue reading glut tutorial: http://www.lighthouse3d.com/tutorials/glut-tutorial/keyboard/
-- @Test: mocking for cpp?
-- read c++ guide: http://stackoverflow.com/questions/30373/what-c-pitfalls-should-i-avoid
-- have a look at libfreenect project ideas:
-	http://openkinect.org/wiki/Project_ideas
-	http://openkinect.org/wiki/Gallery
 -- @MEX: mexErrMsgIdAndTxt("MATLAB:mexcpp:nargout", "MEXCPP requires no output argument.");
--- enums for c++: enum directions {up, down};
 -- @BUILD: cpp maven integration (maybe via cmake?!)
--- dependency injection for cpp?
 -- go through github sourcecode related to openni: https://github.com/search?q=openni&type=Everything&repo=&langOverride=&start_value=1
 -- go through project sourcecode
 	* https://github.com/roxlu/ofxOpenNI
@@ -43,10 +32,33 @@ TODOs
 		eg: https://github.com/pixelnerve/BlockOpenNI/blob/master/src/VOpenNIDevice.cpp
 // INFO: XnCallbackHandle purpose => Optional. Will be filled with a handle to be passed to @ref UnregisterFromGenerationRunningChange().
 
+		<Node type="IR" name="IR1">
+			<Configuration>
+				<MapOutputMode xRes="1280" yRes="1024" FPS="15"/>
+				<Mirror on="true"/>
+			</Configuration>
+		</Node>		
+
+=================================================
+CPP
+=================================================
+! @C++: get familiar with building: static vs dynamic lib
+	// #add_library(PnCommon SHARED ${CPP_FILES})
+- google mock
+- enums for c++: enum directions {up, down};
+-- @C++: garbage collector framework
+-- read c++ guide: http://stackoverflow.com/questions/30373/what-c-pitfalls-should-i-avoid
+-- @Async: create custom type with some (bound?!) type-parameter
+-- dependency injection?
 
 =================================================
 MAKE
 =================================================
+- http://www.cmake.org/Wiki/CMake_Useful_Variables
+- @MAKE BUILD: have a look at openni make files
+	// eg in make: OSTYPE := $(shell uname -s) ... ifneq ("$(OSTYPE)","Darwin")
+	// eg in c++: #if defined(__APPLE__) || defined(MACOSX)
+
 ? proper *.o compilation
 * check for operating system:
 	OSTYPE := $(shell uname -s)
@@ -93,6 +105,11 @@ IDEAs
 	* casala company
 		- http://www.youtube.com/watch?v=fxnMMVy9tFU
 		- http://www.casala.ie/collaborate-with-us.html
+- have a look at libfreenect project ideas:
+	http://openkinect.org/wiki/Project_ideas
+	http://openkinect.org/wiki/Gallery
+// sehr gute uni arbeit (predator): http://www.youtube.com/watch?v=1GhNXHCQGsM
+
 
 =================================================
 LINKs

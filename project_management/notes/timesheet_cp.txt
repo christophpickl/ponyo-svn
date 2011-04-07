@@ -24,4 +24,11 @@ TIMESHEET CP
 03.04. - 18:00 -  1h - started custom logging framework
 04.04. - 10:00 -  2h - cmake investigation (see multimake-playground)
               ~~ 30h~~
-06.04. - 18:00 -   h - learn cpp: pointers&co*
+06.04. - 19:00 -  2h - learn cpp: pointers&co*; some project mgmt
+06.04. - 21:00 -  8h - starting with major prototype PonyoNI: merging existing playgrounds (multiple kinects, save image)
+              ~~ 40h~~
+07.04. - 12:00 -  1h - misc prototype enhancements (gui/glut, etc)
+07.04. - 13:00 -  1h - implemented basic image detection for camera calibration using opencv matchTemplate
+07.04. - 14:00 -  3h - working on camera calibration for PonyoNI usage
+07.04. - 22:00 -  h - 
+              ~~ 45h~~

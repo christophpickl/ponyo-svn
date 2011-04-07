@@ -1,8 +1,7 @@
-
 /*
  * Software License Agreement (BSD License)
  *
- *  Copyright (c) 2011 Ponyo/ChristophPickl.
+ *  Copyright (c) 2011 Christoph Pickl (Ponyo).
  *    Christoph Pickl <christoph.pickl@gmail.com>
  *
  *  All rights reserved.

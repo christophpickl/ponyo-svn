@@ -7,12 +7,13 @@
 
 #include "Cam.hpp"
 #include "ImageDetector.hpp"
+#include "ImageConverter.hpp"
 #include "ImageSaver.hpp"
 
 namespace pn {
 class CamCalibrator {
 public:
-	CamCalibrator(ImageDetector* pDetector, ImageSaver* pSaver); //, cv::Mat* pTemplateImage);
+	CamCalibrator(ImageDetector*, ImageConverter*, ImageSaver*, cv::Mat* templateImage);
 	virtual ~CamCalibrator();
 
 	void calibrate(std::vector<Cam*>& cams);
@@ -20,8 +21,9 @@ private:
 	static Log* LOG;
 
 	ImageDetector* detector;
+	ImageConverter* converter;
 	ImageSaver* saver;
-//	cv::Mat* templateImage;
+	cv::Mat* templateImage;
 
 };
 }

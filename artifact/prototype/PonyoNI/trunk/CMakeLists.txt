@@ -12,7 +12,7 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 
 
-SET(TARGET_EXE PonyoNIApp.exe)
+SET(EXECUTABLE_NAME PonyoNIPrototype)
 
 
 # LIB - Glut
@@ -66,14 +66,14 @@ add_subdirectory(PonyoNIApp)
 set(PONYONIAPP_SRC_FOLDER "${PROJECT_SOURCE_DIR}/PonyoNIApp/src")
 file(GLOB_RECURSE CPP_FILES "${PONYONIAPP_SRC_FOLDER}/*.cpp")
 message("CPP_FILES: ${CPP_FILES}")
-add_executable (${TARGET_EXE} ${CPP_FILES})
-target_link_libraries (${TARGET_EXE} ${EXTRA_LIBS})
+add_executable (${EXECUTABLE_NAME} ${CPP_FILES})
+target_link_libraries (${EXECUTABLE_NAME} ${EXTRA_LIBS})
 
 
 # LIB - OpenCV
 ##############################################################
 FIND_PACKAGE( OpenCV REQUIRED )
-TARGET_LINK_LIBRARIES( ${TARGET_EXE} ${OpenCV_LIBS} )
+TARGET_LINK_LIBRARIES( ${EXECUTABLE_NAME} ${OpenCV_LIBS} )
 
 
 # LIB - Boost
@@ -81,9 +81,9 @@ TARGET_LINK_LIBRARIES( ${TARGET_EXE} ${OpenCV_LIBS} )
 
 set(BOOST_LIBS thread date_time system)
 find_package(Boost COMPONENTS ${BOOST_LIBS} REQUIRED)
-target_link_libraries(${TARGET_EXE} ${Boost_LIBRARIES})
+target_link_libraries(${EXECUTABLE_NAME} ${Boost_LIBRARIES})
 find_package(Threads REQUIRED)
-target_link_libraries(${TARGET_EXE} ${CMAKE_THREAD_LIBS_INIT})
+target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_THREAD_LIBS_INIT})
 
 
 ##############################################################

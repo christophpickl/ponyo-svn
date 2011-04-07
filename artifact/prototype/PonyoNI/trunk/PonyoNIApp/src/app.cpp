@@ -23,8 +23,8 @@ Log* LOG_APP = NEW_LOG(__FILE__)
 
 class App : public MainWindowListener {
 public:
-	App() : window(new MainWindow()) {
-		LOG_APP->debug("new App()");
+	App(const char* pTemplateImagePath) : templateImagePath(pTemplateImagePath) {
+		LOG_APP->debug("new App(templateImagePath)");
 	}
 
 	~App() {
@@ -37,8 +37,9 @@ public:
 		delete this->camInitializer;
 		delete this->camCalibrator;
 		delete this->imageSaver;
+		delete this->imageConverter;
 		delete this->imageDetector;
-//		delete this->templateImage;
+		delete this->templateImage;
 	}
 
 	void main(int argc, char** argv) {
@@ -57,11 +58,12 @@ public:
 
 	void onListDevices() {
 		LOG_APP->info("onListDevices()");
-		// TODO maybe spawn thread?!
+
 		try {
 			this->manager->listDevices();
 		} catch (Exception& e) {
-			fprintf(stderr, "Exception was thrown: %s\n", e.getMessage());
+			fprintf(stderr, "Exception was thrown while listing devices: %s\n", e.getMessage());
+			e.printBacktrace();
 		}
 	}
 
@@ -72,7 +74,12 @@ public:
 
 	void onCalibrate() {
 		LOG_APP->info("onCalibrate()");
-		this->manager->calibrate();
+		try {
+			this->manager->calibrate();
+		} catch (Exception& e) {
+			fprintf(stderr, "Exception was thrown while calibrating: %s\n", e.getMessage());
+			e.printBacktrace();
+		}
 	}
 
 	void onQuit() {
@@ -87,21 +94,25 @@ private:
 	CamInitializer* camInitializer;
 	CamCalibrator* camCalibrator;
 	ImageDetector* imageDetector;
+	ImageConverter * imageConverter;
 	ImageSaver* imageSaver;
-//	cv::Mat* templateImage;
+	cv::Mat* templateImage;
+	const char* templateImagePath;
 
 	void initAndWireObjects() {
 		LOG_APP->debug("initAndWireObjects()");
-//		this->templateImage = new cv::Mat(cvLoadImage(IMG_BLUE_TEMPLATE));
+		this->templateImage = new cv::Mat(cvLoadImage(this->templateImagePath)); // TODO store PImage* and cvReleaseImage afterwards?
 
 		// wire objects
 		this->imageDetector = new ImageDetector();
+		this->imageConverter = new ImageConverter();
 		this->imageSaver = new ImageSaver();
-		this->camCalibrator= new CamCalibrator(this->imageDetector, this->imageSaver); //, this->templateImage);
+		this->camCalibrator = new CamCalibrator(this->imageDetector, this->imageConverter, this->imageSaver, this->templateImage);
 
 		this->camInitializer = new CamInitializer();
 		this->manager = new OpenNiManager(this->camInitializer, this->camCalibrator);
 
+		this->window = new MainWindow();
 		this->window->addListener(this);
 	}
 
@@ -110,7 +121,7 @@ private:
 int main(int argc, char** argv) {
 	println("main() START");
 
-	App app;
+	App app(IMG_BLUE_TEMPLATE);
 	app.main(argc, argv);
 
 	println("main() END");

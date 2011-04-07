@@ -4,9 +4,18 @@ namespace pn {
 
 Log* CamCalibrator::LOG = NEW_LOG(__FILE__)
 
-CamCalibrator::CamCalibrator(ImageDetector* pDetector, ImageSaver* pSaver) : //, cv::Mat* pTemplateImage) :
-		detector(pDetector), saver(pSaver) { //, templateImage(pTemplateImage) {
-	LOG->debug("new CamCalibrator(detector, saver, pTemplateImage)");
+CamCalibrator::CamCalibrator(
+		ImageDetector* pDetector,
+		ImageConverter* pConverter,
+		ImageSaver* pSaver,
+		cv::Mat* pTemplateImage
+		) :
+			detector(pDetector),
+			converter(pConverter),
+			saver(pSaver),
+			templateImage(pTemplateImage)
+{
+	LOG->debug("new CamCalibrator(detector, converter saver, templateImage)");
 }
 
 CamCalibrator::~CamCalibrator() {
@@ -22,17 +31,18 @@ void CamCalibrator::calibrate(std::vector<Cam*>& cams) {
 	for(int i = 0; i < n; i++) {
 		printf("calibrating cam number %i\n", i);
 		Cam* currentCam = cams.at(i);
-		const xn::ImageMetaData* imageData = currentCam->getRecentImageData();
-		// FIXME convert ImageMetaData to Mat
-		cv::Mat sourceImage;
 
-//		cv::Point p = this->detector->match(sourceImage, *this->templateImage);
-//		templateCoordinates[i] = p;
-//		int x = p.x;
-//		int x = p.y;
+		// TODO mutex lock? or maybe even copy, as calibrate is only invoked once (ar at least not every frame)
+		const xn::ImageMetaData* imageData = currentCam->getRecentImageData();
+
+		cv::Mat sourceImage;
+		this->converter->convertImageMetaData2cvMat(sourceImage, imageData);
+
+		cv::Point p = this->detector->match(sourceImage, *this->templateImage);
+		templateCoordinates[i] = p;
 
 		// additionally save image to disk
-//		this->saver->saveToDefault(imageData, currentCam->getCleanId());
+		this->saver->saveToDefault(imageData, currentCam->getCleanId());
 	}
 	// TODO create own class CamCalibrator
 

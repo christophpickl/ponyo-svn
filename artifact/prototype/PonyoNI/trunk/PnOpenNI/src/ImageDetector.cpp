@@ -16,7 +16,12 @@ cv::Point ImageDetector::match(cv::Mat& sourceImage, cv::Mat& templateImage) thr
 	LOG->debug("match(..)");
 
 	cv::Mat matchResult;
-	cv::matchTemplate(sourceImage, templateImage, matchResult, ImageDetector::MATCH_TEMPLATE_METHOD);
+	try {
+		cv::matchTemplate(sourceImage, templateImage, matchResult, ImageDetector::MATCH_TEMPLATE_METHOD);
+	} catch(cv::Exception& ex) {
+		fprintf(stderr, "Internal exception: %s\n", ex.what());
+		throw ImageDetectorException("cv::matchTemplate() failed!", AT);
+	}
 
 	double minValue;
 	double maxValue;

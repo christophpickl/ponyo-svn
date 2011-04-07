@@ -78,9 +78,6 @@ void CamInitializer::fetchDevices(xn::Context& context) {
 			xn::NodeInfo deviceInfo = deviceInfos[i];
 			xn::NodeInfo imageInfo = imageInfos[i];
 
-			XnProductionNodeDescription description = deviceInfo.GetDescription();
-			printf("\t%i. deviceInfo: description.vendor=%s, description.name=%s\n", (i+1), description.strVendor, description.strName);
-
 		//	returnCode = this->context.CreateProductionTree(const_cast<xn::NodeInfo&>(deviceInfo));
 		//	if(returnCode != XN_STATUS_OK) { THROW_XN_EXCEPTION("Creating depth generator failed!", returnCode); }
 
@@ -123,7 +120,10 @@ void CamInitializer::fetchDevices(xn::Context& context) {
 	unsigned char bus;
 	unsigned char address;
 
-	const XnChar* creationInfoXn = deviceInfo.GetCreationInfo();
+	const XnProductionNodeDescription& description = deviceInfo.GetDescription();
+	printf("\tdeviceInfo: description.vendor=%s, description.name=%s\n", description.strVendor, description.strName);
+
+	const XnChar* creationInfoXn = deviceInfo.GetCreationInfo(); // \\?\usb#vid_045e&pid_02ae#a00362....102a#{.(some more numbers)..}
 	printf("CamInitializer ... creationInfoXn=[%s]\n", creationInfoXn);
 	std::string cleanId = std::string(creationInfoXn); // "045e/02ae@36/6"
 	std::string escapeStr("_");
@@ -131,8 +131,9 @@ void CamInitializer::fetchDevices(xn::Context& context) {
 	cleanId.replace(9, 1, escapeStr); // "045e_02ae_36/6"
 	cleanId.replace(12, 1, escapeStr); // "045e_02ae_36_6"
 	// cleanId == "045e_02ae_38_12"
+	printf("XXXXXXXXXXXXXX cleanId: %s\n", cleanId.c_str());
 
-	sscanf(deviceInfo.GetCreationInfo(), "%hx/%hx@%hhu/%hhu", &vendorId, &productId, &bus, &address);
+	sscanf(creationInfoXn, "%hx/%hx@%hhu/%hhu", &vendorId, &productId, &bus, &address);
 
 	Cam* newCam = new Cam(imageGenerator, cleanId, vendorId, productId, bus, address);
 	return newCam;

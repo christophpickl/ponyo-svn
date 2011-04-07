@@ -27,13 +27,7 @@ OpenNiManager::~OpenNiManager() {
 void OpenNiManager::init() throw (OpenNiException) {
 	LOG->info("init()");
 
-	LOG->trace(">> this->context.Init(); START");
-
-	XnStatus returnCode = this->context.Init();
-	printf("returnCode: %i\n", returnCode);
-//	CHECK_RC(this->context.Init(), "context.Init()");
-
-	LOG->trace(">> this->context.Init(); END");
+	CHECK_RC(this->context.Init(), "context.Init()");
 }
 
 void OpenNiManager::listDevices() { // TODO throw (ConnectionException) {

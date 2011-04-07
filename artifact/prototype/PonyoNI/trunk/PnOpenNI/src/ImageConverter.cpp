@@ -1,4 +1,4 @@
-#include "ImageConverter.h"
+#include "ImageConverter.hpp"
 
 namespace pn {
 
@@ -9,6 +9,13 @@ ImageConverter::ImageConverter() {
 }
 
 ImageConverter::~ImageConverter() {
-	LOG->debug("new ImageConverter()");
+	LOG->debug("~ImageConverter()");
 }
+
+void ImageConverter::convertImageMetaData2cvMat(cv::Mat& targetMat, const xn::ImageMetaData* sourceData) {
+	LOG->debug("convertImageMetaData2cvMat(..)");
+
+
+}
+
 }

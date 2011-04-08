@@ -14,7 +14,7 @@ int main() {
 
 	CHECK_RC(context.Init(), "context.Init()");
 
-	CHECK_RC(context.Shutdown(), "context.Shutdown()");
+	context.Shutdown();
 
 	return EXIT_SUCCESS;
 }

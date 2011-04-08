@@ -12,6 +12,9 @@ SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 
 ##############################################################
 
+
 SET (EXECUTABLE1 "main_create_product_nodes")
+
 ADD_EXECUTABLE (${EXECUTABLE1} ${EXECUTABLE1}.cpp)
+TARGET_LINK_LIBRARIES (${EXECUTABLE1} ${EXTRA_LIBS})
 

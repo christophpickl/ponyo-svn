@@ -2,8 +2,24 @@
 
 #include "myni_inc.h"
 
+class Cam {
+public:
+	Cam(xn::Context& pContext) : context(pContext) {
+		printf("new Cam()\n");
+	}
+	~Cam() {
+		printf("~Cam()\n");
+//		delete &this->context; // TODO was created on heap!
+	}
+	const xn::Context& getContext() const {
+		return this->context;
+	}
+private:
+	xn::Context context;
+};
+
 int main() {
-	printf("main() START\n");
+	printf("main() USB fail approach START\n");
 
 	xn::Context globalContext;
 
@@ -26,33 +42,39 @@ int main() {
 	printf("\nCreating stuff for all devices\n");
 	printf("=================================\n");
 	const int n = deviceNodes.size();
-	std::vector<xn::Context*> deviceContexts;
+	std::vector<Cam*> cams;
 	for (int i = 0; i < n; ++i) {
 		xn::NodeInfo deviceNode = deviceNodes[i];
 //		xn::NodeInfo depthNode = depthNodes[i];
 //		xn::NodeInfo imageNode = imageNodes[i];
 
-		std::cout << "Iterating device " << node.GetCreationInfo() << std::endl;
+		printf("Setting up device '%s' ...\n", deviceNode.GetCreationInfo());
 
 		xn::Context* deviceContext = new xn::Context();
-		deviceContexts.push_back(deviceContext);
 		CHECK_RCX(deviceContext->Init(), "deviceContext->Init()");
 
 		// TODO InitFromXmlFile??
 		CHECK_RCX(deviceContext->CreateProductionTree(deviceNode), "deviceContext->CreateProductionTree(deviceNode)");
+
+		cams.push_back(new Cam(*deviceContext));
 
 	}
 
 	printf("\nShutting down\n");
 	printf("=================================\n");
 	for (int i = 0; i < n; ++i) {
-		xn::Context* deviceContext = deviceContexts.at(i);
-		printf(">> deviceContext.Shutdown() ...\n"); deviceContext.Shutdown();
-		delete deviceContext;
+
+		const Cam* cam = cams.at(i);
+		xn::Context deviceContext = cam->getContext();
+
+		printf(">> deviceContext.Shutdown() ...\n");
+		deviceContext.Shutdown();
+
+		delete cam;
 	}
 
 	printf(">> globalContext.Shutdown() ...\n"); globalContext.Shutdown();
 
-	printf("main() END\n");
+	printf("\n\nmain() END\n");
 	return 0;
 }

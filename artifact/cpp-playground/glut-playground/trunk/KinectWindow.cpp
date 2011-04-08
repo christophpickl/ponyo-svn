@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include <glut.h>
+//#include <glut.h>
+#include <GLUT/glut.h>
 #include <XnCppWrapper.h>
 #include "KinectWindow.h"
 

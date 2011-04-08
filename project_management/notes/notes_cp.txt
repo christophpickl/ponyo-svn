@@ -8,6 +8,7 @@ TODOs
 * get matlab engine running
 * use cmake + matlab engine (no mex!)
 
+! fuer uni projekt => LIBFREENECT verwenden
 
 ! asus competition: http://event.asus.com/wavi/gallery/Event_Term.aspx
 !! register openni callbacks for joint data (skeleton tracking)
@@ -128,6 +129,9 @@ OpenNI
 -------------------------------------------------
 - wiki with good faq
 	http://wiki.openni.org/mediawiki/index.php/Main_Page
+- API Doc
+	http://www.ros.org/doc/api/openni/html/index.html
+	http://www.ros.org/doc/api/nite/html/index.html
 
 Boost
 -------------------------------------------------

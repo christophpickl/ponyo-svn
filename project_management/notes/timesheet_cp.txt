@@ -32,3 +32,6 @@ TIMESHEET CP
 07.04. - 14:00 -  3h - working on camera calibration for PonyoNI usage
 07.04. - 22:00 -  5h - Failed to set USB interface!
               ~~ 50h~~
+08.04. - 15:00 -  3h - Investigating USB fail error
+09.04. - 01:00 -   h - 
+              ~~ 53h~~

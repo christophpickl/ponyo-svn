@@ -1,19 +1,14 @@
 SOURCE: http://groups.google.com/group/openni-dev/browse_thread/thread/a667d6066d144d71
 
-status = context.Init();
-status = context.EnumerateProductionTrees(cNodeType,
-NULL,image_node_info_list, NULL);
+context.Init();
+context.EnumerateProductionTrees(cNodeType, NULL,image_node_info_list, NULL);
 int i = 0;
-           for (xn::NodeInfoList::Iterator nodeIt
-=image_node_info_list.Begin(); nodeIt != image_node_info_list.End();
-++nodeIt, ++i) {
+for (xn::NodeInfoList::Iterator nodeIt=image_node_info_list.Begin(); nodeIt != image_node_info_list.End(); ++nodeIt, ++i) {
                 xn::NodeInfo info = *nodeIt;
-                const XnProductionNodeDescription& description =
-info.GetDescription();
-                printf("image: vendor %s name %s, instance
-%s\n",description.strVendor, description.strName, info.GetInstanceName());
+                const XnProductionNodeDescription& description = info.GetDescription();
+                printf("image: vendor %s name %s, instance %s\n",description.strVendor, description.strName, info.GetInstanceName());
 
-                status = context.CreateProductionTree (info);
+                status = context.CreateProductionTree(info);
                 status = info.GetInstance (genImage);
                 XnMapOutputMode mode;
                 mode.nXRes = 640;
@@ -28,3 +23,15 @@ info.GetDescription();
                 sprintf(filename, "test_i%d.png", i);
                 Kovari::Kinect::Save(imMD, filename);
            } 
+
+
+
+	xn::EnumerationErrors errors;
+	XnStatus statusCreateDepthNode = context.CreateAnyProductionTree(XN_NODE_TYPE_DEPTH, NULL, depthNode, &errors);
+	if(statusCreateDepthNode != XN_STATUS_OK) {
+		printf("ERROR: %s\n", xnGetStatusString(statusCreateDepthNode));
+		for (xn::EnumerationErrors::Iterator it = errors.Begin(); it != errors.End(); ++it) {
+			XnChar strDesc[512];
+			xnProductionNodeDescriptionToString(&it.Description(), strDesc, 512);
+			printf("%s failed to enumerate: %s\n", xnGetStatusString(it.Error()));
+	}

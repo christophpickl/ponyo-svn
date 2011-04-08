@@ -1,5 +1,7 @@
 #include "ImageConverter.hpp"
 
+// FIXME merge ImageConverter/Detector/Saver to single class
+
 namespace pn {
 
 Log* ImageConverter::LOG = NEW_LOG(__FILE__)

@@ -9,8 +9,9 @@
 
 #define THROW_XN_EXCEPTION(errorMessage, returnCode) \
 std::string ss;                                      \
+ss.append("Custom error message: ");                 \
 ss.append(errorMessage);                             \
-ss.append(" - ");                                    \
+ss.append("\nOpenNI error message: ");               \
 ss.append(xnGetStatusString(returnCode));            \
 std::cerr << ss << std::endl; \
 throw OpenNiException(ss.c_str(), AT);

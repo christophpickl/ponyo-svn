@@ -8,7 +8,11 @@ UserManager::UserManager() {
 	LOG->debug("new UserManager()");
 }
 UserManager::~UserManager() {
-	LOG->debug("~UserManager()");
+	LOG->debug("~UserManager() ... unregistering callbacks");
+
+	this->userGenerator.UnregisterUserCallbacks(this->callbackUser);
+	this->userGenerator.GetSkeletonCap().UnregisterCalibrationCallbacks(this->callbackCalibration);
+	this->userGenerator.GetPoseDetectionCap().UnregisterFromPoseCallbacks(this->callbackPose);
 }
 
 void UserManager::init(xn::Context& context) throw(UserManagerException, OpenNiException) {
@@ -30,13 +34,11 @@ void UserManager::init(xn::Context& context) throw(UserManagerException, OpenNiE
 	// -------------------------------------------------------
 	LOG->debug("Registering callbacks.");
 
-	XnCallbackHandle callbackUser;
 	xn::SkeletonCapability skeletonCap = this->userGenerator.GetSkeletonCap();
-	CHECK_RC(userGenerator.RegisterUserCallbacks(&UserManager::onUserNew, &UserManager::onUserLost, this, callbackUser),
+	CHECK_RC(userGenerator.RegisterUserCallbacks(&UserManager::onUserNew, &UserManager::onUserLost, this, this->callbackUser),
 		"Registering user callbacks for user generator failed!");
 
-	XnCallbackHandle callbackCalibration;
-	CHECK_RC(skeletonCap.RegisterCalibrationCallbacks(&UserManager::onCalibrationStart, &UserManager::onCalibrationEnd, this, callbackCalibration),
+	CHECK_RC(skeletonCap.RegisterCalibrationCallbacks(&UserManager::onCalibrationStart, &UserManager::onCalibrationEnd, this, this->callbackCalibration),
 		"Registering calibration callbacks for user generator failed!");
 
 	if(skeletonCap.NeedPoseForCalibration()) {
@@ -45,8 +47,7 @@ void UserManager::init(xn::Context& context) throw(UserManagerException, OpenNiE
 			throw UserManagerException("A pose is required but not supported by your hardware!", AT);
 		}
 
-		XnCallbackHandle callbackPose;
-		this->userGenerator.GetPoseDetectionCap().RegisterToPoseCallbacks(&UserManager::onPoseDetected, NULL/*onPoseDetectedEnd*/, this, callbackPose);
+		this->userGenerator.GetPoseDetectionCap().RegisterToPoseCallbacks(&UserManager::onPoseDetected, NULL/*onPoseDetectedEnd*/, this, this->callbackPose);
 		skeletonCap.GetCalibrationPose(this->requiredPoseName);
 
 //		printf("Required pose name: '%s'\n", this->requiredPoseName);

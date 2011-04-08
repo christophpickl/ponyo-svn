@@ -7,16 +7,18 @@
 namespace pn {
 class CamInitDescriptor {
 public:
-	CamInitDescriptor(bool, bool, XnMapOutputMode&);
+	CamInitDescriptor(bool, bool, bool, XnMapOutputMode&);
 
 	const bool isImageGeneratorRequired() const;
+	const bool isDepthGeneratorRequired() const;
 	const bool isUserGeneratorRequired() const;
-	const XnMapOutputMode& getImageOutputMode() const;
+	const XnMapOutputMode getMapOutputMode() const;
 
 private:
 	bool imageGeneratorRequired;
+	bool depthGeneratorRequired;
 	bool userGeneratorRequired;
-	XnMapOutputMode imageOutputMode;
+	XnMapOutputMode mapOutputMode;
 
 };
 }

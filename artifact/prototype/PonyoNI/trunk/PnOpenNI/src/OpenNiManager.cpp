@@ -35,11 +35,8 @@ void OpenNiManager::listDevices(CamInitDescriptor* initDescriptor) { // TODO thr
 	// TODO if(!initedYet) throw IllegalStateException
 	LOG->info("listDevices(initDescriptor)");
 
-	LOG->trace("listDevices # 1/3");
 	this->initDescriptor = initDescriptor;
-	LOG->trace("listDevices # 2/3");
 	this->camInitializer->fetchDevices(this->context, this->initDescriptor);
-	LOG->trace("listDevices # 3/3");
 }
 
 /**
@@ -123,6 +120,7 @@ void OpenNiManager::shutdown() {
 		}
 	}
 
+	this->context.StopGeneratingAll();
 	this->context.Shutdown();
 }
 

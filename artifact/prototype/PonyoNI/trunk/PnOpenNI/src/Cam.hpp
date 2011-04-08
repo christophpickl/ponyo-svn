@@ -43,6 +43,9 @@ private:
 	xn::ImageMetaData recentImageData;
 	std::string cleanId;
 	CamInitDescriptor* initDescriptor;
+
+	XnCallbackHandle newDataAvailableCallbackHandle;
+
 //	unsigned short vendorId;
 //	unsigned short productId;
 //	unsigned char bus;

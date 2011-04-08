@@ -15,11 +15,8 @@ CamInitializer::~CamInitializer() {
 void CamInitializer::fetchDevices(xn::Context& context, CamInitDescriptor* initDescriptor) {
 	LOG->debug("fetchDevices(context)");
 
-	LOG->trace("fetchDevices # 1/3");
 	this->initDescriptor = initDescriptor;
-	LOG->trace("fetchDevices # 2/3");
 	this->workerThread = boost::thread(&CamInitializer::run, this, context);
-	LOG->trace("fetchDevices # 3/3");
 }
 
 /**
@@ -31,43 +28,54 @@ void CamInitializer::fetchDevices(xn::Context& context, CamInitDescriptor* initD
 	std::vector<Cam*> cams;
 
 	std::vector<xn::NodeInfo> deviceInfos;
-	xn::NodeInfoList deviceInfoList;
+	static xn::NodeInfoList deviceInfoList;
 	this->loadDeviceInfos(deviceInfos, deviceInfoList, context);
-	printf("CamInitializer ... found devices count: %i\n", (int) deviceInfos.size());
 
 	if(!deviceInfos.empty()) {
 
-		// Image Generator
+		// Enumerate Depth Generators
+		// -------------------------------------------------------------------
+		std::vector<xn::NodeInfo> depthInfos;
+		static xn::NodeInfoList depthInfoList;
+
+		if(this->initDescriptor->isDepthGeneratorRequired()) {
+			LOG->trace(">> context.EnumerateProductionTrees(XN_NODE_TYPE_DEPTH, ..)");
+			CHECK_RC(context.EnumerateProductionTrees(XN_NODE_TYPE_DEPTH, NULL, depthInfoList, NULL), "context.EnumerateProductionTrees(DEPTH)");
+
+			for (xn::NodeInfoList::Iterator it = depthInfoList.Begin(); it != depthInfoList.End(); ++it) {
+				printf("Found DEPTH name: '%s'\n", (*it).GetDescription().strName); // GetCreationInfo() == ""
+				depthInfos.push_back(*it);
+			}
+
+			if(deviceInfos.size() != depthInfos.size()) {
+				LOG->debug("run() ... THREAD aborting");
+				OpenNiException ex("Number of devices does not match number of depth streams!", AT);
+				this->dispatchOnException(ex);
+				return;
+			}
+		}
+
+		// Enumerate Image Generators
 		// -------------------------------------------------------------------
 		std::vector<xn::NodeInfo> imageInfos;
-		xn::NodeInfoList imageInfoList;
+		static xn::NodeInfoList imageInfoList;
+
 		if(this->initDescriptor->isImageGeneratorRequired()) {
 			LOG->trace(">> context.EnumerateProductionTrees(XN_NODE_TYPE_IMAGE, ..)");
-			CHECK_RC(context.EnumerateProductionTrees(XN_NODE_TYPE_IMAGE, NULL,imageInfoList, NULL),
-				"context.EnumerateProductionTrees(IMAGE)");
+			CHECK_RC(context.EnumerateProductionTrees(XN_NODE_TYPE_IMAGE, NULL, imageInfoList, NULL), "context.EnumerateProductionTrees(IMAGE)");
 
 			for (xn::NodeInfoList::Iterator it = imageInfoList.Begin(); it != imageInfoList.End(); ++it) {
+				printf("Found IMAGE name: '%s'\n", (*it).GetDescription().strName); // GetCreationInfo() == ""
 				imageInfos.push_back(*it);
 			}
 
-			if(deviceInfos.size() != imageInfos.size() /* || dev.size != depth.size */) {
+			if(deviceInfos.size() != imageInfos.size()) {
 				LOG->debug("run() ... THREAD aborting");
 				OpenNiException ex("Number of devices does not match number of image streams!", AT);
 				this->dispatchOnException(ex);
 				return;
 			}
 		}
-
-		// Depth Generator
-		// -------------------------------------------------------------------
-		//	printf("Looking for available depth generators...\n");
-		//	static xn::NodeInfoList depth_nodes;
-		//	status = context_.EnumerateProductionTrees (XN_NODE_TYPE_DEPTH, NULL, depth_nodes, NULL);
-		//	if(returnCode != XN_STATUS_OK) { THROW_XN_EXCEPTION("Enumerating depth generator nodes failed!", returnCode); }
-		//	vector<xn::NodeInfo> depth_info;
-		//	for (xn::NodeInfoList::Iterator nodeIt = depth_nodes.Begin (); nodeIt != depth_nodes.End (); ++nodeIt) {
-		//		depth_info.push_back (*nodeIt);
-		//	}
 
 		// User Generator
 		// -------------------------------------------------------------------
@@ -82,42 +90,75 @@ void CamInitializer::fetchDevices(xn::Context& context, CamInitDescriptor* initD
 		}
 
 		// Foreach Device => create some nodes and Cam object
-		// -------------------------------------------------------------------
+		// ===================================================================
 		for (unsigned i = 0, n = deviceInfos.size(); i < n; i++) {
 			printf("CamInitializer ... Processing device number %i of %i\n", (i+1), n);
 			xn::NodeInfo deviceInfo = deviceInfos[i];
 
+			// NO! this->context.CreateProductionTree(const_cast<xn::NodeInfo&>(deviceInfo));
+//			xn::DepthGenerator depthGenerator;
+//			xn::ImageGenerator imageGenerator;
+//			xn::NodeInfo depthInfo = depthInfos[i];
+//			xn::NodeInfo imageInfo = imageInfos[i];
+//
+//			CHECK_RC(context.CreateProductionTree(const_cast<xn::NodeInfo&>(imageInfo)), "Creating image generator instance failed!");
+//			CHECK_RC(context.CreateProductionTree(const_cast<xn::NodeInfo&>(depthInfo)), "Creating depth generator instance failed!");
+//
+//			CHECK_RC(depthInfo.GetInstance(depthGenerator), "Getting depth production node instance failed!");
+//			CHECK_RC(imageInfo.GetInstance(imageGenerator), "Creating image generator instance failed!");
 
-		//	returnCode = this->context.CreateProductionTree(const_cast<xn::NodeInfo&>(deviceInfo));
-		//	if(returnCode != XN_STATUS_OK) { THROW_XN_EXCEPTION("Creating depth generator failed!", returnCode); }
 
-			xn::ImageGenerator imageGenerator;
-			if(this->initDescriptor->isImageGeneratorRequired()) {
-				LOG->trace(">> context.CreateProductionTree(imageInfo)");
-				xn::NodeInfo imageInfo = imageInfos[i];
-				CHECK_RC(context.CreateProductionTree(const_cast<xn::NodeInfo&>(imageInfo)), "Creating image generator instance failed!");
+			// Depth Generator
+			// -------------------------------------------------------------------
+			xn::DepthGenerator depthGenerator;
+			if(this->initDescriptor->isDepthGeneratorRequired()) {
+				xn::NodeInfo depthInfo = depthInfos[i];
 
-				LOG->trace(">> imageInfo.GetInstance(imageGenerator)");
-				CHECK_RC(imageInfo.GetInstance(imageGenerator),
-					"Creating image generator instance failed!");
-				CHECK_RC(imageGenerator.SetMapOutputMode(this->initDescriptor->getImageOutputMode()),
-					"imageGenerator.SetMapOutputMode(imageOutputMode)");
+				LOG->trace("Creating DEPTH node ...");
+//				CHECK_RC(context.CreateProductionTree(const_cast<xn::NodeInfo&>(depthInfo)), "Creating depth generator instance failed!");
+				CHECK_RC(context.CreateAnyProductionTree(XN_NODE_TYPE_DEPTH, NULL, depthGenerator, NULL), "CreateAnyProductionTree(DEPTH)");
+
+				LOG->trace(">> depthInfo.GetInstance(depthGenerator)");
+				CHECK_RC(depthInfo.GetInstance(depthGenerator), "Getting depth production node instance failed!");
+				printf("a\n");
+				XnMapOutputMode foo;
+				foo.nFPS = 30;
+				foo.nXRes = 640;
+				foo.nYRes = 480;
+//				CHECK_RC(depthGenerator.SetMapOutputMode(foo), "depthGenerator.SetMapOutputMode(..)");
+//				CHECK_RC(depthGenerator.SetMapOutputMode(this->initDescriptor->getMapOutputMode()), "depthGenerator.SetMapOutputMode(..)");
+				printf("b\n");
+				// 2 ... software/kinect, 1 ... hardware/primesense
+//				CHECK_RC(depthGenerator.SetIntProperty("RegistrationType", 2), "Setting RegistrationType property for depth generator failed!");
+				printf("c\n");
 			}
 
-			// get production node instances
-		//	returnCode = depth_node.GetInstance(depth_generator_);
-		//	if(returnCode != XN_STATUS_OK) { THROW_XN_EXCEPTION("Creating depth generator instance failed!", returnCode); }
+			// Image Generator
+			// -------------------------------------------------------------------
+			xn::ImageGenerator imageGenerator;
+			if(this->initDescriptor->isImageGeneratorRequired()) {
+				xn::NodeInfo imageInfo = imageInfos[i];
 
-			// call virtual function to find available modes specifically for each device type
-		//	this->getAvailableModes();
-			// set Depth resolution here only once... since no other mode for kinect is available -> deactivating setDepthResolution method!
-		//	setDepthOutputMode (getDefaultDepthMode ());
-		//	setImageOutputMode (getDefaultImageMode ());
+				LOG->trace("Creating IMAGE node ...");
+//				CHECK_RC(context.CreateProductionTree(const_cast<xn::NodeInfo&>(imageInfo)), "Creating image generator instance failed!");
+				CHECK_RC(context.CreateAnyProductionTree(XN_NODE_TYPE_IMAGE, NULL, imageGenerator, NULL), "CreateProductionTree(IMAGE)");
 
-			Cam* newCam = this->createCamInstance(imageGenerator, deviceInfo);
+				LOG->trace(">> imageInfo.GetInstance(imageGenerator)");
+				CHECK_RC(imageInfo.GetInstance(imageGenerator), "Creating image generator instance failed!");
+//				CHECK_RC(imageGenerator.SetMapOutputMode(this->initDescriptor->getMapOutputMode()), "imageGenerator.SetMapOutputMode(..)");
+//				CHECK RC(imageGenerator.SetIntProperty("InputFormat", 6); // set kinect specific format. Thus input = uncompressed Bayer, output = grayscale = bypass = bayer
+//				CHECK RC(imageGenerator.SetPixelFormat(XN_PIXEL_FORMAT_GRAYSCALE_8_BIT); // Grayscale: bypass debayering -> gives us bayer pattern!
+			}
+
+
+			Cam* newCam = this->createCamInstance(imageGenerator, /*depthGenerator, */ deviceInfo);
 			cams.push_back(newCam);
 		}
 	}
+
+
+	//this->userGenerator.GetSkeletonCap().SetSmoothing(0.8);
+	//xnSetMirror(depth, xxMirrorMode);
 
 	this->dispatchOnInitializedCams(cams);
 	LOG->fatal("run() ... THREAD ended");
@@ -142,10 +183,13 @@ void CamInitializer::fetchDevices(xn::Context& context, CamInitDescriptor* initD
 	}
 
 	for (xn::NodeInfoList::Iterator it = deviceInfoList.Begin(); it != deviceInfoList.End(); ++it) {
+		// GetDescription().strName == "SensorV2"
+		// GetDescription().strVendor == "PrimeSense"
+		// GetInstanceName() == ""
+		printf("Found DEVICE creation info: '%s'\n", (*it).GetCreationInfo());
 		deviceInfos.push_back(*it);
 	}
 }
-
 
 /**
  * Cam Factory method.

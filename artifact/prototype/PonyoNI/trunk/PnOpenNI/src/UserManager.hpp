@@ -22,6 +22,10 @@ private:
 	bool isPoseRequired;
 	XnChar requiredPoseName[20];
 
+	XnCallbackHandle callbackUser;
+	XnCallbackHandle callbackCalibration;
+	XnCallbackHandle callbackPose;
+
 	static void XN_CALLBACK_TYPE onUserNew(xn::UserGenerator&, XnUserID, void* tthis);
 	static void XN_CALLBACK_TYPE onUserLost(xn::UserGenerator&, XnUserID, void* tthis);
 	static void XN_CALLBACK_TYPE onPoseDetected(xn::PoseDetectionCapability&, const XnChar*, XnUserID, void* tthis);

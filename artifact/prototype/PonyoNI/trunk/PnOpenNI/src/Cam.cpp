@@ -18,13 +18,17 @@ Cam::Cam(xn::ImageGenerator& pImageGenerator, std::string pCleanId, CamInitDescr
 	LOG->debug("new Cam(..)");
 
 	if(this->initDescriptor->isImageGeneratorRequired()) {
-		XnCallbackHandle TODO_What_todo_with_this_imageCallbackHandle;
-		CHECK_RC(this->imageGenerator.RegisterToNewDataAvailable(&Cam::onImageDataAvailable, this, TODO_What_todo_with_this_imageCallbackHandle), "imageGenerator.RegisterToNewDataAvailable(..)");
+		printf("register A\n");
+		CHECK_RC(this->imageGenerator.RegisterToNewDataAvailable(&Cam::onImageDataAvailable, this, this->newDataAvailableCallbackHandle),
+			"imageGenerator.RegisterToNewDataAvailable(..)");
+		printf("register B\n");
 	}
 }
 
 Cam::~Cam() {
-	LOG->debug("~Cam()");
+	LOG->debug("~Cam() ... unregistering callback");
+
+	this->imageGenerator.UnregisterFromNewDataAvailable(this->newDataAvailableCallbackHandle);
 }
 std::string Cam::getCleanId() const {
 	return this->cleanId;

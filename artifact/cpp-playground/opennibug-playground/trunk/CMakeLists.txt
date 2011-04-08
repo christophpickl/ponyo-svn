@@ -12,9 +12,12 @@ SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 
 ##############################################################
 
-
 SET (EXECUTABLE1 "main_create_product_nodes")
+SET (EXECUTABLE2 "main_usbfail_approach")
 
 ADD_EXECUTABLE (${EXECUTABLE1} ${EXECUTABLE1}.cpp)
+ADD_EXECUTABLE (${EXECUTABLE2} ${EXECUTABLE2}.cpp)
+
 TARGET_LINK_LIBRARIES (${EXECUTABLE1} ${EXTRA_LIBS})
+TARGET_LINK_LIBRARIES (${EXECUTABLE2} ${EXTRA_LIBS})
 

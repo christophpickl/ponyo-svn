@@ -3,6 +3,7 @@
 #define MYNI_INC_H_
 
 #include <stdio.h>
+#include <string>
 #include <stdlib.h>
 #include <vector>
 #include <XnCppWrapper.h>
@@ -22,8 +23,9 @@
 #define ENUMERATE_NODES(ctx, nodeTypeLabel, nodeTypeId, nodes, nodeInfoList) { \
 	printf("\nENUMERATE_NODES(%s)\n", nodeTypeLabel); \
 	printf("EnumerateProductionTrees(..)"); CHECK_RC(ctx.EnumerateProductionTrees(nodeTypeId, NULL, nodeInfoList, NULL), "EnumerateProductionTrees(..)"); \
-	for (xn::NodeInfoList::Iterator it = nodeInfoList.Begin(); it != nodeInfoList.End(); ++it) { nodes.push_back(*it); } \
-	printf("nodes.size()=%i\n", (int) nodes.size()); \
+	printf("Initializing nodes vector ...\n"); \
+for (xn::NodeInfoList::Iterator it = nodeInfoList.Begin(); it != nodeInfoList.End(); ++it) { nodes.push_back(*it); } \
+	printf("nodes.size()=%i\n\n", (int) nodes.size()); \
 }
 
 

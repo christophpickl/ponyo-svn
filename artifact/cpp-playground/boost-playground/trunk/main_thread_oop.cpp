@@ -3,9 +3,9 @@
 #include <boost/thread.hpp>
 #include <boost/date_time.hpp>
 
+// see: http://antonym.org/2009/05/threading-with-boost---part-i-creating-threads.html
 
 bool shouldQuit = false;
-
 class Foo {
 public:
 	Foo() {
@@ -14,29 +14,37 @@ public:
 	~Foo() {
 		printf("~Foo()\n");
 	}
-//		while(!shouldQuit) {
-//			boost::posix_time::seconds workTime(1);
-//			boost::this_thread::sleep(workTime);
-//		}
-//		boost::thread someThread(Foo::onThreadRun);
-	void operator()() {
-		printf("Foo.operator() START\n");
-			boost::posix_time::seconds workTime(2);
+
+	void onThread() {
+		printf("Foo.onThread() START\n");
+		boost::posix_time::seconds workTime(1);
+
+		while(!shouldQuit) {
+			printf("Foo WORKING again!\n");
 			boost::this_thread::sleep(workTime);
-		printf("Foo.operator() END\n");
+		}
+
+		printf("Foo.onThread() END\n");
 	}
 };
 
 int main(int argc, char* argv[]) {
 	std::cout << "main() START" << std::endl;
 
-//	boost::thread workerThread(workerFunc, 3);
-//	std::cout << "main: waiting for thread" << std::endl;
-//	workerThread.join();
+	Foo* f = new Foo();
+	printf("main() ... spawning new thread\n");
+	boost::thread someThread(&Foo::onThread, f);
 
-	Foo f;
-	boost::thread someThread(f);
+	printf("main() sleeping\n");
+	boost::posix_time::seconds sleepTime(3);
+	boost::this_thread::sleep(sleepTime);
+	printf("main() aborting\n");
+	shouldQuit = true;
+
+	printf("main() ... someThread.join()\n");
 	someThread.join();
+
+	delete f;
 
 	std::cout << "main() END" << std::endl;
 	return 0;

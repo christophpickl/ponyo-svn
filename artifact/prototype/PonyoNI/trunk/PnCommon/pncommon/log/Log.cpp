@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Log.hpp"
+#include <ponyo/pncommon/log/Log.hpp>
 
 namespace pn {
 

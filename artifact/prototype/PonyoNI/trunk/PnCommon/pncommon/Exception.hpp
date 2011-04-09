@@ -2,7 +2,7 @@
 #ifndef EXCEPTION_H_
 #define EXCEPTION_H_
 
-#include "log/Log.hpp"
+#include <ponyo/pncommon/log/Log.hpp>
 
 namespace pn {
 class Exception {

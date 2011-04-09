@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string>
-#include "common.hpp"
-#include "LogFactory.hpp"
+#include <ponyo/pncommon/common.hpp>
+#include <ponyo/pncommon/log/LogFactory.hpp>
 
 using namespace std;
 

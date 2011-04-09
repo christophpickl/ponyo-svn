@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "common.hpp"
+#include <ponyo/pncommon/common.hpp>
 
 void println(const char* message) {
 	printf("%s\n", message);

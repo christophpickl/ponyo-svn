@@ -9,8 +9,8 @@
 #include <string.h>
 #include <vector>
 
-#include "Exception.hpp"
-#include "log/LogFactory.hpp"
+#include <ponyo/pncommon/Exception.hpp>
+#include <ponyo/pncommon/log/LogFactory.hpp>
 
 void println(const char*);
 

@@ -2,7 +2,7 @@
 #ifndef LOGFACTORY_HPP_
 #define LOGFACTORY_HPP_
 
-#include "log/Log.hpp"
+#include <ponyo/pncommon/log/Log.hpp>
 
 #define NEW_LOG(sourceFile) LogFactory::getLog(sourceFile);
 

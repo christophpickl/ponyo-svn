@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h> // free()
 #include <execinfo.h> // backtrace()
-#include "common.hpp"
-#include "Exception.hpp"
+
+#include <ponyo/pncommon/common.hpp>
+#include <ponyo/pncommon/Exception.hpp>
 
 #define STACKTRACE_MAX_SIZE 42
 

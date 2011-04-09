@@ -3,8 +3,9 @@
 #define ASYNC_H_
 
 #include <stdio.h>
-#include "log/LogFactory.hpp"
 #include <vector>
+
+#include <ponyo/pncommon/log/LogFactory.hpp>
 
 namespace pn {
 //Log* Async::LOG = NEW_LOG(__FILE__)

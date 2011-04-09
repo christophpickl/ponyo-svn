@@ -2,9 +2,10 @@
 #ifndef MAINWINDOW_HPP_
 #define MAINWINDOW_HPP_
 
-#include "log/Log.hpp"
+#include <ponyo/pncommon/log/Log.hpp>
+#include <ponyo/pncommon/Async.hpp>
+
 #include "MainWindowListener.hpp"
-#include "Async.hpp"
 
 namespace pn {
 

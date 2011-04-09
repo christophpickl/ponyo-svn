@@ -2,9 +2,10 @@
 #ifndef IMAGESAVER_H_
 #define IMAGESAVER_H_
 
-#include "common_openni.hpp"
-#include "pninclude_opencv.h"
-#include "ImageConverter.hpp"
+#include <ponyo/pncommon/pninclude_opencv.h>
+
+#include <ponyo/pnopenni/common_openni.hpp>
+#include <ponyo/pnopenni/ImageConverter.hpp>
 
 namespace pn {
 class ImageSaver {

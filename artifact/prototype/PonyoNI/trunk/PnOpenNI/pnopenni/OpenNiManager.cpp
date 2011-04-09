@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <iostream>
 
-#include "OpenNiManager.hpp"
+#include <ponyo/pnopenni/OpenNiManager.hpp>
 
 namespace pn {
 

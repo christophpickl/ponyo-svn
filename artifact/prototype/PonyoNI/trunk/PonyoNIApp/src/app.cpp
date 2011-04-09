@@ -1,7 +1,12 @@
-#include "common.hpp"
-#include "pninclude_opencv.h"
+#include <ponyo/pncommon/common.hpp>
+
+//#include <ponyo/pncommon/pninclude_opencv.h>
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
+
+#include <ponyo/pnopenni/OpenNiManager.hpp>
 #include "MainWindow.hpp"
-#include "OpenNiManager.hpp"
 
 #define IMG_BLUE_TEMPLATE "images/blue_ball_template.jpg"
 #define IMG_RED_TEMPLATE "images/red_ball_template.jpg"

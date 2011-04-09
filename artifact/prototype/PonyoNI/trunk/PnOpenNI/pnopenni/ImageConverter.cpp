@@ -1,4 +1,4 @@
-#include "ImageConverter.hpp"
+#include <ponyo/pnopenni/ImageConverter.hpp>
 
 // FIXME merge ImageConverter/Detector/Saver to single class
 

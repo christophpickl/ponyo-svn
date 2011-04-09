@@ -3,8 +3,8 @@
 #define CAM_HPP_
 
 #include <iostream>
-#include "common_openni.hpp"
-#include "CamInitDescriptor.hpp"
+#include <ponyo/pnopenni/common_openni.hpp>
+#include <ponyo/pnopenni/CamInitDescriptor.hpp>
 
 namespace pn {
 class Cam {

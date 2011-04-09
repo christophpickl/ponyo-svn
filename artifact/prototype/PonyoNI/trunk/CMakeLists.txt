@@ -58,4 +58,3 @@ MESSAGE ("==============> ROOT")
 
 
 ADD_DEPENDENCIES (PnOpenNI PnCommon)
-#ADD_DEPENDENCIES (App PnOpenNI)

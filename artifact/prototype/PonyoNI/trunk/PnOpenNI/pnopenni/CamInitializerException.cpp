@@ -1,4 +1,4 @@
-#include "CamInitializerException.hpp"
+#include <ponyo/pnopenni/CamInitializerException.hpp>
 
 namespace pn {
 

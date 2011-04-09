@@ -2,8 +2,8 @@
 #ifndef USERMANAGER_HPP_
 #define USERMANAGER_HPP_
 
-#include "common_openni.hpp"
-#include "UserManagerException.hpp"
+#include <ponyo/pnopenni/common_openni.hpp>
+#include <ponyo/pnopenni/UserManagerException.hpp>
 
 namespace pn {
 class UserManager {

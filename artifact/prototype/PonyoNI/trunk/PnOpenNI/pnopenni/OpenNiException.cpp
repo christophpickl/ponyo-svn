@@ -1,4 +1,4 @@
-#include "OpenNiException.hpp"
+#include <ponyo/pnopenni/OpenNiException.hpp>
 
 namespace pn {
 

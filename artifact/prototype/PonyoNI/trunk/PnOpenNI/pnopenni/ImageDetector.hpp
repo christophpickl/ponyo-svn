@@ -2,9 +2,10 @@
 #ifndef IMAGEDETECTOR_HPP_
 #define IMAGEDETECTOR_HPP_
 
-#include "common_openni.hpp"
-#include "pninclude_opencv.h"
-#include "ImageDetectorException.hpp"
+#include <ponyo/pncommon/pninclude_opencv.h>
+
+#include <ponyo/pnopenni/common_openni.hpp>
+#include <ponyo/pnopenni/ImageDetectorException.hpp>
 
 namespace pn {
 class ImageDetector {

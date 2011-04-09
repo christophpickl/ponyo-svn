@@ -4,8 +4,8 @@
 
 #include <XnCppWrapper.h>
 
-#include "common.hpp"
-#include "OpenNiException.hpp"
+#include <ponyo/pncommon/common.hpp>
+#include <ponyo/pnopenni/OpenNiException.hpp>
 
 #define THROW_XN_EXCEPTION(errorMessage, returnCode) \
 std::string ss;                                      \

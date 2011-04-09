@@ -3,7 +3,7 @@
 #define CAMINITIALIZERLISTENER_HPP_
 
 #include <vector>
-#include "Cam.hpp"
+#include <ponyo/pnopenni/Cam.hpp>
 
 namespace pn {
 class CamInitializerListener {

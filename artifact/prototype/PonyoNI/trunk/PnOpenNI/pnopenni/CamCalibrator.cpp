@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "CamCalibrator.hpp"
+#include <ponyo/pnopenni/CamCalibrator.hpp>
 
 namespace pn {
 

@@ -1,4 +1,4 @@
-#include "CamInitDescriptor.hpp"
+#include <ponyo/pnopenni/CamInitDescriptor.hpp>
 
 namespace pn {
 

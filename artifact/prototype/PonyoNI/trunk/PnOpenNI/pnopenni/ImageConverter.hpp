@@ -2,8 +2,9 @@
 #ifndef IMAGECONVERTER_HPP_
 #define IMAGECONVERTER_HPP_
 
-#include "common_openni.hpp"
-#include "pninclude_opencv.h"
+#include <ponyo/pncommon/pninclude_opencv.h>
+
+#include <ponyo/pnopenni/common_openni.hpp>
 
 namespace pn {
 class ImageConverter {

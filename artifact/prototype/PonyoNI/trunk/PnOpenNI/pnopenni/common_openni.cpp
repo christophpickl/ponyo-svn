@@ -1,5 +1,5 @@
-#include "common_openni.hpp"
-#include "XnLog.h"
+#include <XnLog.h>
+#include <ponyo/pnopenni/common_openni.hpp>
 
 namespace pn {
 void initOpenniLogging() {

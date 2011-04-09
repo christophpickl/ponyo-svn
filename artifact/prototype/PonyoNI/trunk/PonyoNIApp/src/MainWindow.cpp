@@ -1,6 +1,10 @@
-#include "pninclude_glut.h"
-#include "common.hpp"
+//#include <ponyo/pncommon/pninclude_opencv.h>
+#include <GLUT/glut.h>
+#include <opencv2/core/core.hpp>
+#include <opencv2/imgproc/imgproc.hpp>
+#include <opencv2/highgui/highgui.hpp>
 
+#include <ponyo/pncommon/common.hpp>
 #include "MainWindow.hpp"
 
 namespace pn {

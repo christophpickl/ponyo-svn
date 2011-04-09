@@ -1,93 +1,57 @@
-message("==============> ROOT")
+MESSAGE ("==============> ROOT")
 
-cmake_minimum_required (VERSION 2.8) 
-project (PonyoNI)
-
-# adding optimizer flag, otherwise build will fail with:
-#Undefined symbols:
-#  "_xnShutdown", referenced from:
-#      xn::Context::Shutdown() 
-
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
-
-
-SET(EXECUTABLE_NAME PonyoNIPrototype)
+# general setup
+	CMAKE_MINIMUM_REQUIRED (VERSION 2.8) 
+	PROJECT (PonyoNI)
+	#SET(EXECUTABLE_OUTPUT_PATH target)
+	SET(EXECUTABLE_NAME App)
+	
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2") # prevent "Undefined symbols" error
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
 
 
 # LIB - Glut
-##############################################################
-
-IF(APPLE)
-	message("APPLE detected, setting glut specific paths")
 	INCLUDE_DIRECTORIES( /System/Library/Frameworks )
 	FIND_LIBRARY(GLUT_LIBRARY GLUT )
 	FIND_LIBRARY(OpenGL_LIBRARY OpenGL )
 	MARK_AS_ADVANCED (GLUT_LIBRARY OpenGL_LIBRARY)
-   SET(EXTRA_LIBS ${EXTRA_LIBS} ${GLUT_LIBRARY} ${OpenGL_LIBRARY})
-ENDIF (APPLE)
-
-
-# LIB - OpenNI
-##############################################################
-
-FIND_LIBRARY(OpenNI_LIBRARY OpenNI )
-SET(EXTRA_LIBS ${EXTRA_LIBS} ${OpenNI_LIBRARY} )
-
-IF(APPLE)
-	message("APPLE detected, setting OpenNI specific paths")
-	INCLUDE_DIRECTORIES( /usr/include/ni )
-ENDIF(APPLE)
-
-
-##############################################################
-# PnCommon
-##############################################################
-
-include_directories("${PROJECT_SOURCE_DIR}/PnCommon/src")
-add_subdirectory(PnCommon)
-set(EXTRA_LIBS ${EXTRA_LIBS} PnCommon)
-
-
-##############################################################
-# PnOpenNI
-##############################################################
-include_directories("${PROJECT_SOURCE_DIR}/PnOpenNI/src")
-add_subdirectory(PnOpenNI)
-set(EXTRA_LIBS ${EXTRA_LIBS} PnOpenNI)
-
-
-##############################################################
-# PonyoNIApp
-##############################################################
-add_subdirectory(PonyoNIApp)
-
-
-set(PONYONIAPP_SRC_FOLDER "${PROJECT_SOURCE_DIR}/PonyoNIApp/src")
-file(GLOB_RECURSE CPP_FILES "${PONYONIAPP_SRC_FOLDER}/*.cpp")
-message("CPP_FILES: ${CPP_FILES}")
-add_executable (${EXECUTABLE_NAME} ${CPP_FILES})
-target_link_libraries (${EXECUTABLE_NAME} ${EXTRA_LIBS})
-
+	SET(EXTRA_LIBS ${EXTRA_LIBS} ${GLUT_LIBRARY} ${OpenGL_LIBRARY})
 
 # LIB - OpenCV
-##############################################################
-FIND_PACKAGE( OpenCV REQUIRED )
-TARGET_LINK_LIBRARIES( ${EXECUTABLE_NAME} ${OpenCV_LIBS} )
-
+	FIND_PACKAGE ( OpenCV REQUIRED )
+	SET (EXTRA_LIBS ${EXTRA_LIBS} ${OpenCV_LIBS})
 
 # LIB - Boost
-##############################################################
+	SET (BOOST_LIBS thread date_time system)
+	FIND_PACKAGE (Boost COMPONENTS ${BOOST_LIBS} REQUIRED)
+	FIND_PACKAGE (Threads REQUIRED)
+	SET (EXTRA_LIBS ${EXTRA_LIBS} ${Boost_LIBRARIES})
+	SET (EXTRA_LIBS ${EXTRA_LIBS} ${CMAKE_THREAD_LIBS_INIT})
 
-set(BOOST_LIBS thread date_time system)
-find_package(Boost COMPONENTS ${BOOST_LIBS} REQUIRED)
-target_link_libraries(${EXECUTABLE_NAME} ${Boost_LIBRARIES})
-find_package(Threads REQUIRED)
-target_link_libraries(${EXECUTABLE_NAME} ${CMAKE_THREAD_LIBS_INIT})
+# LIB - OpenNI
+	INCLUDE_DIRECTORIES (/usr/include/ni)
+	FIND_LIBRARY (OpenNI_LIBRARY OpenNI)
+	SET (EXTRA_LIBS ${EXTRA_LIBS} ${OpenNI_LIBRARY})
 
 
-##############################################################
+# PnCommon
+	include_directories("${PROJECT_SOURCE_DIR}/PnCommon/pncommon")
+	add_subdirectory(PnCommon)
+	set(EXTRA_LIBS ${EXTRA_LIBS} PnCommon)
 
-message("[ROOT] EXTRA_LIBS: ${EXTRA_LIBS}")
-#message("CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
-message("ROOT says: EXTRA_LIBS=[${EXTRA_LIBS}]")
+# PnOpenNI
+	include_directories("${PROJECT_SOURCE_DIR}/PnOpenNI/pnopenni")
+	add_subdirectory(PnOpenNI)
+	set(EXTRA_LIBS ${EXTRA_LIBS} PnOpenNI)
+
+# PonyoNIApp
+	add_subdirectory(PonyoNIApp)
+
+	SET (PONYONIAPP_SRC_FOLDER "${PROJECT_SOURCE_DIR}/PonyoNIApp/src")
+	FILE (GLOB_RECURSE CPP_FILES "${PONYONIAPP_SRC_FOLDER}/*.cpp")
+	ADD_EXECUTABLE (${EXECUTABLE_NAME} ${CPP_FILES})
+	TARGET_LINK_LIBRARIES (${EXECUTABLE_NAME} ${EXTRA_LIBS})
+
+# some messages
+	MESSAGE ("[ROOT] CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
+	MESSAGE ("[ROOT] EXTRA_LIBS: ${EXTRA_LIBS}")

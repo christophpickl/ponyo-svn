@@ -1,8 +1,15 @@
-message("")
-message("==============> PnCommon")
+MESSAGE ("")
+MESSAGE ("==============> PnCommon")
 
-set (PROJECT_SOURCE_DIR src)
+# TODO rename src folder!
+SET (PROJECT_SOURCE_DIR pncommon)
 
-file(GLOB_RECURSE CPP_FILES "${PROJECT_SOURCE_DIR}/*.cpp")
-message("CPP_FILES: ${CPP_FILES}")
-add_library(PnCommon SHARED ${CPP_FILES})
+FILE (GLOB_RECURSE CPP_FILES "${PROJECT_SOURCE_DIR}/*.cpp")
+ADD_LIBRARY (PnCommon SHARED ${CPP_FILES})
+
+INSTALL (TARGETS PnCommon LIBRARY DESTINATION lib)
+INSTALL (DIRECTORY ${PROJECT_SOURCE_DIR}
+         DESTINATION include/ponyo
+         FILES_MATCHING PATTERN "*.hpp"
+                        PATTERN ".svn" EXCLUDE
+        )

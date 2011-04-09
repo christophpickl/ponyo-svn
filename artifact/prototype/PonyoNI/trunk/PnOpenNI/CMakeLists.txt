@@ -1,10 +1,16 @@
-message("")
-message("==============> PnOpenNI")
+MESSAGE ("")
+MESSAGE ("==============> PnOpenNI")
 
-set (PROJECT_SOURCE_DIR src)
+SET (PROJECT_SOURCE_DIR pnopenni)
 
 
-file(GLOB_RECURSE CPP_FILES "${PROJECT_SOURCE_DIR}/*.cpp")
-#message("CPP_FILES: ${CPP_FILES}")
-add_library(PnOpenNI ${CPP_FILES})
+FILE (GLOB_RECURSE CPP_FILES "${PROJECT_SOURCE_DIR}/*.cpp")
+ADD_LIBRARY (PnOpenNI ${CPP_FILES})
+
+INSTALL (TARGETS PnOpenNI LIBRARY DESTINATION lib)
+INSTALL (DIRECTORY ${PROJECT_SOURCE_DIR}
+         DESTINATION include/ponyo
+         FILES_MATCHING PATTERN "*.hpp"
+                        PATTERN ".svn" EXCLUDE
+        )
 

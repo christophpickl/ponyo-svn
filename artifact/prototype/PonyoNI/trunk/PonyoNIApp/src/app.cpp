@@ -185,6 +185,7 @@ void onSignalReceived(int signalCode) {
 	shouldTerminate = true;
 }
 void foo() {
+	printf("foo()\n");
 	signal(SIGINT, onSignalReceived); // hit CTRL-C keys in terminal (2)
 	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)
 
@@ -246,6 +247,8 @@ void foo() {
 
 int main(int argc, char** argv) {
 	println("main() START");
+
+	initOpenniLogging();
 
 	foo();
 //	App app(IMG_TEMPLATE);

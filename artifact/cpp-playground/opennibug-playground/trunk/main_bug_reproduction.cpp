@@ -1,11 +1,21 @@
 #include <XnCppWrapper.h>
+#include <XnLog.h>
 
 #define CHECK(returnCode) \
 if(returnCode != XN_STATUS_OK) { fprintf(stderr, "%s\n", xnGetStatusString(returnCode)); exit(1); }
 
 int main() {
 	xn::Context context;
-	printf("Init");
+
+	printf("Init log ...\n");
+	CHECK(xnLogInitSystem());
+	CHECK(xnLogSetLineInfo(true));
+	CHECK(xnLogSetConsoleOutput(true));
+	CHECK(xnLogSetFileOutput(false));
+	CHECK(xnLogSetSeverityFilter(/*XnLogSeverity*/XN_LOG_VERBOSE));
+	CHECK(xnLogSetMaskState("ALL", true));
+
+	printf("Init context\n");
 	CHECK(context.Init());
 
 	printf("Getting DEPTH node\n");

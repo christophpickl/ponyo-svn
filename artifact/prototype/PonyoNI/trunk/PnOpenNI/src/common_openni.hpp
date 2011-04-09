@@ -19,4 +19,8 @@ throw OpenNiException(ss.c_str(), AT);
 #define CHECK_RC(returnCode, errorMessage) \
 if(returnCode != XN_STATUS_OK) { THROW_XN_EXCEPTION(errorMessage, returnCode); }
 
+namespace pn {
+	void initOpenniLogging();
+}
+
 #endif // COMMON_OPENNI_HPP_

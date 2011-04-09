@@ -1,5 +1,6 @@
-#include "common_openni.h"
+#include "common_openni.hpp"
 
+namespace pn {
 
 void baaar() {
 	xn::Context ctx;
@@ -81,3 +82,5 @@ void reproduceCreateProductionTreeError() {
 //	println("main() END");
 //	return 0;
 //}
+
+}

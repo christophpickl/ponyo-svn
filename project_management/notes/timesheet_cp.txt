@@ -2,8 +2,9 @@
 TIMESHEET CP
 =================================================
 
-              ~~ 55h~~
-09.04. - 03:00 -   h - 
+              ~~ 56h~~
+09.04. - 15:00 -   h - prototyping JNA and openni C wrapper
+09.04. - 03:00 -  2h - investigating JNA and openni C wrapper
 09.04. - 01:00 -  2h - worked on user generator playground
 08.04. - 15:00 -  3h - Investigating USB fail error
               ~~ 50h~~

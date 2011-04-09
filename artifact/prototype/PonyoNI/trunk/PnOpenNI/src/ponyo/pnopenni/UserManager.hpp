@@ -14,6 +14,7 @@ public:
 	void init(xn::Context&) throw(UserManagerException, OpenNiException);
 
 	void start() throw(OpenNiException);
+	bool isRunning();
 	void stop() throw(OpenNiException);
 
 private:

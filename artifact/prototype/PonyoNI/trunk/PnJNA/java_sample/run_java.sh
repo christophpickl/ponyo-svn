@@ -11,5 +11,5 @@ CLASSPATH=${TARGET_FOLDER}:lib/jna.jar:lib/platform.jar
 
 mkdir ${TARGET_FOLDER}
 
-exec "javac -classpath ${CLASSPATH} -d ${TARGET_FOLDER} src/jponyo/PnJNAWrapper.java"
-exec "java -Djna.library.path=${LIBPATH} -classpath ${CLASSPATH} jponyo.PnJNAWrapper"
+exec "javac -classpath ${CLASSPATH} -d ${TARGET_FOLDER} src/jponyo/App.java"
+exec "java -Djna.library.path=${LIBPATH} -classpath ${CLASSPATH} jponyo.App"

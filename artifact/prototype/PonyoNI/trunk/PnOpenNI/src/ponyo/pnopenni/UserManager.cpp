@@ -87,6 +87,10 @@ void UserManager::start() throw(OpenNiException) {
 	CHECK_RC(this->userGenerator.StartGenerating(), "Starting user generator failed!");
 }
 
+bool UserManager::isRunning() {
+	return this->userGenerator.IsGenerating() == TRUE ? true : false;
+}
+
 void UserManager::stop() throw(OpenNiException) {
 	if(!this->userGenerator.IsGenerating()) {
 		LOG->warn("stop() ... aborting, as not generating!");

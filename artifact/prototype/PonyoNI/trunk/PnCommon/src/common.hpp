@@ -4,6 +4,8 @@
 
 #define AT __FILE__, __LINE__
 
+#include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <vector>
 

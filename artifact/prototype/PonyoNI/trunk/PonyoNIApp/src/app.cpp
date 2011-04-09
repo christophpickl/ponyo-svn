@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h> // exit()
-
 #include "common.hpp"
 #include "pninclude_opencv.h"
 #include "MainWindow.hpp"
@@ -11,7 +8,7 @@
 #define IMG_TEMPLATE IMG_BLUE_TEMPLATE
 
 #define CAM_ENABLE_IMAGE_GENERATOR true
-#define CAM_ENABLE_DEPTH_GENERATOR true
+#define CAM_ENABLE_DEPTH_GENERATOR false
 #define CAM_ENABLE_USER_GENERATOR false
 #define IMAGE_OUTPUT_MODE_WIDTH XN_VGA_X_RES
 #define IMAGE_OUTPUT_MODE_HEIGHT XN_VGA_Y_RES
@@ -151,62 +148,106 @@ private:
 	}
 };
 
+xn::Context ctx;
+xn::UserGenerator userGenerator;
+xn::DepthGenerator depthGenerator;
+xn::DepthMetaData tempDepthMetaData;
+bool shouldTerminate = false;
+XnMapOutputMode mapMode;
 
-void playground() {
-	XnMapOutputMode mapMode; mapMode.nFPS = 30; mapMode.nXRes = 640; mapMode.nYRes = 480;
+void XN_CALLBACK_TYPE onUserNew(xn::UserGenerator& generator, XnUserID userId, void* cookie) {
+	printf("onUserNew: %d (requesting calibration)\n", userId);
+	userGenerator.GetSkeletonCap().RequestCalibration(userId, TRUE);
+}
+void XN_CALLBACK_TYPE onUserLost(xn::UserGenerator& generator, XnUserID userId, void* cookie) {
+	printf("onUserLost: %d\n", userId);
+}
+void XN_CALLBACK_TYPE onPoseDetected(xn::PoseDetectionCapability& capability, const XnChar* strPose, XnUserID userId, void* cookie) {
+	printf("Pose %s detected for user %d (stopping pose detection, requesting calibration)\n", strPose, userId);
+	userGenerator.GetPoseDetectionCap().StopPoseDetection(userId);
+	userGenerator.GetSkeletonCap().RequestCalibration(userId, TRUE);
+}
+void XN_CALLBACK_TYPE onCalibrationStart(xn::SkeletonCapability& capability, XnUserID userId, void* cookie) {
+	printf("Calibration started for user %d\n", userId);
+}
+void XN_CALLBACK_TYPE onCalibrationEnd(xn::SkeletonCapability& capability, XnUserID userId, XnBool calibartionSuccessful, void* cookie) {
+	if(calibartionSuccessful) {
+		printf("Calibration complete, start tracking user %d\n", userId);
+		userGenerator.GetSkeletonCap().StartTracking(userId);
+	} else {
+		printf("Calibration failed for user %d (again requesting calibration)\n", userId);
+		userGenerator.GetSkeletonCap().RequestCalibration(userId, TRUE);
+	}
+}
 
-	printf("Initializing context ...\n"); xn::Context context; CHECK_RC(context.Init(), "context.Init()");
+void onSignalReceived(int signalCode) {
+	printf("onSignalReceived(signalCode=%d)\n", signalCode);
+	shouldTerminate = true;
+}
+void foo() {
+	signal(SIGINT, onSignalReceived); // hit CTRL-C keys in terminal (2)
+	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)
 
-	printf("Enumerating DEVICE nodes ...\n"); static xn::NodeInfoList deviceInfoList; CHECK_RC(context.EnumerateProductionTrees(XN_NODE_TYPE_DEVICE, NULL, deviceInfoList, NULL), "EnumerateProductionTrees(DEVICE)");
-	std::vector<xn::NodeInfo> deviceNodes; for (xn::NodeInfoList::Iterator nodeIt = deviceInfoList.Begin (); nodeIt != deviceInfoList.End (); ++nodeIt) { deviceNodes.push_back(*nodeIt); }
+	mapMode.nXRes = XN_VGA_X_RES;
+	mapMode.nYRes = XN_VGA_Y_RES;
+	mapMode.nFPS = 30;
 
-	printf("Enumerating DEPTH nodes ...\n"); static xn::NodeInfoList depthInfoList; CHECK_RC(context.EnumerateProductionTrees(XN_NODE_TYPE_DEPTH, NULL, depthInfoList, NULL), "EnumerateProductionTrees(DEPTH)");
-	std::vector<xn::NodeInfo> depthNodes; for (xn::NodeInfoList::Iterator nodeIt = depthInfoList.Begin (); nodeIt != depthInfoList.End (); ++nodeIt) { depthNodes.push_back(*nodeIt); }
+	CHECK_RC(ctx.Init(), "init");
+	CHECK_RC(depthGenerator.Create(ctx), "create depth");
+	depthGenerator.SetMapOutputMode(mapMode);
 
-	printf("Enumerating IMAGE nodes ...\n"); static xn::NodeInfoList imageInfoList; CHECK_RC(context.EnumerateProductionTrees(XN_NODE_TYPE_IMAGE, NULL, imageInfoList, NULL), "EnumerateProductionTrees(IMAGE)");
-	std::vector<xn::NodeInfo> imageNodes; for (xn::NodeInfoList::Iterator nodeIt = imageInfoList.Begin (); nodeIt != imageInfoList.End (); ++nodeIt) { imageNodes.push_back(*nodeIt); }
-
-	printf("deviceNodes.size = %i\n", (int) deviceNodes.size());
-	printf("depthNodes.size = %i\n", (int) depthNodes.size());
-	printf("imageNodes.size = %i\n", (int) imageNodes.size());
-
-	for(int i=0, n=deviceNodes.size(); i < n; i++) {
-		xn::NodeInfo deviceNode = deviceNodes[i];
-		xn::NodeInfo depthNode = depthNodes[i];
-		xn::NodeInfo imageNode = imageNodes[i];
-
-		xn::DepthGenerator depthGenerator;
-		xn::DepthGenerator imageGenerator;
-
-		printf("Creating DEPTH node ...\n"); CHECK_RC(context.CreateProductionTree(const_cast<xn::NodeInfo&>(depthNode)), "CreateProductionTree(DEPTH)");
-		printf("Creating IMAGE node ...\n"); CHECK_RC(context.CreateProductionTree(const_cast<xn::NodeInfo&>(imageNode)), "CreateProductionTree(IMAGE)");
-//		printf("Creating DEPTH node ...\n"); CHECK_RC(context.CreateAnyProductionTree(XN_NODE_TYPE_DEPTH, NULL, depthGenerator, NULL), "CreateProductionTree(DEPTH)");
-//		printf("Creating IMAGE node ...\n"); CHECK_RC(context.CreateAnyProductionTree(XN_NODE_TYPE_IMAGE, NULL, imageGenerator, NULL), "CreateProductionTree(IMAGE)");
-
-		printf("Getting DEPTH generator instance ...\n"); CHECK_RC(depthNode.GetInstance(depthGenerator), "GetInstance(DEPTH)");
-		printf("Getting IMAGE generator instance ...\n"); CHECK_RC(imageNode.GetInstance(imageGenerator), "GetInstance(IMAGE)");
-
-		printf(">> imageGenerator.GetSupportedMapOutputModesCount()\n"); unsigned modeCount = imageGenerator.GetSupportedMapOutputModesCount();
-		XnMapOutputMode* modes = new XnMapOutputMode[modeCount];
-		printf(">> imageGenerator.GetSupportedMapOutputModes(modes, modeCount)\n"); XnStatus status = imageGenerator.GetSupportedMapOutputModes(modes, modeCount);
-
-		for (unsigned modeIdx = 0; modeIdx < modeCount; ++modeIdx) {
-			printf("=> %i: fps=%i, size=%ix%i\n", (modeIdx+1), modes[modeIdx].nFPS, modes[modeIdx].nXRes, modes[modeIdx].nYRes);
-//			available_image_modes_.push_back (modes[modeIdx]);
-		}
-		delete[] modes;
-
-		printf("Setting DEPTH map output mode ...\n"); CHECK_RC(depthGenerator.SetMapOutputMode(mapMode), "depthGenerator.SetMapOutputMode(..)");
-		printf("Setting IMAGE map output mode ...\n"); CHECK_RC(imageGenerator.SetMapOutputMode(mapMode), "imageGenerator.SetMapOutputMode(..)");
+	XnStatus userAvailable = ctx.FindExistingNode(XN_NODE_TYPE_USER, userGenerator);
+	if(userAvailable != XN_STATUS_OK) {
+		CHECK_RC(userGenerator.Create(ctx), "create user");
 	}
 
-	printf("Shutting down context ...\n"); context.Shutdown();
+	XnCallbackHandle hUserCallbacks, hCalibrationCallbacks, hPoseCallbacks;
+	xn::SkeletonCapability skel = userGenerator.GetSkeletonCap();
+	CHECK_RC(userGenerator.RegisterUserCallbacks(onUserNew, onUserLost, NULL, hUserCallbacks), "register user");
+	CHECK_RC(skel.RegisterCalibrationCallbacks(onCalibrationStart, onCalibrationEnd, NULL, hCalibrationCallbacks), "register calib");
+	CHECK_RC(userGenerator.GetPoseDetectionCap().RegisterToPoseCallbacks(onPoseDetected, NULL, NULL, hPoseCallbacks), "register pose");
+
+	XnChar poseName[20] = "";
+	CHECK_RC(skel.GetCalibrationPose(poseName), "get posename");
+	printf("poseName: %s\n", poseName);
+	CHECK_RC(skel.SetSkeletonProfile(XN_SKEL_PROFILE_ALL), "set skel profile");
+	CHECK_RC(skel.SetSmoothing(0.8), "set smoothing");
+//	xnSetMirror(depth, !mirrorMode);
+
+	CHECK_RC(ctx.StartGeneratingAll(), "start generating");
+
+	printf("waitAnyUpdateAll ...\n");
+	while(!shouldTerminate) {
+		ctx.WaitAnyUpdateAll();
+		depthGenerator.GetMetaData(tempDepthMetaData);
+
+		const XnUInt16 userCount = userGenerator.GetNumberOfUsers();
+//		printf("userCount: %i\n", userCount);
+		XnUserID aUsers[userCount];
+		XnUInt16 nUsers = userCount;
+		userGenerator.GetUsers(aUsers, nUsers);
+		for (int i = 0; i < nUsers; ++i) {
+			XnUserID currentUserId = aUsers[i];
+			if (userGenerator.GetSkeletonCap().IsTracking(aUsers[i])) {
+				XnSkeletonJointPosition joint;
+				skel.GetSkeletonJointPosition(currentUserId, XN_SKEL_HEAD, joint);
+				XnFloat x = joint.position.X;
+				XnFloat y = joint.position.Y;
+				XnFloat z = joint.position.Z;
+				printf("joint position: %.2f x %.2f x %.2f\n", x, y, z);
+				printf("joint.fConfidence: %.2f\n", joint.fConfidence);
+			}
+		}
+	}
+	printf("STOP\n");
+	CHECK_RC(ctx.StopGeneratingAll(), "stop generating");
+	ctx.Shutdown();
 }
 
 int main(int argc, char** argv) {
 	println("main() START");
 
-	playground();
+	foo();
 //	App app(IMG_TEMPLATE);
 //	app.main(argc, argv);
 

@@ -2,36 +2,37 @@
 TIMESHEET CP
 =================================================
 
-29.03. - 22:00 -  2h - project setup
-30.03. - 00:00 -  1h - setup of openni-playground project
-30.03. - 01:00 -  1h - matlab setup + kinect-mex first (failed) mex build tries
-01.04. - 15:00 -  1h - saving kinect image with opencv
-01.04. - 16:00 -  3h - got multiple kinects working :)
-01.04. - 19:00 -  2h - mainly project mgmt (organisation, planning)
-              ~~ 10h~~
-02.04. - 00:00 -  1h - investigating cxxunit and boost
-02.04. - 01:00 -  1h - investigating glut; get ni glut sample running
-02.04. - 10:00 -  1h - got first mex prototype working
-02.04. - 11:00 -  2h - getting deeper into mex programming (in/out-args, build environment)
-02.04. - 13:00 -  1h - implementing basic jni playground
-02.04. - 14:00 -  3h - some more mex prototyping (shared logic, in/out-args)
-02.04. - 17:00 -  2h - assisting oliver with environment setup
-              ~~ 20h~~
-03.04. - 11:00 -  1h - other projects investigation (libfreenect, lts2)
-03.04. - 12:00 -  2h - learn cpp: oop, interfaces, exceptions
-03.04. - 14:00 -  2h - learn cpp: templates, own async/listeners
-03.04. - 16:00 -  2h - finished boost playground: multithreaded worker and mutex for data snapshot (future rgb and depth meta data storage)
-03.04. - 18:00 -  1h - started custom logging framework
-04.04. - 10:00 -  2h - cmake investigation (see multimake-playground)
-              ~~ 30h~~
-06.04. - 19:00 -  2h - learn cpp: pointers&co*; some project mgmt
-06.04. - 21:00 -  8h - starting with major prototype PonyoNI: merging existing playgrounds (multiple kinects, save image)
-              ~~ 40h~~
-07.04. - 12:00 -  1h - misc prototype enhancements (gui/glut, etc)
-07.04. - 13:00 -  1h - implemented basic image detection for camera calibration using opencv matchTemplate
-07.04. - 14:00 -  3h - working on camera calibration for PonyoNI usage
-07.04. - 22:00 -  5h - Failed to set USB interface!
-              ~~ 50h~~
+              ~~ 55h~~
+09.04. - 03:00 -   h - 
+09.04. - 01:00 -  2h - worked on user generator playground
 08.04. - 15:00 -  3h - Investigating USB fail error
-09.04. - 01:00 -   h - 
-              ~~ 53h~~
+              ~~ 50h~~
+07.04. - 22:00 -  5h - Failed to set USB interface!
+07.04. - 14:00 -  3h - working on camera calibration for PonyoNI usage
+07.04. - 13:00 -  1h - implemented basic image detection for camera calibration using opencv matchTemplate
+07.04. - 12:00 -  1h - misc prototype enhancements (gui/glut, etc)
+              ~~ 40h~~
+06.04. - 21:00 -  8h - starting with major prototype PonyoNI: merging existing playgrounds (multiple kinects, save image)
+06.04. - 19:00 -  2h - learn cpp: pointers&co*; some project mgmt
+              ~~ 30h~~
+04.04. - 10:00 -  2h - cmake investigation (see multimake-playground)
+03.04. - 18:00 -  1h - started custom logging framework
+03.04. - 16:00 -  2h - finished boost playground: multithreaded worker and mutex for data snapshot (future rgb and depth meta data storage)
+03.04. - 14:00 -  2h - learn cpp: templates, own async/listeners
+03.04. - 12:00 -  2h - learn cpp: oop, interfaces, exceptions
+03.04. - 11:00 -  1h - other projects investigation (libfreenect, lts2)
+              ~~ 20h~~
+02.04. - 17:00 -  2h - assisting oliver with environment setup
+02.04. - 14:00 -  3h - some more mex prototyping (shared logic, in/out-args)
+02.04. - 13:00 -  1h - implementing basic jni playground
+02.04. - 11:00 -  2h - getting deeper into mex programming (in/out-args, build environment)
+02.04. - 10:00 -  1h - got first mex prototype working
+02.04. - 01:00 -  1h - investigating glut; get ni glut sample running
+02.04. - 00:00 -  1h - investigating cxxunit and boost
+              ~~ 10h~~
+01.04. - 19:00 -  2h - mainly project mgmt (organisation, planning)
+01.04. - 16:00 -  3h - got multiple kinects working :)
+01.04. - 15:00 -  1h - saving kinect image with opencv
+30.03. - 01:00 -  1h - matlab setup + kinect-mex first (failed) mex build tries
+30.03. - 00:00 -  1h - setup of openni-playground project
+29.03. - 22:00 -  2h - project setup

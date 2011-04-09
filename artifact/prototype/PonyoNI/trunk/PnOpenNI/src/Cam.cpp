@@ -36,7 +36,7 @@ std::string Cam::getCleanId() const {
 
 /*static*/ void Cam::onImageDataAvailable(xn::ProductionNode& node, void* cookie) {
 	Cam* tthis = reinterpret_cast<Cam*>(cookie);
-
+	printf(".\n");
 //	printf("onImageDataAvailable(..) >> tthis->imageGenerator.WaitAndUpdateData();\n");
     tthis->imageGenerator.WaitAndUpdateData();
     tthis->imageGenerator.GetMetaData(tthis->recentImageData);

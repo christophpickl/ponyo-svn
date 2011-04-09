@@ -6,7 +6,7 @@ echo CWD: ${CWD}
 function exec {
 	echo ">> ${1}"
 	${1}
-	CHECK ?
+	CHECK $?
 }
 
 CHECK() {
@@ -19,8 +19,8 @@ CHECK() {
 }
 
 
-#TARGET=/usr/local
-TARGET=/pntmp/usr/local
+TARGET=/usr/local
+#TARGET=/pntmp/usr/local
 
 echo "Building and installing ponyo libs to ${TARGET}"
 

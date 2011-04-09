@@ -12,6 +12,7 @@ public:
 	~ContextX();
 	void init() throw(OpenNiException);
 	void start() throw(OpenNiException);
+	void waitAndUpdate();
 	void shutdown();
 private:
 	static Log* LOG;

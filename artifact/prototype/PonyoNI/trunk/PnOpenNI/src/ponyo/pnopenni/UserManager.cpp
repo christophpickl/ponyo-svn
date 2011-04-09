@@ -13,6 +13,7 @@ UserManager::~UserManager() {
 	this->userGenerator.UnregisterUserCallbacks(this->callbackUser);
 	this->userGenerator.GetSkeletonCap().UnregisterCalibrationCallbacks(this->callbackCalibration);
 	this->userGenerator.GetPoseDetectionCap().UnregisterFromPoseCallbacks(this->callbackPose);
+	LOG->debug("~UserManager() END");
 }
 
 void UserManager::init(xn::Context& context) throw(UserManagerException, OpenNiException) {

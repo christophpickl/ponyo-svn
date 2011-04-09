@@ -20,7 +20,6 @@ ContextX::~ContextX() {
 void ContextX::init() throw(OpenNiException) {
 	LOG->debug("init()");
 	CHECK_RC(this->context.Init(), "context.Init()");
-	this->userManager->init(this->context);
 }
 
 void ContextX::start() throw(OpenNiException) {
@@ -35,10 +34,15 @@ void ContextX::start() throw(OpenNiException) {
 	CHECK_RC(this->depthGenerator.Create(this->context), "create depth");
 	CHECK_RC(this->depthGenerator.SetMapOutputMode(this->mapMode), "set depth mode"); // mandatory, otherwise will fail
 
+	this->userManager->init(this->context);
 	this->userManager->start();
 
 //	this->depth.GetMetaData(metaData)
 	CHECK_RC(this->depthGenerator.StartGenerating(), "depth start");
+}
+
+void ContextX::waitAndUpdate() {
+	this->context.WaitAnyUpdateAll();
 }
 
 void ContextX::shutdown() {
@@ -47,11 +51,10 @@ void ContextX::shutdown() {
 	if(this->userManager->isRunning()) {
 		this->userManager->stop();
 	}
-
 	if(this->depthGenerator.IsGenerating()) {
-		// TODO soft fail!
-		CHECK_RC(this->depthGenerator.StopGenerating(), "depth stop");
+		CHECK_RC(this->depthGenerator.StopGenerating(), "depth stop"); // TODO soft fail!
 	}
+	CHECK_RC(this->context.StopGeneratingAll(), "context stop all"); // TODO soft fail!
 
 	this->context.Shutdown();
 }

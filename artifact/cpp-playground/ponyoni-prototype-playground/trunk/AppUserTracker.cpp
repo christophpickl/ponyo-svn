@@ -74,7 +74,7 @@ int main() {
 	printf("waitAnyUpdateAll ...\n");
 	while(!shouldTerminate) {
 		ctx.WaitAnyUpdateAll();
-		depthGenerator.GetMetaData(tempDepthMetaData);
+//		depthGenerator.GetMetaData(tempDepthMetaData);
 
 		const XnUInt16 userCount = userGenerator.GetNumberOfUsers();
 //		printf("userCount: %i\n", userCount);

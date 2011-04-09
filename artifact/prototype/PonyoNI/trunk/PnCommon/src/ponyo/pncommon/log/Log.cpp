@@ -17,11 +17,11 @@ Log::Log(const char* pLogeeName) {
 	int strX = 30; // "/Users/phudy/_dev/cpp/PonyoNI/"
 	int strN = pSourceFileStr.size() - strX - 4 /*.cpp*/;
 	this->logeeName = pSourceFileStr.substr(strX, strN);
-	printf("[LOGLOG] new Log(logeeName=%s)\n", this->logeeName.c_str());
+//	printf("[LOGLOG] new Log(logeeName=%s)\n", this->logeeName.c_str());
 }
 
 Log::~Log() {
-	printf("[LOGLOG] ~Log() ... this->logeeName=[%s]\n", this->logeeName.c_str());
+//	printf("[LOGLOG] ~Log() ... this->logeeName=[%s]\n", this->logeeName.c_str());
 }
 
 inline void Log::writeLog(const char* message, int logLevel, const char* label /* TODO: , Exception& exception = NULL */) {

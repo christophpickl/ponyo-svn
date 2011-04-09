@@ -8,7 +8,7 @@ using namespace std;
 namespace pn {
 
 LogFactory::LogFactory() {
-	println("new LogFactory()");
+//	println("new LogFactory()");
 }
 
 LogFactory::~LogFactory() {

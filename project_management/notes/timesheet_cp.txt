@@ -2,8 +2,9 @@
 TIMESHEET CP
 =================================================
 
-              ~~ 62h~~
-09.04. - 21:00 -   h - 
+              ~~ 65h~~
+10.04. - 00:00 -   h - 
+09.04. - 21:00 -  3h - working on simplified JNA wrapper (multi threaded user generator)
 09.04. - 19:00 -  2h - investigating cmake shared lib build
               ~~ 60h~~
 09.04. - 15:00 -  4h - prototyping JNA and openni wrapper

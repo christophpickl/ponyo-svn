@@ -24,6 +24,8 @@ TARGET=/pntmp/usr/local
 
 echo "Building and installing ponyo libs to ${TARGET}"
 
+#exec "make clean"
+
 exec "cmake -DCMAKE_INSTALL_PREFIX:PATH=${TARGET}"
 #cmake -DCMAKE_INSTALL_PREFIX:PATH=/pxtmp \
 #      -DCMAKE_INSTALL_NAME_DIR:STRING=@executable_path/../somelib .

@@ -1,9 +1,8 @@
-message("")
-message("==============> PonyoNIApp")
+MESSAGE ("")
+MESSAGE ("==============> PonyoNIApp")
 
-set(PROJECT_SOURCE_DIR src)
+SET (PROJECT_SOURCE_DIR src)
 
-find_package(GLUT)
-find_package(OpenGL)
-
+FIND_PACKAGE (GLUT)
+FIND_PACKAGE (OpenGL)
 

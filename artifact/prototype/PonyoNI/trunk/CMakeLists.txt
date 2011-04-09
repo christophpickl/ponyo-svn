@@ -35,17 +35,17 @@ MESSAGE ("==============> ROOT")
 
 
 # PnCommon
-	include_directories("${PROJECT_SOURCE_DIR}/PnCommon/pncommon")
-	add_subdirectory(PnCommon)
-	set(EXTRA_LIBS ${EXTRA_LIBS} PnCommon)
+	INCLUDE_DIRECTORIES ("${PROJECT_SOURCE_DIR}/PnCommon/pncommon")
+	ADD_SUBDIRECTORY (PnCommon)
+	SET (EXTRA_LIBS ${EXTRA_LIBS} PnCommon)
 
 # PnOpenNI
-	include_directories("${PROJECT_SOURCE_DIR}/PnOpenNI/pnopenni")
-	add_subdirectory(PnOpenNI)
-	set(EXTRA_LIBS ${EXTRA_LIBS} PnOpenNI)
+	INCLUDE_DIRECTORIES ("${PROJECT_SOURCE_DIR}/PnOpenNI/pnopenni")
+	ADD_SUBDIRECTORY (PnOpenNI)
+	SET (EXTRA_LIBS ${EXTRA_LIBS} PnOpenNI)
 
 # PonyoNIApp
-	add_subdirectory(PonyoNIApp)
+	ADD_SUBDIRECTORY (PonyoNIApp)
 
 	SET (PONYONIAPP_SRC_FOLDER "${PROJECT_SOURCE_DIR}/PonyoNIApp/src")
 	FILE (GLOB_RECURSE CPP_FILES "${PONYONIAPP_SRC_FOLDER}/*.cpp")
@@ -55,3 +55,7 @@ MESSAGE ("==============> ROOT")
 # some messages
 	MESSAGE ("[ROOT] CMAKE_CXX_FLAGS: ${CMAKE_CXX_FLAGS}")
 	MESSAGE ("[ROOT] EXTRA_LIBS: ${EXTRA_LIBS}")
+
+
+ADD_DEPENDENCIES (PnOpenNI PnCommon)
+#ADD_DEPENDENCIES (App PnOpenNI)

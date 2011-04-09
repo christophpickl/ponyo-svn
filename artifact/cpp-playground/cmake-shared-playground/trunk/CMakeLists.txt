@@ -1,25 +1,26 @@
-cmake_minimum_required (VERSION 2.8) 
-project (PxShared)
+# general setup
+	cmake_minimum_required (VERSION 2.8) 
+	project (PxShared)
 
-#SET(TARGET_FOLDER ${PROJECT_SOURCE_DIR}/target)
-#SET(LIBRARY_OUTPUT_PATH ${TARGET_FOLDER})
+	#SET(TARGET_FOLDER ${PROJECT_SOURCE_DIR}/target)
+	#SET(LIBRARY_OUTPUT_PATH ${TARGET_FOLDER})
 
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
-SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
+
 
 # LIB - OpenNI
-FIND_LIBRARY(OpenNI_LIBRARY OpenNI )
-SET(EXTRA_LIBS ${EXTRA_LIBS} ${OpenNI_LIBRARY} )
-INCLUDE_DIRECTORIES( /usr/include/ni )
+	FIND_LIBRARY(OpenNI_LIBRARY OpenNI )
+	SET(EXTRA_LIBS ${EXTRA_LIBS} ${OpenNI_LIBRARY} )
+	INCLUDE_DIRECTORIES( /usr/include/ni )
 
 # PxCommon
-add_subdirectory(PxCommon)
-include_directories("${PROJECT_SOURCE_DIR}/PxCommon/pxcommon")
-set(EXTRA_LIBS ${EXTRA_LIBS} PxCommon)
-
+	add_subdirectory(PxCommon)
+	include_directories("${PROJECT_SOURCE_DIR}/PxCommon/pxcommon")
+	set(EXTRA_LIBS ${EXTRA_LIBS} PxCommon)
 
 # PxApp
-add_subdirectory(PxApp)
+	add_subdirectory(PxApp)
 
 ##############################################################
 

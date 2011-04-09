@@ -1,15 +1,17 @@
-message("")
-message("==============> PxCommon")
+MESSAGE ("")
+MESSAGE ("==============> PxCommon")
 
-set (PROJECT_SOURCE_DIR pxcommon)
+SET (PROJECT_SOURCE_DIR src)
+INCLUDE_DIRECTORIES(${PROJECT_SOURCE_DIR})
+SET (MY_LIB_NAME PxCommon)
 
-file(GLOB_RECURSE PXCOMMON_CPP_FILES "${PROJECT_SOURCE_DIR}/*.cpp")
-add_library(PxCommon SHARED ${PXCOMMON_CPP_FILES})
+FILE (GLOB_RECURSE PXCOMMON_CPP_FILES "${PROJECT_SOURCE_DIR}/*.cpp")
+ADD_LIBRARY (${MY_LIB_NAME} SHARED ${PXCOMMON_CPP_FILES})
 
-install(TARGETS PxCommon LIBRARY DESTINATION lib)
+INSTALL (TARGETS ${MY_LIB_NAME} LIBRARY DESTINATION lib)
 
-install(DIRECTORY pxcommon
-        DESTINATION include/ponyo
-        FILES_MATCHING PATTERN "*.hpp"
-                       PATTERN ".svn" EXCLUDE
-       )
+INSTALL (DIRECTORY ${PROJECT_SOURCE_DIR}/ponyo
+         DESTINATION include
+         FILES_MATCHING PATTERN "*.hpp"
+                        PATTERN ".svn" EXCLUDE
+        )

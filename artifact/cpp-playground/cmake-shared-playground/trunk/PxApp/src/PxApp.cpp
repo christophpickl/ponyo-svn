@@ -1,6 +1,5 @@
 #include <stdio.h>
-
-#include <PxCommon.hpp>
+#include <ponyo/pxcommon/PxCommon.hpp>
 
 int main() {
 	printf("PxApp main()\n");

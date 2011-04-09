@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <pthread.h>
-#include <glut.h>
+//#include <glut.h>
+#include <GLUT/glut.h>
 
 #include "DataSnapshot.hpp"
 #include "DeviceDataGobbler.hpp"

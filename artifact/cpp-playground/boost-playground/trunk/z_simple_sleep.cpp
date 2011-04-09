@@ -11,11 +11,15 @@ void workerFunc(int delaySecs) {
 }
 
 int main(int argc, char* argv[]) {
-	std::cout << "main: startup" << std::endl;
+	std::cout << "main: staaaaaaartup" << std::endl;
+
+//	boost::posix_time::seconds workTime(3);
+//	boost::this_thread::sleep(workTime);
+
 	boost::thread workerThread(workerFunc, 3);
 	std::cout << "main: waiting for thread" << std::endl;
-
 	workerThread.join();
+
 	std::cout << "main: done" << std::endl;
 	return 0;
 }

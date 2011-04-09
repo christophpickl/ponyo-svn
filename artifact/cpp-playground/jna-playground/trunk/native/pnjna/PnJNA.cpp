@@ -1,5 +1,5 @@
 #include "PnJNA.hpp"
 
-int pnGetNumber() {
-	return 21;
+extern "C" int pnGetNumber() {
+	return 82;
 }

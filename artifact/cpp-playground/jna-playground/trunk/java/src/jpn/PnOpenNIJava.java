@@ -4,9 +4,22 @@ import com.sun.jna.Callback;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
 import com.sun.jna.Callback.UncaughtExceptionHandler;
+import com.sun.jna.ptr.IntByReference;
 
 public class PnOpenNIJava {
-
+	
+	public static class PnReturnCodes {
+		public static final int PN_RETURN_SUCCESS = 0;
+		public static final int PN_RETURN_ERROR_UNKOWN = 1;
+		private static final String[] RETURN_CODE_STRINGS = new String[] {
+			"Success",
+			"Error Unkown"
+		};
+		public static String getReturnCodeString(final int returnCode) {
+			return RETURN_CODE_STRINGS[returnCode];
+		}
+	}
+	
     private interface PnOpenNICpp extends Library {
     	
     	// TODO use UncaughtExceptionHandler
@@ -16,8 +29,16 @@ public class PnOpenNIJava {
     	
     	PnOpenNICpp INSTANCE = (PnOpenNICpp) Native.loadLibrary("PnOpenNICpp", PnOpenNICpp.class);
     	
+    	
     	int pnGetNumber(); // will invoke callback handler
+    	
     	/*FoobarCallback old handler*/ void addCallback(FoobarCallback fn);
+    	int errorSafeAdd2(IntByReference returnCode, int operand);
+    	
+//    	public static class JOYCAPSW extends Structure {
+//    		public short wMid;
+//    		public short wPid;
+//    	}
     }
     
     private static final PnOpenNICpp CPP = PnOpenNICpp.INSTANCE;
@@ -40,6 +61,12 @@ public class PnOpenNIJava {
     	};
     	CPP.addCallback(callback);
 		System.out.println("CPP says number=" + CPP.pnGetNumber());
+		
+		IntByReference returnCode = new IntByReference();
+		final int result = CPP.errorSafeAdd2(returnCode, -10);
+		System.out.println("CPP.errorSafeAdd2(..) = " + result);
+		int returnCodeVal = returnCode.getValue();
+		System.out.println("returnCode.getValue() = " + returnCodeVal + " -> [" + PnReturnCodes.getReturnCodeString(returnCodeVal) + "]");
 		
 		System.out.println("main() END");
 	}

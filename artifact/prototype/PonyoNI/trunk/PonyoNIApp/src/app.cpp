@@ -250,7 +250,7 @@ int main(int argc, char** argv) {
 
 	initOpenniLogging();
 
-	foo();
+//	foo();
 //	App app(IMG_TEMPLATE);
 //	app.main(argc, argv);
 

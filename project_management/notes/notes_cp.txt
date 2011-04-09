@@ -10,7 +10,7 @@ TODOs
 * use cmake + matlab engine (no mex!)
 
 ! fuer uni projekt => LIBFREENECT verwenden
-
+- @JNA: have a look at http://code.google.com/p/jnaerator/ 
 ! asus competition: http://event.asus.com/wavi/gallery/Event_Term.aspx
 !! register openni callbacks for joint data (skeleton tracking)
 !! refactor Device logic; add depthGenerator
@@ -112,77 +112,3 @@ IDEAs
 	http://openkinect.org/wiki/Gallery
 // sehr gute uni arbeit (predator): http://www.youtube.com/watch?v=1GhNXHCQGsM
 
-
-=================================================
-LINKs
-=================================================
-
-Matlab
--------------------------------------------------
-- matlab tutorials
-	http://mechanical.poly.edu/faculty/vkapila/matlabtutor.htm
-- mex tutorials
-	http://www.mathworks.com/help/techdoc/matlab_external/f29502.html
-- matlab engine
-	http://www.mathworks.com/help/techdoc/matlab_external/f29148.html
-
-OpenNI
--------------------------------------------------
-- wiki with good faq
-	http://wiki.openni.org/mediawiki/index.php/Main_Page
-- API Doc
-	http://www.ros.org/doc/api/openni/html/index.html
-	http://www.ros.org/doc/api/nite/html/index.html
-
-Boost
--------------------------------------------------
-- official site
-	http://www.boost.org
-- goood tutorial
-	http://antonym.org/2009/05/threading-with-boost---part-i-creating-threads.html
-- misc
-	http://www.boost.org/doc/libs/1_41_0/libs/thread/example/
-	http://www.boost.org/doc/libs/1_41_0/libs/iostreams/doc/installation.html
-	http://www.highscore.de/cpp/boost/multithreading.html
-	http://programmingexamples.net/index.php?title=CPP/Boost/Threads
-	http://drdobbs.com/cpp/184401518
-
-CMake
--------------------------------------------------
-- official site
-	http://www.cmake.org/Wiki/CMake
-- documentation
-	http://www.cmake.org/cmake/help/documentation.html
-- examples
-	http://www.cmake.org/cmake/help/examples.html
-- more examples
-	http://www.vtk.org/Wiki/CMake/Examples
-
-Tools
--------------------------------------------------
-- OpenCV (Open Source Computer Vision)
-	http://opencv.willowgarage.com/wiki/
-- glut
-	http://www.lighthouse3d.com/opengl/glut/
-	http://www.opengl.org/documentation/specs/glut/spec3/spec3.html
-- CxxUnit
-	http://cxxunit.sourceforge.net/
-
-Misc
--------------------------------------------------
-- JNI documentation
-	http://java.sun.com/docs/books/jni/html/start.html
-	http://java.sun.com/developer/onlineTraining/Programming/JDCBook/jniexamp.html
-- Make documentation
-	http://www.gnu.org/software/make/manual/make.html
-- openFrameworks forum
-	http://www.openframeworks.cc/forum
-	
-C++
--------------------------------------------------
-- Understanding C++ Exception Handling
-	http://www.gamedev.net/page/resources/_/reference/programming/languages/c-and-c/understanding-c-exception-handling-r953
-- C++ STL (Standard Template Library) Tutorial and Examples
-	http://www.yolinux.com/TUTORIALS/LinuxTutorialC++STL.html
-- C++ Class Templates
-	http://www.codersource.net/c/c-tutorial-on-templates/c-class-templates.aspx

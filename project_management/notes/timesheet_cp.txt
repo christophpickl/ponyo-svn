@@ -2,8 +2,11 @@
 TIMESHEET CP
 =================================================
 
-              ~~ 56h~~
-09.04. - 15:00 -   h - prototyping JNA and openni C wrapper
+              ~~ 62h~~
+09.04. - 21:00 -   h - 
+09.04. - 19:00 -  2h - investigating cmake shared lib build
+              ~~ 60h~~
+09.04. - 15:00 -  4h - prototyping JNA and openni wrapper
 09.04. - 03:00 -  2h - investigating JNA and openni C wrapper
 09.04. - 01:00 -  2h - worked on user generator playground
 08.04. - 15:00 -  3h - Investigating USB fail error

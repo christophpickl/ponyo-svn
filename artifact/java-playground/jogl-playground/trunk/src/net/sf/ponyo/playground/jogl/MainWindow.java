@@ -7,6 +7,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.media.opengl.GLCanvas;
+import javax.media.opengl.GLCapabilities;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -19,16 +20,20 @@ public class MainWindow extends JFrame {
 
 	private static final long serialVersionUID = -7367551475234626321L;
 	
-	private final GLCanvas canvas = new GLCanvas();
-	private final Animator animator = new Animator(this.canvas);
-	private final MainWindowGL gl;
+	private final Animator animator;
 	
 	public MainWindow(GlobalData data, final MainWindowListener listener) {
 		super("Jogl Playground");
 		
-		this.gl = new MainWindowGL(data);
-		this.canvas.addGLEventListener(this.gl);
-	    this.initComponents(listener);
+		GLCapabilities glCapabilities = new GLCapabilities();
+		glCapabilities.setDoubleBuffered(true);
+		glCapabilities.setHardwareAccelerated(true);
+		
+		GLCanvas canvas = new GLCanvas(glCapabilities);
+		this.animator = new Animator(canvas);
+		
+		canvas.addGLEventListener(new MainWindowGL(data));
+	    this.initComponents(canvas, listener);
 	    
 	    this.addWindowListener(new WindowAdapter() {
 	        @Override public void windowClosing(WindowEvent e) {
@@ -42,9 +47,9 @@ public class MainWindow extends JFrame {
 	    });
 	}
 	
-	private void initComponents(final MainWindowListener listener) {
+	private void initComponents(GLCanvas canvas, final MainWindowListener listener) {
 		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(this.canvas, BorderLayout.CENTER);
+		panel.add(canvas, BorderLayout.CENTER);
 		
 		JPanel cmdPanel = new JPanel();
 		JButton btnQuit = new JButton("Quit");

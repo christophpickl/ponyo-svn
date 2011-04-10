@@ -5,6 +5,8 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
+import net.sf.ponyo.playground.jogl.glx.ObjectDrawer;
+
 import jponyo.GlobalData;
 import jponyo.jna.Skel;
 
@@ -15,7 +17,6 @@ class MainWindowGL implements GLEventListener {
 	private static final float CUBE_ROTATION_VALUE = -1.15f;
 	
 	private final /*ctorArg*/ GlobalData data;
-	private final ObjectDrawer drawer = new ObjectDrawer();
 	
 	private transient float pyramidRotation;
 	private transient float cubeRotation;
@@ -45,12 +46,12 @@ class MainWindowGL implements GLEventListener {
 		gl.glLoadIdentity();
 		gl.glTranslatef(-1.5f, 0.0f, -6.0f);
 		gl.glRotatef(this.pyramidRotation, 0.0f, 1.0f, 0.0f);
-		this.drawer.drawPyramid(gl);
+		ObjectDrawer.drawPyramid(gl);
 		
 		gl.glLoadIdentity();
 		gl.glTranslatef(1.5f, 0.0f, -7.0f);				
 		gl.glRotatef(this.cubeRotation, 1.0f, 1.0f, 1.0f);			
-		this.drawer.drawCube(gl);
+		ObjectDrawer.drawCube(gl);
 		
 		this.pyramidRotation += PYRAMID_ROTATION_VALUE;
 		this.cubeRotation += CUBE_ROTATION_VALUE;					

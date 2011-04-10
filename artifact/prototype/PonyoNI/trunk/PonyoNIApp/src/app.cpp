@@ -154,25 +154,12 @@ private:
 	}
 };
 
-
-#include <ponyo/pnopenni/simplified/ContextX.hpp>
-void playgroundSimplified() {
-	ContextX* ctx = new ContextX();
-	ctx->init();
-	ctx->start();
-	ctx->shutdown();
-	delete ctx;
-}
-
 int main(int argc, char** argv) {
 	println("main() START");
 
-	playgroundSimplified();
-//	initOpenniLogging();
-
-//	foo();
-//	App app(IMG_TEMPLATE);
-//	app.main(argc, argv);
+	initOpenniLogging();
+	App app(IMG_TEMPLATE);
+	app.main(argc, argv);
 
 	println("main() END");
 	return 0;

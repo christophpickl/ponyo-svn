@@ -39,14 +39,20 @@ void ContextX::start() throw(OpenNiException) {
 //	this->updateThread = boost::thread(ContextX::threadRun, this);
 	LOG->debug("background thread running.");
 }
+void ContextX::addUserManagerListener(UserManagerListener* listener) {
+	this->userManager->addListener(listener);
+}
 
 void ContextX::onThreadRun() {
 	printf("onThreadRun() START\n");
 	while(this->threadShouldRun) {
 		this->context.WaitAnyUpdateAll();
+
+		this->userManager->update();
 	}
 	printf("onThreadRun() END\n");
 }
+
 
 void ContextX::shutdown() {
 	LOG->debug("shutdown()");

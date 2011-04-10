@@ -83,7 +83,7 @@ int main() {
 		userGenerator.GetUsers(aUsers, nUsers);
 		for (int i = 0; i < nUsers; ++i) {
 			XnUserID currentUserId = aUsers[i];
-			if (userGenerator.GetSkeletonCap().IsTracking(aUsers[i])) {
+			if (skel.IsTracking(aUsers[i])) {
 				XnSkeletonJointPosition joint;
 				skel.GetSkeletonJointPosition(currentUserId, XN_SKEL_HEAD, joint);
 				XnFloat x = joint.position.X;

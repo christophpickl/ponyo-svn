@@ -16,6 +16,7 @@ public:
 	void start() throw(OpenNiException);
 	void waitAndUpdate();
 	void shutdown();
+	void addUserManagerListener(UserManagerListener*);
 private:
 	static Log* LOG;
 	xn::Context context;

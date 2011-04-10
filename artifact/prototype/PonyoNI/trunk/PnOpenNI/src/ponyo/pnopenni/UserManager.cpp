@@ -4,19 +4,21 @@ namespace pn {
 
 Log* UserManager::LOG = NEW_LOG(__FILE__)
 
-UserManager::UserManager() {
+UserManager::UserManager() : skeletonCapability(NULL) {
 	LOG->debug("new UserManager()");
 }
-UserManager::~UserManager() {
+
+/*public*/ UserManager::~UserManager() {
 	LOG->debug("~UserManager() ... unregistering callbacks");
 
 	this->userGenerator.UnregisterUserCallbacks(this->callbackUser);
 	this->userGenerator.GetSkeletonCap().UnregisterCalibrationCallbacks(this->callbackCalibration);
 	this->userGenerator.GetPoseDetectionCap().UnregisterFromPoseCallbacks(this->callbackPose);
+
 	LOG->debug("~UserManager() END");
 }
 
-void UserManager::init(xn::Context& context) throw(UserManagerException, OpenNiException) {
+/*public*/ void UserManager::init(xn::Context& context) throw(UserManagerException, OpenNiException) {
 	LOG->debug("init(context) START");
 
 	// -------------------------------------------------------
@@ -31,54 +33,41 @@ void UserManager::init(xn::Context& context) throw(UserManagerException, OpenNiE
 	if(!this->userGenerator.IsCapabilitySupported(XN_CAPABILITY_SKELETON)) {
 		throw UserManagerException("Supplied user generator doesn't support skeleton", AT);
 	}
+	this->skeletonCapability = this->userGenerator.GetSkeletonCap();
 
 	// -------------------------------------------------------
 	LOG->debug("Registering callbacks.");
 
-	xn::SkeletonCapability skeletonCap = this->userGenerator.GetSkeletonCap();
-	CHECK_RC(userGenerator.RegisterUserCallbacks(&UserManager::onUserNew, &UserManager::onUserLost, this, this->callbackUser),
+	CHECK_RC(this->userGenerator.RegisterUserCallbacks(&UserManager::onUserNew, &UserManager::onUserLost, this, this->callbackUser),
 		"Registering user callbacks for user generator failed!");
 
-	CHECK_RC(skeletonCap.RegisterCalibrationCallbacks(&UserManager::onCalibrationStart, &UserManager::onCalibrationEnd, this, this->callbackCalibration),
+	CHECK_RC(this->skeletonCapability.RegisterCalibrationCallbacks(&UserManager::onCalibrationStart, &UserManager::onCalibrationEnd, this, this->callbackCalibration),
 		"Registering calibration callbacks for user generator failed!");
 
-	if(skeletonCap.NeedPoseForCalibration()) {
-		this->isPoseRequired = true;
+	this->poseRequired = this->skeletonCapability.NeedPoseForCalibration() == TRUE;
+	if(this->poseRequired) {
 		if(!this->userGenerator.IsCapabilitySupported(XN_CAPABILITY_POSE_DETECTION)) {
 			throw UserManagerException("A pose is required but not supported by your hardware!", AT);
 		}
 
 		this->userGenerator.GetPoseDetectionCap().RegisterToPoseCallbacks(&UserManager::onPoseDetected, NULL/*onPoseDetectedEnd*/, this, this->callbackPose);
-		skeletonCap.GetCalibrationPose(this->requiredPoseName);
+		this->skeletonCapability.GetCalibrationPose(this->requiredPoseName);
 
 //		printf("Required pose name: '%s'\n", this->requiredPoseName);
 		std::cout << "Calibration pose name: '" << this->requiredPoseName << "'" << std::endl;
-
 	} else {
-		this->isPoseRequired = false;
+		std::cout << "No calibration pose required." << std::endl;
 	}
-	this->userGenerator.GetSkeletonCap().SetSkeletonProfile(XN_SKEL_PROFILE_ALL); //  we want to have all joints
+
+	this->skeletonCapability.SetSkeletonProfile(XN_SKEL_PROFILE_ALL); //  we want to have all joints
 
 	//this->userGenerator.GetSkeletonCap().SetSmoothing(0.8);
 	//xnSetMirror(depth, xxMirrorMode);
 
-	// iterating over USER production nodes ===> returns only ONE instance ... interesting.
-	// **********************************************************************************************************
-	//	xn::NodeInfoList userInfoList;
-	//	LOG->trace(">> context.EnumerateProductionTrees(XN_NODE_TYPE_USER, ..)");
-	//	CHECK_RC(context.EnumerateProductionTrees(XN_NODE_TYPE_USER, NULL, userInfoList, NULL), "context.EnumerateProductionTrees(USER)");
-	//
-	//	std::vector<xn::NodeInfo> imageInfos;
-	//	for (xn::NodeInfoList::Iterator it = userInfoList.Begin(); it != userInfoList.End(); ++it) {
-	//		xn::NodeInfo info = *it;
-	//		printf("NodeInfo UserNode: creationInfo=%s; descriptionName=%s\n", info.GetCreationInfo(), info.GetDescription().strName);
-	//		imageInfos.push_back(*it);
-	//	}
-
 	LOG->debug("init(context) END");
 }
 
-void UserManager::start() throw(OpenNiException) {
+/*public*/ void UserManager::start() throw(OpenNiException) {
 	if(this->userGenerator.IsGenerating()) {
 		LOG->warn("start() ... aborting, as already generating!");
 		return;
@@ -88,11 +77,11 @@ void UserManager::start() throw(OpenNiException) {
 	CHECK_RC(this->userGenerator.StartGenerating(), "Starting user generator failed!");
 }
 
-bool UserManager::isRunning() {
+/*public*/ bool UserManager::isRunning() {
 	return this->userGenerator.IsGenerating() == TRUE ? true : false;
 }
 
-void UserManager::stop() throw(OpenNiException) {
+/*public*/ void UserManager::stop() throw(OpenNiException) {
 	if(!this->userGenerator.IsGenerating()) {
 		LOG->warn("stop() ... aborting, as not generating!");
 		return;
@@ -102,41 +91,95 @@ void UserManager::stop() throw(OpenNiException) {
 	CHECK_RC(this->userGenerator.StopGenerating(), "Stopping user generator failed!");
 }
 
-/*static*/ void XN_CALLBACK_TYPE UserManager::onUserNew(xn::UserGenerator& generator, XnUserID userId, void* cookie) {
+/*public*/ void UserManager::update() throw(OpenNiException) {
+	const XnUInt16 constUserCount = this->userGenerator.GetNumberOfUsers();
+	XnUserID userIds[constUserCount];
+	XnUInt16 userCount = constUserCount;
+	CHECK_RC(this->userGenerator.GetUsers(userIds, userCount), "Getting users failed!");
+	for (int i = 0; i < userCount; ++i) {
+		XnUserID currentUserId = userIds[i];
+		if (this->skeletonCapability.IsTracking(currentUserId)) {
+
+			// TODO for each XnSkeletonJoint.values()
+			XnSkeletonJoint joint = XN_SKEL_HEAD;
+			XnSkeletonJointPosition jointPosition;
+			CHECK_RC(this->skeletonCapability.GetSkeletonJointPosition(currentUserId, XN_SKEL_HEAD, jointPosition), "Get joint position failed");
+			if(jointPosition.fConfidence < 0.5) { continue; }
+
+			for(int i=0, n = this->listeners.size(); i < n; i++) {
+				this->listeners.at(i)->onJointPositionChanged(currentUserId, joint, jointPosition);
+			}
+
+//			XnSkeletonJointOrientation jointOrientation;
+//			CHECK_RC(this->skeletonCapability.GetSkeletonJointOrientation(currentUserId, XN_SKEL_HEAD, jointOrientation), "Get joint orientation failed!");
+//			if(jointOrientation.fConfidence < 0.5) { continue; }
+
+//			jointOrientation.orientation.elements[0], jointOrientation.orientation.elements[1], jointOrientation.orientation.elements[2],
+//			jointOrientation.orientation.elements[3], jointOrientation.orientation.elements[4], jointOrientation.orientation.elements[5],
+//			jointOrientation.orientation.elements[6], jointOrientation.orientation.elements[7], jointOrientation.orientation.elements[8],
+
+//			printf("joint update:\n\tposition: %.2f x %.2f x %.2f (confidence: %.2f)\n\torientation: [ (%.2f, %.2f, %.2f) - (%.2f, %.2f, %.2f) - (%.2f, %.2f, %.2f)] (confidence: %.2f)\n",
+//					jointPosition.position.X, jointPosition.position.Y, jointPosition.position.Z, jointPosition.fConfidence,
+//					jointOrientation.orientation.elements[0], jointOrientation.orientation.elements[1], jointOrientation.orientation.elements[2],
+//					jointOrientation.orientation.elements[3], jointOrientation.orientation.elements[4], jointOrientation.orientation.elements[5],
+//					jointOrientation.orientation.elements[6], jointOrientation.orientation.elements[7], jointOrientation.orientation.elements[8],
+//					jointOrientation.fConfidence);
+
+		}
+	}
+}
+
+/*private*/ inline void UserManager::broadcastUserChangeState(int userId, UserState userState) {
+	for(int i=0, n = this->listeners.size(); i < n; i++) {
+		this->listeners.at(i)->onUserStateChanged(userId, userState);
+	}
+}
+
+/*private static*/ void XN_CALLBACK_TYPE UserManager::onUserNew(xn::UserGenerator& generator, XnUserID/*unsigned int*/ userId, void* cookie) {
 	printf("UserManager.onNewUser(generator, userId=%d, cookie)\n", userId);
 
 	UserManager* tthis = static_cast<UserManager*>(cookie);
-
 	printf("Requesting calibration for new user.");
 	tthis->userGenerator.GetSkeletonCap().RequestCalibration(userId, TRUE);
+
+	tthis->broadcastUserChangeState(userId, USER_STATE_NEW);
 }
 
-/*static*/ void XN_CALLBACK_TYPE UserManager::onUserLost(xn::UserGenerator& generator, XnUserID userId, void* cookie) {
+/*private static*/ void XN_CALLBACK_TYPE UserManager::onUserLost(xn::UserGenerator& generator, XnUserID userId, void* cookie) {
 	printf("UserManager.onUserLost(generator, userId=%d, cookie)\n", userId);
-}
-
-/*static*/ void XN_CALLBACK_TYPE UserManager::onPoseDetected(xn::PoseDetectionCapability& capability, const XnChar* detectedPoseName, XnUserID userId, void* cookie) {
-	printf("UserManager.Pose %s detected for user %d\n", detectedPoseName, userId);
 
 	UserManager* tthis = static_cast<UserManager*>(cookie);
-	tthis->userGenerator.GetPoseDetectionCap().StopPoseDetection(userId);
-	tthis->userGenerator.GetSkeletonCap().RequestCalibration(userId, TRUE);
+	tthis->broadcastUserChangeState(userId, USER_STATE_LOST);
 }
 
-/*static*/ void XN_CALLBACK_TYPE UserManager::onCalibrationStart(xn::SkeletonCapability& capability, XnUserID userId, void* cookie) {
+/*private static*/ void XN_CALLBACK_TYPE UserManager::onCalibrationStart(xn::SkeletonCapability& capability, XnUserID userId, void* cookie) {
 	printf("Calibration started for user %d\n", userId);
+	UserManager* tthis = static_cast<UserManager*>(cookie);
+	tthis->broadcastUserChangeState(userId, USER_STATE_CALIBRATION_STARTED);
 }
 
-/*static*/ void XN_CALLBACK_TYPE UserManager::onCalibrationEnd(xn::SkeletonCapability& capability, XnUserID userId, XnBool successfullyCalibrated, void* cookie) {
+/*private static*/ void XN_CALLBACK_TYPE UserManager::onCalibrationEnd(xn::SkeletonCapability& capability, XnUserID userId, XnBool successfullyCalibrated, void* cookie) {
 	UserManager* tthis = static_cast<UserManager*>(cookie);
 
 	if (successfullyCalibrated) {
 		printf("Calibration complete, start tracking user %d\n", userId);
 		tthis->userGenerator.GetSkeletonCap().StartTracking(userId);
+		tthis->broadcastUserChangeState(userId, USER_STATE_CALIBRATION_ENDED_SUCCESFULLY);
 	} else {
 		printf("Calibration failed for user %d\n", userId);
 		tthis->userGenerator.GetSkeletonCap().RequestCalibration(userId, TRUE);
+		tthis->broadcastUserChangeState(userId, USER_STATE_CALIBRATION_ENDED_UNSUCCESFULLY);
 	}
+}
+
+// TODO when is this invoked??
+/*private static*/ void XN_CALLBACK_TYPE UserManager::onPoseDetected(xn::PoseDetectionCapability& capability, const XnChar* detectedPoseName, XnUserID userId, void* cookie) {
+	printf("UserManager.Pose %s detected for user %d\n", detectedPoseName, userId);
+
+	UserManager* tthis = static_cast<UserManager*>(cookie);
+	tthis->userGenerator.GetPoseDetectionCap().StopPoseDetection(userId);
+	tthis->userGenerator.GetSkeletonCap().RequestCalibration(userId, TRUE);
+	tthis->broadcastUserChangeState(userId, USER_STATE_POSE_DETECTED);
 }
 
 }

@@ -72,12 +72,7 @@ C++ Lib Boost
 	http://www.highscore.de/cpp/boost/multithreading.html
 	http://programmingexamples.net/index.php?title=CPP/Boost/Threads
 	http://drdobbs.com/cpp/184401518
-
-Misc
--------------------------------------------------
-- openFrameworks forum
-	http://www.openframeworks.cc/forum
-
+	
 Matlab
 -------------------------------------------------
 - matlab tutorials
@@ -86,3 +81,13 @@ Matlab
 	http://www.mathworks.com/help/techdoc/matlab_external/f29502.html
 - matlab engine
 	http://www.mathworks.com/help/techdoc/matlab_external/f29148.html
+
+Misc
+-------------------------------------------------
+- openFrameworks forum
+	http://www.openframeworks.cc/forum
+
+- @cloudbees
+	http://www.slideshare.net/cloudbees/7-ways-to-optimize-hudson-in-production
+	https://grandcentral.cloudbees.com/
+	https://cloudbees.zendesk.com/home

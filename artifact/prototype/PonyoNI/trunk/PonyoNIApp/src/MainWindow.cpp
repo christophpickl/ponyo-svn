@@ -129,6 +129,7 @@ void MainWindow::display() {
 }
 
 /*static*/ void MainWindow::onGlutKeyboard(unsigned char key, int x, int y) {
+#pragma unused (x, y)
 	LOG->info("onGlutKeyboard(key, x, y) START");
 
 	switch (key) {

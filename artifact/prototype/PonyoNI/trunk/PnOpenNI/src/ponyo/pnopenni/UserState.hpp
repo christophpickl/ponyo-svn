@@ -5,8 +5,9 @@
 namespace pn {
 
 // TODO typedef enum UserState {
-//	USER_STATE_NEW           = 1,
-//	USER_STATE_POSE_DETECTED = 2
+//	USER_STATE_NEW           = 0,
+//	USER_STATE_POSE_DETECTED = 1,
+//  last
 //} UserState;
 
 typedef unsigned int UserState;
@@ -25,6 +26,11 @@ const UserState USER_STATE_CALIBRATION_ENDED_SUCCESFULLY   = 410;
 
 /** Waiting in Psi fail, re-requesting calibraiton. */
 const UserState USER_STATE_CALIBRATION_ENDED_UNSUCCESFULLY = 420;
+
+// TODO add more user states
+// const UserState USER_STATE_TRACKING_STARTED             = 500;
+// const UserState USER_STATE_LOST_PROBABLY_STARTED        = 910; // ... premature timeout, as openni timeout is too long
+// const UserState USER_STATE_LOST_PROBABLY_ENDED          = 920; // ... after user was invisible for a while, we received updated joints
 
 /** Timeout occured; user ID will be freed. */
 const UserState USER_STATE_LOST                            = 999;

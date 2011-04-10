@@ -2,6 +2,10 @@
 TIMESHEET CP
 =================================================
 
+              ~~ 73h~~
+10.04. - 20:00 -   h - learning OpenGL
+10.04. - 19:00 -  1h - some administrative work
+10.04. - 17:00 -  2h - investigating java 3d engine: jogl, java3d, jmonkey, ardor3d
               ~~ 70h~~
 10.04. - 03:00 -  2h - finishing basic skeleton tracking working from c++ to java
 10.04. - 00:00 -  3h - getting basic skeleton tracking working from c++ to java

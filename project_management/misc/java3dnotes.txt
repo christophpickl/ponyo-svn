@@ -1,0 +1,93 @@
+
+=================================================
+CHOICEs (have to be made)
+=================================================
+* JOGL
+	=> http://jogamp.org/jogl/www/
+	- merely exposes the procedural OpenGL API
+	- interoperable with swing/awt
+	- download: http://download.java.net/media/jogl/builds/archive/jsr-231-1.1.1a/
+* Java3D
+	=> http://java3d.java.net/   // tutorials and samples: http://www.java3d.org/
+	- highly OOP
+	- developed by sun
+* lwjgl
+	=> http://lwjgl.org/
+	- "light weight java gaming lib"
+	- aims (amateurs+profis) game developers // opengl + audio
+	// basically only the opengl driver interface in java (+ some stuff for audio, input)
+* jME
+	=> http://jmonkeyengine.com/
+	- built on top of lwjgl
+	- modern game 3d engine
+	- tutorial: http://jmonkeyengine.org/wiki/doku.php
+* Ardor3D [http://www.ardor3d.com/]
+	- fork of jME // but cleaned up with better structure
+* Ogre4j
+	=> http://ogre4j.sourceforge.net/
+// http://www.java-gaming.org/
+
+
+=================================================
+OpenGL
+=================================================
+* OpenGL 1.1 tutorial
+	http://www.ntu.edu.sg/home/ehchua/programming/opengl/JOGL1.1.html
+* many good samples with source
+	http://www.codecolony.de/opengl.htm
+* 48 lessons
+	http://nehe.gamedev.net/
+
+=================================================
+JOGL jogl-1.1.1a
+=================================================
+- download from: http://download.java.net/media/jogl/builds/archive/jsr-231-1.1.1a/jogl-1.1.1a-macosx-universal.zip
+
+
+INSTALL
+-------------------------------------------------
+* jogl needs some jars (jogl, gluegen-rt) and some jnilibs (jogl, jogl_awt, jogl_cg, gluegen-rt)
+* if UnsatisfiedLinkError "no jogl in java.library.path":
+	==> JVM ARG += "-Djava.library.path=path/to/jnilib/folder" ||
+	              NOO!! System.setProperty("java.library.path", "/var/folder/bla/foo/bar/") ||
+	               put jnilibs in system extension folder
+* NOO!! this only happened with JOGL 1.1.1-rc8, not with JOGL 1.1.1a
+  if UnsatisfiedLinkError "no matching architecture in universal wrapper":
+	==> JVM ARG += "-d32" // switch JVM to 32bit mode
+  NOO!! seems as 1.1.1a supports 64bit; would have meant additional work, add PonyoNI 32bit build
+
+LINKS
+-------------------------------------------------
+- official site
+	http://jogamp.org/
+- download site
+	http://download.java.net/media/jogl/builds/archive/
+	http://jogamp.org/deployment/webstart/archive/
+- jogl javadoc
+	http://jogamp.org/deployment/jogamp-next/javadoc/jogl/javadoc/
+- seite nur ueber jogl
+	http://www.jogl.info/
+- jogl userguide
+	http://download.java.net/media/jogl/doc/userguide/
+- jogl in eclipse
+	http://timelessname.com/jogl/lesson01/
+- forum about mac 32/64 bit issue
+	http://www.java-gaming.org/index.php?topic=22162.0
+- jogl source
+	http://java.net/projects/jogl/sources/svn/show/
+	
+- http://www.ntu.edu.sg/home/ehchua/programming/opengl/JOGL1.1.html
+- http://www.ntu.edu.sg/home/ehchua/programming/opengl/JOGL2.0.html
+	OpenGL (Open Graphics Library) is a cross-platform, language-independent, industrial standard API for producing 2D and 3D computer graphics.
+	Graphics cards that claim OpenGL-compliance make use of the hardware acceleration when possible to speed up the graphics rendering process.
+	OpenGL competes with Direct3D on Microsoft Windows platform. The OpenGL mother site is at www.opengl.org.
+	
+	JOGL (Java Bindings for the OpenGL) allows Java applications to access the OpenGL API for graphics programming.
+	JOGL is currently maintained by JogAmp (Java on Graphics, Audio, Media and Processing) at http://jogamp.org, which includes
+		* JOGL (3D graphics),
+		* JOAL (3D Audio) and
+		* JOCL (Common Language for Graphics Processors).
+
+
+
+

@@ -1,4 +1,12 @@
 
+If you read it carefully, you'll see that one solution to use JNI libraries is to bundle them in architecture specific
+	JARs so that you can depend on them like any other dependency from a Maven point of view.
+	This is actually how JOGL version 1.1.1 is packaged in http://download.java.net/maven/2/net/java/dev/jogl/,
+	there is one JAR artifact with the Java classes and several architecture specific JARs artifacts with the native libraries. 
+	[http://stackoverflow.com/questions/1962718/maven-and-the-jogl-library]
+	// to load JNIs from classpath, use some: NativeLoader.loadLibrary("foolib");
+
+
     private:
         thread(thread&);
         thread& operator=(thread&);

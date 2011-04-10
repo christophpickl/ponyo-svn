@@ -1,4 +1,3 @@
-#include <iostream>
 #include <ponyo/pncommon/log/Log.hpp>
 
 namespace pn {

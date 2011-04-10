@@ -3,7 +3,7 @@
 
 namespace pn {
 
-Log* CamCalibrator::LOG = NEW_LOG(__FILE__)
+Log* CamCalibrator::LOG = NEW_LOG();
 
 CamCalibrator::CamCalibrator(
 		ImageDetector* pDetector,

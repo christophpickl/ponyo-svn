@@ -8,7 +8,7 @@
 #include <ponyo/pncommon/log/LogFactory.hpp>
 
 namespace pn {
-//Log* Async::LOG = NEW_LOG(__FILE__)
+//Log* Async::LOG = NEW_LOG();
 
 template <class T>
 class Async {

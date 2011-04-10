@@ -2,7 +2,7 @@
 #ifndef IMAGEDETECTOREXCEPTION_HPP_
 #define IMAGEDETECTOREXCEPTION_HPP_
 
-#include <ponyo/pncommon/common.hpp>
+#include <ponyo/pncommon/Exception.hpp>
 
 namespace pn {
 class ImageDetectorException : public Exception {

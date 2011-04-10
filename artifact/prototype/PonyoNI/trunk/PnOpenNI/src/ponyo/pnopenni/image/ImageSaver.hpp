@@ -2,9 +2,7 @@
 #ifndef IMAGESAVER_H_
 #define IMAGESAVER_H_
 
-#include <ponyo/pncommon/pninclude_opencv.h>
-
-#include <ponyo/pnopenni/common_openni.hpp>
+#include <ponyo/pnopenni/PnOpenNI.hpp>
 #include <ponyo/pnopenni/image/ImageConverter.hpp>
 
 namespace pn {

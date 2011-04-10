@@ -1,11 +1,12 @@
 #pragma once
-#ifndef COMMON_OPENNI_HPP_
-#define COMMON_OPENNI_HPP_
+#ifndef PNOPENNI_HPP_
+#define PNOPENNI_HPP_
 
 #include <XnCppWrapper.h>
 
-#include <ponyo/pncommon/common.hpp>
+#include <ponyo/pncommon/PnCommon.hpp>
 #include <ponyo/pnopenni/OpenNiException.hpp>
+
 
 // i hate c++ enums, and XnTypes does not define an artificial last enum to check against :-|
 #define PN_SKEL_START 1
@@ -27,4 +28,4 @@ namespace pn {
 	void initOpenniLogging();
 }
 
-#endif // COMMON_OPENNI_HPP_
+#endif // PNOPENNI_HPP_

@@ -2,7 +2,7 @@
 #ifndef OPENNIEXCEPTION_H_
 #define OPENNIEXCEPTION_H_
 
-#include <ponyo/pncommon/common.hpp>
+#include <ponyo/pncommon/Exception.hpp>
 
 namespace pn {
 class OpenNiException : public Exception {

@@ -2,7 +2,7 @@
 #ifndef USERMANAGEREXCEPTION_HPP_
 #define USERMANAGEREXCEPTION_HPP_
 
-#include <ponyo/pncommon/common.hpp>
+#include <ponyo/pncommon/Exception.hpp>
 
 namespace pn {
 class UserManagerException : public Exception {

@@ -1,17 +1,15 @@
 #pragma once
-#ifndef COMMON_HPP_
-#define COMMON_HPP_
+#ifndef PNCOMMON_HPP_
+#define PNCOMMON_HPP_
 
-#define AT __FILE__, __LINE__
-
+// TODO remove these includes!
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <vector>
-
 #include <ponyo/pncommon/Exception.hpp>
 #include <ponyo/pncommon/log/LogFactory.hpp>
 
 void println(const char*);
 
-#endif // COMMON_HPP_
+#endif // PNCOMMON_HPP_

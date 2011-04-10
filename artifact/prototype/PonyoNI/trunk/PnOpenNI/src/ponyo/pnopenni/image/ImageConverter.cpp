@@ -1,10 +1,8 @@
 #include <ponyo/pnopenni/image/ImageConverter.hpp>
 
-// FIXME merge ImageConverter/Detector/Saver to single class
-
 namespace pn {
 
-Log* ImageConverter::LOG = NEW_LOG(__FILE__)
+Log* ImageConverter::LOG = NEW_LOG();
 
 ImageConverter::ImageConverter() {
 	LOG->debug("new ImageConverter()");

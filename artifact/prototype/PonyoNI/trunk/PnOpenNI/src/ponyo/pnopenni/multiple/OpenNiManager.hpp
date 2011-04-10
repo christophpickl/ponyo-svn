@@ -2,7 +2,8 @@
 #ifndef OPENNIMANAGER_HPP_
 #define OPENNIMANAGER_HPP_
 
-#include <ponyo/pnopenni/common_openni.hpp>
+#include <ponyo/pnopenni/Cam.hpp>
+#include <ponyo/pnopenni/CamInitDescriptor.hpp>
 #include <ponyo/pnopenni/multiple/CamInitializer.hpp>
 #include <ponyo/pnopenni/multiple/CamCalibrator.hpp>
 

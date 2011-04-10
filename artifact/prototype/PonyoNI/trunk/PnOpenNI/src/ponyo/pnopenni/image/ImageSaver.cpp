@@ -1,9 +1,9 @@
-//#include <time.h>
 #include <ponyo/pnopenni/image/ImageSaver.hpp>
+#include <ponyo/pncommon/pninclude_opencv.h>
 
 namespace pn {
 
-Log* ImageSaver::LOG = NEW_LOG(__FILE__)
+Log* ImageSaver::LOG = NEW_LOG();
 
 ImageSaver::ImageSaver(ImageConverter* pConverter) : converter(pConverter) {
 	LOG->debug("new ImageSaver(converter)");

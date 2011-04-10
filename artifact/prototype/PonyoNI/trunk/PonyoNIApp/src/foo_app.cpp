@@ -1,4 +1,4 @@
-#include <ponyo/pnopenni/common_openni.hpp>
+#include <ponyo/pnopenni/PnOpenNI.hpp>
 
 namespace pn {
 

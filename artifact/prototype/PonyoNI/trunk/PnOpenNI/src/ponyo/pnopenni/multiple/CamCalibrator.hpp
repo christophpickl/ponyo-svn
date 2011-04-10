@@ -3,7 +3,7 @@
 #define CAMCALIBRATOR_HPP_
 
 #include <ponyo/pncommon/pninclude_opencv.h>
-#include <ponyo/pnopenni/common_openni.hpp>
+#include <ponyo/pnopenni/PnOpenNI.hpp>
 
 #include <ponyo/pnopenni/Cam.hpp>
 #include <ponyo/pnopenni/image/ImageDetector.hpp>

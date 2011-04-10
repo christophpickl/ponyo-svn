@@ -1,7 +1,8 @@
 #include <XnLog.h>
-#include <ponyo/pnopenni/common_openni.hpp>
+#include <ponyo/pnopenni/PnOpenNI.hpp>
 
 namespace pn {
+
 void initOpenniLogging() {
 	CHECK_RC(xnLogInitSystem(), "xnLogInitSystem");
 	CHECK_RC(xnLogSetLineInfo(true), "xnLogSetLineInfo");
@@ -10,4 +11,5 @@ void initOpenniLogging() {
 	CHECK_RC(xnLogSetSeverityFilter(/*XnLogSeverity*/XN_LOG_VERBOSE), "xnLogSetSeverityFilter");
 	CHECK_RC(xnLogSetMaskState("ALL", true), "xnLogSetMaskState");
 }
+
 }

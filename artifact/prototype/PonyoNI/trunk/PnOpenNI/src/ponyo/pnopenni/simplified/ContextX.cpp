@@ -2,7 +2,7 @@
 
 namespace pn {
 
-Log* ContextX::LOG = NEW_LOG(__FILE__)
+Log* ContextX::LOG = NEW_LOG();
 
 ContextX::ContextX() : userManager(new UserManager()), threadShouldRun(true) {
 	LOG->debug("new ContextX()");

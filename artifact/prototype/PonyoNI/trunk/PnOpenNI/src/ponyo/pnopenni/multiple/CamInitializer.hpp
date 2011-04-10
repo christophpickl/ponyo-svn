@@ -3,12 +3,14 @@
 #define CAMINITIALIZER_HPP_
 
 #include <boost/thread.hpp>
+
 #include <ponyo/pncommon/Async.hpp>
-#include <ponyo/pnopenni/common_openni.hpp>
-#include <ponyo/pnopenni/multiple/CamInitializerListener.hpp>
-#include <ponyo/pnopenni/multiple/CamInitializerException.hpp>
+
+#include <ponyo/pnopenni/Cam.hpp>
 #include <ponyo/pnopenni/CamInitDescriptor.hpp>
 #include <ponyo/pnopenni/UserManager.hpp>
+#include <ponyo/pnopenni/multiple/CamInitializerListener.hpp>
+#include <ponyo/pnopenni/multiple/CamInitializerException.hpp>
 
 namespace pn {
 class CamInitializer : public Async<CamInitializerListener*> {

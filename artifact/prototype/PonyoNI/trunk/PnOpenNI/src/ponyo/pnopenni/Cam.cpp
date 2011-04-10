@@ -4,7 +4,7 @@
 
 namespace pn {
 
-Log* Cam::LOG = NEW_LOG(__FILE__);
+Log* Cam::LOG = NEW_LOG();
 
 Cam::Cam(xn::ImageGenerator& pImageGenerator, std::string pCleanId, CamInitDescriptor* pInitDescriptor) : // const unsigned short pVendorId, const unsigned short pProductId, const unsigned char pBus, const unsigned char pAddress) :
 	imageGenerator(pImageGenerator),

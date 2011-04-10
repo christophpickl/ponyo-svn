@@ -1,4 +1,4 @@
-#include <ponyo/pncommon/common.hpp>
+#include <ponyo/pncommon/PnCommon.hpp>
 
 //#include <ponyo/pncommon/pninclude_opencv.h>
 #include <opencv2/core/core.hpp>
@@ -31,7 +31,7 @@ q ... quit
  */
 using namespace pn;
 
-Log* LOG_APP = NEW_LOG(__FILE__)
+Log* LOG_APP = NEW_LOG();
 
 class App : public MainWindowListener {
 public:

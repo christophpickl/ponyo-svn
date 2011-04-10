@@ -2,7 +2,7 @@
 
 namespace pn {
 
-Log* CamInitializer::LOG = NEW_LOG(__FILE__)
+Log* CamInitializer::LOG = NEW_LOG();
 
 CamInitializer::CamInitializer(UserManager* pUserManager) :
 	userManager(pUserManager) {

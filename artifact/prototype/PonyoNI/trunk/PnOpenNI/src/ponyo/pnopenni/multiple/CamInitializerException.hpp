@@ -2,7 +2,7 @@
 #ifndef CAMINITIALIZEREXCEPTION_HPP_
 #define CAMINITIALIZEREXCEPTION_HPP_
 
-#include <ponyo/pncommon/common.hpp>
+#include <ponyo/pncommon/Exception.hpp>
 
 namespace pn {
 class CamInitializerException : public Exception {

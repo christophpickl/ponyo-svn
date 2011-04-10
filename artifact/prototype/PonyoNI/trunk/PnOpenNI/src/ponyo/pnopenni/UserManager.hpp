@@ -2,7 +2,7 @@
 #ifndef USERMANAGER_HPP_
 #define USERMANAGER_HPP_
 
-#include <ponyo/pnopenni/common_openni.hpp>
+#include <ponyo/pnopenni/PnOpenNI.hpp>
 #include <ponyo/pncommon/Async.hpp>
 #include <ponyo/pnopenni/UserManagerException.hpp>
 #include <ponyo/pnopenni/UserManagerListener.hpp>

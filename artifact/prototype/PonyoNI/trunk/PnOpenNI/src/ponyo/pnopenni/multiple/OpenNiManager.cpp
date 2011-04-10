@@ -5,7 +5,7 @@
 
 namespace pn {
 
-Log* OpenNiManager::LOG = NEW_LOG(__FILE__)
+Log* OpenNiManager::LOG = NEW_LOG();
 
 OpenNiManager::OpenNiManager(
 		CamInitializer* pCamInitializer,

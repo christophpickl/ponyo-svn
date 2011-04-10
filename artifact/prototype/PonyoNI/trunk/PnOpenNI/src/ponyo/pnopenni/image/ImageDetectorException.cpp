@@ -2,7 +2,7 @@
 
 namespace pn {
 
-Log* ImageDetectorException::LOG = NEW_LOG(__FILE__)
+Log* ImageDetectorException::LOG = NEW_LOG();
 
 ImageDetectorException::ImageDetectorException(const char* message, const char* sourceFile, int sourceLine) :
 		Exception(message, sourceFile, sourceLine) {

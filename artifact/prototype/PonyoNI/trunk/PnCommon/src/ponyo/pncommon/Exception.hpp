@@ -2,12 +2,17 @@
 #ifndef EXCEPTION_H_
 #define EXCEPTION_H_
 
-#include <ponyo/pncommon/log/Log.hpp>
+#define AT __FILE__, __LINE__
+
+#include <ponyo/pncommon/log/LogFactory.hpp>
 
 namespace pn {
 class Exception {
 
 public:
+	/**
+	 * eg: throw Exception("foobar", AT);
+	 */
 	Exception(const char*, const char*, int);
 	virtual ~Exception();
 

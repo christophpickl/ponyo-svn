@@ -2,14 +2,13 @@
 #include <stdlib.h> // free()
 #include <execinfo.h> // backtrace()
 
-#include <ponyo/pncommon/common.hpp>
 #include <ponyo/pncommon/Exception.hpp>
 
 #define STACKTRACE_MAX_SIZE 42
 
 namespace pn {
 
-Log* Exception::LOG = NEW_LOG(__FILE__)
+Log* Exception::LOG = NEW_LOG();
 
 Exception::Exception(const char* pMessage, const char* pSourceFile, int pSourceLine) :
 	message(pMessage), sourceFile(pSourceFile), sourceLine(pSourceLine) {

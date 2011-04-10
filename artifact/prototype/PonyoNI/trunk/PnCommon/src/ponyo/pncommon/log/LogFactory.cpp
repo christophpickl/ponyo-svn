@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string>
-#include <ponyo/pncommon/common.hpp>
+#include <ponyo/pncommon/PnCommon.hpp>
 #include <ponyo/pncommon/log/LogFactory.hpp>
 
 using namespace std;

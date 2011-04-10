@@ -2,7 +2,7 @@
 
 namespace pn {
 
-Log* UserManagerException::LOG = NEW_LOG(__FILE__)
+Log* UserManagerException::LOG = NEW_LOG();
 
 UserManagerException::UserManagerException(const char* message, const char* sourceFile, int sourceLine) :
 		Exception(message, sourceFile, sourceLine) {

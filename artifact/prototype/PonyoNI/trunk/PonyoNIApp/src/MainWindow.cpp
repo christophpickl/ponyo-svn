@@ -4,12 +4,12 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
-#include <ponyo/pncommon/common.hpp>
+#include <ponyo/pncommon/PnCommon.hpp>
 #include "MainWindow.hpp"
 
 namespace pn {
 
-Log* MainWindow::LOG = NEW_LOG(__FILE__)
+Log* MainWindow::LOG = NEW_LOG();
 
 const int MENU_LOAD_DEVICES = 10;
 const int MENU_START_GENERATING = 20;

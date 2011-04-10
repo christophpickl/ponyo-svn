@@ -2,7 +2,7 @@
 
 namespace pn {
 
-Log* UserManager::LOG = NEW_LOG(__FILE__)
+Log* UserManager::LOG = NEW_LOG();
 
 UserManager::UserManager() : skeletonCapability(NULL) {
 	LOG->debug("new UserManager()");

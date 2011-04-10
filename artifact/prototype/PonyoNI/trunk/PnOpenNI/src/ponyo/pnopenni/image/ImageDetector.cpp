@@ -2,7 +2,7 @@
 
 namespace pn {
 
-Log* ImageDetector::LOG = NEW_LOG(__FILE__)
+Log* ImageDetector::LOG = NEW_LOG();
 
 int ImageDetector::MATCH_TEMPLATE_METHOD = CV_TM_SQDIFF;
 ImageDetector::ImageDetector() {

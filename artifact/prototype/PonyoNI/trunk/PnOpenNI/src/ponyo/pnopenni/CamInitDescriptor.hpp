@@ -2,7 +2,7 @@
 #ifndef CAMINITDESCRIPTOR_H_
 #define CAMINITDESCRIPTOR_H_
 
-#include <ponyo/pnopenni/common_openni.hpp>
+#include <XnCppWrapper.h>
 
 namespace pn {
 class CamInitDescriptor {

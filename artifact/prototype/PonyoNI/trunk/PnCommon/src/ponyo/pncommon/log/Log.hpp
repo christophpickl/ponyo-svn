@@ -9,8 +9,8 @@
 #define LABEL_LEVEL_DEBUG "[DEBUG]"
 #define LABEL_LEVEL_TRACE "[TRACE]"
 
-#include <iostream>
 #include <string.h>
+#include <iostream>
 
 namespace pn {
 class Log {

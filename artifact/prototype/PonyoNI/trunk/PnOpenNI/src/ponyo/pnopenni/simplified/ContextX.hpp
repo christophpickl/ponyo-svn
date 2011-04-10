@@ -4,7 +4,8 @@
 
 #include <boost/thread.hpp>
 #include <boost/date_time.hpp>
-#include <ponyo/pnopenni/common_openni.hpp>
+
+#include <ponyo/pnopenni/PnOpenNI.hpp>
 #include <ponyo/pnopenni/UserManager.hpp>
 #include <ponyo/pnopenni/simplified/ContextXListener.hpp>
 

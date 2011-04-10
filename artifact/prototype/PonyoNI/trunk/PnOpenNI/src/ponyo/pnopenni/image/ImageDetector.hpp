@@ -3,8 +3,6 @@
 #define IMAGEDETECTOR_HPP_
 
 #include <ponyo/pncommon/pninclude_opencv.h>
-
-#include <ponyo/pnopenni/common_openni.hpp>
 #include <ponyo/pnopenni/image/ImageDetectorException.hpp>
 
 namespace pn {

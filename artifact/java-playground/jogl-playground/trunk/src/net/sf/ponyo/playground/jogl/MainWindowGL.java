@@ -5,16 +5,25 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
-public class MyGLEventListener implements GLEventListener {
+import jponyo.GlobalData;
+import jponyo.jna.Skel;
+
+class MainWindowGL implements GLEventListener {
 
 	private static final float PYRAMID_ROTATION_VALUE = +0.2f;
 //	private static final float CUBE_ROTATION_VALUE = -0.15f;
 	private static final float CUBE_ROTATION_VALUE = -1.15f;
 	
+	private final /*ctorArg*/ GlobalData data;
 	private final ObjectDrawer drawer = new ObjectDrawer();
-	private float pyramidRotation;
-	private float cubeRotation;
-
+	
+	private transient float pyramidRotation;
+	private transient float cubeRotation;
+	
+	public MainWindowGL(GlobalData data) {
+		this.data = data;
+	}
+	
 	public void init(GLAutoDrawable drawable) {
 		System.out.println("init GL");
 		final GL gl = drawable.getGL();
@@ -27,19 +36,23 @@ public class MyGLEventListener implements GLEventListener {
 	}
 	
 	public void display(GLAutoDrawable drawable) {
+		if(this.data.isTracking) {
+			System.out.println("display() ... " + this.data.xByJoint[Skel.LEFT_HAND.getId()]);
+		}
 		final GL gl = drawable.getGL();
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 		
 		gl.glLoadIdentity();
-		gl.glTranslatef(-1.5f,0.0f,-6.0f);
+		gl.glTranslatef(-1.5f, 0.0f, -6.0f);
 		gl.glRotatef(this.pyramidRotation, 0.0f, 1.0f, 0.0f);
 		this.drawer.drawPyramid(gl);
-		this.pyramidRotation += PYRAMID_ROTATION_VALUE;
 		
 		gl.glLoadIdentity();
-		gl.glTranslatef(1.5f,0.0f,-7.0f);				
+		gl.glTranslatef(1.5f, 0.0f, -7.0f);				
 		gl.glRotatef(this.cubeRotation, 1.0f, 1.0f, 1.0f);			
-		this.drawer.drawCube(gl);						
+		this.drawer.drawCube(gl);
+		
+		this.pyramidRotation += PYRAMID_ROTATION_VALUE;
 		this.cubeRotation += CUBE_ROTATION_VALUE;					
 	}
 	

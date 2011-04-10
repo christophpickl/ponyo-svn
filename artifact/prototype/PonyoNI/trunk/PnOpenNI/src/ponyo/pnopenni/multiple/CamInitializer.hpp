@@ -5,8 +5,8 @@
 #include <boost/thread.hpp>
 #include <ponyo/pncommon/Async.hpp>
 #include <ponyo/pnopenni/common_openni.hpp>
-#include <ponyo/pnopenni/CamInitializerListener.hpp>
-#include <ponyo/pnopenni/CamInitializerException.hpp>
+#include <ponyo/pnopenni/multiple/CamInitializerListener.hpp>
+#include <ponyo/pnopenni/multiple/CamInitializerException.hpp>
 #include <ponyo/pnopenni/CamInitDescriptor.hpp>
 #include <ponyo/pnopenni/UserManager.hpp>
 

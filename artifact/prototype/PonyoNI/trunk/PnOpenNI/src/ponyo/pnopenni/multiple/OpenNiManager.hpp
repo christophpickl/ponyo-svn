@@ -3,8 +3,8 @@
 #define OPENNIMANAGER_HPP_
 
 #include <ponyo/pnopenni/common_openni.hpp>
-#include <ponyo/pnopenni/CamInitializer.hpp>
-#include <ponyo/pnopenni/CamCalibrator.hpp>
+#include <ponyo/pnopenni/multiple/CamInitializer.hpp>
+#include <ponyo/pnopenni/multiple/CamCalibrator.hpp>
 
 namespace pn {
 class OpenNiManager : public CamInitializerListener {

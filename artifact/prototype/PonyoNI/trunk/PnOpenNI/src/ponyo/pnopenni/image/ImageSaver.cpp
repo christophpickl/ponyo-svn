@@ -1,5 +1,5 @@
 //#include <time.h>
-#include <ponyo/pnopenni/ImageSaver.hpp>
+#include <ponyo/pnopenni/image/ImageSaver.hpp>
 
 namespace pn {
 

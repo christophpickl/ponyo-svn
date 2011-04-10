@@ -50,7 +50,7 @@ public class PonyoNI {
     	System.out.println("PnJNAWrapper.startup()");
     	PonyoNI.instance.start(this.userCallback, this.jointCallback, this.threadExceptionCallback);
     }
-
+    
     public void startRecording(String oniFilePath) {
     	System.out.println("PnJNAWrapper.startRecording(oniFilePath=" + oniFilePath + ")");
     	PonyoNI.instance.startRecording(this.userCallback, this.jointCallback, this.threadExceptionCallback, oniFilePath);

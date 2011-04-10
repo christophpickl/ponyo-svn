@@ -20,6 +20,7 @@ public class MainWindow extends JFrame {
 	private static final long serialVersionUID = 6925062641532803991L;
 
 	private final SkeletonDrawer drawer = new SkeletonDrawer();
+	private JButton btnStart = new JButton("Start");
 	
 	public MainWindow(final MainWindowListener listener) {
 		super("JPonyo C++");
@@ -33,13 +34,23 @@ public class MainWindow extends JFrame {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(new JLabel("App for PnJNA!!!"), BorderLayout.NORTH);
 		
+		JPanel cmdPanel = new JPanel();
 		JButton btnQuit = new JButton("Quit");
 		btnQuit.addActionListener(new ActionListener() {
 			@Override public void actionPerformed(ActionEvent e) {
 				listener.onQuit();
 			}
 		});
-		panel.add(btnQuit, BorderLayout.SOUTH);
+		
+		this.btnStart.addActionListener(new ActionListener() {
+			@Override public void actionPerformed(ActionEvent e) {
+				listener.onStart();
+			}
+		});
+		
+		cmdPanel.add(this.btnStart);
+		cmdPanel.add(btnQuit);
+		panel.add(cmdPanel, BorderLayout.SOUTH);
 		this.getRootPane().setDefaultButton(btnQuit);
 		
 		panel.add(this.drawer, BorderLayout.CENTER);
@@ -55,5 +66,11 @@ public class MainWindow extends JFrame {
 	
 	public interface MainWindowListener {
 		void onQuit();
+
+		void onStart();
+	}
+	
+	public void setJnaRunning(boolean jnaRunning) {
+		this.btnStart.setEnabled(jnaRunning == false);
 	}
 }

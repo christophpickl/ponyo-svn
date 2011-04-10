@@ -3,8 +3,6 @@ package jponyo;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import com.sun.codemodel.internal.JOp;
-
 import jponyo.gui.MainWindow;
 import jponyo.gui.MainWindow.MainWindowListener;
 import jponyo.jna.PonyoNI;
@@ -34,9 +32,6 @@ public class App implements PonyoNIListener, MainWindowListener {
 		System.out.println("App.iniJna()");
 		this.jna.addListener(this);
 		this.jna.initLib();
-		this.jna.startRecording("/myopenni/myoni.oni");
-//		this.jna.start();
-		this.jnaIsStarted = true;
 	}
 	
 	public void onQuit() {
@@ -76,5 +71,18 @@ public class App implements PonyoNIListener, MainWindowListener {
 		JOptionPane.showMessageDialog(null, exceptionMessage, "Update Thread Aborted", JOptionPane.ERROR_MESSAGE);
 		System.out.println("Shutting down jna context ...");
 		this.jna.shutdown();
+	}
+
+	@Override @SuppressWarnings("synthetic-access")
+	public void onStart() {
+		this.window.setJnaRunning(true);
+		this.jnaIsStarted = true;
+		
+		new Thread(new Runnable() {
+			@Override public void run() {
+				App.this.jna.startRecording("/myopenni/myoni.oni");
+//				App.this.jna.start();
+			}
+		}).start();
 	}
 }

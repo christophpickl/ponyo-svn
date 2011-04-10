@@ -6,9 +6,9 @@
 #include <ponyo/pnopenni/common_openni.hpp>
 
 #include <ponyo/pnopenni/Cam.hpp>
-#include <ponyo/pnopenni/ImageDetector.hpp>
-#include <ponyo/pnopenni/ImageConverter.hpp>
-#include <ponyo/pnopenni/ImageSaver.hpp>
+#include <ponyo/pnopenni/image/ImageDetector.hpp>
+#include <ponyo/pnopenni/image/ImageConverter.hpp>
+#include <ponyo/pnopenni/image/ImageSaver.hpp>
 
 namespace pn {
 class CamCalibrator {

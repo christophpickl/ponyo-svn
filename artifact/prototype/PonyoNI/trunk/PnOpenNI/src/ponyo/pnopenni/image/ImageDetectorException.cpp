@@ -1,4 +1,4 @@
-#include <ponyo/pnopenni/ImageDetectorException.hpp>
+#include <ponyo/pnopenni/image/ImageDetectorException.hpp>
 
 namespace pn {
 

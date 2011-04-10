@@ -5,7 +5,7 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 
-#include <ponyo/pnopenni/OpenNiManager.hpp>
+#include <ponyo/pnopenni/multiple/OpenNiManager.hpp>
 
 #include "MainWindow.hpp"
 

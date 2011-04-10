@@ -1,4 +1,4 @@
-#include <ponyo/pnopenni/ImageDetector.hpp>
+#include <ponyo/pnopenni/image/ImageDetector.hpp>
 
 namespace pn {
 

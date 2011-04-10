@@ -1,10 +1,10 @@
-#include <ponyo/pnopenni/CamInitializerException.hpp>
+#include <ponyo/pnopenni/multiple/CamInitializerException.hpp>
 
 namespace pn {
 
 Log* CamInitializerException::LOG = NEW_LOG(__FILE__)
 
-		CamInitializerException::CamInitializerException(const char* message, const char* sourceFile, int sourceLine) :
+CamInitializerException::CamInitializerException(const char* message, const char* sourceFile, int sourceLine) :
 		Exception(message, sourceFile, sourceLine) {
 	LOG->debug("new CamInitializerException(..)");
 }

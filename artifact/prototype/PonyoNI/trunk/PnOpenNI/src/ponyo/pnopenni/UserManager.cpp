@@ -98,34 +98,64 @@ UserManager::UserManager() : skeletonCapability(NULL) {
 	CHECK_RC(this->userGenerator.GetUsers(userIds, userCount), "Getting users failed!");
 	for (int i = 0; i < userCount; ++i) {
 		XnUserID currentUserId = userIds[i];
-		if (this->skeletonCapability.IsTracking(currentUserId)) {
-
-			// TODO for each XnSkeletonJoint.values()
-			XnSkeletonJoint joint = XN_SKEL_HEAD;
-			XnSkeletonJointPosition jointPosition;
-			CHECK_RC(this->skeletonCapability.GetSkeletonJointPosition(currentUserId, XN_SKEL_HEAD, jointPosition), "Get joint position failed");
-			if(jointPosition.fConfidence < 0.5) { continue; }
-
-			for(int i=0, n = this->listeners.size(); i < n; i++) {
-				this->listeners.at(i)->onJointPositionChanged(currentUserId, joint, jointPosition);
-			}
-
-//			XnSkeletonJointOrientation jointOrientation;
-//			CHECK_RC(this->skeletonCapability.GetSkeletonJointOrientation(currentUserId, XN_SKEL_HEAD, jointOrientation), "Get joint orientation failed!");
-//			if(jointOrientation.fConfidence < 0.5) { continue; }
-
-//			jointOrientation.orientation.elements[0], jointOrientation.orientation.elements[1], jointOrientation.orientation.elements[2],
-//			jointOrientation.orientation.elements[3], jointOrientation.orientation.elements[4], jointOrientation.orientation.elements[5],
-//			jointOrientation.orientation.elements[6], jointOrientation.orientation.elements[7], jointOrientation.orientation.elements[8],
-
-//			printf("joint update:\n\tposition: %.2f x %.2f x %.2f (confidence: %.2f)\n\torientation: [ (%.2f, %.2f, %.2f) - (%.2f, %.2f, %.2f) - (%.2f, %.2f, %.2f)] (confidence: %.2f)\n",
-//					jointPosition.position.X, jointPosition.position.Y, jointPosition.position.Z, jointPosition.fConfidence,
-//					jointOrientation.orientation.elements[0], jointOrientation.orientation.elements[1], jointOrientation.orientation.elements[2],
-//					jointOrientation.orientation.elements[3], jointOrientation.orientation.elements[4], jointOrientation.orientation.elements[5],
-//					jointOrientation.orientation.elements[6], jointOrientation.orientation.elements[7], jointOrientation.orientation.elements[8],
-//					jointOrientation.fConfidence);
-
+		if (!this->skeletonCapability.IsTracking(currentUserId)) {
+			// user is detected (new), but not yet calibrated; skip. // still, could have checked with IsTracking(), but because of performance reasons...
+			continue;
 		}
+
+		this->broadcastJointPositions(currentUserId, XN_SKEL_HEAD, 0);
+		this->broadcastJointPositions(currentUserId, XN_SKEL_NECK, 1);
+		this->broadcastJointPositions(currentUserId, XN_SKEL_TORSO, 2);
+//		this->broadcastJointPositions(currentUserId, XN_SKEL_WAIST, 3);
+//		this->broadcastJointPositions(currentUserId, XN_SKEL_LEFT_COLLAR, 4);
+		this->broadcastJointPositions(currentUserId, XN_SKEL_LEFT_SHOULDER, 5);
+		this->broadcastJointPositions(currentUserId, XN_SKEL_LEFT_ELBOW, 6);
+//		this->broadcastJointPositions(currentUserId, XN_SKEL_LEFT_WRIST, 7);
+		this->broadcastJointPositions(currentUserId, XN_SKEL_LEFT_HAND, 8);
+//		this->broadcastJointPositions(currentUserId, XN_SKEL_LEFT_FINGERTIP, 9);
+//		this->broadcastJointPositions(currentUserId, XN_SKEL_RIGHT_COLLAR, 10);
+		this->broadcastJointPositions(currentUserId, XN_SKEL_RIGHT_SHOULDER, 11);
+		this->broadcastJointPositions(currentUserId, XN_SKEL_RIGHT_ELBOW, 12);
+//		this->broadcastJointPositions(currentUserId, XN_SKEL_RIGHT_WRIST, 13);
+		this->broadcastJointPositions(currentUserId, XN_SKEL_RIGHT_HAND, 14);
+//		this->broadcastJointPositions(currentUserId, XN_SKEL_RIGHT_FINGERTIP, 15);
+		this->broadcastJointPositions(currentUserId, XN_SKEL_LEFT_HIP, 16);
+		this->broadcastJointPositions(currentUserId, XN_SKEL_LEFT_KNEE, 17);
+//		this->broadcastJointPositions(currentUserId, XN_SKEL_LEFT_ANKLE, 18);
+		this->broadcastJointPositions(currentUserId, XN_SKEL_LEFT_FOOT, 19);
+		this->broadcastJointPositions(currentUserId, XN_SKEL_RIGHT_HIP, 20);
+		this->broadcastJointPositions(currentUserId, XN_SKEL_RIGHT_KNEE, 21);
+//		this->broadcastJointPositions(currentUserId, XN_SKEL_RIGHT_ANKLE, 22);
+		this->broadcastJointPositions(currentUserId, XN_SKEL_RIGHT_FOOT, 23);
+
+//		XnSkeletonJointOrientation jointOrientation; NO => if interested in position AND orientation ==> use GetSkeletonJoint() instead!!
+//		CHECK_RC(this->skeletonCapability.GetSkeletonJointOrientation(currentUserId, XN_SKEL_HEAD, jointOrientation), "Get joint orientation failed!");
+//		if(jointOrientation.fConfidence < 0.5) { continue; }
+//		jointOrientation.orientation.elements[0], jointOrientation.orientation.elements[1], jointOrientation.orientation.elements[2],
+//		jointOrientation.orientation.elements[3], jointOrientation.orientation.elements[4], jointOrientation.orientation.elements[5],
+//		jointOrientation.orientation.elements[6], jointOrientation.orientation.elements[7], jointOrientation.orientation.elements[8],
+//		printf("joint update:\n\tposition: %.2f x %.2f x %.2f (confidence: %.2f)\n\torientation: [ (%.2f, %.2f, %.2f) - (%.2f, %.2f, %.2f) - (%.2f, %.2f, %.2f)] (confidence: %.2f)\n",
+//				jointPosition.position.X, jointPosition.position.Y, jointPosition.position.Z, jointPosition.fConfidence,
+//				jointOrientation.orientation.elements[0], jointOrientation.orientation.elements[1], jointOrientation.orientation.elements[2],
+//				jointOrientation.orientation.elements[3], jointOrientation.orientation.elements[4], jointOrientation.orientation.elements[5],
+//				jointOrientation.orientation.elements[6], jointOrientation.orientation.elements[7], jointOrientation.orientation.elements[8],
+//				jointOrientation.fConfidence);
+	}
+}
+
+
+
+/*private*/ inline void UserManager::broadcastJointPositions(XnUserID currentUserId, XnSkeletonJoint jointEnum, int jointId) {
+	XnSkeletonJointPosition jointPosition;
+
+	// TODO strange, this is how it should be ... :-/
+//	this->skeletonCapability.GetSkeletonJointPosition(currentUserId, jointEnum, jointPosition);
+	CHECK_RC(this->skeletonCapability.GetSkeletonJointPosition(currentUserId, jointEnum, jointPosition), "Get joint position failed");
+
+	if(jointPosition.fConfidence < 0.5) { return; }
+
+	for(int i=0, n = this->listeners.size(); i < n; i++) {
+		this->listeners.at(i)->onJointPositionChanged(currentUserId, jointId, jointPosition);
 	}
 }
 

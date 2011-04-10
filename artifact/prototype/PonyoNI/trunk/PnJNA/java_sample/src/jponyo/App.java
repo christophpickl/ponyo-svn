@@ -1,24 +1,22 @@
 package jponyo;
 
-import java.awt.BorderLayout;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 
-import jponyo.PnJNAWrapper.PnJNAWrapperListener;
+import com.sun.codemodel.internal.JOp;
 
-public class App implements PnJNAWrapperListener {
+import jponyo.gui.MainWindow;
+import jponyo.gui.MainWindow.MainWindowListener;
+import jponyo.jna.PonyoNI;
+import jponyo.jna.PonyoNIListener;
+
+public class App implements PonyoNIListener, MainWindowListener {
 	
-	final PnJNAWrapper jna = new PnJNAWrapper();
+	private final PonyoNI jna = new PonyoNI();
+	private final GlobalData data = new GlobalData();
+	final MainWindow window = new MainWindow(this);
 	
-	private final JTextArea text = new JTextArea();
+	private transient boolean jnaIsStarted = false; 
 	
 	public static void main(String[] args) {
     	new App().start();
@@ -26,59 +24,57 @@ public class App implements PnJNAWrapperListener {
 	
 	public void start() {
 		System.out.println("App.start() START");
-		
 		this.initGui();
-		
-		this.jna.addListener(this);
-		this.jna.initLib();
-		this.jna.startup();
+		this.initJna();
 		
 		System.out.println("App.start() END");
 	}
 	
-	void onWindowClosing(JFrame window) {
-		System.out.println("App.onWindowClosing(window) START");
+	private void initJna() {
+		System.out.println("App.iniJna()");
+		this.jna.addListener(this);
+		this.jna.initLib();
+		this.jna.startRecording("/myopenni/myoni.oni");
+//		this.jna.start();
+		this.jnaIsStarted = true;
+	}
+	
+	public void onQuit() {
+		System.out.println("App.onQuit() START");
+		if(this.jnaIsStarted == true) {
+			this.jna.shutdown();
+			this.jnaIsStarted = false;
+		}
 		
-		this.jna.shutdown();
 		System.out.println("Hiding and disposing window");
-		window.setVisible(false);
-		window.dispose();
-		
-		System.out.println("App.onWindowClosing(window) END");
+		this.window.setVisible(false);
+		this.window.dispose();
+		System.out.println("App.onQuit() END");
 	}
 	
 	private void initGui() {
-		final JFrame window = new JFrame();
-		window.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
-		window.addWindowListener(new WindowAdapter() {
-			@Override public void windowClosing(WindowEvent event) {
-				onWindowClosing(window);
-			}
-		});
-		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(new JLabel("App for PnJNA!!!"), BorderLayout.NORTH);
-		
-		this.text.setColumns(100);
-		this.text.setRows(30);
-		JScrollPane scrollPane = new JScrollPane(this.text);
-		panel.add(scrollPane, BorderLayout.CENTER);
-		window.getContentPane().add(panel);
-		window.pack();
-		window.setLocation(50, 50);
-		
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override public void run() {
+		System.out.println("App.initGui()");
+		SwingUtilities.invokeLater(new Runnable() { @Override public void run() {
 				System.out.println("App.SwingUtilities.run() ... displaying window");
-				window.setVisible(true);
-			}
-		});
-	}
+				App.this.window.setVisible(true);
+			} }); }
 	
 	@Override public void onUserStateChanged(int userId, int userState) {
-		this.text.setText(this.text.getText() + "\no User changed: ID=" + userId + "; state=" + userState);
+		System.out.println("App.onUserStateChanged(userId="+userId+", userState="+userState+")");
 	}
 
 	@Override public void onJointPositionChanged(int userId, int joint, float x, float y, float z) {
-		System.out.println("joint position changed!");
+//		System.out.println("onJointPositionChanged(userId="+userId+", joint="+joint+", x="+x+", y="+y+", z="+z+")");
+		this.data.xByJoint[joint] = x;
+		this.data.yByJoint[joint] = y;
+		this.data.zByJoint[joint] = z;
+		this.window.update(this.data);
+	}
+
+	@Override public void onUpdateThreadThrewException(String exceptionMessage) {
+		System.out.println("App.onUpdateThreadThrewException(exceptionMessage=[" + exceptionMessage + "])");
+		JOptionPane.showMessageDialog(null, exceptionMessage, "Update Thread Aborted", JOptionPane.ERROR_MESSAGE);
+		System.out.println("Shutting down jna context ...");
+		this.jna.shutdown();
 	}
 }

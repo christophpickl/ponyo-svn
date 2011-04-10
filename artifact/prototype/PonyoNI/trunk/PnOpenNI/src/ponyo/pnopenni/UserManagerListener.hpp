@@ -11,7 +11,7 @@ public:
 
 	virtual void onUserStateChanged(int userId, UserState userState) = 0;
 
-	virtual void onJointPositionChanged(/*TODO unsigned*/int userId, XnSkeletonJoint/*TODO & */, XnSkeletonJointPosition/*TODO &*/) = 0;
+	virtual void onJointPositionChanged(/*TODO unsigned*/int userId, int jointId, XnSkeletonJointPosition/*TODO &*/) = 0;
 
 };
 }

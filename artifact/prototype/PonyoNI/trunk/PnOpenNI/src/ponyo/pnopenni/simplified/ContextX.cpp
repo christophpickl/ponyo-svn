@@ -25,9 +25,21 @@ void ContextX::init() throw(OpenNiException) {
 
 void ContextX::start() throw(OpenNiException) {
 	LOG->debug("start()");
+	this->startInternal(true);
+}
 
+void ContextX::startRecording(const XnChar* oniFilePath) throw(OpenNiException) {
+	LOG->debug("startOni(oniFilePath)");
+	CHECK_RC(this->context.OpenFileRecording(oniFilePath), "Opening ONI file failed!");
+	this->startInternal(false);
+}
+
+/*private */ void ContextX::startInternal(bool shouldSetOutputMode) throw(OpenNiException) {
 	CHECK_RC(this->depthGenerator.Create(this->context), "create depth");
-	CHECK_RC(this->depthGenerator.SetMapOutputMode(this->mapMode), "set depth mode"); // mandatory, otherwise will fail
+	if(shouldSetOutputMode) {
+		// mandatory to set if starting non-recording, otherwise will fail
+		CHECK_RC(this->depthGenerator.SetMapOutputMode(this->mapMode), "set depth mode");
+	}
 
 	this->userManager->init(this->context);
 	this->userManager->start();
@@ -39,18 +51,34 @@ void ContextX::start() throw(OpenNiException) {
 //	this->updateThread = boost::thread(ContextX::threadRun, this);
 	LOG->debug("background thread running.");
 }
+
 void ContextX::addUserManagerListener(UserManagerListener* listener) {
 	this->userManager->addListener(listener);
 }
 
 void ContextX::onThreadRun() {
-	printf("onThreadRun() START\n");
-	while(this->threadShouldRun) {
-		this->context.WaitAnyUpdateAll();
-
-		this->userManager->update();
+	LOG->info("onThreadRun() START\n");
+	try {
+		while(this->threadShouldRun) {
+			this->context.WaitAnyUpdateAll();
+			this->userManager->update();
+		}
+	} catch(Exception& e) {
+		this->broadcastThreadException(e);
 	}
-	printf("onThreadRun() END\n");
+	LOG->info("onThreadRun() END\n");
+}
+
+/*private*/ void ContextX::broadcastThreadException(Exception& e) {
+	int n = this->listeners.size();
+	if(n == 0) {
+		fprintf(stderr, "ContextX background thread terminated: %s\n", e.getMessage());
+		e.printBacktrace();
+	} else {
+		for(int i=0; i < n; i++) {
+			this->listeners.at(i)->onUpdateThreadException(e);
+		}
+	}
 }
 
 

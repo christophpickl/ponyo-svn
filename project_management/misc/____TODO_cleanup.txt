@@ -1,3 +1,11 @@
+
+    private:
+        thread(thread&);
+        thread& operator=(thread&);
+
+
+
+
 string cstr_to_str(const char * str)
 {
 string tmp_str(str);

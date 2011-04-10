@@ -34,6 +34,7 @@ private:
 	XnCallbackHandle callbackPose;
 
 	void broadcastUserChangeState(int userId, UserState userState);
+	void broadcastJointPositions(XnUserID userId, XnSkeletonJoint jointEnum, int jointId);
 
 	static void XN_CALLBACK_TYPE onUserNew(xn::UserGenerator&, XnUserID, void* tthis);
 	static void XN_CALLBACK_TYPE onUserLost(xn::UserGenerator&, XnUserID, void* tthis);

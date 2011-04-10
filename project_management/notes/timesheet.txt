@@ -2,7 +2,8 @@
 TIMESHEET CP
 =================================================
 
-              ~~ 68h~~
+              ~~ 70h~~
+10.04. - 03:00 -  2h - finishing basic skeleton tracking working from c++ to java
 10.04. - 00:00 -  3h - getting basic skeleton tracking working from c++ to java
 09.04. - 21:00 -  3h - working on simplified JNA wrapper (multi threaded user generator)
 09.04. - 19:00 -  2h - investigating cmake shared lib build

@@ -64,6 +64,8 @@ C++ Lib Boost
 	http://www.boost.org
 - goood tutorial
 	http://antonym.org/2009/05/threading-with-boost---part-i-creating-threads.html
+- video getting C++ Threads Right 
+	http://www.youtube.com/watch?v=mrvAqvtWYb4
 - misc
 	http://www.boost.org/doc/libs/1_41_0/libs/thread/example/
 	http://www.boost.org/doc/libs/1_41_0/libs/iostreams/doc/installation.html

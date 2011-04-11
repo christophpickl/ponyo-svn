@@ -2,6 +2,7 @@
 #ifndef LOG_HPP_
 #define LOG_HPP_
 
+#include <iostream>
 #include <string.h>
 
 #define LABEL_LEVEL_FATAL "[FATAL]"

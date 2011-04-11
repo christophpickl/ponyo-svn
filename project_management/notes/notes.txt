@@ -1,7 +1,8 @@
 REMEMBER => if receiving openni error "bad parameter", maybe mapoutputmode was not set!
 
 ! rename namespace pn to ponyo (verschachtelte sogar moeglich)
-
+* @C++: improvements (cxxunit and cmake, proper logging, doxygen)
+* @BUILD: platform independent build; win/linux support (c++, cmake)
 =================================================
 TODOs
 =================================================

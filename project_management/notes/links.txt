@@ -82,6 +82,13 @@ Matlab
 - matlab engine
 	http://www.mathworks.com/help/techdoc/matlab_external/f29148.html
 
+OpenGL
+-------------------------------------------------
+- OpenGL Fundamentals
+	http://www.naturewizard.com/tutorial0101.html
+- The Character Animation FAQ
+	http://www.flipcode.com/documents/charfaq.html
+	
 Misc
 -------------------------------------------------
 - openFrameworks forum

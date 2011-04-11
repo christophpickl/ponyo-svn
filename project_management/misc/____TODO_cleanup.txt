@@ -1,4 +1,35 @@
+* offizielles sample projekt starten (generell, fuer alle eigenen artifakte!)
 
+
+	public static double convertScaleValue(double fromValue, double fromMin, double fromMax, double toMin, double toMax) {
+		double fromDiff = fromMax - fromMin; // Figure out the from range
+		double toDiff = toMax - toMin;       // Figure out the to range
+		
+		// Find the percentage
+		double position = fromValue / fromDiff;
+		double newValue = toDiff * position;
+		
+		return toMin + newValue;
+	}
+
+
+
+
+
+
+
+  private Vec2f screenToNormalizedCoordinates(CameraParameters params,
+                                              int x, int y) {
+    // AWT's origin is upper left
+    return new Vec2f(
+      (((float) x / (float) (params.xSize - 1)) - 0.5f) * 2.0f,
+      (0.5f - ((float) y / (float) (params.ySize - 1))) * 2.0f
+    );
+  }
+  
+  
+  
+  
 If you read it carefully, you'll see that one solution to use JNI libraries is to bundle them in architecture specific
 	JARs so that you can depend on them like any other dependency from a Maven point of view.
 	This is actually how JOGL version 1.1.1 is packaged in http://download.java.net/maven/2/net/java/dev/jogl/,

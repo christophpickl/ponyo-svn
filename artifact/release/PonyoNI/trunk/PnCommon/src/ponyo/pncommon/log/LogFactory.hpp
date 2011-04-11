@@ -4,8 +4,6 @@
 
 #include <ponyo/pncommon/log/Log.hpp>
 
-#define NEW_LOG() LogFactory::getLog(__FILE__);
-
 namespace pn {
 class LogFactory {
 public:

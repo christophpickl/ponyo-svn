@@ -4,7 +4,7 @@
 
 #define AT __FILE__, __LINE__
 
-#include <ponyo/pncommon/log/LogFactory.hpp>
+#include <ponyo/pncommon/Logging.hpp>
 
 namespace pn {
 class Exception {

@@ -1,9 +1,12 @@
+/**
+ * Include merge header, as well defines NEW_LOG() macro.
+ */
 #pragma once
 #ifndef LOGGING_HPP_
 #define LOGGING_HPP_
 
-#include <ponyo/pncommon/log/Log.hpp>
-#include <ponyo/pncommon/log/LogFactory.hpp>
+#include <ponyo/pncommon/logging/Log.hpp>
+#include <ponyo/pncommon/logging/LogFactory.hpp>
 
 /**
  * Sample usage:

@@ -1,4 +1,4 @@
-REMEMBER => if receiving openni error "bad parameter", maybe mapoutputmode was not set!
+* OpenNI detailed investigation: CoD, joint orientation, scene analyzer, nite gestures, ...
 
 ! rename namespace pn to ponyo (verschachtelte sogar moeglich)
 * @C++: improvements (cxxunit and cmake, proper logging, doxygen)

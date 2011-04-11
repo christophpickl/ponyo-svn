@@ -2,59 +2,50 @@
 # this document can be viewed online at: http://code.google.com/p/ponyo-svn/wiki/RoadMap
 
 = Sub projects =
-
   * *PonyoNI* ... provides core functionality based on OpenNI; mainly C++ and some JNI/JNA bridge to Java
-  * JPonyo* ... Java middleware; he is really a big boy
-  * *PonyoMIDI* / Pulse ... reroute Skeleton information as MIDI to generate audio (a.k.a. old "_MKinector_")
+  * *JPonyo* ... Java middleware; he is really a big boy
+  * *PonyoMIDI* Router ... route Skeleton information as MIDI to generate audio (a.k.a. old Pulse "_MKinector_")
   * *!PonyoTrainer* ... a Virtual Personal Trainer; detect right/wrong movement of certain Aikido technique(s)
   * *!PonyoTracker* ... a Surveillance System; multiple Kinects using custom object detection algorithms to track people
 
-  
 == PonyoNI - Version 0.0 ==
-
 _Get to know OpenNI_
-
-  * alle moeglichkeiten; daten wie CoD, orientation (dafuer war opengl gedacht, mehr lernen ist also vorerst nicht notwendig)
-  * mit jointpoint koordinaten vertraut machen
-  * nite features (gesten detektor)
-  * scene analyzer, ...
-  * api diagram zeichnen
-  * samle code lesen, forum lesen
+  * get familiar with provided coordinates
+  * get familiar with OpenNI API: draw diagram, read OpenNI sample code, read forum
 
 == PonyoNI - Version 0.1 ==
+_Initial version of PonyoNI_
+  * keep everything as simple as possible: only user management and skeleton tracking
+  * based on existing PonyoNI prototype
+  * enhance C++ infrastructure: memory, logging, exception
 
-_First PonyoNI + PonyoJNA version (Mac OS X only)_
-
-  * so simpel wie moeglich (mit xml); reduziert nur auf fuer funktionalitaet notwendige
-  * prototypen ausreifen (viel C++ related; memory, logging, exception handling)
-  
 == JPonyo - Version 0.1 ==
+_Complete rewrite of old Josceleton codebase_
+  * rewrite josceleton core/connection libraries
+  * API abstracts connection type {PonyoNI, PonyoOSC; maybe even openkinect}
 
-_Joscelton rewrite_
-
-  * old core/connection rewrite (schon osc beruecksichtigen)
-  
 == PonyoMIDI - Version 0.x ==
-
-_Minor enhancements using old logic_
-
+_Minor enhancements using ?old? logic_
   * implement !BeatStabilizer
   * fix minor GUI stuff
   * consistent 0/1 base indexing
   * fix quit bug
 
+== PonyoTrainer - Version 0.0 ==
+_Write something that just works, kind of throw-away code_
+  * implement rule set engine to detect proper movement
+  * e.g.: detect shi-ho-nage
+
 
 = Far far away =
 
 == Future TODOs ==
-
   * learn and use advanced OpenGL techniques
   * multiple kinects
   * investigate openkinect/libFreeNect
   * rewrite JNA to JNI wrapper
   
 == Future Sub projects==
-
-  * *PonyoOSC* ... reroute Skeleton information as OSC
+  * *PonyoOSC* Router ... route Skeleton information as OSC protocol
   * *PonyoMEX* ... provide caMatlab bridge via mex library
   * *ASPonyo* ... Flash/Flex bridge via Merapi

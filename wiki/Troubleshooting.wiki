@@ -1,0 +1,5 @@
+#Errors you might encounter.
+
+= OpenNI Error while starting generator"bad parameter" =
+
+Check if you have set MapOutputMode.

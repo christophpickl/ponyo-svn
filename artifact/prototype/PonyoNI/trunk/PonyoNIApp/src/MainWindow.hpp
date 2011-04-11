@@ -23,7 +23,7 @@ private:
 	static Log* LOG;
 	int mainWindowHandler;
 
-	void initMenuBar();
+	void initContextMenu();
 
 	void onHandleLoadDevices();
 	void onHandleStartGenerating();

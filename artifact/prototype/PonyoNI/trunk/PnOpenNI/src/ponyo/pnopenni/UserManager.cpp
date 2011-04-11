@@ -60,9 +60,7 @@ UserManager::UserManager() : skeletonCapability(NULL) {
 	}
 
 	this->skeletonCapability.SetSkeletonProfile(XN_SKEL_PROFILE_ALL); //  we want to have all joints
-
-	//this->userGenerator.GetSkeletonCap().SetSmoothing(0.8);
-	//xnSetMirror(depth, xxMirrorMode);
+	// CHECK_RC(this->skeletonCapability.SetSmoothing(0.0f), "set smoothing");
 
 	LOG->debug("init(context) END");
 }

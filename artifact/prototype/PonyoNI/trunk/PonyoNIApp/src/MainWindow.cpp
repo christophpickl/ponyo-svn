@@ -47,7 +47,7 @@ void MainWindow::init(int argc, char** argv) {
 //	glutReshapeFunc(MainWindow::onGlutReshape);
 //	glutIdleFunc(MainWindow::onGlutIdle);
 
-	this->initMenuBar();
+	this->initContextMenu();
 
 	glClearColor(1.0,1.0,1.0,0.0);
 	glColor3f(0.0f, 0.0f, 0.0f);
@@ -70,7 +70,7 @@ void MainWindow::display() {
 //	glFlush();
 }
 
-/*private*/ void MainWindow::initMenuBar() {
+/*private*/ void MainWindow::initContextMenu() {
 //	int submenid = glutCreateMenu(menu);
 //	glutAddMenuEntry("Teapot", 2);
 	int menid = glutCreateMenu(MainWindow::onMenuItemClicked);

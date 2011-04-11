@@ -40,6 +40,8 @@ void ContextX::startRecording(const XnChar* oniFilePath) throw(OpenNiException) 
 		// mandatory to set if starting non-recording, otherwise will fail
 		CHECK_RC(this->depthGenerator.SetMapOutputMode(this->mapMode), "set depth mode");
 	}
+	// TODO outsource as client configuration option
+	CHECK_RC(xnSetMirror(this->depthGenerator, true), "set mirror");
 
 	this->userManager->init(this->context);
 	this->userManager->start();

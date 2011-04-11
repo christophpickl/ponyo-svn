@@ -2,7 +2,7 @@
 #ifndef LOGFACTORY_HPP_
 #define LOGFACTORY_HPP_
 
-#include <ponyo/pncommon/logging/Log.hpp>
+#include <ponyo/common/logging/Log.hpp>
 
 namespace pn {
 class LogFactory {

@@ -5,8 +5,8 @@
 #ifndef LOGGING_HPP_
 #define LOGGING_HPP_
 
-#include <ponyo/pncommon/logging/Log.hpp>
-#include <ponyo/pncommon/logging/LogFactory.hpp>
+#include <ponyo/common/logging/Log.hpp>
+#include <ponyo/common/logging/LogFactory.hpp>
 
 /**
  * Sample usage:

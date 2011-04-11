@@ -2,7 +2,7 @@
 #include <stdlib.h> // free()
 #include <execinfo.h> // backtrace()
 
-#include <ponyo/pncommon/exception/Exception.hpp>
+#include <ponyo/common/exception/Exception.hpp>
 
 #define STACKTRACE_MAX_SIZE 42
 

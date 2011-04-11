@@ -1,4 +1,4 @@
-#include <ponyo/pncommon/logging/LogFactory.hpp>
+#include <ponyo/common/logging/LogFactory.hpp>
 
 using namespace std;
 

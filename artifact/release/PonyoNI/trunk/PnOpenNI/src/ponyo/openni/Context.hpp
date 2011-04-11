@@ -2,7 +2,7 @@
 #ifndef CONTEXT_HPP_
 #define CONTEXT_HPP_
 
-#include <ponyo/pncommon/PnCommon.hpp>
+#include <ponyo/common/PnCommon.hpp>
 
 namespace pn {
 class Context {

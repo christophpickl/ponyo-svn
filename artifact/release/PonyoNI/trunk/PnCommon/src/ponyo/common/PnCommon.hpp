@@ -7,8 +7,12 @@
 #ifndef PNCOMMON_HPP_
 #define PNCOMMON_HPP_
 
+#include <stdio.h>
+#include <iostream>
+#include <string>
+#include <vector>
+
+#include <ponyo/common/Logging.hpp>
 #include <ponyo/common/exception/Exception.hpp>
-#include <ponyo/common/logging/Log.hpp>
-#include <ponyo/common/logging/LogFactory.hpp>
 
 #endif // PNCOMMON_HPP_

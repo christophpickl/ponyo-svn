@@ -29,6 +29,7 @@ public class App implements PonyoNIListener, MainWindowListener {
 	private final PonyoNI jna = new PonyoNI();
 	private final GlobalData data = new GlobalData();
 	private final MainWindow window = new MainWindow(this.data, this);
+	private transient boolean jnaRunning = false;
 	
 	public static void main(String[] args) {
 		new App().startUp();
@@ -50,21 +51,26 @@ public class App implements PonyoNIListener, MainWindowListener {
 		this.jna.initLib();
 		new Thread(new Runnable() {
 			@Override public void run() {
-				App.this.jna.startRecording("/myopenni/myoni.oni");
-//				App.this.jna.start();
+//				App.this.jna.startRecording("/myopenni/myoni.oni");
+				App.this.jna.start();
 			}
 		}).start();
+		this.jnaRunning = true;
 	}
 
 	@Override public void onJointPositionChanged(int userId, int joint, float x, float y, float z) {
 		this.data.xByJoint[joint] = x;
 		this.data.yByJoint[joint] = y;
 		this.data.zByJoint[joint] = z;
+		this.window.onJointUpdated();
 	}
 
 	@Override public void onUpdateThreadThrewException(String exceptionMessage) {
 		JOptionPane.showMessageDialog(null, exceptionMessage, "Update Thread Aborted", JOptionPane.ERROR_MESSAGE);
-		this.jna.shutdown();
+		if(this.jnaRunning == true) {
+			this.jna.shutdown();
+			this.jnaRunning = false;
+		}
 	}
 
 	@Override public void onUserStateChanged(int userId, int userState) {
@@ -79,9 +85,12 @@ public class App implements PonyoNIListener, MainWindowListener {
 	@Override
 	public void onQuit() {
 		this.window.stop();
-		this.jna.shutdown();
+		if(this.jnaRunning == true) {
+			this.jna.shutdown();
+			this.jnaRunning = false;
+		}
 		this.window.setVisible(false);
-		this.window.dispose();
+//		this.window.dispose();
 		System.exit(0);
 	}
 }

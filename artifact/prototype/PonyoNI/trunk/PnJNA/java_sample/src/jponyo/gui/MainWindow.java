@@ -19,7 +19,7 @@ public class MainWindow extends JFrame {
 
 	private static final long serialVersionUID = 6925062641532803991L;
 
-	private final SkeletonDrawer drawer = new SkeletonDrawer();
+	private final SkeletonNumberPanel drawer = new SkeletonNumberPanel();
 	private JButton btnStart = new JButton("Start");
 	
 	public MainWindow(final MainWindowListener listener) {

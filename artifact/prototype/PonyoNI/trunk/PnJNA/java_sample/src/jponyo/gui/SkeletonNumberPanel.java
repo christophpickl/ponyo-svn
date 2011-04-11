@@ -9,7 +9,7 @@ import javax.swing.JPanel;
 import jponyo.GlobalData;
 import jponyo.jna.Skel;
 
-public class SkeletonDrawer extends JPanel {
+public class SkeletonNumberPanel extends JPanel {
 	
 	private static final long serialVersionUID = -6412556352307293613L;
 	
@@ -18,7 +18,7 @@ public class SkeletonDrawer extends JPanel {
 	private final JLabel[] yLabels = new JLabel[Skel.COUNT];
 	private final JLabel[] zLabels = new JLabel[Skel.COUNT];
 	
-	public SkeletonDrawer() {
+	public SkeletonNumberPanel() {
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		

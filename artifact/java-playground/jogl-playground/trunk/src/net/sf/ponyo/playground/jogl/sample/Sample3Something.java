@@ -1,7 +1,5 @@
 package net.sf.ponyo.playground.jogl.sample;
 
-import java.awt.Color;
-
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.glu.GLU;

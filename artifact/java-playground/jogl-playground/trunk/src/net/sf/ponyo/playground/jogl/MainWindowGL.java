@@ -1,10 +1,13 @@
 package net.sf.ponyo.playground.jogl;
 
+import java.awt.Color;
+
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
+import net.sf.ponyo.playground.jogl.glx.GLUtil;
 import net.sf.ponyo.playground.jogl.glx.ObjectDrawer;
 
 import jponyo.GlobalData;
@@ -12,14 +15,11 @@ import jponyo.jna.Skel;
 
 class MainWindowGL implements GLEventListener {
 
-	private static final float PYRAMID_ROTATION_VALUE = +0.2f;
-//	private static final float CUBE_ROTATION_VALUE = -0.15f;
-	private static final float CUBE_ROTATION_VALUE = -1.15f;
+	private static final Color PRIMARY_COLOR_OFF = Color.GRAY;
+	private static final float JOINT_SCALE = 0.3f;
+	private static final float SKEL_DEF_Z = -10.0f;
 	
 	private final /*ctorArg*/ GlobalData data;
-	
-	private transient float pyramidRotation;
-	private transient float cubeRotation;
 	
 	public MainWindowGL(GlobalData data) {
 		this.data = data;
@@ -37,30 +37,53 @@ class MainWindowGL implements GLEventListener {
 	}
 	
 	public void display(GLAutoDrawable drawable) {
-		if(this.data.isTracking) {
-			System.out.println("display() ... " + this.data.xByJoint[Skel.LEFT_HAND.getId()]);
-		}
 		final GL gl = drawable.getGL();
+		
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+		Color primaryColor = this.data.isTracking ? null : PRIMARY_COLOR_OFF;
 		
+		drawSkel(gl, Skel.HEAD,  primaryColor,  0.0f, +3.5f, SKEL_DEF_Z);
+		drawSkel(gl, Skel.NECK,  primaryColor,  0.0f, +2.0f, SKEL_DEF_Z);
+		drawSkel(gl, Skel.TORSO, primaryColor,  0.0f, -0.5f, SKEL_DEF_Z);
+
+		drawSkel(gl, Skel.LEFT_SHOULDER,  primaryColor, -1.6f, +1.6f, SKEL_DEF_Z);
+		drawSkel(gl, Skel.RIGHT_SHOULDER, primaryColor, +1.6f, +1.6f, SKEL_DEF_Z);
+		drawSkel(gl, Skel.LEFT_ELBOW,     primaryColor, -2.6f, +0.5f, SKEL_DEF_Z);
+		drawSkel(gl, Skel.RIGHT_ELBOW,    primaryColor, +2.6f, +0.5f, SKEL_DEF_Z);
+		drawSkel(gl, Skel.LEFT_HAND,      primaryColor, -2.2f, -0.8f, SKEL_DEF_Z);
+		drawSkel(gl, Skel.RIGHT_HAND,     primaryColor, +2.2f, -0.8f, SKEL_DEF_Z);
+
+		drawSkel(gl, Skel.LEFT_HIP,   primaryColor, -0.7f, -1.0f, SKEL_DEF_Z);
+		drawSkel(gl, Skel.RIGHT_HIP,  primaryColor, +0.7f, -1.0f, SKEL_DEF_Z);
+		drawSkel(gl, Skel.LEFT_KNEE,  primaryColor, -1.2f, -2.0f, SKEL_DEF_Z);
+		drawSkel(gl, Skel.RIGHT_KNEE, primaryColor, +1.2f, -2.0f, SKEL_DEF_Z);
+		drawSkel(gl, Skel.LEFT_FOOT,  primaryColor, -1.5f, -3.5f, SKEL_DEF_Z);
+		drawSkel(gl, Skel.RIGHT_FOOT, primaryColor, +1.5f, -3.5f, SKEL_DEF_Z);
+	}
+	
+	private void drawSkel(GL gl, Skel skel, Color color, float defX, float defY, float defZ) {
 		gl.glLoadIdentity();
-		gl.glTranslatef(-1.5f, 0.0f, -6.0f);
-		gl.glRotatef(this.pyramidRotation, 0.0f, 1.0f, 0.0f);
-		ObjectDrawer.drawPyramid(gl);
+		this.translateSkel(gl, skel, defX, defY, defZ);
+		gl.glScalef(JOINT_SCALE, JOINT_SCALE, JOINT_SCALE);
 		
-		gl.glLoadIdentity();
-		gl.glTranslatef(1.5f, 0.0f, -7.0f);				
-		gl.glRotatef(this.cubeRotation, 1.0f, 1.0f, 1.0f);			
-		ObjectDrawer.drawCube(gl);
-		
-		this.pyramidRotation += PYRAMID_ROTATION_VALUE;
-		this.cubeRotation += CUBE_ROTATION_VALUE;					
+		if(skel == Skel.HEAD) {
+			ObjectDrawer.drawPyramid(gl, color);
+		} else {
+			ObjectDrawer.drawCube(gl, color);
+		}
+	}
+	private void translateSkel(GL gl, Skel skel, float defX, float defY, float defZ) {
+		if(this.data.isTracking == false) {
+			gl.glTranslatef(defX, defY, defZ);
+		} else {
+			GLUtil.translate(gl, this.data, skel);
+		}
 	}
 	
 	public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
 		// nothing to do
 	}
-
+	
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
 		System.out.println("reshape(drawable, x="+x+", y="+y+", width="+width+", height="+height+")");
 		final GL gl = drawable.getGL();

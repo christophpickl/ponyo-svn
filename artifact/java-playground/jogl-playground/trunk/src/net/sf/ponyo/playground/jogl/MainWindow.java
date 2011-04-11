@@ -1,6 +1,7 @@
 package net.sf.ponyo.playground.jogl;
 
 import java.awt.BorderLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -13,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import jponyo.GlobalData;
+import jponyo.gui.SkeletonNumberDialog;
 
 import com.sun.opengl.util.Animator;
 
@@ -21,9 +23,12 @@ public class MainWindow extends JFrame {
 	private static final long serialVersionUID = -7367551475234626321L;
 	
 	private final Animator animator;
+	private final GlobalData data;
+	private final SkeletonNumberDialog skeletonDialog = new SkeletonNumberDialog();
 	
 	public MainWindow(GlobalData data, final MainWindowListener listener) {
 		super("Jogl Playground");
+		this.data = data;
 		
 		GLCapabilities glCapabilities = new GLCapabilities();
 		glCapabilities.setDoubleBuffered(true);
@@ -32,7 +37,7 @@ public class MainWindow extends JFrame {
 		GLCanvas canvas = new GLCanvas(glCapabilities);
 		this.animator = new Animator(canvas);
 		
-		canvas.addGLEventListener(new MainWindowGL(data));
+		canvas.addGLEventListener(new MainWindowGL(this.data));
 	    this.initComponents(canvas, listener);
 	    
 	    this.addWindowListener(new WindowAdapter() {
@@ -45,6 +50,12 @@ public class MainWindow extends JFrame {
 	        	}).start();
 	        }
 	    });
+	}
+	@Override public void setVisible(boolean visible) {
+		super.setVisible(visible);
+		Point p = this.getLocation();
+		this.skeletonDialog.setLocation(p.x + this.getWidth() + 5/*gap*/, p.y);
+		this.skeletonDialog.setVisible(visible);
 	}
 	
 	private void initComponents(GLCanvas canvas, final MainWindowListener listener) {
@@ -71,5 +82,9 @@ public class MainWindow extends JFrame {
 
 	public void stop() {
 		this.animator.stop();
+	}
+
+	public void onJointUpdated() {
+		this.skeletonDialog.update(this.data);
 	}
 }

@@ -2,18 +2,18 @@
 
 = Sub projects =
 
-* *PonyoNI* ... provides core functionality based on OpenNI; mainly C++  and some JNI/JNA bridge to Java
-* *PonyoMIDI* / Pulse ... reroute Skeleton information as MIDI to generate audio (a.k.a. old "_MKinector_")
-* *PonyoTrainer* ... a Virtual Personal Trainer; detect right/wrong movement of certain Aikido technique(s)
-* *PonyoTracker* ... a Surveillance System; multiple Kinects using custom object detection algorithms to track people
+  * *PonyoNI* ... provides core functionality based on OpenNI; mainly C++  and some JNI/JNA bridge to Java
+  * *PonyoMIDI* / Pulse ... reroute Skeleton information as MIDI to generate audio (a.k.a. old "_MKinector_")
+  * *!PonyoTrainer* ... a Virtual Personal Trainer; detect right/wrong movement of certain Aikido technique(s)
+  * *!PonyoTracker* ... a Surveillance System; multiple Kinects using custom object detection algorithms to track people
 
 
-== PonyoMIDI 0.1 ==
+== PonyoMIDI - Version 0.1 ==
 
-* todo A
-* todo B
+  * todo A
+  * todo B
 
-== PonyoNI 0.1 ==
+== PonyoNI - Version 0.1 ==
 
-* doing A
-* doing B
+  * doing A
+  * doing B

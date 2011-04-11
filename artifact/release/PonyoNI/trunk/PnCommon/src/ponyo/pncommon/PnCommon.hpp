@@ -8,7 +8,7 @@
 #define PNCOMMON_HPP_
 
 #include <ponyo/pncommon/exception/Exception.hpp>
-#include <ponyo/pncommon/log/Log.hpp>
-#include <ponyo/pncommon/log/LogFactory.hpp>
+#include <ponyo/pncommon/logging/Log.hpp>
+#include <ponyo/pncommon/logging/LogFactory.hpp>
 
 #endif // PNCOMMON_HPP_

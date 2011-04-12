@@ -10,5 +10,7 @@
 #include <ponyo/common/PnCommon.hpp>
 #include <ponyo/openni/PnContext.hpp>
 #include <ponyo/openni/OpenNiException.hpp>
+#include <ponyo/openni/UserManager.hpp>
+#include <ponyo/openni/UserState.hpp>
 
 #endif // PNOPENNI_HPP_

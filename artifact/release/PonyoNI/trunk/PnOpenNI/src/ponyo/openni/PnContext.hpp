@@ -3,6 +3,8 @@
 #define PNCONTEXT_HPP_
 
 #include <ponyo/openni/pnopenni_inc.hpp>
+#include <ponyo/openni/UserManager.hpp>
+#include <ponyo/openni/UpdateThread.hpp>
 
 namespace pn {
 class PnContext {
@@ -18,8 +20,13 @@ public:
 private:
 	static Log* LOG;
 
+	UserManager* userManager;
+	UpdateThread* updateThread;
+
 	xn::Context context;
 	xn::DepthGenerator depthGenerator;
+
+	void internalSetup() throw(OpenNiException);
 
 };
 }

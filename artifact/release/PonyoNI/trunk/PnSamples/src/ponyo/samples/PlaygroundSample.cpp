@@ -2,11 +2,14 @@
 
 using namespace pn;
 
-void onUserStateChanged(unsigned int userId, UserState userState) {
+void onUserStateChanged(UserId userId, UserState userState) {
 	printf("PlaygroundSample says: onUserStateChanged(userId=%i, userState=%i)\n", userId, userState);
 }
+void onJointDataChanged(UserId userId, unsigned int jointId, float x, float y, float z) {
+//	printf("PlaygroundSample says: onJointDataChanged(userId=%i, jointId=%i, ...)\n", userId, jointId);
+}
 
-OpenNIFacade g_facade(NULL, NULL);
+OpenNIFacade g_facade(&onUserStateChanged, &onJointDataChanged);
 
 Log* LOG = NEW_LOG();
 

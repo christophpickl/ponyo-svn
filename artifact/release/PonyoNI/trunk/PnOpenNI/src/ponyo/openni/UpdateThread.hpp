@@ -14,13 +14,34 @@ class UpdateThread {
 public:
 	typedef void (CallbackType::*aFunction) ();
 
-	UpdateThread(CallbackType* callbackInstance,  aFunction callbackMethod);
-	virtual ~UpdateThread();
+	UpdateThread(CallbackType* pCallbackInstance,  aFunction pCallbackMethod) :
+		callbackInstance(pCallbackInstance),
+		callbackMethod(pCallbackMethod),
+		threadShouldRun(true)
+	{
+		LOG = NEW_LOG();
+//		Log* UpdateThread<CallbackType>::LOG = ;
+		LOG->debug("new UpdateThread(callbackInstance, callbackMethod)");
+	}
 
-	void start(xn::Context&);
-	void stopAndJoin();
+	~UpdateThread() {
+		LOG->debug("~UpdateThread()");
+	}
+
+	void start(xn::Context& context) {
+		LOG->debug("start(context) ... spawning update thread");
+		this->updateThread = boost::thread(&UpdateThread::onThreadRun, this, context);
+	}
+
+	void stopAndJoin() {
+		LOG->debug("stopAndJoin() START");
+		this->threadShouldRun = false;
+		this->updateThread.join();
+		LOG->debug("stopAndJoin() END");
+	}
+
 private:
-	static Log* LOG;
+	Log* LOG;
 
 	CallbackType* callbackInstance;
 	aFunction callbackMethod;
@@ -29,7 +50,19 @@ private:
 	bool threadShouldRun;
 
 
-	void onThreadRun();
+	void onThreadRun(xn::Context& context) {
+		LOG->info("onThreadRun(context) START");
+
+	//	try {
+			while(this->threadShouldRun) {
+				context.WaitAnyUpdateAll();
+				(this->callbackInstance->*this->callbackMethod)();
+			}
+	//	} catch(Exception& e) {
+	//		TODO this->broadcastThreadException(e);
+	//	}
+		LOG->info("onThreadRun() END");
+	}
 };
 }
 

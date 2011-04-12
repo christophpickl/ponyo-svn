@@ -1,4 +1,5 @@
 
+EXECUTABLES += oop_callbacks
 EXECUTABLES += pointers
 EXECUTABLES += templates
 EXECUTABLES += datastructures
@@ -38,6 +39,9 @@ init:
 	@echo
 	mkdir -p $(TARGET)
 
+oop_callbacks: $(OBJECTS) main_oop_callbacks.o
+	$(CXX) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
+	
 pointers: $(OBJECTS) main_pointers.o
 	$(CXX) $(LFLAGS) $(OBJECTS_PATH) $(TARGET)/main_$(@).o -o $(TARGET)/$@
 	

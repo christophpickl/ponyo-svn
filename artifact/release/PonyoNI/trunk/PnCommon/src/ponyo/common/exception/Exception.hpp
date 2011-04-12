@@ -12,11 +12,11 @@ public:
 	/**
 	 * eg: throw Exception("foobar", AT);
 	 */
-	Exception(const char*, const char*, int);
+	Exception(const char*, const char*, int /*TODO add cause*/);
 	virtual ~Exception();
 
-	const char* getMessage();
-	void printBacktrace();
+	const char* getMessage() const;
+	void printBacktrace() const;
 
 private:
 	static Log* LOG;

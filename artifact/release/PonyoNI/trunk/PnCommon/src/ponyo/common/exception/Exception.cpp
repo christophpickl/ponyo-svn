@@ -24,17 +24,16 @@ Exception::~Exception() {
 	// backtrace
 //}
 
-const char* Exception::getMessage() {
+const char* Exception::getMessage() const {
 	return this->message;
 }
 
-void Exception::printBacktrace() {
+void Exception::printBacktrace() const {
 	void* tracesArray[STACKTRACE_MAX_SIZE];
 	size_t traceSize = backtrace(tracesArray, STACKTRACE_MAX_SIZE);
 	int traceSizeInt = (int) traceSize;
 	char** traceSymbols = backtrace_symbols(tracesArray, traceSize);
-
-	fprintf(stderr, "Backtrace %s#%i:\n", this->sourceFile, this->sourceLine);
+	fprintf(stderr, "Exception: %s\nBacktrace of %s#%i:\n", this->message, this->sourceFile, this->sourceLine);
 	if(traceSymbols != NULL) {
 		for (int i = 1/*skip this*/; i < traceSizeInt; ++i) {
 			fprintf(stderr, "\t(%d) %s\n", i, traceSymbols[i]);

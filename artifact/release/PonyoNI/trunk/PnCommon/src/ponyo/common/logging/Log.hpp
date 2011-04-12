@@ -3,6 +3,7 @@
 #define LOG_HPP_
 
 #include <iostream>
+#include <stdio.h>
 #include <string.h>
 
 #define LABEL_LEVEL_FATAL "[FATAL]"
@@ -37,6 +38,7 @@ private:
 	static int LEVEL_ANY;
 
 	std::string logeeName;
+//	const char* logeeName;
 
 	void writeLog(const char*, int, const char*);
 };

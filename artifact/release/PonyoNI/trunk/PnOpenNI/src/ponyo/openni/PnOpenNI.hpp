@@ -9,5 +9,6 @@
 
 #include <ponyo/common/PnCommon.hpp>
 #include <ponyo/openni/PnContext.hpp>
+#include <ponyo/openni/OpenNiException.hpp>
 
 #endif // PNOPENNI_HPP_

@@ -25,7 +25,8 @@ Log::~Log() {
 
 inline void Log::writeLog(const char* message, int logLevel, const char* label /* TODO: , Exception& exception = NULL */) {
 	// TODO check logLevel
-	std::cout << label << " " << this->logeeName << " -- " << message << std::endl;
+//	std::cout << label << " " << this->logeeName << " -- " << message << std::endl;
+	printf("%s %s -- %s\n", label, this->logeeName.c_str(), message);
 }
 // TODO vararg arguments for log methods!!!
 // TODO add timestamp

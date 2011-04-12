@@ -7,15 +7,14 @@
 #include <ponyo/openni/OpenNiException.hpp>
 
 #define THROW_XN_EXCEPTION(xnStatus, customErrorMessage) \
-	std::string ss;                                      \
-	ss.append("OpenNI Exception: ");                     \
-	ss.append(customErrorMessage);                       \
-	ss.append(" (Detail message: ");                     \
-	ss.append(xnGetStatusString(xnStatus));              \
-	ss.append(")");                                      \
+	std::string ss;                                                      \
+	ss.append(customErrorMessage);                                       \
+	ss.append(" (OpenNI message: ");                                     \
+	ss.append(xnGetStatusString(xnStatus));                              \
+	ss.append(")");                                                      \
 	throw OpenNiException(ss.c_str(), AT);
 
-#define TRY(xnStatus, customErrorMessage) \
+#define XNTRY(xnStatus, customErrorMessage) \
 		if(xnStatus != XN_STATUS_OK) { THROW_XN_EXCEPTION(xnStatus, customErrorMessage); }
 
 #endif // PNOPENNI_INC_HPP_

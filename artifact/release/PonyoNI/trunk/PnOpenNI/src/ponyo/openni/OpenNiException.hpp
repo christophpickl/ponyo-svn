@@ -7,7 +7,7 @@
 namespace pn {
 class OpenNiException : public Exception {
 public:
-	OpenNiException(const char*, const char*, int);
+	OpenNiException(const char* message, const char* sourceFile, int sourceLine);
 	virtual ~OpenNiException();
 private:
 	static Log* LOG;

@@ -16,6 +16,7 @@ PonyoNI v0.1 tasks
 =================================================
 TODOs X
 =================================================
+! vor jedem ponyo init statusdaten ausgeben: zb angeschlossene usb devices (vor allem Xbox NUI xxx hervorheben) 
 1. bzgl usb fail: ganz einfach mit xml wieder konfigurieren
 	* falls runtime config notwendig -> xml einfach in /tmp oder so selbst anlegen, und dort dann gleich laden (bzw XmlRunScript funktion nutzen)
 		=> wenn das geht, imwrite + opencv match template aus java raus nutzen
@@ -39,7 +40,7 @@ X. wesentliche OpenNI API klassen visualisieren (omni graffle)
 =================================================
 TODOs
 =================================================
-TODO @ponyo
+- @c++: error codes genauso wie openni machen (generell mehr davon inspirieren lassen)
 - custom var args!
    fuer A. CHECK_RC()  (nur evaluieren on ERROR)
       // nur status codes uebergeben, nicht const char*'s!

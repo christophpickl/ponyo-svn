@@ -8,7 +8,7 @@
 #define PNOPENNI_HPP_
 
 #include <ponyo/common/PnCommon.hpp>
-#include <ponyo/openni/PnContext.hpp>
+#include <ponyo/openni/OpenNIFacade.hpp>
 #include <ponyo/openni/OpenNiException.hpp>
 #include <ponyo/openni/UserManager.hpp>
 #include <ponyo/openni/UserState.hpp>

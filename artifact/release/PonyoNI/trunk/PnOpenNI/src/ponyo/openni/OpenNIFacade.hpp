@@ -1,17 +1,17 @@
 #pragma once
-#ifndef PNCONTEXT_HPP_
-#define PNCONTEXT_HPP_
+#ifndef OpenNIFacade_HPP_
+#define OpenNIFacade_HPP_
 
 #include <ponyo/openni/pnopenni_inc.hpp>
 #include <ponyo/openni/UserManager.hpp>
 #include <ponyo/openni/UpdateThread.hpp>
 
 namespace pn {
-class PnContext {
+class OpenNIFacade {
 
 public:
-	PnContext();
-	virtual ~PnContext();
+	OpenNIFacade();
+	virtual ~OpenNIFacade();
 
 	void startWithXml(const char* configPath) throw(OpenNiException);
 	void startRecording(const char* oniFilePath) throw(OpenNiException);
@@ -30,4 +30,4 @@ private:
 
 };
 }
-#endif // PNCONTEXT_HPP_
+#endif // OpenNIFacade_HPP_

@@ -4,6 +4,13 @@ LINKs
 =================================================
 
 
+My OpenNI forum entries
+-------------------------------------------------
+- is it safe to unregister a non-registered callback? 
+	http://groups.google.com/group/openni-dev/browse_thread/thread/cbe42c276727e56a
+- "Failed to set USB interface!" error message 
+	http://groups.google.com/group/openni-dev/browse_frm/thread/742ac6dc41abf613
+
 CMake
 -------------------------------------------------
 - official site

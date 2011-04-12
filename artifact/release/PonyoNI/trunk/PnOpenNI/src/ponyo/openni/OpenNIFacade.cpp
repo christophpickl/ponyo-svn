@@ -1,22 +1,22 @@
-#include <ponyo/openni/PnContext.hpp>
+#include <ponyo/openni/OpenNIFacade.hpp>
 
 namespace pn {
 
-Log* PnContext::LOG = NEW_LOG();
+Log* OpenNIFacade::LOG = NEW_LOG();
 
-PnContext::PnContext() {
-	LOG->debug("new PnContext()");
+OpenNIFacade::OpenNIFacade() {
+	LOG->debug("new OpenNIFacade()");
 
 	this->userManager = new UserManager();
 }
 
-PnContext::~PnContext() {
-	LOG->debug("~PnContext()");
+OpenNIFacade::~OpenNIFacade() {
+	LOG->debug("~OpenNIFacade()");
 	delete this->userManager;
 	delete this->updateThread;
 }
 
-/*public*/ void PnContext::startRecording(const char* oniFilePath) throw(OpenNiException) {
+/*public*/ void OpenNIFacade::startRecording(const char* oniFilePath) throw(OpenNiException) {
 	LOG->info("startRecording(oniFilePath)");
 
 	LOG->debug("Initializing context ...");
@@ -29,7 +29,7 @@ PnContext::~PnContext() {
 	this->internalSetup();
 }
 
-/*public*/ void PnContext::startWithXml(const char* configPath) throw(OpenNiException) {
+/*public*/ void OpenNIFacade::startWithXml(const char* configPath) throw(OpenNiException) {
 	LOG->info("startWithXml(configPath)");
 
 	LOG->debug("Initializing context ...");
@@ -38,7 +38,7 @@ PnContext::~PnContext() {
 	this->internalSetup();
 }
 
-/*private*/ void PnContext::internalSetup() throw(OpenNiException) {
+/*private*/ void OpenNIFacade::internalSetup() throw(OpenNiException) {
 	LOG->info("internalSetup()");
 
 	LOG->debug("Creating depth generator ...");
@@ -66,14 +66,14 @@ PnContext::~PnContext() {
 	this->updateThread->start();
 }
 
-/*public*/ void PnContext::destroy() {
+/*public*/ void OpenNIFacade::destroy() {
 	LOG->info("destroy()");
 
 	this->userManager->unregister();
 	this->updateThread->stopAndJoin();
-//	this->depthGenerator
 
 	try {
+		// get sure everything was unregistered/nothing is waiting, as otherwise node lock error will be returned
 		XNTRY(this->context.StopGeneratingAll(), "Could not stop generators!");
 	} catch(OpenNiException& e) {
 		LOG->warn("Could not stop user manager!"); // TODO add exception as log argument

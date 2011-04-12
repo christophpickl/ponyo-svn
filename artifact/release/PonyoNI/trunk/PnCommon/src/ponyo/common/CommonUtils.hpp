@@ -7,13 +7,13 @@
 namespace pn {
 class CommonUtils {
 public:
-	CommonUtils();
-	virtual ~CommonUtils();
-
 	static void sleep(int seconds);
+	static void waitHitEnter(bool printDefaultPrompt = false);
 private:
 	static Log* LOG;
 
+	CommonUtils();
+	virtual ~CommonUtils();
 };
 }
 

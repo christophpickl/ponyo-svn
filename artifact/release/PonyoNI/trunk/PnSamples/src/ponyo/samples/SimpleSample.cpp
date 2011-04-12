@@ -3,10 +3,10 @@
 int main() {
 	printf("SimpleSample main() START\n");
 
-	pn::PnContext* context = new pn::PnContext();
+	pn::OpenNIFacade* facade = new pn::OpenNIFacade();
 	try {
-//		context->startWithXml("/myopenni/simple_config.xml");
-		context->startRecording("/myopenni/myoni.oni");
+//		facade->startWithXml("misc/playground_config.xml");
+		facade->startRecording("/myopenni/myoni.oni");
 	} catch(const pn::Exception& e) {
 //	} catch(const pn::OpenNiException& e) {
 		e.printBacktrace();
@@ -14,8 +14,8 @@ int main() {
 //	} catch (const std::exception& e) {
 //	} catch (...) {
 //	}
-	context->destroy();
-	delete context;
+	facade->destroy();
+	delete facade;
 
 	printf("main() END\n");
 	return 0;

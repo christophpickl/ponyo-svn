@@ -2,6 +2,7 @@
 TIMESHEET CP
 =================================================
 
+12.04. - 14:00 -   h - reworking openni communication layer
               ~~ 87h~~
 11.04. - 23:00 -  6h - stopping work on PonyoNI and launching official PonyoNI version
 11.04. - 20:00 -  1h - administrative work

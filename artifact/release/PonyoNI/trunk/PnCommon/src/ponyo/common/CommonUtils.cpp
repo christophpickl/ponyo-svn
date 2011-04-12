@@ -5,8 +5,16 @@
 namespace pn {
 Log* CommonUtils::LOG = NEW_LOG();
 
-CommonUtils::CommonUtils() { }
-CommonUtils::~CommonUtils() { }
+/*private*/ CommonUtils::CommonUtils() { }
+/*private*/ CommonUtils::~CommonUtils() { }
+
+/*static*/ void CommonUtils::waitHitEnter(bool printDefaultPrompt) {
+	if(printDefaultPrompt == true) {
+		printf("\n  ======> Hit ENTER to continue ...\n\n");
+	}
+	std::string input;
+	std::getline(std::cin, input);
+}
 
 /*static*/ void CommonUtils::sleep(int seconds) {
 	LOG->debug("sleep(seconds)");

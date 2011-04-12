@@ -2,11 +2,12 @@
 TIMESHEET CP
 =================================================
 
-              ~~ 80h~~
-11.04. - 19:00 -   h - 
+              ~~ 87h~~
+11.04. - 23:00 -  6h - stopping work on PonyoNI and launching official PonyoNI version
+11.04. - 20:00 -  1h - administrative work
               ~~ 80h~~
 10.04. - 20:00 -  7h - learn OpenGL + implement basic skeleton visualisation with jogl
-10.04. - 19:00 -  1h - some administrative work
+10.04. - 19:00 -  1h - administrative work
 10.04. - 17:00 -  2h - investigating java 3d engine: jogl, java3d, jmonkey, ardor3d
               ~~ 70h~~
 10.04. - 03:00 -  2h - finishing basic skeleton tracking working from c++ to java

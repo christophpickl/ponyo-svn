@@ -11,8 +11,11 @@ int main() {
 
 	printf("main() setting up context ...\n");
 	ContextX* context = new ContextX();
+	printf("main() init\n");
 	context->init();
-	context->start();
+	printf("main() startRecording\n");
+	context->startRecording("/myopenni/myoni.oni");
+//	context->start();
 
 	printf("main() sleeping ...\n");
 	boost::posix_time::seconds workTime(20);

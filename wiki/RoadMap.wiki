@@ -36,6 +36,10 @@ _Write something that just works, kind of throw-away code_
   * implement rule set engine to detect proper movement
   * e.g.: detect shi-ho-nage
 
+== PonyoNI - Version 0.2 ==
+_N/A_
+  * improve C++ infrastructure: add cxxunit, enhance logging, rework cmake, add doxygen, ...
+  * programatic configuration (no more XML necessary)
 
 = Far far away =
 

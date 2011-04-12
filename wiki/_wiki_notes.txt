@@ -1,0 +1,6 @@
+
+wiki online:
+	http://code.google.com/p/ponyo-svn/wiki/RoadMap
+
+wiki syntax help:
+	http://code.google.com/p/support/wiki/WikiSyntax

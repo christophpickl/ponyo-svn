@@ -1,5 +1,16 @@
 #Errors you might encounter.
 
-= OpenNI Error while starting generator"bad parameter" =
+= OpenNI Error while starting generator "bad parameter" =
 
 Check if you have set MapOutputMode.
+
+
+= UserGenerator callbacks are not invoked but they should be =
+
+Make sure you are invoking depthGenerator.GetMetaData(depthMetaData), even when you dont need the data itself,
+it is necessary to call it after WaitXXX() so the user generator will dispatch events.
+
+
+= Programatically initializing OpenNI error "Failed to set USB device" =
+
+???

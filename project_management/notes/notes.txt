@@ -1,8 +1,41 @@
+* autogenerate stuff between c++ and java (user state enum, joint enum)
 * OpenNI detailed investigation: CoD, joint orientation, scene analyzer, nite gestures, ...
-
-! rename namespace pn to ponyo (verschachtelte sogar moeglich)
-* @C++: improvements (cxxunit and cmake, proper logging, doxygen)
+! custom mylyn installation (eclipse mylyn integration; customize workflow; customize fields)
 * @BUILD: platform independent build; win/linux support (c++, cmake)
+
+=================================================
+PonyoNI v0.1 tasks
+=================================================
+* init by XML
+* simple console log
+* no dynamic capability detection (expect only -single- kinect)
+* register via function callback (typedef); no addListener!
+* PonyoJNA: { start/stop, onUser, onJoint }
+	-> future: startRecording, startWithConfiguration, onBackgroundThreadException
+
+=================================================
+TODOs X
+=================================================
+1. bzgl usb fail: ganz einfach mit xml wieder konfigurieren
+	* falls runtime config notwendig -> xml einfach in /tmp oder so selbst anlegen, und dort dann gleich laden (bzw XmlRunScript funktion nutzen)
+		=> wenn das geht, imwrite + opencv match template aus java raus nutzen
+*. PnJNI schreiben
+2. mehr neue skeleton daten
+	* orientation
+		--> auch in gui debugger anzeigen
+	* center of mass
+		--> auch in gui debugger anzeigen
+	* smoothing wert rumspielen
+	? confidence hat auch andere werte als 0.0 und 1.0?
+		--> auch in gui debugger anzeigen
+3. mehr neue features
+	* save image
+	* load/save calibration profile
+	* use existing detectors (wave/swipe/circle gesture)
+X. wesentliche OpenNI API klassen visualisieren (omni graffle)
+
+*) interessantes setup: mehrere computer; je eine kinect dran; mit OSCserver daten an master computer schicken (keine kinect dran), dort dann daten verarbeiten
+
 =================================================
 TODOs
 =================================================

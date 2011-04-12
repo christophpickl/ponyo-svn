@@ -35,7 +35,9 @@ C++
 	http://www.yolinux.com/TUTORIALS/LinuxTutorialC++STL.html
 - C++ Class Templates
 	http://www.codersource.net/c/c-tutorial-on-templates/c-class-templates.aspx
-
+- enum tutorial
+	http://www.codeproject.com/KB/cpp/EnumIterator.aspx
+	
 JNA (JNI)
 -------------------------------------------------
 - good jna help
@@ -72,7 +74,7 @@ C++ Lib Boost
 	http://www.highscore.de/cpp/boost/multithreading.html
 	http://programmingexamples.net/index.php?title=CPP/Boost/Threads
 	http://drdobbs.com/cpp/184401518
-	
+
 Matlab
 -------------------------------------------------
 - matlab tutorials

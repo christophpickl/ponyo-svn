@@ -8,7 +8,7 @@ namespace pn {
 class CommonUtils {
 public:
 	static void sleep(int seconds);
-	static void waitHitEnter(bool printDefaultPrompt = false);
+	static void waitHitEnter(bool printDefaultPrompt = true);
 private:
 	static Log* LOG;
 

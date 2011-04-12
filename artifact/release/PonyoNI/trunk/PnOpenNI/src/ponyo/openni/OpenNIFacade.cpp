@@ -4,10 +4,10 @@ namespace pn {
 
 Log* OpenNIFacade::LOG = NEW_LOG();
 
-OpenNIFacade::OpenNIFacade() {
-	LOG->debug("new OpenNIFacade()");
+OpenNIFacade::OpenNIFacade(UserStateCallback userStateCallback, JointDataCallback jointDataCallback) {
+	LOG->debug("new OpenNIFacade(userStateCallback, jointDataCallback )");
 
-	this->userManager = new UserManager();
+	this->userManager = new UserManager(userStateCallback, jointDataCallback);
 }
 
 OpenNIFacade::~OpenNIFacade() {
@@ -20,11 +20,11 @@ OpenNIFacade::~OpenNIFacade() {
 	LOG->info("startRecording(oniFilePath)");
 
 	LOG->debug("Initializing context ...");
-	XNTRY(this->context.Init(), "Could not initialize OpenNI context!");
+	CHECK_XN(this->context.Init(), "Could not initialize OpenNI context!");
 
 	LOG->debug("Opening oni file recording ...");
 	printf("opening: %s\n", oniFilePath);
-	XNTRY(this->context.OpenFileRecording(oniFilePath), "Could not open *.oni file!");
+	CHECK_XN(this->context.OpenFileRecording(oniFilePath), "Could not open *.oni file!");
 
 	this->internalSetup();
 }
@@ -33,7 +33,7 @@ OpenNIFacade::~OpenNIFacade() {
 	LOG->info("startWithXml(configPath)");
 
 	LOG->debug("Initializing context ...");
-	XNTRY(this->context.InitFromXmlFile(configPath), "Could not initialize OpenNI context from XML!");
+	CHECK_XN(this->context.InitFromXmlFile(configPath), "Could not initialize OpenNI context from XML!");
 
 	this->internalSetup();
 }
@@ -42,13 +42,13 @@ OpenNIFacade::~OpenNIFacade() {
 	LOG->info("internalSetup()");
 
 	LOG->debug("Creating depth generator ...");
-	XNTRY(this->depthGenerator.Create(this->context), "Could not create depth generator!");
+	CHECK_XN(this->depthGenerator.Create(this->context), "Could not create depth generator!");
 
 	// TODO outsource as client configuration option
-//	XNTRY(xnSetMirror(this->depthGenerator, true), "Setting mirror mode for depth generator failed!");
+//	CHECK_XN(xnSetMirror(this->depthGenerator, true), "Setting mirror mode for depth generator failed!");
 
 	// mandatory to set if starting non-recording, otherwise will fail
-//	... if starting non-recording => XNTRY(this->depthGenerator.SetMapOutputMode(this->mapMode), "set depth mode");
+//	... if starting non-recording => CHECK_XN(this->depthGenerator.SetMapOutputMode(this->mapMode), "set depth mode");
 
 	try {
 		this->userManager->init(this->context);
@@ -57,10 +57,10 @@ OpenNIFacade::~OpenNIFacade() {
 	}
 
 //	LOG->debug("Starting all generators ...");
-//	XNTRY(this->context.StartGeneratingAll(), "Could not start generators!");
+//	CHECK_XN(this->context.StartGeneratingAll(), "Could not start generators!");
 
 	LOG->debug("Starting depth generator ...");
-	XNTRY(this->depthGenerator.StartGenerating(), "Could not start depth generator!");
+	CHECK_XN(this->depthGenerator.StartGenerating(), "Could not start depth generator!");
 
 	this->updateThread = new UpdateThread(this->context, this->depthGenerator, this->userManager);
 	this->updateThread->start();
@@ -72,13 +72,13 @@ OpenNIFacade::~OpenNIFacade() {
 	this->userManager->unregister();
 	this->updateThread->stopAndJoin();
 
-	try {
-		// get sure everything was unregistered/nothing is waiting, as otherwise node lock error will be returned
-		XNTRY(this->context.StopGeneratingAll(), "Could not stop generators!");
-	} catch(OpenNiException& e) {
-		LOG->warn("Could not stop user manager!"); // TODO add exception as log argument
-		e.printBacktrace();
-	}
+	// FIXME on StopGeneratingAll() getting "The node is locked for changes!" - temporary hack => just shutdown without stopping ;)
+//	try {
+//		CHECK_XN(this->context.StopGeneratingAll(), "Could not stop generators!");
+//	} catch(OpenNiException& e) {
+//		LOG->warn("Could not stop user manager!"); // TODO add exception as log argument
+//		e.printBacktrace();
+//	}
 
 	LOG->debug("Shutting down OpenNI context...");
 	this->context.Shutdown();

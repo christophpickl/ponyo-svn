@@ -10,7 +10,7 @@ namespace pn {
 
 class UserManager {
 public:
-	UserManager();
+	UserManager(UserStateCallback, JointDataCallback);
 	virtual ~UserManager();
 
 	void init(xn::Context&) throw(UserManagerException, OpenNiException);
@@ -22,6 +22,9 @@ private:
 	xn::UserGenerator userGenerator;
 	xn::SkeletonCapability skeletonCapability;
 
+	UserStateCallback userStateCallback;
+	JointDataCallback jointDataCallback;
+
 	bool poseRequired;
 	XnChar requiredPoseName[20];
 
@@ -29,14 +32,14 @@ private:
 	XnCallbackHandle callbackCalibration;
 	XnCallbackHandle callbackPose;
 
-//	void broadcastUserChangeState(int userId, UserState userState);
-	void broadcastJointPositions(XnUserID userId, XnSkeletonJoint jointEnum, int jointId);
+	void broadcastUserChangeState(UserId userId, UserState userState);
+	void broadcastJointPositions(UserId userId, XnSkeletonJoint jointEnum, int jointId);
 
 	static void XN_CALLBACK_TYPE onUserNew(xn::UserGenerator&, XnUserID, void* tthis);
 	static void XN_CALLBACK_TYPE onUserLost(xn::UserGenerator&, XnUserID, void* tthis);
 	static void XN_CALLBACK_TYPE onPoseDetected(xn::PoseDetectionCapability&, const XnChar*, XnUserID, void* tthis);
-	static void XN_CALLBACK_TYPE onCalibrationStart(xn::SkeletonCapability&, XnUserID, void* tthis);
-	static void XN_CALLBACK_TYPE onCalibrationEnd(xn::SkeletonCapability&, XnUserID, XnBool successfullyCalibrated, void* tthis);
+	static void XN_CALLBACK_TYPE onCalibrationStarted(xn::SkeletonCapability&, XnUserID, void* tthis);
+	static void XN_CALLBACK_TYPE onCalibrationEnded(xn::SkeletonCapability&, XnUserID, XnBool successfullyCalibrated, void* tthis);
 };
 }
 

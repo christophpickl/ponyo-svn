@@ -6,6 +6,7 @@
 #include <XnLog.h>
 #include <ponyo/common/PnCommon.hpp>
 #include <ponyo/openni/OpenNiException.hpp>
+#include <ponyo/openni/UserState.hpp>
 
 #define THROW_XN_EXCEPTION(xnStatus, customErrorMessage) \
 	std::string ss;                                                      \
@@ -15,7 +16,19 @@
 	ss.append(")");                                                      \
 	throw OpenNiException(ss.c_str(), AT);
 
-#define XNTRY(xnStatus, customErrorMessage) \
+#define CHECK_XN(xnStatus, customErrorMessage) \
 		if(xnStatus != XN_STATUS_OK) { THROW_XN_EXCEPTION(xnStatus, customErrorMessage); }
+
+namespace pn {
+
+typedef unsigned int UserId;
+
+typedef void (*UserStateCallback) (UserId, UserState);
+
+typedef void (*JointDataCallback) (UserId, unsigned int jointId, float x, float y, float z);
+
+// typedef void (*UpdateThreadThrewExceptionCallback) (int errorCode?? const char* exceptionMessage);
+
+}
 
 #endif // PNOPENNI_INC_HPP_

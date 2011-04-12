@@ -7,10 +7,16 @@
 #include <ponyo/openni/UpdateThread.hpp>
 
 namespace pn {
+
+
 class OpenNIFacade {
 
 public:
-	OpenNIFacade();
+	/**
+	 * @param userStateCallback non-null function handle
+	 * @param JointDataCallback non-null function handle
+	 */
+	OpenNIFacade(UserStateCallback userStateCallback, JointDataCallback jointDataCallback);
 	virtual ~OpenNIFacade();
 
 	void startWithXml(const char* configPath) throw(OpenNiException);
@@ -22,7 +28,6 @@ private:
 
 	UserManager* userManager;
 	UpdateThread* updateThread;
-
 	xn::Context context;
 	xn::DepthGenerator depthGenerator;
 

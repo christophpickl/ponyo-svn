@@ -2,7 +2,11 @@
 
 using namespace pn;
 
-OpenNIFacade g_facade;
+void onUserStateChanged(unsigned int userId, UserState userState) {
+	printf("PlaygroundSample says: onUserStateChanged(userId=%i, userState=%i)\n", userId, userState);
+}
+
+OpenNIFacade g_facade(NULL, NULL);
 
 Log* LOG = NEW_LOG();
 
@@ -30,9 +34,14 @@ int main() {
 		printf("Hit ENTER to quit\n");
 		CommonUtils::waitHitEnter(false);
 		printf("ENTER pressed, shutting down.\n");
-
+	} catch(const OpenNiException& e) {
+		e.printBacktrace();
 	} catch(const Exception& e) {
 		e.printBacktrace();
+	} catch (const std::exception& e) {
+		fprintf(stderr, "std exception: %s\n", e.what());
+	} catch (...) {
+		fprintf(stderr, "Unhandled exception!");
 	}
 
 	tearDown();

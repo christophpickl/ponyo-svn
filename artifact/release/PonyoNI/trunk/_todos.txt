@@ -2,7 +2,7 @@
 @CMAKE: inject version number in some hpp
 @LOG: support varargs, and optional Exception
  
- 
+- add toString for all
  
  
 // TODO get xnErrors working + OpenNiException + string copy (as it seems as something get unintentionally freed)

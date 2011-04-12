@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <ponyo/samples/PlaygroundSample.hpp>
 
 namespace pn {

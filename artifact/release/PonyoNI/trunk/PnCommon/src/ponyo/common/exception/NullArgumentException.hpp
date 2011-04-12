@@ -5,6 +5,10 @@
 #include <ponyo/common/exception/Exception.hpp>
 
 namespace pn {
+
+/**
+ * @version 0.1
+ */
 class NullArgumentException : public Exception {
 public:
 	NullArgumentException(const char* message, const char* sourceFile, int sourceLine);

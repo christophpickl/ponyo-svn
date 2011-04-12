@@ -5,8 +5,14 @@ using namespace pn;
 void onUserStateChanged(UserId userId, UserState userState) {
 	printf("PlaygroundSample says: onUserStateChanged(userId=%i, userState=%i)\n", userId, userState);
 }
+
+int g_jointCounter = 0;
 void onJointDataChanged(UserId userId, unsigned int jointId, float x, float y, float z) {
-//	printf("PlaygroundSample says: onJointDataChanged(userId=%i, jointId=%i, ...)\n", userId, jointId);
+	if(g_jointCounter == 100) {
+		printf("PlaygroundSample says: 100th onJointDataChanged(userId=%i, jointId=%i, ...)\n", userId, jointId);
+		g_jointCounter = 0;
+	}
+	g_jointCounter++;
 }
 
 OpenNIFacade g_facade(&onUserStateChanged, &onJointDataChanged);
@@ -30,22 +36,12 @@ int main() {
 	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)
 //	OpenNIUtils::enableXnLogging(XN_LOG_INFO);
 
-	try {
-		g_facade.startRecording("/myopenni/myoni.oni");
-//		g_facade.startWithXml("misc/playground_config.xml");
+	g_facade.startRecording("/myopenni/myoni.oni");
+//	g_facade.startWithXml("misc/playground_config.xml");
 
-		printf("Hit ENTER to quit\n");
-		CommonUtils::waitHitEnter(false);
-		printf("ENTER pressed, shutting down.\n");
-	} catch(const OpenNiException& e) {
-		e.printBacktrace();
-	} catch(const Exception& e) {
-		e.printBacktrace();
-	} catch (const std::exception& e) {
-		fprintf(stderr, "std exception: %s\n", e.what());
-	} catch (...) {
-		fprintf(stderr, "Unhandled exception!");
-	}
+	printf("Hit ENTER to quit\n");
+	CommonUtils::waitHitEnter(false);
+	printf("ENTER pressed, shutting down.\n");
 
 	tearDown();
 

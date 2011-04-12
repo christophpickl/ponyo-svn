@@ -1,3 +1,6 @@
+/*
+ * @version 0.1
+ */
 #pragma once
 #ifndef PNCOMMON_INC_HPP_
 #define PNCOMMON_INC_HPP_

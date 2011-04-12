@@ -2,26 +2,43 @@
 #ifndef PNJNA_HPP_
 #define PNJNA_HPP_
 
-#include <ponyo/common/PnCommon.hpp>
-
-namespace pn {
-
-// typedef void(*UserStateChangedCallback)(unsigned int userId, unsigned int userState);
-
-// typedef void(*JointPositionChangedCallback)(unsigned int userId, unsigned int jointId, float x, float y, float z);
+#include <ponyo/openni/PnOpenNI.hpp>
 
 /**
  * Initialize and start the OpenNI framework with the given configuration file.
  *
  * @param configPath path to an existing XML file to configure OpenNI with.
+ * @param userStateCallback
+ * @param jointDataCallback
  */
-extern "C" void startWithXml(const char* configPath);
+extern "C" void pnStartWithXml(
+		const char* configPath,
+		pn::UserStateCallback userStateCallback,
+		pn::JointDataCallback jointDataCallback
+	);
 
+/**
+ * Initialize and start the OpenNI framework using a prerecorded session.
+ *
+ * @param oniFilePath path to an existing ONI file which should be replayed.
+ * @param userStateCallback
+ * @param jointDataCallback
+ */
+extern "C" void pnStartRecording(
+		const char* oniFilePath,
+		pn::UserStateCallback userStateCallback,
+		pn::JointDataCallback jointDataCallback
+	);
 /**
  * Stops any started generators, frees any memory, so a further reuse will not be possible anymore.
  */
-extern "C" void destroy();
+extern "C" void pnDestroy();
 
-}
+/*private*/ void __pnStart(
+		const char* configOrOniFile,
+		bool isConfigFlag,
+		pn::UserStateCallback userStateCallback,
+		pn::JointDataCallback jointDataCallback
+	);
 
 #endif // PNJNA_HPP_

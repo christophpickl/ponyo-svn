@@ -5,6 +5,10 @@
 #include <ponyo/common/logging/Log.hpp>
 
 namespace pn {
+
+/**
+ * @version 0.1
+ */
 class LogFactory {
 public:
 	LogFactory();

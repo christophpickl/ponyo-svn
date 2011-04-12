@@ -5,6 +5,10 @@
 #include <ponyo/common/PnCommon.hpp>
 
 namespace pn {
+
+/**
+ * @version 0.1
+ */
 class CommonUtils {
 public:
 	static void sleep(int seconds);

@@ -6,6 +6,10 @@
 #include <ponyo/common/Logging.hpp>
 
 namespace pn {
+
+/**
+ * @version 0.1
+ */
 class Exception {
 
 public:

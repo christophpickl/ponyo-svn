@@ -14,6 +14,10 @@
 #define LABEL_LEVEL_TRACE "[TRACE]"
 
 namespace pn {
+
+/**
+ * @version 0.1
+ */
 class Log {
 public:
 

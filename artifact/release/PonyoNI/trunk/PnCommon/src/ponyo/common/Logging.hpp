@@ -1,5 +1,7 @@
-/**
+/*
  * Include merge header, as well defines NEW_LOG() macro.
+ *
+ * @version 0.1
  */
 #pragma once
 #ifndef LOGGING_HPP_

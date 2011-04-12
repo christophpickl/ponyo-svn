@@ -2,8 +2,7 @@
 #ifndef EXCEPTION_H_
 #define EXCEPTION_H_
 
-#define AT __FILE__, __LINE__
-
+#include <ponyo/common/pncommon_inc.hpp>
 #include <ponyo/common/Logging.hpp>
 
 namespace pn {

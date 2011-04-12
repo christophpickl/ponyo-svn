@@ -1,0 +1,41 @@
+MESSAGE ("===> COMMON")
+
+# MACRO: SETUP LIB
+###############################################################################
+MACRO (PN_SETUP_LIB LIBNAME)
+    INCLUDE_DIRECTORIES ("${PROJECT_SOURCE_DIR}/${LIBNAME}/src")
+	ADD_SUBDIRECTORY (${LIBNAME})
+	SET (EXTRA_LIBS ${EXTRA_LIBS} ${LIBNAME})
+ENDMACRO (PN_SETUP_LIB)
+
+# MACRO: INIT LIB
+###############################################################################
+MACRO (PN_INIT_LIB LIBNAME)
+    MESSAGE ("===> ${LIBNAME}")
+	SET (PROJECT_SOURCE_DIR src)
+	INCLUDE_DIRECTORIES (${PROJECT_SOURCE_DIR})
+	
+	FILE (GLOB_RECURSE CPP_FILES "${PROJECT_SOURCE_DIR}/*.cpp")
+	ADD_LIBRARY (${LIBNAME} SHARED ${CPP_FILES})
+	TARGET_LINK_LIBRARIES (${LIBNAME} ${EXTRA_LIBS})
+	
+	INSTALL (TARGETS ${LIBNAME} LIBRARY DESTINATION lib)
+	INSTALL (DIRECTORY ${PROJECT_SOURCE_DIR}/ponyo
+	         DESTINATION include
+	         FILES_MATCHING PATTERN "*.hpp"
+	                        PATTERN ".svn" EXCLUDE
+	        )
+ENDMACRO (PN_INIT_LIB)
+
+# MACRO: SETUP EXE
+###############################################################################
+MACRO (PN_SETUP_EXE EXENAME)
+	ADD_SUBDIRECTORY (${EXENAME})
+ENDMACRO (PN_SETUP_EXE) 
+
+# COMPILER FLAGS
+###############################################################################
+	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2") # prevent "Undefined symbols" error
+	#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
+	#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+

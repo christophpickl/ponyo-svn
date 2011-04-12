@@ -1,0 +1,1 @@
+PN_INIT_LIB (PnJNA)

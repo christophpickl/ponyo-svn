@@ -1,0 +1,4 @@
+@CMAKE: add cxxunit; http://www.cmake.org/cmake/help/cmake_tutorial.html
+@CMAKE: inject version number in some hpp
+@LOG: support varargs, and optional Exception
+ 

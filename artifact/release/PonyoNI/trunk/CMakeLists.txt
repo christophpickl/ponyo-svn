@@ -1,24 +1,16 @@
+MESSAGE ("===> ROOT")
 
 # GENERAL SETUP
 ###############################################################################
 	CMAKE_MINIMUM_REQUIRED (VERSION 2.8) 
 	PROJECT (PonyoNI)
+	INCLUDE (build_scripts/cmake_common.txt)
 
-# COMPILER FLAGS
-###############################################################################
-	SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2") # prevent "Undefined symbols" error
-	#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g")
-	#SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall")
+PN_SETUP_LIB (PnCommon)
+PN_SETUP_LIB (PnOpenNI)
+PN_SETUP_LIB (PnJNA)
+PN_SETUP_EXE (PnSamples)
 
-# MACRO: SETUP LIB
-###############################################################################
-MACRO (PN_SETUP_LIB LIBNAME)
-    INCLUDE_DIRECTORIES ("${PROJECT_SOURCE_DIR}/${LIBNAME}/src")
-	ADD_SUBDIRECTORY (${LIBNAME})
-	SET (EXTRA_LIBS ${EXTRA_LIBS} ${LIBNAME})
-ENDMACRO (PN_SETUP_LIB) 
-
-PN_SETUP_LIB ("PnCommon")
-PN_SETUP_LIB ("PnOpenNI")
-
-ADD_SUBDIRECTORY (PnSamples)
+ADD_DEPENDENCIES (PnOpenNI PnCommon)
+ADD_DEPENDENCIES (PnJNA PnOpenNI)
+#ADD_DEPENDENCIES (PnSamples PnOpenNI)

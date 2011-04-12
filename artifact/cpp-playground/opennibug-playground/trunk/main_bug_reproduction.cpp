@@ -2,7 +2,7 @@
 #include <XnLog.h>
 
 #define CHECK(returnCode) \
-if(returnCode != XN_STATUS_OK) { fprintf(stderr, "%s\n", xnGetStatusString(returnCode)); exit(1); }
+if(returnCode != XN_STATUS_OK) { fprintf(stderr, "XN Error: %s\n", xnGetStatusString(returnCode)); exit(1); }
 
 int main() {
 	xn::Context context;

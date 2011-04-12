@@ -27,11 +27,15 @@ private:
 	static Log* LOG;
 
 	UserManager* userManager;
-	UpdateThread* updateThread;
+	UpdateThread<OpenNIFacade>* updateThread;
 	xn::Context context;
 	xn::DepthGenerator depthGenerator;
 
+	xn::DepthMetaData depthMetaData; // TODO this seems like a hack, but is mandatory, as otherwise something like: ...
+	// usergenerator does not get data from its dependent depthgenerator (?!)
+
 	void internalSetup() throw(OpenNiException);
+	void onUpdateThreadGotData();
 
 };
 }

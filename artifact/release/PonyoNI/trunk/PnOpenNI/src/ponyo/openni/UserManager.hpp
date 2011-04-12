@@ -8,6 +8,10 @@
 
 namespace pn {
 
+typedef void (*UserStateCallback) (UserId, UserState);
+
+typedef void (*JointDataCallback) (UserId, unsigned int jointId, float x, float y, float z);
+
 class UserManager {
 public:
 	UserManager(UserStateCallback, JointDataCallback);

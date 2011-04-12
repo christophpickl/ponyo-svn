@@ -62,8 +62,13 @@ OpenNIFacade::~OpenNIFacade() {
 	LOG->debug("Starting depth generator ...");
 	CHECK_XN(this->depthGenerator.StartGenerating(), "Could not start depth generator!");
 
-	this->updateThread = new UpdateThread(this->context, this->depthGenerator, this->userManager);
-	this->updateThread->start();
+	this->updateThread = new UpdateThread<OpenNIFacade>(this, &OpenNIFacade::onUpdateThreadGotData);
+	this->updateThread->start(this->context);
+}
+
+void OpenNIFacade::onUpdateThreadGotData() {
+	this->depthGenerator.GetMetaData(this->depthMetaData);
+	this->userManager->update();
 }
 
 /*public*/ void OpenNIFacade::destroy() {

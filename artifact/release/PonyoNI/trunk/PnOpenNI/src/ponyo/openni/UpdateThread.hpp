@@ -8,20 +8,24 @@
 #include <ponyo/openni/UserManager.hpp>
 
 namespace pn {
+
+template <class CallbackType>
 class UpdateThread {
 public:
-	UpdateThread(xn::Context&, xn::DepthGenerator&, UserManager*);
+	typedef void (CallbackType::*aFunction) ();
+
+	UpdateThread(CallbackType* callbackInstance,  aFunction callbackMethod);
 	virtual ~UpdateThread();
 
-	void start();
+	void start(xn::Context&);
 	void stopAndJoin();
 private:
 	static Log* LOG;
 
+	CallbackType* callbackInstance;
+	aFunction callbackMethod;
+
 	boost::thread updateThread;
-	xn::Context context;
-	xn::DepthGenerator depthGenerator;
-	UserManager* userManager;
 	bool threadShouldRun;
 
 

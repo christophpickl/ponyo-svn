@@ -2,36 +2,34 @@
 
 namespace pn {
 
-Log* UpdateThread::LOG = NEW_LOG();
+Log* UpdateThread<CallbackType>::LOG = NEW_LOG();
 
-// FIXME receive callback handle instead
-UpdateThread::UpdateThread(xn::Context& pContext, xn::DepthGenerator& pDepthGenerator, UserManager* pUserManager) :
-		threadShouldRun(true), context(pContext), userManager(pUserManager), depthGenerator(pDepthGenerator) {
-	LOG->debug("new UpdateThread(context, userManager, depthGenerator)");
+UpdateThread::UpdateThread(CallbackType* pCallbackInstance,  aFunction pCallbackMethod) :
+		callbackInstance(pCallbackInstance),
+		callbackMethod(pCallbackMethod),
+		threadShouldRun(true) {
+	LOG->debug("new UpdateThread(callbackInstance, callbackMethod)");
 }
 
-UpdateThread::~UpdateThread() {
+UpdateThread<CallbackType>::~UpdateThread() {
 	LOG->debug("~UpdateThread()");
 }
 
-void UpdateThread::start() {
-	LOG->debug("start() ... spawning update thread");
-	this->updateThread = boost::thread(&UpdateThread::onThreadRun, this);
+void UpdateThread::start(xn::Context& context) {
+	LOG->debug("start(context) ... spawning update thread");
+	this->updateThread = boost::thread(&UpdateThread::onThreadRun, this, context);
 }
 
-void UpdateThread::onThreadRun() {
-	LOG->info("onThreadRun() START");
-	xn::DepthMetaData depthMetaData; // TODO this seems like a hack, but is mandatory, as otherwise something like: ...
-	// usergenerator does not get data from its dependent depthgenerator (?!)
+void UpdateThread::onThreadRun(xn::Context& context) {
+	LOG->info("onThreadRun(context) START");
 
 //	try {
 		while(this->threadShouldRun) {
-			this->context.WaitAnyUpdateAll();
-			this->depthGenerator.GetMetaData(depthMetaData);
-//			this->userManager->update();
+			context.WaitAnyUpdateAll();
+			(this->callbackInstance->*this->callbackMethod)();
 		}
 //	} catch(Exception& e) {
-//		this->broadcastThreadException(e);
+//		TODO this->broadcastThreadException(e);
 //	}
 	LOG->info("onThreadRun() END");
 }

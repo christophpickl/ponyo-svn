@@ -1,15 +1,16 @@
 #include <boost/thread.hpp>
 #include <boost/date_time.hpp>
-#include <ponyo/common/Utils.hpp>
+#include <ponyo/common/CommonUtils.hpp>
 
 namespace pn {
-Log* Utils::LOG = NEW_LOG();
+Log* CommonUtils::LOG = NEW_LOG();
 
-Utils::Utils() { }
-Utils::~Utils() { }
+CommonUtils::CommonUtils() { }
+CommonUtils::~CommonUtils() { }
 
-/*static*/ void Utils::sleep(int seconds) {
+/*static*/ void CommonUtils::sleep(int seconds) {
 	LOG->debug("sleep(seconds)");
+
 	boost::posix_time::seconds workTime(seconds);
 	boost::this_thread::sleep(workTime);
 }

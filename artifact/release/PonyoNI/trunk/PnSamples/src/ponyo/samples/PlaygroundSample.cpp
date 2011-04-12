@@ -1,40 +1,42 @@
 #include <ponyo/openni/PnOpenNI.hpp>
 using namespace pn;
 
-bool g_shouldQuit = false;
+PnContext g_context;
+
+Log* LOG = NEW_LOG();
+
+void tearDown() {
+	LOG->info("tearDown()");
+	g_context.destroy();
+}
 
 void onSignalReceived(int signalCode) {
 	printf("onSignalReceived(signalCode=%d)\n", signalCode);
-	g_shouldQuit = true;
+	tearDown();
 }
 
-void foo() {
+int main() {
+	LOG->info("PlaygroundSample main() START\n");
+
 	signal(SIGINT, onSignalReceived); // hit CTRL-C keys in terminal (2)
 	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)
+//	OpenNIUtils::enableXnLogging(XN_LOG_INFO);
 
-	PnContext* context = new PnContext();
 	try {
-		context->startRecording("/myopenni/myoni.oni");
-		printf("Entering infinite loop ...\n");
-		int i = 0;
-		while(g_shouldQuit == false && i != 5) {
-			Utils::sleep(2);
-			i++;
-		}
-		printf("loop ended\n");
+//		g_context.startRecording("/myopenni/myoni.oni");
+		g_context.startWithXml("/myopenni/simple_config.xml");
+
+		printf("Hit ENTER to quit\n");
+		std::string input;
+		std::getline(std::cin, input);
+		printf("ENTER pressed, shutting down.\n");
+
 	} catch(const Exception& e) {
 		e.printBacktrace();
 	}
 
-	context->destroy();
-	delete context;
-}
+	tearDown();
 
-int main() {
-	printf("PlaygroundSample main() START\n");
-
-	foo();
-
-	printf("main() END\n");
+	LOG->info("main() END\n");
 	return 0;
 }

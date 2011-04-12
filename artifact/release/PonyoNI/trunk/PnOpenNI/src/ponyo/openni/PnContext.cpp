@@ -69,13 +69,16 @@ PnContext::~PnContext() {
 /*public*/ void PnContext::destroy() {
 	LOG->info("destroy()");
 
+	this->userManager->unregister();
+	this->updateThread->stopAndJoin();
+//	this->depthGenerator
+
 	try {
 		XNTRY(this->context.StopGeneratingAll(), "Could not stop generators!");
 	} catch(OpenNiException& e) {
 		LOG->warn("Could not stop user manager!"); // TODO add exception as log argument
 		e.printBacktrace();
 	}
-	this->updateThread->stopAndJoin();
 
 	LOG->debug("Shutting down OpenNI context...");
 	this->context.Shutdown();

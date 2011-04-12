@@ -3,6 +3,7 @@
 #define PNOPENNI_INC_HPP_
 
 #include <XnCppWrapper.h>
+#include <XnLog.h>
 #include <ponyo/common/PnCommon.hpp>
 #include <ponyo/openni/OpenNiException.hpp>
 

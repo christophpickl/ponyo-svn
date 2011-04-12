@@ -14,8 +14,8 @@ public:
 	virtual ~UserManager();
 
 	void init(xn::Context&) throw(UserManagerException, OpenNiException);
-
 	void update() throw(OpenNiException);
+	void unregister();
 
 private:
 	static Log* LOG;

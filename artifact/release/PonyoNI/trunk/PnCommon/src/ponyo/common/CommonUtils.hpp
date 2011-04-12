@@ -1,14 +1,14 @@
 #pragma once
-#ifndef UTILS_HPP_
-#define UTILS_HPP_
+#ifndef COMMONUTILS_HPP_
+#define COMMONUTILS_HPP_
 
 #include <ponyo/common/PnCommon.hpp>
 
 namespace pn {
-class Utils {
+class CommonUtils {
 public:
-	Utils();
-	virtual ~Utils();
+	CommonUtils();
+	virtual ~CommonUtils();
 
 	static void sleep(int seconds);
 private:
@@ -17,4 +17,4 @@ private:
 };
 }
 
-#endif // UTILS_HPP_
+#endif // COMMONUTILS_HPP_

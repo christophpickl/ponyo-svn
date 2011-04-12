@@ -9,13 +9,15 @@ UserManager::UserManager() : skeletonCapability(NULL) {
 }
 
 /*public*/ UserManager::~UserManager() {
-	LOG->debug("~UserManager() ... unregistering callbacks");
+	LOG->debug("~UserManager()");
+	this->unregister(); // just to be sure, invoke in any case
+}
+/*public*/ void UserManager::unregister() {
+	LOG->debug("unregister()");
 
 	this->userGenerator.UnregisterUserCallbacks(this->callbackUser);
 	this->userGenerator.GetSkeletonCap().UnregisterCalibrationCallbacks(this->callbackCalibration);
 	this->userGenerator.GetPoseDetectionCap().UnregisterFromPoseCallbacks(this->callbackPose);
-
-	LOG->debug("~UserManager() END");
 }
 
 /*public*/ void UserManager::init(xn::Context& context) throw(UserManagerException, OpenNiException) {

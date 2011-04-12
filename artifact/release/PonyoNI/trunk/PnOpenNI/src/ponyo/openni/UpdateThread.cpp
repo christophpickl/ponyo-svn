@@ -4,6 +4,7 @@ namespace pn {
 
 Log* UpdateThread::LOG = NEW_LOG();
 
+// FIXME receive callback handle instead
 UpdateThread::UpdateThread(xn::Context& pContext, xn::DepthGenerator& pDepthGenerator, UserManager* pUserManager) :
 		threadShouldRun(true), context(pContext), userManager(pUserManager), depthGenerator(pDepthGenerator) {
 	LOG->debug("new UpdateThread(context, userManager, depthGenerator)");
@@ -20,7 +21,9 @@ void UpdateThread::start() {
 
 void UpdateThread::onThreadRun() {
 	LOG->info("onThreadRun() START");
-	xn::DepthMetaData depthMetaData;
+	xn::DepthMetaData depthMetaData; // TODO this seems like a hack, but is mandatory, as otherwise something like: ...
+	// usergenerator does not get data from its dependent depthgenerator (?!)
+
 //	try {
 		while(this->threadShouldRun) {
 			this->context.WaitAnyUpdateAll();

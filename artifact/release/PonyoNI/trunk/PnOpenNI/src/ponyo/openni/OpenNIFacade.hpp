@@ -16,12 +16,16 @@ public:
 	 * @param userStateCallback non-null function handle
 	 * @param jointPositionCallback non-null function handle
 	 */
-	OpenNIFacade(UserStateCallback userStateCallback, JointPositionCallback jointPositionCallback);
+	OpenNIFacade();
 	virtual ~OpenNIFacade();
 
-	void startWithXml(const char* configPath) throw(OpenNiException);
-	void startRecording(const char* oniFilePath) throw(OpenNiException);
-	void destroy();
+//	void registerUserStateCallback(UserStateCallback);
+//	void registerJointPositionCallback(JointPositionCallback);
+
+	void startWithXml(const char* configPath, UserStateCallback, JointPositionCallback) throw(OpenNiException);
+	void startRecording(const char* oniFilePath, UserStateCallback, JointPositionCallback) throw(OpenNiException);
+
+	void shutdown();
 
 private:
 	static Log* LOG;
@@ -34,7 +38,7 @@ private:
 	xn::DepthMetaData depthMetaData; // TODO this seems like a hack, but is mandatory, as otherwise something like: ...
 	// usergenerator does not get data from its dependent depthgenerator (?!)
 
-	void internalSetup() throw(OpenNiException);
+	void internalSetup(UserStateCallback, JointPositionCallback) throw(OpenNiException);
 	void onUpdateThread();
 
 };

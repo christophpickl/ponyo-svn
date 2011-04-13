@@ -15,13 +15,13 @@ void onJointPositionChanged(UserId userId, unsigned int jointId, float x, float 
 	g_jointCounter++;
 }
 
-OpenNIFacade g_facade(&onUserStateChanged, &onJointPositionChanged);
+OpenNIFacade g_facade;
 
 Log* LOG = NEW_LOG();
 
 void tearDown() {
 	LOG->info("tearDown()");
-	g_facade.destroy();
+	g_facade.shutdown();
 }
 
 void onSignalReceived(int signalCode) {
@@ -36,7 +36,7 @@ int main() {
 	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)
 //	OpenNIUtils::enableXnLogging(XN_LOG_INFO);
 
-	g_facade.startRecording("/ponyo/oni.oni");
+	g_facade.startRecording("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
 //	g_facade.startWithXml("misc/playground_config.xml");
 
 	printf("Hit ENTER to quit\n");

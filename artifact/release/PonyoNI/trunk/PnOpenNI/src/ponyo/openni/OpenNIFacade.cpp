@@ -5,20 +5,18 @@ namespace pn {
 
 Log* OpenNIFacade::LOG = NEW_LOG();
 
-OpenNIFacade::OpenNIFacade(
-		UserStateCallback userStateCallback,
-		JointPositionCallback jointPositionCallback) {
-	LOG->debug("new OpenNIFacade(userStateCallback, jointPositionCallback )");
-
-	this->userManager = new UserManager(userStateCallback, jointPositionCallback);
+OpenNIFacade::OpenNIFacade() {
+	LOG->debug("new OpenNIFacade( )");
 }
-
 OpenNIFacade::~OpenNIFacade() {
 	LOG->debug("~OpenNIFacade()");
-	delete this->userManager;
+	if(this->userManager != NULL) {
+		delete this->userManager;
+	}
 }
 
-/*public*/ void OpenNIFacade::startRecording(const char* oniFilePath) throw(OpenNiException) {
+
+/*public*/ void OpenNIFacade::startRecording(const char* oniFilePath, UserStateCallback userCallback, JointPositionCallback jointCallback) throw(OpenNiException) {
 	LOG->info2("startRecording(oniFilePath=%s)", oniFilePath);
 
 	LOG->debug("Initializing context ...");
@@ -28,19 +26,19 @@ OpenNIFacade::~OpenNIFacade() {
 	printf("opening: %s\n", oniFilePath);
 	CHECK_XN(this->context.OpenFileRecording(oniFilePath), "Could not open *.oni file!");
 
-	this->internalSetup();
+	this->internalSetup(userCallback, jointCallback);
 }
 
-/*public*/ void OpenNIFacade::startWithXml(const char* configPath) throw(OpenNiException) {
+/*public*/ void OpenNIFacade::startWithXml(const char* configPath, UserStateCallback userCallback, JointPositionCallback jointCallback) throw(OpenNiException) {
 	LOG->info2("startWithXml(configPath=%s)", configPath);
 
 	printf("Initializing context from file: %s\n", configPath);
 	CHECK_XN(this->context.InitFromXmlFile(configPath), "Could not initialize OpenNI context from XML! Is the device really properly connected?!");
 
-	this->internalSetup();
+	this->internalSetup(userCallback, jointCallback);
 }
 
-/*private*/ void OpenNIFacade::internalSetup() throw(OpenNiException) {
+/*private*/ void OpenNIFacade::internalSetup(UserStateCallback userCallback, JointPositionCallback jointCallback) throw(OpenNiException) {
 	LOG->info("internalSetup()");
 
 	LOG->debug("Creating depth generator ...");
@@ -52,6 +50,7 @@ OpenNIFacade::~OpenNIFacade() {
 	// mandatory to set if starting non-recording, otherwise will fail
 //	... if starting non-recording => CHECK_XN(this->depthGenerator.SetMapOutputMode(this->mapMode), "set depth mode");
 
+	this->userManager = new UserManager(userCallback, jointCallback);
 	try {
 		this->userManager->init(this->context);
 	} catch(UserManagerException& e) {
@@ -63,20 +62,16 @@ OpenNIFacade::~OpenNIFacade() {
 	LOG->debug("Starting depth generator ...");
 	CHECK_XN(this->depthGenerator.StartGenerating(), "Could not start depth generator!");
 
-	printf("new thread starting\n");
 	this->updateThread.start(this->context, this, &OpenNIFacade::onUpdateThread);
 }
 
 void OpenNIFacade::onUpdateThread() {
-	// strange, but we have to do this (unnecessary read) to get updates from user generator
-	this->depthGenerator.GetMetaData(this->depthMetaData);
-
-	// read and broadcast new skeleton data
-	this->userManager->update();
+	this->depthGenerator.GetMetaData(this->depthMetaData); // have to unnecessary read to get updates from user generator :-/
+	this->userManager->update(); // read and broadcast new skeleton data
 }
 
-/*public*/ void OpenNIFacade::destroy() {
-	LOG->info("destroy()");
+/*public*/ void OpenNIFacade::shutdown() {
+	LOG->info("shutdown()");
 
 	this->userManager->unregister();
 	this->updateThread.stopAndJoin();

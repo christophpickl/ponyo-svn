@@ -13,6 +13,9 @@ public:
 	UserManager(UserStateCallback, JointPositionCallback);
 	virtual ~UserManager();
 
+//	void registerUserStateCallback(UserStateCallback, void* cookie = NULL);
+//	void registerJointPositionCallback(JointPositionCallback, void* cookie = NULL);
+
 	void init(xn::Context&) throw(UserManagerException, OpenNiException);
 	void update() throw(OpenNiException);
 	void unregister();
@@ -22,8 +25,8 @@ private:
 	xn::UserGenerator userGenerator;
 	xn::SkeletonCapability skeletonCapability;
 
-	UserStateCallback userStateCallback;
-	JointPositionCallback jointPositionCallback;
+	UserStateCallback userCallback;
+	JointPositionCallback jointCallback;
 
 	bool poseRequired;
 	XnChar requiredPoseName[20];

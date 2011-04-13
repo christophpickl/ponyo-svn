@@ -5,17 +5,14 @@ namespace pn {
 
 Log* UserManager::LOG = NEW_LOG();
 
-UserManager::UserManager(UserStateCallback pUserStateCallback, JointPositionCallback pJointPositionCallback) :
-		skeletonCapability(NULL),
-		userStateCallback(pUserStateCallback),
-		jointPositionCallback(pJointPositionCallback),
-		callbacksRegistered(false)
-{
-	LOG->debug("new UserManager(userStateCallback, jointPositionCallback)");
-
-	if(this->userStateCallback == NULL) {
-		throw NullArgumentException("null", AT);
-	}
+UserManager::UserManager(UserStateCallback pUserCallback, JointPositionCallback pJointCallback) :
+		userCallback(pUserCallback),
+		jointCallback(pJointCallback),
+		skeletonCapability(NULL), callbacksRegistered(false) {
+	LOG->debug("new UserManager(..)");
+	// TODO write NULL CHECK macro
+	if(pUserCallback == NULL) { throw NullArgumentException("UserStateCallback", AT); }
+	if(pJointCallback == NULL) { throw NullArgumentException("JointPositionCallback", AT); }
 }
 
 UserManager::~UserManager() {
@@ -156,7 +153,8 @@ UserManager::~UserManager() {
 
 //	printf("joint position: %i.X = %f\n", jointEnum, jointPosition.position.X);
 	if(jointPosition.fConfidence > 0.5) {
-		this->jointPositionCallback(userId, jointId, jointPosition.position.X, jointPosition.position.Y, jointPosition.position.Z);
+		this->jointCallback(userId, jointId,
+			jointPosition.position.X, jointPosition.position.Y, jointPosition.position.Z);
 	}
 }
 
@@ -164,7 +162,7 @@ UserManager::~UserManager() {
 		UserId userId,
 		UserState userState
 	) {
-	this->userStateCallback(userId, userState);
+	this->userCallback(userId, userState);
 }
 
 /*private static*/ void XN_CALLBACK_TYPE UserManager::onUserNew(

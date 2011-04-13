@@ -3,7 +3,7 @@
 using namespace pn;
 
 Log* LOG = NEW_LOG();
-OpenNIFacade* facade;
+OpenNIFacade facade;
 bool isRunning = false;
 
 extern "C" int pnStartByXmlConfig(
@@ -27,20 +27,17 @@ int __pnStart(
 		bool isConfigFlag,
 		UserStateCallback userStateCallback,
 		JointPositionCallback jointPositionCallback) {
-	if(facade != NULL) {
-		return 66; // TODO return error resultCode -> in java throw an IllegalStateException!!!
-	}
+
 	if(isRunning == true) {
 		return 67;
 	}
 
 	int resultCode = -1;
 	try {
-		facade = new OpenNIFacade(userStateCallback, jointPositionCallback);
 		if(isConfigFlag) {
-			facade->startWithXml(configOrOniPath); // "misc/playground_config.xml"
+			facade.startWithXml(configOrOniPath, userStateCallback, jointPositionCallback);
 		} else {
-			facade->startRecording(configOrOniPath); // "/myopenni/myoni.oni"
+			facade.startRecording(configOrOniPath, userStateCallback, jointPositionCallback);
 		}
 		isRunning = true;
 		resultCode = 0;
@@ -61,19 +58,16 @@ int __pnStart(
 	return resultCode;
 }
 
-extern "C" void pnDestroy() {
-	LOG->info("pnDestroy()");
+extern "C" void pnShutdown() {
+	LOG->info("pnShutdown()");
 
 	// FIXME check if currently initializing, as client (awt dispatcher thread) could be async call
-	if(facade != NULL) {
-		printf("destroying; is running = %i\n", isRunning);
-		if(isRunning == true) {
-			facade->destroy();
-			isRunning = false;
-		}
-		delete facade;
+	printf("shutting down; is running = %i\n", isRunning);
+	if(isRunning == true) {
+		facade.shutdown();
+		isRunning = false;
 	} else {
-		LOG->warn("nothing to destroy");
+		LOG->warn("nothing to shutdown");
 	}
 }
 

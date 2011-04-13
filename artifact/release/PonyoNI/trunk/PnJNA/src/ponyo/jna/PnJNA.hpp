@@ -23,11 +23,9 @@ extern "C" int pnStartByOniRecording(
 	);
 
 /**
- * Stops any started generators, frees any memory.
- *
- * Theoretically it should be possible to call start again ;)
+ * Stops generators, frees memory, etc... object is not reusable afterwards.
  */
-extern "C" void pnDestroy();
+extern "C" void pnShutdown();
 
 /**
  * Internal method containing common generic startup logic.

@@ -2,7 +2,7 @@
 
 using namespace pn;
 
-void onUserStateChanged(unsigned int userId, UserState userState) {
+void onUserStateChanged(UserId userId, UserState userState) {
 	printf(">>>>> SimpleSample says: onUserStateChanged(userId=%i, userState=%i)\n", userId, userState);
 }
 
@@ -11,24 +11,33 @@ void onJointPositionChanged(UserId userId, unsigned int jointId, float x, float 
 }
 
 void usePnFacadeToRunOniFile() {
-	OpenNIFacade* facade = new OpenNIFacade(&onUserStateChanged, &onJointPositionChanged);
+	OpenNIFacade facade;
 
-//	facade->startWithXml("misc/playground_config.xml");
-	facade->startRecording("/myopenni/myoni.oni");
+//	facade.startWithXml("misc/playground_config.xml", &onUserStateChanged, &onJointPositionChanged);
+	facade.startRecording("/myopenni/myoni.oni", &onUserStateChanged, &onJointPositionChanged);
 	CommonUtils::waitHitEnter();
-	facade->destroy();
-	delete facade;
+	facade.shutdown();
 }
 
-void foo() {
-	try {
-//		usePnFacadeToRunOniFile();
+void justStartContextAndDumpInfo() {
+	xn::Context context;
 
-		xn::Context context;
-//		CHECK_XN(context.Init(), "context init");
-		CHECK_XN(context.InitFromXmlFile("/ponyo/niconfig.xml"), "context init xml");
-		OpenNIUtils::dumpNodeInfosByContext(context);
-		context.Shutdown();
+//	CHECK_XN(context.Init(), "context init");
+	CHECK_XN(context.InitFromXmlFile("/ponyo/niconfig.xml"), "context init xml");
+
+	OpenNIUtils::dumpNodeInfosByContext(context);
+
+	context.Shutdown();
+}
+
+int main() {
+	printf("SimpleSample main() START\n");
+
+	try {
+
+		usePnFacadeToRunOniFile();
+//		justStartContextAndDumpInfo();
+
 	} catch(Exception& e) {
 		fprintf(stderr, "Ponyo Exception:");
 		e.printBacktrace();
@@ -37,11 +46,7 @@ void foo() {
 	} catch(...) {
 		fprintf(stderr, "Some unkown error occured! DEBUG!"); // TODO how to process varargs?!
 	}
-}
 
-int main() {
-	printf("SimpleSample main() START\n");
-	foo();
 	printf("main() END\n");
 	return 0;
 }

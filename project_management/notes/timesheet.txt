@@ -2,8 +2,8 @@
 TIMESHEET CP
 =================================================
 
-              ~~100h~~
-13.04. - 20:00 -   h - 
+              ~~103h~~
+13.04. - 20:00 -  3h - finisihed initial version of PonyoOSC Server
               ~~100h~~
 13.04. - 13:00 -  7h - starting basic jponyo connection setup
 13.04. - 10:00 -  3h - wanted to start JPonyo, but had to fiddle around with nasty boost lib bugs

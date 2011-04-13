@@ -22,7 +22,7 @@ protected:
         try{
             // example of parsing single messages. osc::OsckPacketListener
             // handles the bundle traversal.
-            
+            std::cout << "ProcessMessage(m.AddressPattern()=" << m.AddressPattern() << ")" << std::endl;
             if( std::strcmp( m.AddressPattern(), "/test1" ) == 0 ){
                 // example #1 -- argument stream interface
                 osc::ReceivedMessageArgumentStream args = m.ArgumentStream();

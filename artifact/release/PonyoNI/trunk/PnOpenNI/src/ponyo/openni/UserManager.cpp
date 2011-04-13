@@ -4,12 +4,12 @@ namespace pn {
 
 Log* UserManager::LOG = NEW_LOG();
 
-UserManager::UserManager(UserStateCallback pUserStateCallback, JointDataCallback pJointDataCallback) :
+UserManager::UserManager(UserStateCallback pUserStateCallback, JointPositionCallback pJointPositionCallback) :
 		skeletonCapability(NULL),
 		userStateCallback(pUserStateCallback),
-		jointDataCallback(pJointDataCallback)
+		jointPositionCallback(pJointPositionCallback)
 {
-	LOG->debug("new UserManager(userStateCallback, jointDataCallback)");
+	LOG->debug("new UserManager(userStateCallback, jointPositionCallback)");
 
 	if(this->userStateCallback == NULL) {
 		throw NullArgumentException("null", AT);
@@ -133,7 +133,7 @@ UserManager::~UserManager() {
 		return; // skip bad data
 	}
 //	printf("joint position: %i.X = %f\n", jointEnum, jointPosition.position.X);
-	this->jointDataCallback(userId, jointId, jointPosition.position.X, jointPosition.position.Y, jointPosition.position.Z);
+	this->jointPositionCallback(userId, jointId, jointPosition.position.X, jointPosition.position.Y, jointPosition.position.Z);
 }
 
 /*private*/ inline void UserManager::broadcastUserChangeState(

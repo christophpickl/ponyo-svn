@@ -10,7 +10,7 @@ namespace pn {
 
 class UserManager {
 public:
-	UserManager(UserStateCallback, JointDataCallback);
+	UserManager(UserStateCallback, JointPositionCallback);
 	virtual ~UserManager();
 
 	void init(xn::Context&) throw(UserManagerException, OpenNiException);
@@ -23,7 +23,7 @@ private:
 	xn::SkeletonCapability skeletonCapability;
 
 	UserStateCallback userStateCallback;
-	JointDataCallback jointDataCallback;
+	JointPositionCallback jointPositionCallback;
 
 	bool poseRequired;
 	XnChar requiredPoseName[20];

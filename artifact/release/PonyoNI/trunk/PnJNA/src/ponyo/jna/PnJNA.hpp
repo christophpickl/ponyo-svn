@@ -9,12 +9,12 @@
  *
  * @param configPath path to an existing XML file to configure OpenNI with.
  * @param userStateCallback
- * @param jointDataCallback
+ * @param jointPositionCallback
  */
 extern "C" void pnStartWithXml(
 		const char* configPath,
 		pn::UserStateCallback userStateCallback,
-		pn::JointDataCallback jointDataCallback
+		pn::JointPositionCallback jointPositionCallback
 	);
 
 /**
@@ -22,12 +22,12 @@ extern "C" void pnStartWithXml(
  *
  * @param oniFilePath path to an existing ONI file which should be replayed.
  * @param userStateCallback
- * @param jointDataCallback
+ * @param jointPositionCallback
  */
 extern "C" void pnStartRecording(
 		const char* oniFilePath,
 		pn::UserStateCallback userStateCallback,
-		pn::JointDataCallback jointDataCallback
+		pn::JointPositionCallback jointPositionCallback
 	);
 /**
  * Stops any started generators, frees any memory, so a further reuse will not be possible anymore.
@@ -38,7 +38,7 @@ extern "C" void pnDestroy();
 		const char* configOrOniFile,
 		bool isConfigFlag,
 		pn::UserStateCallback userStateCallback,
-		pn::JointDataCallback jointDataCallback
+		pn::JointPositionCallback jointPositionCallback
 	);
 
 #endif // PNJNA_HPP_

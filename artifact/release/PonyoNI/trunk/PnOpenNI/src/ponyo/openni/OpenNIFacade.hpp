@@ -14,9 +14,9 @@ class OpenNIFacade {
 public:
 	/**
 	 * @param userStateCallback non-null function handle
-	 * @param JointDataCallback non-null function handle
+	 * @param jointPositionCallback non-null function handle
 	 */
-	OpenNIFacade(UserStateCallback userStateCallback, JointDataCallback jointDataCallback);
+	OpenNIFacade(UserStateCallback userStateCallback, JointPositionCallback jointPositionCallback);
 	virtual ~OpenNIFacade();
 
 	void startWithXml(const char* configPath) throw(OpenNiException);

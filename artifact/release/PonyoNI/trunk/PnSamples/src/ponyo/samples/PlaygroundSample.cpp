@@ -7,15 +7,15 @@ void onUserStateChanged(UserId userId, UserState userState) {
 }
 
 int g_jointCounter = 0;
-void onJointDataChanged(UserId userId, unsigned int jointId, float x, float y, float z) {
+void onJointPositionChanged(UserId userId, unsigned int jointId, float x, float y, float z) {
 	if(g_jointCounter == 100) {
-		printf("PlaygroundSample says: 100th onJointDataChanged(userId=%i, jointId=%i, ...)\n", userId, jointId);
+		printf("PlaygroundSample says: 100th onJointPositionChanged(userId=%i, jointId=%i, ...)\n", userId, jointId);
 		g_jointCounter = 0;
 	}
 	g_jointCounter++;
 }
 
-OpenNIFacade g_facade(&onUserStateChanged, &onJointDataChanged);
+OpenNIFacade g_facade(&onUserStateChanged, &onJointPositionChanged);
 
 Log* LOG = NEW_LOG();
 

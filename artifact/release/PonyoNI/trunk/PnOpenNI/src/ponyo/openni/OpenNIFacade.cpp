@@ -4,10 +4,10 @@ namespace pn {
 
 Log* OpenNIFacade::LOG = NEW_LOG();
 
-OpenNIFacade::OpenNIFacade(UserStateCallback userStateCallback, JointDataCallback jointDataCallback) {
-	LOG->debug("new OpenNIFacade(userStateCallback, jointDataCallback )");
+OpenNIFacade::OpenNIFacade(UserStateCallback userStateCallback, JointPositionCallback jointPositionCallback) {
+	LOG->debug("new OpenNIFacade(userStateCallback, jointPositionCallback )");
 
-	this->userManager = new UserManager(userStateCallback, jointDataCallback);
+	this->userManager = new UserManager(userStateCallback, jointPositionCallback);
 }
 
 OpenNIFacade::~OpenNIFacade() {
@@ -75,7 +75,9 @@ void OpenNIFacade::onUpdateThreadGotData() {
 	LOG->info("destroy()");
 
 	this->userManager->unregister();
-	this->updateThread->stopAndJoin();
+	if(this->updateThread != NULL) {
+		this->updateThread->stopAndJoin();
+	}
 
 	// FIXME on StopGeneratingAll() getting "The node is locked for changes!" - temporary hack => just shutdown without stopping ;)
 //	try {

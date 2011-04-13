@@ -35,7 +35,7 @@ private:
 	// usergenerator does not get data from its dependent depthgenerator (?!)
 
 	void internalSetup() throw(OpenNiException);
-	void onUpdateThreadGotData();
+	void onUpdateThread();
 
 };
 }

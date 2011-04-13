@@ -12,6 +12,7 @@
  * @param jointPositionCallback
  */
 extern "C" void pnStartWithXml(
+		int& resultCode,
 		const char* configPath,
 		pn::UserStateCallback userStateCallback,
 		pn::JointPositionCallback jointPositionCallback
@@ -25,6 +26,7 @@ extern "C" void pnStartWithXml(
  * @param jointPositionCallback
  */
 extern "C" void pnStartRecording(
+		int& resultCode,
 		const char* oniFilePath,
 		pn::UserStateCallback userStateCallback,
 		pn::JointPositionCallback jointPositionCallback
@@ -35,6 +37,7 @@ extern "C" void pnStartRecording(
 extern "C" void pnDestroy();
 
 /*private*/ void __pnStart(
+		int& resultCode,
 		const char* configOrOniFile,
 		bool isConfigFlag,
 		pn::UserStateCallback userStateCallback,

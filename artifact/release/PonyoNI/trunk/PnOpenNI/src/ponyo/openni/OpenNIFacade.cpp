@@ -7,7 +7,7 @@ Log* OpenNIFacade::LOG = NEW_LOG();
 OpenNIFacade::OpenNIFacade(
 		UserStateCallback userStateCallback,
 		JointPositionCallback jointPositionCallback) :
-		updateThread(NULL) {
+		updateThread(new UpdateThread<OpenNIFacade>()) {
 	LOG->debug("new OpenNIFacade(userStateCallback, jointPositionCallback )");
 
 	this->userManager = new UserManager(userStateCallback, jointPositionCallback);
@@ -17,9 +17,7 @@ OpenNIFacade::~OpenNIFacade() {
 	LOG->debug("~OpenNIFacade()");
 
 	delete this->userManager;
-	if(this->updateThread != NULL) { // as it will be lazy instantiatiated
-		delete this->updateThread;
-	}
+	delete this->updateThread;
 }
 
 /*public*/ void OpenNIFacade::startRecording(const char* oniFilePath) throw(OpenNiException) {
@@ -38,7 +36,7 @@ OpenNIFacade::~OpenNIFacade() {
 /*public*/ void OpenNIFacade::startWithXml(const char* configPath) throw(OpenNiException) {
 	LOG->info("startWithXml(configPath)");
 
-	LOG->debug("Initializing context ...");
+	printf("Initializing context from file: %s\n", configPath);
 	CHECK_XN(this->context.InitFromXmlFile(configPath), "Could not initialize OpenNI context from XML!");
 
 	this->internalSetup();
@@ -62,18 +60,18 @@ OpenNIFacade::~OpenNIFacade() {
 		throw OpenNiException(e.getMessage(), AT); // TODO add UserManagerException as exception cause
 	}
 
-//	LOG->debug("Starting all generators ...");
-//	CHECK_XN(this->context.StartGeneratingAll(), "Could not start generators!");
-
 	LOG->debug("Starting depth generator ...");
 	CHECK_XN(this->depthGenerator.StartGenerating(), "Could not start depth generator!");
 
-	this->updateThread = new UpdateThread<OpenNIFacade>(this, &OpenNIFacade::onUpdateThreadGotData);
-	this->updateThread->start(this->context);
+	printf("new thread starting\n");
+	this->updateThread->start(this->context, this, &OpenNIFacade::onUpdateThread);
 }
 
-void OpenNIFacade::onUpdateThreadGotData() {
+void OpenNIFacade::onUpdateThread() {
+	// strange, but we have to do this (unnecessary read) to get updates from user generator
 	this->depthGenerator.GetMetaData(this->depthMetaData);
+
+	// read and broadcast new skeleton data
 	this->userManager->update();
 }
 
@@ -81,7 +79,6 @@ void OpenNIFacade::onUpdateThreadGotData() {
 	LOG->info("destroy()");
 
 	this->userManager->unregister();
-//	if(this->updateThread != NULL) { ???
 	this->updateThread->stopAndJoin();
 
 	// FIXME on StopGeneratingAll() getting "The node is locked for changes!" - temporary hack => just shutdown without stopping ;)

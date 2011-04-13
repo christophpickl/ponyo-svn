@@ -14,23 +14,19 @@ class UpdateThread {
 public:
 	typedef void (CallbackType::*aFunction) ();
 
-	UpdateThread(CallbackType* pCallbackInstance,  aFunction pCallbackMethod) :
-		callbackInstance(pCallbackInstance),
-		callbackMethod(pCallbackMethod),
-		threadShouldRun(true)
-	{
+	UpdateThread() : threadShouldRun(true) {
 		LOG = NEW_LOG();
-//		Log* UpdateThread<CallbackType>::LOG = ;
-		LOG->debug("new UpdateThread(callbackInstance, callbackMethod)");
+		LOG->debug("new UpdateThread()");
 	}
-
 	~UpdateThread() {
 		LOG->debug("~UpdateThread()");
 	}
 
-	void start(xn::Context& context) {
-		LOG->debug("start(context) ... spawning update thread");
+	void start(xn::Context& context, CallbackType* callbackInstance,  aFunction callbackMethod) {
+		LOG->debug("start(..) ... spawning update thread");
 		this->updateThread = boost::thread(&UpdateThread::onThreadRun, this, context);
+		this->callbackInstance = callbackInstance;
+		this->callbackMethod = callbackMethod;
 	}
 
 	void stopAndJoin() {
@@ -41,7 +37,7 @@ public:
 	}
 
 private:
-	Log* LOG;
+	/*non-static*/ Log* LOG;
 
 	CallbackType* callbackInstance;
 	aFunction callbackMethod;
@@ -49,9 +45,8 @@ private:
 	boost::thread updateThread;
 	bool threadShouldRun;
 
-
 	void onThreadRun(xn::Context& context) {
-		LOG->info("onThreadRun(context) START");
+		LOG->info("onThreadRun(..) START");
 
 	//	try {
 			while(this->threadShouldRun) {

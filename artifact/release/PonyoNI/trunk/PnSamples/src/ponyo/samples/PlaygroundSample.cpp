@@ -36,8 +36,8 @@ int main() {
 	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)
 //	OpenNIUtils::enableXnLogging(XN_LOG_INFO);
 
-	g_facade.startRecording("/myopenni/myoni.oni");
-//	g_facade.startWithXml("misc/playground_config.xml");
+//	g_facade.startRecording("/myopenni/myoni.oni");
+	g_facade.startWithXml("misc/playground_config.xml");
 
 	printf("Hit ENTER to quit\n");
 	CommonUtils::waitHitEnter(false);

@@ -7,22 +7,25 @@ OpenNIFacade* facade;
 bool isRunning = false;
 
 extern "C" void pnStartWithXml(
+		int& resultCode,
 		const char* configPath,
 		UserStateCallback userStateCallback,
 		JointPositionCallback jointPositionCallback) {
 	LOG->info("pnStartWithXml(configPath)");
-	__pnStart(configPath, true, userStateCallback, jointPositionCallback);
+	__pnStart(resultCode, configPath, true, userStateCallback, jointPositionCallback);
 }
 
 extern "C" void pnStartRecording(
+		int& resultCode,
 		const char* oniFilePath,
 		UserStateCallback userStateCallback,
 		JointPositionCallback jointPositionCallback) {
 	LOG->info("pnStartRecording(oniFilePath)");
-	__pnStart(oniFilePath, false, userStateCallback, jointPositionCallback);
+	__pnStart(resultCode, oniFilePath, false, userStateCallback, jointPositionCallback);
 }
 
 void __pnStart(
+		int& resultCode,
 		const char* configOrOniFile,
 		bool isConfigFlag,
 		UserStateCallback userStateCallback,
@@ -38,15 +41,20 @@ void __pnStart(
 			facade->startRecording(configOrOniFile); // "/myopenni/myoni.oni"
 		}
 		isRunning = true;
+		resultCode = 0;
 		// TODO proper error handling! => additional callback for exceptions (also use for background thread)
 	} catch(const OpenNiException& e) {
 		e.printBacktrace();
+		resultCode = 1;
 	} catch(const Exception& e) {
 		e.printBacktrace();
+		resultCode = 1;
 	} catch (const std::exception& e) {
 		fprintf(stderr, "std exception: %s\n", e.what());
+		resultCode = 1;
 	} catch (...) {
 		fprintf(stderr, "Unhandled exception!");
+		resultCode = 1;
 	}
 }
 

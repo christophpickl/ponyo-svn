@@ -122,14 +122,14 @@ int main() {
 				XnSkeletonJoint jointEnum = XN_SKEL_TORSO;
 				printf("\tjoint '%i' is available: %i\n", jointEnum, skeletonCapability.IsJointAvailable(jointEnum));
 				if(skeletonCapability.IsJointAvailable(jointEnum) == false) {
-					printf("\t\tHead joint not available.");
+					printf("\t\tJoint not available.");
 					continue;
 				}
 //				printf("JA!!\n");
-				XnSkeletonJointPosition jointPosition;
 //				XnStatus xns = skeletonCapability.GetSkeletonJointPosition(currentId, jointEnum, jointPosition);
-				TRY2(skeletonCapability.GetSkeletonJointPosition(currentId, jointEnum, jointPosition), "Could not get joint position");
-				printf("\t\tHead Position (%f): %f x %f x %f\n", jointPosition.fConfidence, jointPosition.position.X, jointPosition.position.Y, jointPosition.position.Z);
+//				TODO getting joint still fails :( XnSkeletonJointPosition jointPosition;
+//				TRY2(skeletonCapability.GetSkeletonJointPosition(currentId, jointEnum, jointPosition), "Could not get joint position");
+//				printf("\t\tHead Position (%f): %f x %f x %f\n", jointPosition.fConfidence, jointPosition.position.X, jointPosition.position.Y, jointPosition.position.Z);
 
 //				XnSkeletonJointTransformation jointTransformation;
 //				TRY(skeletonCapability.GetSkeletonJoint(currentId, jointEnum, jointTransformation));
@@ -143,8 +143,9 @@ int main() {
 		}
 	}
 
-	printf("shutting down ...");
+	printf("shutting down ...\n");
 //	TRY(context.StopGeneratingAll()); // TODO Error: The node is locked for changes!
 	context.Shutdown();
+	printf("main() END\n");
 	return 0;
 }

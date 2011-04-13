@@ -58,6 +58,7 @@ JNA (JNI)
 - JNI documentation
 	http://java.sun.com/docs/books/jni/html/start.html
 	http://java.sun.com/developer/onlineTraining/Programming/JDCBook/jniexamp.html
+	!!! http://jna.java.net/javadoc/overview-summary.html
 	
 C++ Libs
 -------------------------------------------------

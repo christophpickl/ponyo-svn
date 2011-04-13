@@ -2,7 +2,8 @@
 TIMESHEET CP
 =================================================
 
-13.04. - 10:00 -   h - 
+              ~~ 93h~~
+13.04. - 10:00 -  3h - wanted to start JPonyo, but had to fiddle around with nasty boost lib bugs
               ~~ 90h~~
 12.04. - 14:00 -  3h - reworking openni communication layer
               ~~ 87h~~

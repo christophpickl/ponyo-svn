@@ -34,7 +34,7 @@ OpenNIFacade::~OpenNIFacade() {
 	LOG->info("startWithXml(configPath)");
 
 	printf("Initializing context from file: %s\n", configPath);
-	CHECK_XN(this->context.InitFromXmlFile(configPath), "Could not initialize OpenNI context from XML!");
+	CHECK_XN(this->context.InitFromXmlFile(configPath), "Could not initialize OpenNI context from XML! Is the device really properly connected?!");
 
 	this->internalSetup();
 }

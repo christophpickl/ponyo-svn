@@ -6,10 +6,6 @@
 
 /**
  * Initialize and start the OpenNI framework with the given configuration file.
- *
- * @param configPath path to an existing XML file to configure OpenNI with.
- * @param userStateCallback
- * @param jointPositionCallback
  */
 extern "C" int pnStartWithXml(
 		const char* configPath,
@@ -19,18 +15,17 @@ extern "C" int pnStartWithXml(
 
 /**
  * Initialize and start the OpenNI framework using a prerecorded session.
- *
- * @param oniFilePath path to an existing ONI file which should be replayed.
- * @param userStateCallback
- * @param jointPositionCallback
  */
 extern "C" int pnStartRecording(
 		const char* oniFilePath,
 		pn::UserStateCallback userStateCallback,
 		pn::JointPositionCallback jointPositionCallback
 	);
+
 /**
- * Stops any started generators, frees any memory, so a further reuse will not be possible anymore.
+ * Stops any started generators, frees any memory.
+ *
+ * Theoretically it should be possible to call start again ;)
  */
 extern "C" void pnDestroy();
 

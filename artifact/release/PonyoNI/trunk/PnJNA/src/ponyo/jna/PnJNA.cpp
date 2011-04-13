@@ -28,8 +28,12 @@ int __pnStart(
 		UserStateCallback userStateCallback,
 		JointPositionCallback jointPositionCallback) {
 	if(facade != NULL) {
-		// FIXME return error resultCode -> in java throw an IllegalStateException!!!
+		return 66; // TODO return error resultCode -> in java throw an IllegalStateException!!!
 	}
+	if(isRunning == true) {
+		return 67;
+	}
+
 	int resultCode = -1;
 	try {
 		facade = new OpenNIFacade(userStateCallback, jointPositionCallback);
@@ -65,7 +69,7 @@ extern "C" void pnDestroy() {
 		printf("destroying; is running = %i\n", isRunning);
 		if(isRunning == true) {
 			facade->destroy();
-			isRunning = true;
+			isRunning = false;
 		}
 		delete facade;
 	} else {

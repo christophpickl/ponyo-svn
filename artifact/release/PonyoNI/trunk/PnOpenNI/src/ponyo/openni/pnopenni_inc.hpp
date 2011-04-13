@@ -8,12 +8,13 @@
 #include <ponyo/openni/OpenNiException.hpp>
 #include <ponyo/openni/UserState.hpp>
 
-#define THROW_XN_EXCEPTION(xnStatus, customErrorMessage) \
+#define THROW_XN_EXCEPTION(xnStatus, customErrorMessage)                 \
 	std::string ss;                                                      \
 	ss.append(customErrorMessage);                                       \
 	ss.append(" (OpenNI message: ");                                     \
 	ss.append(xnGetStatusString(xnStatus));                              \
 	ss.append(")");                                                      \
+	std::cerr << "Throwing OpenNiException: " << ss << std::endl;        \
 	throw OpenNiException(ss.c_str(), AT);
 
 #define CHECK_XN(xnStatus, customErrorMessage) \

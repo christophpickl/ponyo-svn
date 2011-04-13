@@ -10,16 +10,22 @@ public class JnaConnection
 	extends DefaultAsync<ConnectionListener>
 		implements Connection, OnUserStateChangedCallback, OnJointPositionChangedCallback {
 	
-	private final String configPath;
+	private final String configOrRecordingPath;
 	private JnaGate gate;
 	
-	public JnaConnection(String configPath) {
-		this.configPath = configPath;
+	public JnaConnection(String configOrRecordingPath) {
+		this.configOrRecordingPath = configOrRecordingPath;
 	}
 	
-	public Connection open() {
+	public Connection openByXmlConfig() {
 		this.gate = new JnaGate(this, this);
-		this.gate.startWithXml(this.configPath);
+		this.gate.startByXmlConfig(this.configOrRecordingPath);
+		return this;
+	}
+	
+	public Connection openByOniRecording() {
+		this.gate = new JnaGate(this, this);
+		this.gate.startByOniRecording(this.configOrRecordingPath);
 		return this;
 	}
 

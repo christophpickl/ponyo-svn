@@ -10,8 +10,8 @@ interface PnJNALibray extends Library {
 	
 	String LIB_NAME = "PnJNA";
 	
-	int pnStartWithXml(String configPath, OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback);
-	int pnStartRecording(String oniPath, OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback);
+	int pnStartByXmlConfig(String configPath, OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback);
+	int pnStartByOniRecording(String oniPath, OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback);
 	void pnDestroy();
 
 	interface OnUserStateChangedCallback extends Callback {

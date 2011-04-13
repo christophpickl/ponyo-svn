@@ -51,26 +51,30 @@ class JnaGate {
 		}
 	}
 
-	public void startWithXml(String configPath) {
-		this.initNativeLibrary();
-		
-		LOG.debug("startWithXml(configPath=" + configPath + ")");
-		int resultCode = JnaGate.nativeLibrary.pnStartWithXml(configPath, this.userCallback, this.jointCallback);
-		LOG.debug("JNA returned resultCode: " + resultCode);
-		if(resultCode != 0) {
-			throw new RuntimeException("resultCode: " + resultCode);
-		}
+	public void startByXmlConfig(String configPath) {
+		LOG.debug("startByXmlConfig(configPath=" + configPath + ")");
+		this.internalStart(configPath, true);
 	}
 
-	public void startRecording(String oniPath) {
+	public void startByOniRecording(String oniPath) {
+		LOG.debug("startByOniRecording(oniPath=" + oniPath + ")");
+		this.internalStart(oniPath, false);
+	}
+	
+	private void internalStart(String configOrOniPath, boolean isStartingByConfig) {
 		this.initNativeLibrary();
 		
-		LOG.debug("startRecording(oniPath=" + oniPath + ")");
-		int resultCode = JnaGate.nativeLibrary.pnStartRecording(oniPath, this.userCallback, this.jointCallback);
+		final int resultCode;
+		if(isStartingByConfig == true) {
+			resultCode = JnaGate.nativeLibrary.pnStartByXmlConfig(configOrOniPath, this.userCallback, this.jointCallback);
+		} else {
+			resultCode = JnaGate.nativeLibrary.pnStartByOniRecording(configOrOniPath, this.userCallback, this.jointCallback);
+		}
 		LOG.debug("JNA returned resultCode: " + resultCode);
 		if(resultCode != 0) {
 			throw new RuntimeException("resultCode: " + resultCode);
 		}
+		
 	}
 
 	public void destroy() {

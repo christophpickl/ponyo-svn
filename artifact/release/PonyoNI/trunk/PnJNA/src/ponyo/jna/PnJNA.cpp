@@ -6,24 +6,24 @@ Log* LOG = NEW_LOG();
 OpenNIFacade* facade;
 bool isRunning = false;
 
-extern "C" int pnStartWithXml(
-		const char* configPath,
+extern "C" int pnStartByXmlConfig(
+		const char* configXmlPath,
 		UserStateCallback userStateCallback,
 		JointPositionCallback jointPositionCallback) {
-	LOG->info("pnStartWithXml(configPath)");
-	return __pnStart(configPath, true, userStateCallback, jointPositionCallback);
+	LOG->info("pnStartByXmlConfig(configXmlPath)");
+	return __pnStart(configXmlPath, true, userStateCallback, jointPositionCallback);
 }
 
-extern "C" int pnStartRecording(
-		const char* oniFilePath,
+extern "C" int pnStartByOniRecording(
+		const char* recordingOniPath,
 		UserStateCallback userStateCallback,
 		JointPositionCallback jointPositionCallback) {
-	LOG->info("pnStartRecording(oniFilePath)");
-	return __pnStart(oniFilePath, false, userStateCallback, jointPositionCallback);
+	LOG->info("pnStartByOniRecording(recordingOniPath)");
+	return __pnStart(recordingOniPath, false, userStateCallback, jointPositionCallback);
 }
 
 int __pnStart(
-		const char* configOrOniFile,
+		const char* configOrOniPath,
 		bool isConfigFlag,
 		UserStateCallback userStateCallback,
 		JointPositionCallback jointPositionCallback) {
@@ -38,9 +38,9 @@ int __pnStart(
 	try {
 		facade = new OpenNIFacade(userStateCallback, jointPositionCallback);
 		if(isConfigFlag) {
-			facade->startWithXml(configOrOniFile); // "misc/playground_config.xml"
+			facade->startWithXml(configOrOniPath); // "misc/playground_config.xml"
 		} else {
-			facade->startRecording(configOrOniFile); // "/myopenni/myoni.oni"
+			facade->startRecording(configOrOniPath); // "/myopenni/myoni.oni"
 		}
 		isRunning = true;
 		resultCode = 0;

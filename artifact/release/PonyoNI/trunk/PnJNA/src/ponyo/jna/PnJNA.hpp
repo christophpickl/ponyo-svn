@@ -7,7 +7,7 @@
 /**
  * Initialize and start the OpenNI framework with the given configuration file.
  */
-extern "C" int pnStartWithXml(
+extern "C" int pnStartByXmlConfig(
 		const char* configPath,
 		pn::UserStateCallback userStateCallback,
 		pn::JointPositionCallback jointPositionCallback
@@ -16,7 +16,7 @@ extern "C" int pnStartWithXml(
 /**
  * Initialize and start the OpenNI framework using a prerecorded session.
  */
-extern "C" int pnStartRecording(
+extern "C" int pnStartByOniRecording(
 		const char* oniFilePath,
 		pn::UserStateCallback userStateCallback,
 		pn::JointPositionCallback jointPositionCallback

@@ -11,8 +11,7 @@
  * @param userStateCallback
  * @param jointPositionCallback
  */
-extern "C" void pnStartWithXml(
-		int& resultCode,
+extern "C" int pnStartWithXml(
 		const char* configPath,
 		pn::UserStateCallback userStateCallback,
 		pn::JointPositionCallback jointPositionCallback
@@ -25,8 +24,7 @@ extern "C" void pnStartWithXml(
  * @param userStateCallback
  * @param jointPositionCallback
  */
-extern "C" void pnStartRecording(
-		int& resultCode,
+extern "C" int pnStartRecording(
 		const char* oniFilePath,
 		pn::UserStateCallback userStateCallback,
 		pn::JointPositionCallback jointPositionCallback
@@ -36,8 +34,10 @@ extern "C" void pnStartRecording(
  */
 extern "C" void pnDestroy();
 
-/*private*/ void __pnStart(
-		int& resultCode,
+/**
+ * Internal method containing common generic startup logic.
+ */
+/*private*/ int __pnStart(
 		const char* configOrOniFile,
 		bool isConfigFlag,
 		pn::UserStateCallback userStateCallback,

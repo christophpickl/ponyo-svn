@@ -6,33 +6,31 @@ Log* LOG = NEW_LOG();
 OpenNIFacade* facade;
 bool isRunning = false;
 
-extern "C" void pnStartWithXml(
-		int& resultCode,
+extern "C" int pnStartWithXml(
 		const char* configPath,
 		UserStateCallback userStateCallback,
 		JointPositionCallback jointPositionCallback) {
 	LOG->info("pnStartWithXml(configPath)");
-	__pnStart(resultCode, configPath, true, userStateCallback, jointPositionCallback);
+	return __pnStart(configPath, true, userStateCallback, jointPositionCallback);
 }
 
-extern "C" void pnStartRecording(
-		int& resultCode,
+extern "C" int pnStartRecording(
 		const char* oniFilePath,
 		UserStateCallback userStateCallback,
 		JointPositionCallback jointPositionCallback) {
 	LOG->info("pnStartRecording(oniFilePath)");
-	__pnStart(resultCode, oniFilePath, false, userStateCallback, jointPositionCallback);
+	return __pnStart(oniFilePath, false, userStateCallback, jointPositionCallback);
 }
 
-void __pnStart(
-		int& resultCode,
+int __pnStart(
 		const char* configOrOniFile,
 		bool isConfigFlag,
 		UserStateCallback userStateCallback,
 		JointPositionCallback jointPositionCallback) {
 	if(facade != NULL) {
-		// FIXME throw an IllegalStateException!!!
+		// FIXME return error resultCode -> in java throw an IllegalStateException!!!
 	}
+	int resultCode = -1;
 	try {
 		facade = new OpenNIFacade(userStateCallback, jointPositionCallback);
 		if(isConfigFlag) {
@@ -48,14 +46,15 @@ void __pnStart(
 		resultCode = 1;
 	} catch(const Exception& e) {
 		e.printBacktrace();
-		resultCode = 1;
+		resultCode = 2;
 	} catch (const std::exception& e) {
 		fprintf(stderr, "std exception: %s\n", e.what());
-		resultCode = 1;
+		resultCode = 3;
 	} catch (...) {
 		fprintf(stderr, "Unhandled exception!");
-		resultCode = 1;
+		resultCode = 4;
 	}
+	return resultCode;
 }
 
 extern "C" void pnDestroy() {

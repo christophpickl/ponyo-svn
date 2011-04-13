@@ -27,7 +27,7 @@ private:
 	static Log* LOG;
 
 	UserManager* userManager;
-	UpdateThread<OpenNIFacade>* updateThread;
+	UpdateThread<OpenNIFacade> updateThread;
 	xn::Context context;
 	xn::DepthGenerator depthGenerator;
 

@@ -6,8 +6,7 @@ Log* OpenNIFacade::LOG = NEW_LOG();
 
 OpenNIFacade::OpenNIFacade(
 		UserStateCallback userStateCallback,
-		JointPositionCallback jointPositionCallback) :
-		updateThread(new UpdateThread<OpenNIFacade>()) {
+		JointPositionCallback jointPositionCallback) {
 	LOG->debug("new OpenNIFacade(userStateCallback, jointPositionCallback )");
 
 	this->userManager = new UserManager(userStateCallback, jointPositionCallback);
@@ -15,9 +14,7 @@ OpenNIFacade::OpenNIFacade(
 
 OpenNIFacade::~OpenNIFacade() {
 	LOG->debug("~OpenNIFacade()");
-
 	delete this->userManager;
-	delete this->updateThread;
 }
 
 /*public*/ void OpenNIFacade::startRecording(const char* oniFilePath) throw(OpenNiException) {
@@ -64,7 +61,7 @@ OpenNIFacade::~OpenNIFacade() {
 	CHECK_XN(this->depthGenerator.StartGenerating(), "Could not start depth generator!");
 
 	printf("new thread starting\n");
-	this->updateThread->start(this->context, this, &OpenNIFacade::onUpdateThread);
+	this->updateThread.start(this->context, this, &OpenNIFacade::onUpdateThread);
 }
 
 void OpenNIFacade::onUpdateThread() {
@@ -79,7 +76,7 @@ void OpenNIFacade::onUpdateThread() {
 	LOG->info("destroy()");
 
 	this->userManager->unregister();
-	this->updateThread->stopAndJoin();
+	this->updateThread.stopAndJoin();
 
 	// FIXME on StopGeneratingAll() getting "The node is locked for changes!" - temporary hack => just shutdown without stopping ;)
 //	try {

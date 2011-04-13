@@ -24,9 +24,9 @@ public:
 
 	void start(xn::Context& context, CallbackType* callbackInstance,  aFunction callbackMethod) {
 		LOG->debug("start(..) ... spawning update thread");
-		this->updateThread = boost::thread(&UpdateThread::onThreadRun, this, context);
 		this->callbackInstance = callbackInstance;
 		this->callbackMethod = callbackMethod;
+		this->updateThread = boost::thread(&UpdateThread::onThreadRun, this, context);
 	}
 
 	void stopAndJoin() {

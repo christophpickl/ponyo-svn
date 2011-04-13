@@ -1,5 +1,6 @@
 CMAKE_MINIMUM_REQUIRED (VERSION 2.8) 
 PROJECT (playgroundx)
+SET (EXECUTABLE_OUTPUT_PATH bin)
 
 # LIB - OpenNI
 ##############################################################
@@ -11,16 +12,12 @@ INCLUDE_DIRECTORIES (/usr/include/ni)
 SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2")
 
 ##############################################################
+MACRO (SETUP_EXE EXENAME)
+	ADD_EXECUTABLE (${EXENAME} ${EXENAME}.cpp)
+	TARGET_LINK_LIBRARIES (${EXENAME} ${EXTRA_LIBS})
+ENDMACRO (SETUP_EXE) 
 
-SET (EXECUTABLE1 "main_create_product_nodes")
-SET (EXECUTABLE2 "main_usbfail_approach")
-SET (EXECUTABLE3 "main_bug_reproduction")
-
-ADD_EXECUTABLE (${EXECUTABLE1} ${EXECUTABLE1}.cpp)
-ADD_EXECUTABLE (${EXECUTABLE2} ${EXECUTABLE2}.cpp)
-ADD_EXECUTABLE (${EXECUTABLE3} ${EXECUTABLE3}.cpp)
-
-TARGET_LINK_LIBRARIES (${EXECUTABLE1} ${EXTRA_LIBS})
-TARGET_LINK_LIBRARIES (${EXECUTABLE2} ${EXTRA_LIBS})
-TARGET_LINK_LIBRARIES (${EXECUTABLE3} ${EXTRA_LIBS})
+SETUP_EXE (main_create_product_nodes)
+SETUP_EXE (main_usbfail_approach)
+SETUP_EXE (main_bug_reproduction)
 

@@ -16,7 +16,6 @@ import javax.swing.WindowConstants;
 import com.sun.jna.Callback;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
-import com.sun.jna.ptr.IntByReference;
 
 public class App {
 
@@ -43,12 +42,8 @@ public class App {
 		}});
 		
 		System.out.println("Starting up PonyoNI ...");
-//		nativeLibrary.pnStartRecording("/myopenni/myoni.oni", userCallback, jointCallback);
-		
-		IntByReference resultCodeRef = new IntByReference();
-		nativeLibrary.pnStartWithXml(resultCodeRef, "/myopenni/simple_config.xml", userCallback, jointCallback);
-		final int resultCode = resultCodeRef.getValue();
-		
+		int resultCode = nativeLibrary.pnStartRecording("/myopenni/myoni.oni", userCallback, jointCallback);
+//		int resultCode = nativeLibrary.pnStartWithXml("/myopenni/simple_config.xml", userCallback, jointCallback);
 		System.out.println("Starting up PonyoNI ... DONE; result code: " + resultCode);
 		
 		btnQuit.addActionListener(new ActionListener() { @Override public void actionPerformed(ActionEvent e) {
@@ -75,8 +70,8 @@ public class App {
 
 	interface PnJNALibray extends Library {
 		String LIB_NAME = "PnJNA";
-		void pnStartWithXml(IntByReference resultCode, String configPath, OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback);
-		void pnStartRecording(IntByReference resultCode, String oniPath, OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback);
+		int pnStartWithXml(String configPath, OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback);
+		int pnStartRecording(String oniPath, OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback);
 		void pnDestroy();
 	}
 

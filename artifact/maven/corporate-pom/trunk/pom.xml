@@ -1,0 +1,461 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>Corporate POM</name>
+    <description>
+    	The super pom for each and every ponyo artifact, without any exception.
+    	There is not any technology-specific configuration in here,
+    	as it could be used as a base for any non-Java project too;
+    	besides having an own corporate pom leads to a cleaner separation.
+    	Direct descendants are reactor projects or any abstract technology-specific super pom (java-pom, flex-pom)
+    </description>
+    <url>http://ponyo.sf.net/</url>
+    <inceptionYear>2011</inceptionYear>
+    <packaging>pom</packaging>
+    
+    <groupId>net.sf.ponyo.jponyo.pom</groupId>
+    <artifactId>corporate-pom</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                      P R E R E Q U I S I T E S                      -->
+    <!-- ******************************************************************* -->
+    
+    <prerequisites>
+    	<!-- we are supporting maven 2 and 3 concurrently; hell yeah :) see maven3-profile below -->
+    	<!-- therefore there is still an existing report section (to be compatible with mvn2; mvn3 will auto-rewrite it) -->	
+        <maven>2.0.9</maven>
+    </prerequisites>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                         P R O P E R T I E S                         -->
+    <!-- ******************************************************************* -->
+    
+    <properties>
+    	<!-- child poms will reuse this prefix to avoid wrong guess by site plugin; see: http://www.mail-archive.com/users@maven.apache.org/msg97100.html -->
+    	<distribution_site_url_prefix>scp://shell.sourceforge.net/home/project-web/ponyo/htdocs/documentation</distribution_site_url_prefix>
+    	
+    	<!-- mvn3 will be enabled automagically if mvn3 is used ;) -->
+    	<version_mvn_being_used>2</version_mvn_being_used><!-- used to print to console -->
+    	
+    	<report_linkcheck_skip>true</report_linkcheck_skip>
+    	
+   		<!-- ************ BUILD SETTINGS ************ -->
+		<sourceEncoding>UTF-8</sourceEncoding><!-- for mvn3 -->
+    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding><!-- for mvn2 -->
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+   		
+   		<!-- ************ BUILD PLUGINS ************ -->
+    	<version_dependency_plugin>2.2</version_dependency_plugin>
+    	<version_deploy-plugin>2.5</version_deploy-plugin>
+    	<version_release-plugin>2.1</version_release-plugin>
+    	<version_antrun-plugin>1.6</version_antrun-plugin>
+    	<version_resources-plugin>2.4.3</version_resources-plugin>
+    	
+   		<!-- ************ REPORT PLUGINS ************ -->
+    	<version_changelog-plugin>2.2</version_changelog-plugin>
+    	<verison_project-info-reports-plugin_mvn2>2.2</verison_project-info-reports-plugin_mvn2>
+    	<verison_project-info-reports-plugin_mvn3>2.3.1</verison_project-info-reports-plugin_mvn3>
+    	<verison_project-info-reports-plugin>${verison_project-info-reports-plugin_mvn2}</verison_project-info-reports-plugin>
+    	<version_site-plugin_mvn2>2.2</version_site-plugin_mvn2>
+    	<version_site-plugin_mvn3>3.0-beta-3</version_site-plugin_mvn3>
+    	<version_site-plugin>${version_site-plugin_mvn2}</version_site-plugin>
+    	
+    	<version_linkcheck_plugin>1.1</version_linkcheck_plugin>
+    </properties>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                              B U I L D                              -->
+    <!-- ******************************************************************* -->
+    
+    <build>
+    	<pluginManagement>
+    		<plugins>
+	            <!-- // define versions for technology-independent maven plugins -->
+	            <!-- *********************************************************** -->
+				<plugin>
+					<artifactId>maven-dependency-plugin</artifactId>
+					<version>${version_dependency_plugin}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${version_deploy-plugin}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-recources-plugin</artifactId>
+					<version>${version_resources-plugin}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-release-plugin</artifactId>
+					<version>${version_release-plugin}</version>
+				</plugin>
+            	<plugin>
+            		<artifactId>maven-site-plugin</artifactId>
+            		<version>${version_site-plugin}</version>
+            	</plugin>
+    		</plugins>
+    	</pluginManagement>
+
+
+    	<plugins>
+    	
+            <!-- // configure (and activate) technology-independent plugins  -->
+            <!-- *********************************************************** -->
+            
+			<plugin>
+				<artifactId>maven-release-plugin</artifactId>
+				<!-- configuration is handled by custom release-app; see svn:/project-management/release-app -->
+			</plugin>
+    	
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>${version_resources-plugin}</version>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+			</plugin>
+    	
+			<plugin>
+				<!-- print currently used maven version to console -->
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>${version_antrun-plugin}</version>
+				<executions>
+					<!-- not nice solved: adding execution separately for compile and site  -->
+					<execution>
+						<id>print-maven3-profile-message @initialize</id><phase>initialize</phase>
+						<configuration><target>
+							<echo message="[INFO] [corporate-pom] using ponyo detected maven version ${version_mvn_being_used}" />
+						</target></configuration><goals><goal>run</goal></goals>
+					</execution>
+					<execution>
+						<id>print-maven3-profile-message @pre-site</id><phase>pre-site</phase>
+						<configuration><target>
+							<echo message="[INFO] [corporate-pom] using ponyo detected maven version ${version_mvn_being_used}" />
+						</target></configuration><goals><goal>run</goal></goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+		</plugins>
+    </build>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                          R E P O R T I N G                          -->
+    <!-- ******************************************************************* -->
+    
+    <reporting>
+        <plugins>
+            <plugin>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${verison_project-info-reports-plugin}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                        	<!-- disable all reports, as they will be included if not given "-Dreport.skip" -->
+                        </reports>
+                    </reportSet>
+                </reportSets>
+				<configuration>
+					<!-- site:site ... http://maven.apache.org/plugins/maven-site-plugin/site-mojo.html -->
+					
+					<!-- MINOR does not work properly :( still using -Dreport.skip to fasten up site build -->
+					<generateReports>true</generateReports>
+					
+					<!-- this page only lists menu items in expanded form (we dont have any nested items yet, so turn it off) -->
+<!--					<generateSitemap>true</generateSitemap>-->
+					  
+					<validate>true</validate>
+				</configuration>
+			</plugin>
+		</plugins>
+	</reporting>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                           P R O F I L E S                           -->
+    <!-- ******************************************************************* -->
+    
+	<profiles>
+		<profile>
+			<id>maven3-profile</id>
+			<activation>
+				<file>
+					<!-- This employs that the basedir expression is only recognized by Maven 3.x (see MNG-2363) -->
+					<exists>${basedir}</exists>
+				</file>
+			</activation>
+			
+			<properties>
+				<version_mvn_being_used>3</version_mvn_being_used>
+				<version_site-plugin>${version_site-plugin_mvn3}</version_site-plugin>
+    			<verison_project-info-reports-plugin>${verison_project-info-reports-plugin_mvn3}</verison_project-info-reports-plugin>
+			</properties>
+			
+			<build>
+				<!--
+				MINOR @POM mvn3 deploy does not work (but mvn3 site:deploy does) because of not working scp support :(
+				for wagon help see: http://maven.apache.org/wagon/wagon-providers/wagon-scm/usage.html 
+				-->
+				<pluginManagement>
+					<plugins>
+							<!-- sadly this does not work... :( though it is officially said to workaround this way -->
+<!--						<plugin>-->
+<!--							<artifactId>maven-deploy-plugin</artifactId>-->
+<!--							<version>${version_deploy-plugin}</version>-->
+<!--							<dependencies>-->
+<!--								<dependency>-->
+<!--									<groupId>org.apache.maven.wagon</groupId>-->
+<!--									<artifactId>wagon-ssh-external</artifactId>-->
+<!--									<version>1.0-beta-7</version>-->
+<!--									<type>pom</type>-->
+<!--								</dependency>-->
+<!--							</dependencies>-->
+<!--						</plugin>-->
+					</plugins>
+				</pluginManagement>
+
+				<plugins>
+				
+					<!-- enable site generation the "maven 3 way" -->
+					<plugin>
+						<artifactId>maven-site-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>attach-descriptor</id>
+								<goals>
+									<goal>attach-descriptor</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					
+				</plugins>
+				
+			<!-- or register wagon ssh/scp provider as extension (more global than specifying as dependency for plugin only -->
+<!--		<extensions>-->
+<!--			<extension>-->
+<!--				<groupId>org.apache.maven.wagon</groupId>-->
+<!--				<artifactId>wagon-ssh-external</artifactId>-->
+<!--				<version>1.0-beta-7</version> -->
+<!--			</extension>-->
+<!--		</extensions>-->
+
+			</build>
+		</profile>
+		
+		<profile>
+			<id>create-reports-corporate-pom-profile</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<property>
+					<name>report.skip</name>
+					<value>!true</value>
+				</property>
+			</activation>
+	    	<build>
+	    		<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>create-reports-corporate-pom-message</id><phase>pre-site</phase>
+								<configuration><target>
+									<echo message="[INFO] [corporate-pom] Creating enhanced site reports." />
+									<echo message="[INFO] [corporate-pom] (disable by using: &quot;mvn xxx -Dreport.skip&quot;)" />
+									<echo message="[INFO] [corporate-pom] ==============================================================" />
+								</target></configuration><goals><goal>run</goal></goals>
+							</execution>
+						</executions>
+					</plugin>
+					
+					
+		    <!-- ******************************************************************* -->
+		    <!--                          R E P O R T I N G                          -->
+		    <!-- ******************************************************************* -->
+					
+	    		</plugins>
+	    	</build>
+		    
+		    <!--
+		    "And the subtler difference is that a plugin configuration under the reporting element works as build plugin configuration,
+		    although the opposite is not true (a build plugin configuration does not affect a reporting plugin)."
+		      ... source: [http://maven.apache.org/pom.html#Plugin_Management]
+		    -->
+		    
+		    <reporting>
+		        <plugins>
+		        	
+		        	<!-- no maven-changes-plugin! it needs some src/changes/changes.xml file, and only got integration for jira but not for mantis -->
+		        	
+					<plugin>
+						<artifactId>maven-changelog-plugin</artifactId>
+						<version>${version_changelog-plugin}</version>
+						<configuration>
+							<!-- http://maven.apache.org/plugins/maven-changelog-plugin -->
+							<issueIDRegexPattern>#\d+.</issueIDRegexPattern><!-- match own commit msg format "#13 foobar" -->
+							<!-- default is: "[a-zA-Z]{2,}-\d+." -->
+<!--							MINOR <issueLinkUrl>https://sourceforge.net/apps/mantisbt/ponyo/view.php?id=%ISSUE%</issueLinkUrl>-->
+						</configuration>
+					</plugin>
+			     	
+		            <plugin>
+		                <artifactId>maven-project-info-reports-plugin</artifactId>
+		                <version>${verison_project-info-reports-plugin}</version>
+		                <reportSets>
+		                    <reportSet>
+		                        <reports>
+									<!-- FIXME @RELEASE incomment dependencies report -->
+<!--		                            <report>dependencies</report>-->
+		                            <report>project-team</report>
+		                            <report>issue-tracking</report>
+		                            <report>license</report>
+		                            <report>scm</report>
+		                            <report>summary</report>
+		                        </reports>
+		                    </reportSet>
+		                </reportSets>
+					</plugin>
+					
+					<!-- MINOR no linkcheck plugin, as it takes way too long! maybe configure it better -->
+<!--					<plugin>-->
+<!--				        <artifactId>maven-linkcheck-plugin</artifactId>-->
+<!--				        <version>${version_linkcheck_plugin}</version>-->
+<!--				        <configuration>-->
+<!--							 https://maven.apache.org/plugins/maven-linkcheck-plugin/linkcheck-mojo.html -->
+<!--							<skip>${report_linkcheck_skip}</skip>-->
+<!--							<timeout>500</timeout> default is 2000 -->
+<!--				        	 excludedLinks -->
+<!--				        	 <excludedPages> FIXME enable linkcheck before releasing a version; maybe let release app go through all projects (clean svn update), build all site reports (multithreaded) and open sites in browser so one can esaily verify clean state -->
+<!--		        	 			 MINOR @DOC maybe include javadoc/xref in linkcheck from time to time to verify links even in javadoc;-->
+<!--		        	 						but takes veeery long; NO: takes veery long anyway :-/ -->
+<!--								<excludedPage>apidocs/**</excludedPage>-->
+<!--				        	 	<excludedPage>xref/**</excludedPage>-->
+<!--				        	 	<excludedPage>xref-test/**</excludedPage>-->
+<!--				        	 </excludedPages> -->
+<!--				        </configuration>-->
+<!--			     	</plugin>-->
+					
+				</plugins>
+				
+			</reporting>
+	    	
+	    </profile>
+	    
+	</profiles>
+	    
+    
+    <!-- ******************************************************************* -->
+    <!--            D I S T R I B U T I O N   M A N A G E M E N T            -->
+    <!-- ******************************************************************* -->
+    
+    <distributionManagement>
+		<!-- FIXME or use google code? -->
+		<snapshotRepository>
+			<id>ponyo-sourceforge-server</id>
+			<name>ponyo maven snapshot repository @sourceforge</name>
+			<url>scp://shell.sourceforge.net/home/project-web/ponyo/htdocs/maven/snapshot</url>
+		</snapshotRepository>
+
+		<repository>
+			<id>ponyo-sourceforge-server</id>
+			<name>ponyo maven release repository @sourceforge</name>
+			<url>scp://shell.sourceforge.net/home/project-web/ponyo/htdocs/maven/release</url>
+		</repository>
+    
+		<site>
+			<id>ponyo-sourceforge-server</id>
+			<name>ponyo site server @sourceforge</name>
+			<url>${distribution_site_url_prefix}/${project.artifactId}/${project.version}/</url>
+		</site>
+		
+<!--		TODO <downloadUrl>https://sourceforge.net/projects/ponyo/files/</downloadUrl>-->
+		
+    </distributionManagement>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                                S C M                                -->
+    <!-- ******************************************************************* -->
+    
+    <scm>
+        <connection>scm:svn:http://ponyo-svn.googlecode.com/svn/artifact/maven/corporate-pom/trunk/</connection>
+        <developerConnection>scm:svn:https://ponyo-svn.googlecode.com/svn/artifact/maven/corporate-pom/trunk/</developerConnection>
+        <url>http://code.google.com/p/ponyo-svn/source/browse/#svn/artifact/maven/corporate-pom/trunk/</url>
+    </scm>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                   I S S U E   M A N A G E M E N T                   -->
+    <!-- ******************************************************************* -->
+    
+<!--    <issueManagement>-->
+<!--		<system>Mantis</system>-->
+<!--		<url>https://sourceforge.net/apps/mantisbt/josceleton/</url>-->
+<!--	</issueManagement>-->
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                       O R G A N I Z A T I O N                       -->
+    <!-- ******************************************************************* -->
+     
+     <organization>
+     	<name>Ponyo, by Christoph Pickl</name>
+     	<url>http://ponyo.sf.net</url>
+     </organization>
+     
+     
+    <!-- ******************************************************************* -->
+    <!--                           L I C E N S E S                           -->
+    <!-- ******************************************************************* -->
+    
+    <licenses>
+        <license>
+            <name>BSD License</name>
+            <url>http://www.opensource.org/licenses/bsd-license.php</url>
+			<distribution>repo</distribution>
+        </license>
+    </licenses>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                         D E V E L O P E R S                         -->
+    <!-- ******************************************************************* -->
+    
+    <developers>
+    
+        <developer>
+            <id>cpickl</id>
+            <name>Christoph Pickl</name>
+            <email><![CDATA[http://mailhide.recaptcha.net/d?k=01jnOhUplwS4qzLHeENwTSEw==&c=HMbaCVLHdf58OsCoBkx1bYmxfAOYkFUnwi3uw7uVf9w=]]></email>
+            <timezone>+1</timezone>
+            <roles>
+                <role>Project Founder</role>
+            </roles>
+        </developer>
+        
+    </developers>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                       C O N T R I B U T O R S                       -->
+    <!-- ******************************************************************* -->
+    
+    <contributors>
+    
+		<contributor>
+			<name>Thomas Hirt</name>
+			<url>http://thomas-hirt.at/</url>
+            <email><![CDATA[http://mailhide.recaptcha.net/d?k=01jnOhUplwS4qzLHeENwTSEw==&c=IPTiEqWune-qSjc59aeQX6I-bIcmVQJDVpNeBIO-eMk=]]></email>
+			<timezone>+1</timezone>
+			<roles>
+				<role>Ideas Contributer</role>
+			</roles>
+		</contributor>
+		
+	</contributors>
+    
+</project>

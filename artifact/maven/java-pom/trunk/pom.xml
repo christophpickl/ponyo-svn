@@ -1,0 +1,298 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>Java POM</name>
+    <description>
+    	The super POM for all Ponyo Java artifacts.
+    </description>
+    <packaging>pom</packaging>
+    
+    <artifactId>java-pom</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    
+    <!-- ******************************************************************* -->
+    <!--                             P A R E N T                             -->
+    <!-- ******************************************************************* -->
+    
+    <parent>
+        <groupId>net.sf.ponyo.jponyo.pom</groupId>
+        <artifactId>java-abstract-pom</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    	<relativePath>../pon-java-abstract-pom/pom.xml</relativePath>
+    </parent>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                         P R O P E R T I E S                         -->
+    <!-- ******************************************************************* -->
+    
+    <properties>
+    	
+        <!-- V E R S I O N S   I N T E R N A L -->
+   		<!-- *********************************************************** -->
+    	<version_josceleton_guice>2.3</version_josceleton_guice>
+   		<version_ponyo-checkstyle-config>0.1-SNAPSHOT</version_ponyo-checkstyle-config>
+<!--	    <groupId>net.sf.josceleton.thirdparty.com.google.code.guice</groupId>-->
+<!--	    <artifactId>guice-dependencies</artifactId>-->
+<!--	    <version>2.x-SNAPSHOT</version> ... should be updated, if corporate-pom has changed; and changes are needed for guice dep; i dont think so ...-->
+   		
+        <!-- V E R S I O N S   E X T E R N A L -->
+   		<!-- *********************************************************** -->
+    	<version_javaosc>1.0-20060402-josceleton</version_javaosc>
+    	<version_eclipse-plugin>2.8</version_eclipse-plugin><!-- TODO outsource to upper pom (?) -->
+    	
+    </properties>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--              D E P E N D E N C Y  M A N A G E M E N T               -->
+    <!-- ******************************************************************* -->
+    
+    <dependencyManagement>
+    	<dependencies>
+	        
+	        <!-- P S E U D O   E X T E R N A L -->
+    		<!-- *********************************************************** -->
+    		
+<!--			<dependency>-->
+<!--				<groupId>net.sf.josceleton.thirdparty.com.google.code.guice</groupId>-->
+<!--				<artifactId>guice-dependencies</artifactId>-->
+<!--				<version>${version_josceleton_guice}</version>-->
+<!--				<type>pom</type>-->
+<!--			</dependency>-->
+<!--			-->
+<!--	        <dependency>-->
+<!--		        <groupId>com.illposed</groupId>-->
+<!--		        <artifactId>javaosc</artifactId>-->
+<!--		        <version>${version_javaosc}</version>-->
+<!--	        </dependency>-->
+	        
+    	</dependencies>
+    </dependencyManagement>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                       D E P E N D E N C I E S                       -->
+    <!-- ******************************************************************* -->
+    
+    <dependencies>
+    
+        <!-- has to be defined in here as TestNG comes with its own guice2 dependency -->
+<!--		<dependency>-->
+<!--			<groupId>net.sf.josceleton.thirdparty.com.google.code.guice</groupId>-->
+<!--			<artifactId>guice-dependencies</artifactId>-->
+<!--			<type>pom</type>-->
+<!--			<exclusions>-->
+<!--				 we dont need grapher functionality -->
+<!--				<exclusion>-->
+<!--		            <groupId>com.google.code.guice</groupId>-->
+<!--		            <artifactId>guice-grapher</artifactId>-->
+<!--				</exclusion>-->
+<!--			</exclusions>-->
+<!--		</dependency>-->
+    
+    </dependencies>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                              B U I L D                              -->
+    <!-- ******************************************************************* -->
+    
+    <build>
+        
+        <pluginManagement>
+        	<plugins>
+				
+				<plugin>
+					<artifactId>maven-eclipse-plugin</artifactId>
+					<version>${version_eclipse-plugin}</version>
+				</plugin>
+        		
+	            <plugin>
+	                <artifactId>maven-checkstyle-plugin</artifactId>
+					
+					<!-- the following dependency contains the checkstyle config and suppresion XMLs in its src/main/resources folder -->
+					<dependencies>
+						<dependency>
+							<groupId>net.sf.ponyo.jponyo.pom</groupId>
+							<artifactId>checkstyle-config</artifactId>
+							<version>${version_ponyo-checkstyle-config}</version>
+						</dependency>
+					</dependencies>
+					
+                	<!-- ... it seems that whole reporting is obsolete with mvn3; everything shifted in build ... -->
+                	<!-- ATTENTION config for build and for reporting can not be shared :( -->
+                	
+<!--	                    <headerLocation>LICENSE.txt</headerLocation>-->
+<!--						<xrefLocation>${project.reporting.outputDirectory}/xref</xrefLocation>-->
+					<!-- set checkstyle fails on error as property (release=>true) !NOOOO! checkstyle should ALWAYS fail, not only for release -->
+	                <!-- for configuration options see: http://maven.apache.org/plugins/maven-checkstyle-plugin/checkstyle-mojo.html -->
+					
+                	<!-- <<<<<< DUPLICATION DUPLICATION DUPLICATION DUPLICATION DUPLICATION DUPLICATION DUPLICATION -->
+	                <configuration>
+	                    <configLocation>checkstyle.xml</configLocation>
+	                    <suppressionsLocation>checkstyle_suppression.xml</suppressionsLocation>
+	                    <failsOnError>true</failsOnError>
+	                    <includeTestSourceDirectory>false</includeTestSourceDirectory>
+	                    <enableRulesSummary>true</enableRulesSummary>
+	                </configuration>
+                	<!-- <<<<<< DUPLICATION DUPLICATION DUPLICATION DUPLICATION DUPLICATION DUPLICATION DUPLICATION -->
+                	
+				</plugin>
+				
+        	</plugins>
+        </pluginManagement>
+        
+        <plugins>
+            
+            <!-- ECLIPSE -->
+            <!-- *********************************************************** -->
+            
+            <plugin>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<!-- MINOR 000014 @BUILD POM get rid of logged warning message from eclipse plugin -->
+				<!--            mvn eclipse:eclipse => [WARNING] Workspace defines a VM that does not contain a valid jre/lib/rt.jar: /System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home -->
+				<!-- earlier tried to downgrade from 2.8 to 2.5.1; warning disappeared, but now other one pops up something about wtp error  -->
+				<version>${version_eclipse-plugin}</version>
+				
+				<configuration>
+					<!-- for configuration options see: http://maven.apache.org/plugins/maven-eclipse-plugin/eclipse-mojo.html -->
+					
+					<!-- maven looks into workspace and set project references if project name matched instead of linked m2repo jar -->
+					<workspace>${ponyo_peruser_eclipse_workspace_path}</workspace>
+					
+					<!-- with groupid set, we can reuse eg "java-pom" in ponyo and other projects (pulse); but have to get sure the workspace config for project refs still works -->
+					<addGroupIdToProjectName>true</addGroupIdToProjectName>
+					<addVersionToProjectName>true</addVersionToProjectName>
+					
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+					
+					<!-- configure eclise-checkstyle plugin -->
+					<additionalBuildcommands>
+<!--						<buildcommand>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</buildcommand>-->
+						<buildcommand>net.sf.eclipsecs.core.CheckstyleBuilder</buildcommand>
+					</additionalBuildcommands>
+					<additionalProjectnatures>
+<!--						<projectnature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</projectnature>-->
+						<projectnature>net.sf.eclipsecs.core.CheckstyleNature</projectnature>
+					</additionalProjectnatures>
+					
+					<additionalConfig>
+						<file>
+							<name>.checkstyle</name>
+							<!-- var ${ponyo_peruser_checkstyle_configuration_name} defined in settings.xml -->
+							<content>
+			                	<![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<fileset-config file-format-version="1.2.0" simple-config="true" sync-formatter="false">
+  <fileset name="all" enabled="true" check-config-name="${ponyo_peruser_checkstyle_configuration_name}" local="false">
+    <file-match-pattern match-pattern="." include-pattern="true" />
+  </fileset>
+  <filter name="NonSrcDirs" enabled="true" />
+</fileset-config>]]>
+							</content>
+<!--						alternatively to content load external, but introduces -external- dependency, which is not good: -->
+<!--							<url>http://some.place.org/path/to/file</url>-->
+<!--							 <location>/checkstyle-config.xml</location>-->
+						</file>
+					</additionalConfig>
+				</configuration>
+			</plugin>
+			
+            
+            <!-- CODE QUALITY -->
+            <!-- *********************************************************** -->
+            
+            <plugin>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+			</plugin>
+            
+        </plugins>
+        
+    </build>
+    
+	
+    <!-- ******************************************************************* -->
+    <!--                           P R O F I L E S                           -->
+    <!-- ******************************************************************* -->
+    
+	<profiles>
+		<profile>
+			<id>create-reports-java-pom</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<property>
+					<name>report.skip</name>
+					<value>!true</value>
+				</property>
+			</activation>
+	    	<build>
+	    		<plugins>
+					<plugin>
+						<artifactId>maven-antrun-plugin</artifactId>
+						<executions>
+							<execution>
+								<id>create-reports-java-pom-message</id><phase>pre-site</phase>
+								<configuration><target>
+									<echo message="[INFO] [java-pom] Creating enhanced site reports." />
+									<echo message="[INFO] [java-pom] (disable by using: &quot;mvn xxx -Dreport.skip&quot;)" />
+									<echo message="[INFO] [java-pom] ==============================================================" />
+								</target></configuration><goals><goal>run</goal></goals>
+							</execution>
+						</executions>
+					</plugin>
+	    		</plugins>
+	    	</build>
+	    	
+		    <!-- ******************************************************************* -->
+		    <!--                          R E P O R T I N G                          -->
+		    <!-- ******************************************************************* -->
+		    
+		    <reporting>
+		    	<plugins>
+		        
+		            <plugin>
+		                <artifactId>maven-checkstyle-plugin</artifactId>
+		                <version>${verison_checkstyle}</version>
+		                
+		               	<!-- <<<<<< DUPLICATION DUPLICATION DUPLICATION DUPLICATION DUPLICATION DUPLICATION DUPLICATION -->
+		                <configuration>
+		                    <configLocation>checkstyle.xml</configLocation>
+		                    <suppressionsLocation>checkstyle_suppression.xml</suppressionsLocation>
+		                    <failsOnError>true</failsOnError>
+		                    <includeTestSourceDirectory>false</includeTestSourceDirectory>
+		                    <enableRulesSummary>true</enableRulesSummary>
+		                </configuration>
+		               	<!-- <<<<<< DUPLICATION DUPLICATION DUPLICATION DUPLICATION DUPLICATION DUPLICATION DUPLICATION -->
+		                
+		            </plugin>
+		    	</plugins>
+		    </reporting>
+	    </profile>
+	
+	</profiles>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                                S C M                                -->
+    <!-- ******************************************************************* -->
+    
+    <scm>
+        <connection>scm:svn:http://ponyo-svn.googlecode.com/svn/artifact/maven/java-pom/trunk/</connection>
+        <developerConnection>scm:svn:https://ponyo-svn.googlecode.com/svn/artifact/maven/java-pom/trunk/</developerConnection>
+        <url>http://code.google.com/p/ponyo-svn/source/browse/#svn/artifact/maven/java-pom/trunk/</url>
+    </scm>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--            D I S T R I B U T I O N   M A N A G E M E N T            -->
+    <!-- ******************************************************************* -->
+        
+    <distributionManagement>
+		<site>
+			<id>ponyo-sourceforge-server</id>
+			<url>${distribution_site_url_prefix}/${project.artifactId}/${project.version}/</url>
+		</site>
+    </distributionManagement>
+    
+</project>

@@ -4,10 +4,26 @@
     <name>JPonyo Project</name>
     <packaging>pom</packaging>
     
-    <groupId>net.sf.ponyo.jponyo</groupId>
     <artifactId>jponyo-reactor</artifactId>
     <version>0.1-SNAPSHOT</version>
     
+    
+    <!-- ******************************************************************* -->
+    <!--                             P A R E N T                             -->
+    <!-- ******************************************************************* -->
+    
+    <parent>
+        <groupId>net.sf.ponyo.jponyo.pom</groupId>
+        <artifactId>corporate-pom</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    	<relativePath>../pn-corporate-pom/pom.xml</relativePath>
+    </parent>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                            M O D U L E S                            -->
+    <!-- ******************************************************************* -->
+   
     <modules>
     	<module>common</module>
     	<module>jponyo</module>

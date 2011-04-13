@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE suppressions PUBLIC "-//Puppy Crawl//DTD Suppressions 1.1//EN" "http://www.puppycrawl.com/dtds/suppressions_1_1.dtd">
+<!-- 
+<!DOCTYPE suppressions PUBLIC
+     "-//Puppy Crawl//DTD Suppressions 1.0//EN"
+     "http://www.puppycrawl.com/dtds/suppressions_1_0.dtd">
+ -->
+<suppressions>
+
+	<!-- !!! ATTENTION: MethodCount is not yet supported by maven-checkstyle-plugin !!! -->
+<!--	<suppress checks="MethodCount" files=".*Builder.java" />-->
+
+<!--	<suppress checks="[a-zA-Z0-9]*" files=".*Prototype.java" />-->
+<!--	<suppress checks=".*" files=".*Prototype.java" />-->
+	
+	
+	<!-- GUICE MODULES -->
+	<suppress checks="RequireThis" files="net.sf.ponyo.jponyo.*Module.java" />
+	
+	
+	<!-- BODY RELATED -->
+    <!-- ******************************************************************* -->
+	
+<!--	<suppress checks="MethodName" files="net.sf.josceleton.core.api.entity.body.Body.java" lines="200,240-280" />-->
+<!--	<suppress checks="MethodName" files="net.sf.josceleton.core.api.entity.joint.*.java" />-->
+	
+<!--	<suppress checks="MethodCount" files="net.sf.josceleton.core.api.entity.body.Body.java" />-->
+<!--	<suppress checks="MethodCount" files="net.sf.josceleton.commons.reflect.ClassAdapter.java" />-->
+<!--	<suppress checks="MethodCount" files="net.sf.josceleton.commons.reflect.ClassAdapterImpl.java" />-->
+<!--	<suppress checks="MethodCount" files="net.sf.josceleton.commons.test.matcher.JosceletonMatchers.java" />-->
+<!--	<suppress checks="MethodCount" files="net.sf.josceleton.core.impl.entity.CoordinateImpl.java" />-->
+	
+
+	<!-- TEST RELATED -->
+    <!-- ******************************************************************* -->
+    
+<!--	<suppress checks="RightCurly" files=".*Test.java" />-->
+	<suppress checks="ParenPad" files=".*Test(Factory|ScenarioStep|Util)?.java" />
+	<suppress checks="LineLength" files=".*Test(Factory|ScenarioStep|Util)?.java" />
+	<suppress checks="RequireThis" files=".*Test(Factory|ScenarioStep|Util)?.java" />
+	<suppress checks="ParameterNumber" files=".*Test(Factory|ScenarioStep|Util)?.java" />
+	<suppress checks="AvoidInlineConditionals" files=".*Test(Factory|ScenarioStep|Util)?.java" />
+	<suppress checks="AvoidNestedBlocks" files=".*Test.java" />
+	
+	<!-- allow "assertThat(testee.equals(null), equalTo(false));" instead of "assertThat(testee, not(equalTo(null)));" -->
+	<suppress checks="EqualsAvoidNull" files=".*Test.java" />
+	
+	<!-- Suppress JavadocPackage in the test packages -->
+<!--    <suppress checks="JavadocPackage" files="[\\/]test[\\/]"/>-->
+	
+</suppressions>

@@ -6,7 +6,7 @@ import net.sf.ponyo.jponyo.connection.Connector;
 /**
  * @since 0.1
  */
-public class JnaConnector implements Connector {
+public class JnaConnector /*extends DefaultAsync*/ implements Connector {
 	
 	private final JnaGate gate = new JnaGate();
 	

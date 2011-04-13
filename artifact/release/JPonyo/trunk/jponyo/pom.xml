@@ -7,43 +7,36 @@
     <groupId>net.sf.ponyo.jponyo</groupId>
     <artifactId>jponyo</artifactId>
     <version>0.1-SNAPSHOT</version>
-	
-	<properties>
-		<java_version>1.5</java_version>
-		
-		<version_commons_logging>1.1.1</version_commons_logging>
-		<version_log4j>1.2.14</version_log4j>
-	</properties>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                             P A R E N T                             -->
+    <!-- ******************************************************************* -->
+    
+    <parent>
+        <groupId>net.sf.ponyo.jponyo.pom</groupId>
+        <artifactId>java-pom</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    	<relativePath>../pn-java-pom/pom.xml</relativePath>
+    </parent>
 	
 	<dependencies>
+	
+		<dependency>
+			<groupId>net.sf.ponyo.jponyo</groupId>
+			<artifactId>common</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.sun.jna</groupId>
 			<artifactId>jna</artifactId>
-			<version>3.0.9</version>
 		</dependency>
-    		
-        <dependency>
-        	<groupId>commons-logging</groupId>
-        	<artifactId>commons-logging</artifactId>
-        	<version>${version_commons_logging}</version>
-       	</dependency>
-        <dependency>
-        	<groupId>log4j</groupId>
-        	<artifactId>log4j</artifactId>
-        	<version>${version_log4j}</version>
-       	</dependency>
+		
 	</dependencies>
     
     <build>
     	<plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.5</source>
-                    <target>1.5</target>
-                </configuration>
-            </plugin>
-            
             <plugin>
             	<artifactId>maven-assembly-plugin</artifactId>
             	<version>2.2.1</version>
@@ -70,4 +63,5 @@
             </plugin>
     	</plugins>
     </build>
+    
 </project>

@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>Ponyo Checkstyle Config</name>
+    <description>
+    	Simple purpose of this artifact is to keep checkstyle configurations (and suppressions) in a single location.
+    	Simply add in your POM project.build.plugins.plugin[maven-checkstyle-plugin].dependencies a dependency to this artifact.
+    	
+    	There is some magic going on, to be able to use checkstyle files from both, eclipse and maven simultaneously.
+    	A groovy script removes the SuppressionFilter module, as maven will configure this independently (and path would not work for maven). 
+    </description>
+    <packaging>jar</packaging>
+    
+    <artifactId>checkstyle-config</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                             P A R E N T                             -->
+    <!-- ******************************************************************* -->
+    
+    <parent>
+    	<groupId>net.sf.ponyo.jponyo.pom</groupId>
+	    <artifactId>corporate-pom</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    	<relativePath>../pn-corporate-pom/pom.xml</relativePath>
+    </parent>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                              B U I L D                              -->
+    <!-- ******************************************************************* -->
+    
+    <build>
+    	 <plugins>
+    	 
+	    	<!-- there is some magic going on: invoke groovy script removing SuppressionFilter module from checkstyle.xml -->
+	    	<!-- TODO re-enable!!! -->
+<!--			<plugin>-->
+<!--				<groupId>org.codehaus.groovy.maven</groupId>-->
+<!--				<artifactId>gmaven-plugin</artifactId>-->
+<!--				<executions>-->
+<!--					<execution>-->
+<!--						<id>process-checkstyle_xml-groovyscript</id>-->
+<!--						<phase>generate-resources</phase>-->
+<!--						<goals>-->
+<!--							<goal>execute</goal>-->
+<!--						</goals>-->
+<!--						<configuration>-->
+<!--							<source>${basedir}/src/main/script/process_checkstyle_xml.groovy</source>-->
+<!--							<properties>-->
+<!--								<checkstyleXmlPath>${basedir}/src/main/resources/checkstyle.xml</checkstyleXmlPath>-->
+<!--								<targetXmlFilePath>${basedir}/target/classes/checkstyle.xml</targetXmlFilePath>-->
+<!--							</properties>-->
+<!--						</configuration>-->
+<!--					</execution>-->
+<!--				</executions>-->
+<!--			</plugin>-->
+		
+		</plugins>
+    </build>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                                S C M                                -->
+    <!-- ******************************************************************* -->
+    
+    <scm>
+        <connection>scm:svn:http://ponyo-svn.googlecode.com/svn/artifact/maven/checkstyle-config/trunk/</connection>
+        <developerConnection>scm:svn:https://ponyo-svn.googlecode.com/svn/artifact/maven/checkstyle-config/trunk/</developerConnection>
+        <url>http://code.google.com/p/ponyo-svn/source/browse/#svn/artifact/maven/checkstyle-config/trunk/</url>
+    </scm>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--            D I S T R I B U T I O N   M A N A G E M E N T            -->
+    <!-- ******************************************************************* -->
+        
+    <distributionManagement>
+		<site>
+			<id>ponyo-sourceforge-server</id>
+			<url>${distribution_site_url_prefix}/${project.artifactId}/${project.version}/</url>
+		</site>
+    </distributionManagement>
+    
+</project>

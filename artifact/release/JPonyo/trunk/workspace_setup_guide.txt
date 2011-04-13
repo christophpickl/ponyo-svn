@@ -1,0 +1,13 @@
+in ~/.m2/settings.xml:
+
+1. add repo(s)
+2. add profile with local settings + activate it; eg:
+
+		<profile>
+			<id>ponyo-profile</id>
+			<properties>
+				<ponyo_peruser_eclipse_workspace_path>/Users/phudy/_dev/josc</josceleton-ponyo_peruser_eclipse_workspace_path>
+				<ponyo_peruser_checkstyle_suppression_file_path>/Users/phudy/_dev/josc/pn-checkstyle-config/src/main/resources/checkstyle_suppression.xml</ponyo_peruser_checkstyle_suppression_file_path>
+				<ponyo_peruser_checkstyle_configuration_name>pn-checkstyle-config</ponyo_peruser_checkstyle_configuration_name>
+			</properties>
+		</profile>

@@ -16,6 +16,7 @@ import javax.swing.WindowConstants;
 import com.sun.jna.Callback;
 import com.sun.jna.Library;
 import com.sun.jna.Native;
+import com.sun.jna.ptr.IntByReference;
 
 public class App {
 
@@ -36,21 +37,20 @@ public class App {
 
 		JButton btnQuit = new JButton("Quit");
 		btnQuit.setEnabled(false);
-		final JFrame frame = createWindow(nativeLibrary, txtOutput, btnQuit);
+		final JFrame frame = createWindow(txtOutput, btnQuit);
 		SwingUtilities.invokeLater(new Runnable() { @Override public void run() {
 			frame.setVisible(true);
 		}});
 		
 		System.out.println("Starting up PonyoNI ...");
 //		nativeLibrary.pnStartRecording("/myopenni/myoni.oni", userCallback, jointCallback);
-		nativeLibrary.pnStartWithXml("/myopenni/simple_config.xml", userCallback, jointCallback);
-		System.out.println("Starting up PonyoNI ... DONE");
-		btnQuit.setEnabled(true);
-	}
-	
-	private static JFrame createWindow(final PnJNALibray nativeLibrary, JComponent txtOutput, JButton btnQuit) {
-		final JFrame frame = new JFrame("PnJNA - Java Sample");
-		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		
+		IntByReference resultCodeRef = new IntByReference();
+		nativeLibrary.pnStartWithXml(resultCodeRef, "/myopenni/simple_config.xml", userCallback, jointCallback);
+		final int resultCode = resultCodeRef.getValue();
+		
+		System.out.println("Starting up PonyoNI ... DONE; result code: " + resultCode);
+		
 		btnQuit.addActionListener(new ActionListener() { @Override public void actionPerformed(ActionEvent e) {
 			System.out.println("pnDestroy() START");
 			nativeLibrary.pnDestroy();
@@ -58,6 +58,12 @@ public class App {
 			frame.setVisible(false);
 			frame.dispose();
 		}});
+		btnQuit.setEnabled(true);
+	}
+	
+	private static JFrame createWindow(JComponent txtOutput, JButton btnQuit) {
+		final JFrame frame = new JFrame("PnJNA - Java Sample");
+		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(new JScrollPane(txtOutput), BorderLayout.CENTER);
 		panel.add(btnQuit, BorderLayout.SOUTH);
@@ -69,8 +75,8 @@ public class App {
 
 	interface PnJNALibray extends Library {
 		String LIB_NAME = "PnJNA";
-		void pnStartWithXml(String configPath, OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback);
-		void pnStartRecording(String oniPath, OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback);
+		void pnStartWithXml(IntByReference resultCode, String configPath, OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback);
+		void pnStartRecording(IntByReference resultCode, String oniPath, OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback);
 		void pnDestroy();
 	}
 

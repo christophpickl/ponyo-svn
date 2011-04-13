@@ -1,3 +1,4 @@
+#include <ponyo/openni/OpenNIUtils.hpp>
 #include <ponyo/openni/UserManager.hpp>
 
 namespace pn {
@@ -38,17 +39,17 @@ UserManager::~UserManager() {
 	LOG->debug("init(context) START");
 
 	LOG->debug("Setting up user generator node.");
-
 	const XnStatus foundExistingUserGenerator = context.FindExistingNode(XN_NODE_TYPE_USER, this->userGenerator);
 	if(foundExistingUserGenerator != XN_STATUS_OK) {
 		LOG->debug("Not found existing UserGenerator; going to create one.");
 		CHECK_XN(this->userGenerator.Create(context), "userGenerator.Create(context)");
 	}
-
 	if(!this->userGenerator.IsCapabilitySupported(XN_CAPABILITY_SKELETON)) {
 		throw UserManagerException("Supplied user generator doesn't support skeleton", AT);
 	}
 	this->skeletonCapability = this->userGenerator.GetSkeletonCap();
+	OpenNIUtils::dumpJointAvailability(this->skeletonCapability);
+
 
 	this->registerCallbacks();
 	this->skeletonCapability.SetSkeletonProfile(XN_SKEL_PROFILE_ALL); //  we want to have all joints
@@ -147,9 +148,9 @@ UserManager::~UserManager() {
 //	XnSkeletonJointPosition jointPosition;
 //	CHECK_XN(this->skeletonCapability.GetSkeletonJointPosition(userId, jointEnum, jointPosition), "Get joint position failed!");
 
-	if(jointEnum == XN_SKEL_HEAD) {
-		printf("joint orientation: %i.X = %f\n", jointEnum, jointOrientation.orientation.elements[0/*..9*/]);
-	}
+//	if(jointEnum == XN_SKEL_HEAD) {
+//		printf("joint orientation: %i.X = %f\n", jointEnum, jointOrientation.orientation.elements[0/*..9*/]);
+//	}
 //	if(jointOrientation.fConfidence > 0.5) {
 //	}
 

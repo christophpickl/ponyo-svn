@@ -1,3 +1,4 @@
+#include <ponyo/openni/OpenNIUtils.hpp>
 #include <ponyo/openni/OpenNIFacade.hpp>
 
 namespace pn {
@@ -56,6 +57,8 @@ OpenNIFacade::~OpenNIFacade() {
 	} catch(UserManagerException& e) {
 		throw OpenNiException(e.getMessage(), AT); // TODO add UserManagerException as exception cause
 	}
+
+	OpenNIUtils::dumpNodeInfosByContext(this->context);
 
 	LOG->debug("Starting depth generator ...");
 	CHECK_XN(this->depthGenerator.StartGenerating(), "Could not start depth generator!");

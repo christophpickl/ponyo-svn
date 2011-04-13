@@ -12,4 +12,9 @@
 
 #define AT __FILE__, __LINE__
 
+// useful when dealing with pseudo boolean values
+#define YES "Yes"
+#define NO "No"
+#define BOOL2CHAR(b) (b == 1) ? YES:  NO;
+
 #endif // PNCOMMON_INC_HPP_

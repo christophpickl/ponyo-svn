@@ -1,8 +1,4 @@
-#include <vector.h>
-#include "ponyo_common.h"
-#include "NiDevice.h"
 #include "MultipleKinects.h"
-
 
 MultipleKinects::MultipleKinects() {
 	printf("new MultipleKinects()\n");
@@ -37,7 +33,7 @@ void MultipleKinects::init() {
 		std::string errorMsg = "Device node list is empty! (Probably no devices connected?!)";
 		throw errorMsg;
 	}
-	vector<xn::NodeInfo> deviceInfos;
+	std::vector<xn::NodeInfo> deviceInfos;
 	int c = 0; // i'd like to have a "c++" ;)
 	for (xn::NodeInfoList::Iterator it = deviceInfoList.Begin(); it != deviceInfoList.End(); ++it) {
 		deviceInfos.push_back(*it);
@@ -59,7 +55,7 @@ void MultipleKinects::init() {
 	returnCode = this->context.EnumerateProductionTrees(XN_NODE_TYPE_IMAGE, NULL,imageInfoList, NULL);
 	if(returnCode != XN_STATUS_OK) { THROW_XN_EXCEPTION("Enumerating image nodes failed!", returnCode); }
 
-	vector<xn::NodeInfo> imageInfos;
+	std::vector<xn::NodeInfo> imageInfos;
 	for (xn::NodeInfoList::Iterator it = imageInfoList.Begin(); it != imageInfoList.End(); ++it) {
 		imageInfos.push_back(*it);
 	}

@@ -2,8 +2,9 @@
 #ifndef MULTIPLEKINECTS_H_
 #define MULTIPLEKINECTS_H_
 
-#include <vector.h>
+#include <vector>
 #include <XnCppWrapper.h>
+#include "ponyo_common.h"
 #include "NiDevice.h"
 
 class MultipleKinects {
@@ -18,7 +19,7 @@ public:
 
 private:
 	xn::Context context;
-	vector<NiDevice*> devices;
+	std::vector<NiDevice*> devices;
 	ImageSaver* imageSaver; // TODO remove afterwards
 };
 

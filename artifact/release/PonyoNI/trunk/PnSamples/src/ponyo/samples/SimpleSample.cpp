@@ -20,8 +20,7 @@ void usePnFacadeToRunOniFile() {
 	delete facade;
 }
 
-int main() {
-	printf("SimpleSample main() START\n");
+void foo() {
 	try {
 //		usePnFacadeToRunOniFile();
 
@@ -38,6 +37,11 @@ int main() {
 	} catch(...) {
 		fprintf(stderr, "Some unkown error occured! DEBUG!"); // TODO how to process varargs?!
 	}
+}
+
+int main() {
+	printf("SimpleSample main() START\n");
+	foo();
 	printf("main() END\n");
 	return 0;
 }

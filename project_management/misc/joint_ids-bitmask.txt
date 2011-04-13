@@ -1,0 +1,36 @@
+- openni defines 24 skeleton joints; kinect only supports 15 of them (unsupported marked with "*")
+- group bit 7 and 8 are unused
+- idea: instead of byte, could use int => more group masks possible
+
+                           +- upper (lower) body flag
+                           |
+                           V [ <-ID-> ]
+JOINTS:           ID:| 8 7 6 5  4 3 2 1 | RESULT:
+---------------------+------------------+--------
+HEAD            =  1 | ? ? 1 0  0 0 0 1 | ==>   ?
+NECK            =  2 | ? ? 1 0  0 0 1 0 | ==>   ?
+TORSO           =  3 | ? ? 1 0  0 0 1 1 | ==>   ?
+WAIST*          =  4 | ? ? 1 0  0 1 0 0 | ==>   ?
+LEFT_COLLAR*    =  5 | ? ? 1 0  0 1 0 1 | ==>   ?
+LEFT_SHOULDER   =  6 | ? ? 1 0  0 1 1 0 | ==>   ?
+LEFT_ELBOW      =  7 | ? ? 1 0  0 1 1 1 | ==>   ?
+LEFT_WRIST*     =  8 | ? ? 1 0  1 0 0 0 | ==>   ?
+LEFT_HAND       =  9 | ? ? 1 0  1 0 0 1 | ==>   ?
+LEFT_FINGERTIP* = 10 | ? ? 1 0  1 0 1 0 | ==>   ?
+RIGHT_COLLAR*   = 11 | ? ? 1 0  1 0 1 1 | ==>   ?
+RIGHT_SHOULDER  = 12 | ? ? 1 0  1 1 0 0 | ==>   ?
+RIGHT_ELBOW     = 13 | ? ? 1 0  1 1 0 1 | ==>   ?
+RIGHT_WRIST*    = 14 | ? ? 1 0  1 1 1 0 | ==>   ?
+RIGHT_HAND      = 15 | ? ? 1 0  1 1 1 1 | ==>   ?
+RIGHT_FINGERTIP*= 16 | ? ? 1 1  0 0 0 0 | ==>   ?
+LEFT_HIP        = 17 | ? ? 0 1  0 0 0 1 | ==>   ?
+LEFT_KNEE       = 18 | ? ? 0 1  0 0 1 0 | ==>   ?
+LEFT_ANKLE*     = 19 | ? ? 0 1  0 0 1 1 | ==>   ?
+LEFT_FOOT       = 20 | ? ? 0 1  0 1 0 0 | ==>   ?
+RIGHT_HIP       = 21 | ? ? 0 1  0 1 0 1 | ==>   ?
+RIGHT_KNEE      = 22 | ? ? 0 1  0 1 1 0 | ==>   ?
+RIGHT_ANKLE*    = 23 | ? ? 0 1  0 1 1 1 | ==>   ?
+RIGHT_FOOT      = 24 | ? ? 0 1  1 0 0 0 | ==>   ?
+---------------------+---------------------------
+JOINT_ID             | 0 0 0 1  1 1 1 1 | ==>  31
+UPPER_BODY           | 0 0 1 0  0 0 0 0 | ==>  32

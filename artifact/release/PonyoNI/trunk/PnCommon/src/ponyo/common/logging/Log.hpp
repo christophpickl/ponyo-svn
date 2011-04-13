@@ -20,16 +20,21 @@ namespace pn {
  */
 class Log {
 public:
-
 	Log(const char*);
 	virtual ~Log();
 
-	void fatal(const char*);
-	void error(const char*);
-	void warn(const char*);
-	void info(const char*);
-	void debug(const char*);
-	void trace(const char*);
+	void trace(const char* message);
+	void trace2(const char* format, ...);
+	void debug(const char* message);
+	void debug2(const char* format, ...);
+	void info(const char* message);
+	void info2(const char* format, ...);
+	void warn(const char* message);
+	void warn2(const char* format, ...);
+	void error(const char* message);
+	void error2(const char* format, ...);
+	void fatal(const char* message);
+	void fatal2(const char* format, ...);
 
 private:
 	static int LEVEL_NONE;
@@ -42,9 +47,10 @@ private:
 	static int LEVEL_ANY;
 
 	std::string logeeName;
-//	const char* logeeName;
+//	char* logeeName;
 
-	void writeLog(const char*, int, const char*);
+	void writeLog(const char* message, int logLevel, const char* label);
+	void writeLog2(const char* format, va_list& args, int logLevel, const char* label);
 };
 }
 

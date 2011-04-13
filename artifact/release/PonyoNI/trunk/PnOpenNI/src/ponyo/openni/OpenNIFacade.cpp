@@ -19,7 +19,7 @@ OpenNIFacade::~OpenNIFacade() {
 }
 
 /*public*/ void OpenNIFacade::startRecording(const char* oniFilePath) throw(OpenNiException) {
-	LOG->info("startRecording(oniFilePath)");
+	LOG->info2("startRecording(oniFilePath=%s)", oniFilePath);
 
 	LOG->debug("Initializing context ...");
 	CHECK_XN(this->context.Init(), "Could not initialize OpenNI context!");
@@ -32,7 +32,7 @@ OpenNIFacade::~OpenNIFacade() {
 }
 
 /*public*/ void OpenNIFacade::startWithXml(const char* configPath) throw(OpenNiException) {
-	LOG->info("startWithXml(configPath)");
+	LOG->info2("startWithXml(configPath=%s)", configPath);
 
 	printf("Initializing context from file: %s\n", configPath);
 	CHECK_XN(this->context.InitFromXmlFile(configPath), "Could not initialize OpenNI context from XML! Is the device really properly connected?!");

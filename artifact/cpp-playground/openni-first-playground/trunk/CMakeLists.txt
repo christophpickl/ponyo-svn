@@ -11,10 +11,14 @@ PROJECT (playgroundx)
 	SET (EXTRA_LIBS ${EXTRA_LIBS} ${OpenCV_LIBS})
 
 SET (EXECUTABLE_OUTPUT_PATH bin)
+SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g") # enable debugging
 SET (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O2") # solve "_xnShutdown" undefined symbol link error
 
 ##############################################################
 ADD_EXECUTABLE (nienhance nienhance.cpp MultipleKinects.cpp NiDevice.cpp ImageSaver)
 TARGET_LINK_LIBRARIES (nienhance ${EXTRA_LIBS})
+
+ADD_EXECUTABLE (main_openni_features main_openni_features.cpp)
+TARGET_LINK_LIBRARIES (main_openni_features ${EXTRA_LIBS})
 
 

@@ -31,7 +31,9 @@ private:
 	XnCallbackHandle callbackUser;
 	XnCallbackHandle callbackCalibration;
 	XnCallbackHandle callbackPose;
+	bool callbacksRegistered;
 
+	void registerCallbacks() throw(OpenNiException);
 	void broadcastUserChangeState(UserId userId, UserState userState);
 	void broadcastJointPositions(UserId userId, XnSkeletonJoint jointEnum, int jointId);
 

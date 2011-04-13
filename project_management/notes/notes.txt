@@ -2,7 +2,7 @@
 * OpenNI detailed investigation: CoD, joint orientation, scene analyzer, nite gestures, ...
 ! custom mylyn installation (eclipse mylyn integration; customize workflow; customize fields)
 * @BUILD: platform independent build; win/linux support (c++, cmake)
-
+=> depthGenerator.GetAlternativeViewPointCap().SetViewPoint(imageGenerator); // align xyz with rgb.
 =================================================
 PonyoNI v0.1 tasks
 =================================================

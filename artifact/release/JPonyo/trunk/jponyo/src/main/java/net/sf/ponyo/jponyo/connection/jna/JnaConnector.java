@@ -8,18 +8,13 @@ import net.sf.ponyo.jponyo.connection.Connector;
  */
 public class JnaConnector /*extends DefaultAsync*/ implements Connector {
 	
-	private final JnaGate gate = new JnaGate();
+	private final String configPath;
 	
-	private static final JnaConnector INSTANCE = new JnaConnector();
-	
-	private JnaConnector() { /*singleton*/ }
-	
-	public static final JnaConnector getInstance() {
-		return INSTANCE;
+	public JnaConnector(String configPath) {
+		this.configPath = configPath;
 	}
 	
 	public Connection openConnection() {
-		return null;
+		return new JnaConnection(this.configPath).open();
 	}
-
 }

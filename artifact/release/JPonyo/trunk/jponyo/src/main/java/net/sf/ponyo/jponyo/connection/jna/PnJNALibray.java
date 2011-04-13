@@ -19,6 +19,6 @@ interface PnJNALibray extends Library {
 	}
 	
 	interface OnJointPositionChangedCallback extends Callback {
-		void onJointPositionChanged(int userId, int joint, float x, float y, float z);
+		void onJointPositionChanged(int userId, int jointId, float x, float y, float z);
 	}
 }

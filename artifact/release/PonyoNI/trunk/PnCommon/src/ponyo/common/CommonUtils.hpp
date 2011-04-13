@@ -2,7 +2,8 @@
 #ifndef COMMONUTILS_HPP_
 #define COMMONUTILS_HPP_
 
-#include <ponyo/common/PnCommon.hpp>
+#include <ponyo/common/pncommon_inc.hpp>
+#include <ponyo/common/Logging.hpp>
 
 namespace pn {
 

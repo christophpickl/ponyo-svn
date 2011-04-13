@@ -1,1 +1,3 @@
+PN_DEPENDENCY_BOOST ()
+
 PN_INIT_LIB (PnCommon)

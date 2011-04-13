@@ -2,7 +2,7 @@
 #ifndef PNJNA_HPP_
 #define PNJNA_HPP_
 
-#include <ponyo/openni/PnOpenNI.hpp>
+#include <ponyo/PnOpenNI.hpp>
 
 /**
  * Initialize and start the OpenNI framework with the given configuration file.

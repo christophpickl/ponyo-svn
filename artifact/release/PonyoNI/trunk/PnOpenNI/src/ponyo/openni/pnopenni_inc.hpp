@@ -4,7 +4,7 @@
 
 #include <XnCppWrapper.h>
 #include <XnLog.h>
-#include <ponyo/common/PnCommon.hpp>
+#include <ponyo/PnCommon.hpp>
 #include <ponyo/openni/includes/check_xn.hpp>
 #include <ponyo/openni/OpenNiException.hpp>
 #include <ponyo/openni/UserState.hpp>

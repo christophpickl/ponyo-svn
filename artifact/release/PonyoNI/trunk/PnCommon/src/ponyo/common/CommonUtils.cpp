@@ -1,6 +1,7 @@
 #include <boost/thread.hpp>
 #include <boost/date_time.hpp>
 #include <ponyo/common/CommonUtils.hpp>
+//#include <XnCppWrapper.h>
 
 namespace pn {
 Log* CommonUtils::LOG = NEW_LOG();
@@ -12,6 +13,7 @@ Log* CommonUtils::LOG = NEW_LOG();
 	if(printDefaultPrompt == true) {
 		printf("\n  ======> Hit ENTER to continue ...\n\n");
 	}
+//	xn::Context context;
 	std::string input;
 	std::getline(std::cin, input);
 }

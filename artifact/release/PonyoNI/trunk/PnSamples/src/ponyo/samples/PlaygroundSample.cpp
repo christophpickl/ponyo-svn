@@ -1,4 +1,4 @@
-#include <ponyo/openni/PnOpenNI.hpp>
+#include <ponyo/PnOpenNI.hpp>
 
 using namespace pn;
 

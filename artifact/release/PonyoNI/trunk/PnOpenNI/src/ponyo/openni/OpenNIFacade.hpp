@@ -6,7 +6,7 @@
 #include <ponyo/openni/UserManager.hpp>
 #include <ponyo/openni/UpdateThread.hpp>
 #include <ponyo/openni/UpdateThread.hpp>
-#include <ponyo/openni/StartConfigurations.hpp>
+#include <ponyo/openni/includes/headers_config.hpp>
 
 namespace pn {
 
@@ -17,9 +17,9 @@ public:
 	OpenNIFacade();
 	virtual ~OpenNIFacade();
 
-//	TODO void start(StartConfiguration& configuration) throw(OpenNiException);
-	void startWithXml(StartXmlConfiguration& configuration) throw(OpenNiException);
-	void startRecording(StartOniConfiguration& configuration) throw(OpenNiException);
+//	TODO void start(StartConfig& config) throw(OpenNiException);
+	void startWithXml(StartXmlConfig& config) throw(OpenNiException);
+	void startRecording(StartOniConfig& config) throw(OpenNiException);
 
 	void shutdown();
 
@@ -31,10 +31,13 @@ private:
 	xn::Context context;
 	xn::DepthGenerator depthGenerator;
 
+	/** Depending on start configuration, will be (un)used */
+	xn::ImageGenerator imageGenerator;
+
 	xn::DepthMetaData depthMetaData; // TODO this seems like a hack, but is mandatory, as otherwise something like: ...
 	// usergenerator does not get data from its dependent depthgenerator (?!)
 
-	void internalSetup(AbstractConfiguration& configuration) throw(OpenNiException);
+	void internalSetup(GenericConfig& config) throw(OpenNiException);
 	void onUpdateThread();
 
 };

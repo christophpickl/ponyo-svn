@@ -16,49 +16,66 @@ OpenNIFacade::~OpenNIFacade() {
 }
 
 
-/*public*/ void OpenNIFacade::startRecording(StartOniConfiguration& configuration) throw(OpenNiException) {
-	LOG->info2("startRecording(configuration=%s)", configuration.toCString());
+/*public*/ void OpenNIFacade::startRecording(StartOniConfig& config) throw(OpenNiException) {
+	LOG->info2("startRecording(config=%s)", config.toCString());
 
 	LOG->debug("Initializing context ...");
 	CHECK_XN(this->context.Init(), "Could not initialize OpenNI context!");
 
-	const char* oniRecordingPath = configuration.getOniRecordingPath();
+	const char* oniRecordingPath = config.getOniRecordingPath();
 	printf("Opening oni file recording: %s\n", oniRecordingPath);
 	CHECK_XN(this->context.OpenFileRecording(oniRecordingPath), "Could not open *.oni file!");
 
-	this->internalSetup(configuration);
+	this->internalSetup(config);
 }
 
-/*public*/ void OpenNIFacade::startWithXml(StartXmlConfiguration& configuration) throw(OpenNiException) {
-	LOG->info2("startWithXml(configuration=%s)", configuration.toCString());
+/*public*/ void OpenNIFacade::startWithXml(StartXmlConfig& config) throw(OpenNiException) {
+	LOG->info2("startWithXml(config=%s)", config.toCString());
 
-	const char* xmlConfigPath = configuration.getXmlConfigPath();
+	const char* xmlConfigPath = config.getXmlConfigPath();
 	printf("Initializing context from file: %s\n", xmlConfigPath);
 	CHECK_XN(this->context.InitFromXmlFile(xmlConfigPath), "Could not initialize OpenNI context from XML! Is the device really properly connected?!");
 
-	this->internalSetup(configuration);
+	this->internalSetup(config);
 }
 
-/*private*/ void OpenNIFacade::internalSetup(AbstractConfiguration& configuration) throw(OpenNiException) {
-	LOG->info("internalSetup()");
+/*private*/ void OpenNIFacade::internalSetup(GenericConfig& config) throw(OpenNiException) {
+	LOG->info("internalSetup(config)");
+
+	CHECK_XN(this->context.SetGlobalMirror(config.isMirrorModeEnabled() ? TRUE : FALSE),
+		"Setting global mirror mode failed!");
 
 	LOG->debug("Creating depth generator ...");
 	CHECK_XN(this->depthGenerator.Create(this->context), "Could not create depth generator!");
 
-	XnBool xnMirrorMode = TRUE;
-	CHECK_XN(this->context.SetGlobalMirror(), "Setting global mirror mode failed!");
-	// TODO outsource as client configuration option
+	// TODO mandatory to set if starting non-recording and non-xml, otherwise will fail!!!
+//	CHECK_XN(this->depthGenerator.SetMapOutputMode(configuration.getSomeFooMapMode()), "Setting output mode for depth generator failed!");
 
-	// mandatory to set if starting non-recording, otherwise will fail
-//	... if starting non-recording => CHECK_XN(this->depthGenerator.SetMapOutputMode(this->mapMode), "set depth mode");
+	XnMapOutputMode depthMode;
+	this->depthGenerator.GetMapOutputMode(depthMode);
+	LOG->debug2("depthGenerator mode = FPS: %i, Resolution: %i/%i", depthMode.nFPS, depthMode.nXRes, depthMode.nYRes);
 
-	this->userManager = new UserManager(configuration.getUserCallback(), configuration.getJointCallback());
+	if(config.isImageGeneratorEnabled()) {
+		LOG->debug("Creating image generator ...");
+
+		CHECK_XN(this->imageGenerator.Create(this->context), "Could not create image generator!");
+		XnMapOutputMode imageMode;
+		// TODO set image map output mode for non-xml startup
+		this->imageGenerator.GetMapOutputMode(imageMode);
+		LOG->debug2("imageGenerator mode = FPS: %i, Resolution: %i/%i", imageMode.nFPS, imageMode.nXRes, imageMode.nYRes);
+
+//		CHECK_RC(this->imageGenerator.RegisterToNewDataAvailable(&Cam::onImageDataAvailable, this, this->newDataAvailableCallbackHandle),
+//		this->imageGenerator.UnregisterFromNewDataAvailable(this->newDataAvailableCallbackHandle);
+	}
+
+	this->userManager = new UserManager(config.getUserCallback(), config.getJointCallback());
 	try {
 		this->userManager->init(this->context);
 	} catch(UserManagerException& e) {
-		throw OpenNiException(e.getMessage(), AT); // TODO add UserManagerException as exception cause
+		throw OpenNiException(e.getMessage(), AT); // MINOR add UserManagerException as exception cause
 	}
 
+	LOG->debug("Dump of existing nodes:");
 	OpenNIUtils::dumpNodeInfosByContext(this->context);
 
 	LOG->debug("Starting depth generator ...");

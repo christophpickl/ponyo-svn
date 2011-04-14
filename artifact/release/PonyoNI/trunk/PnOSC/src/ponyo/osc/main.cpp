@@ -65,8 +65,8 @@ void startServer() {
 
 	g_transmitSocket = new UdpTransmitSocket(IpEndpointName("127.0.0.1", 7000));
 
-	StartOniConfiguration configuration("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
-	g_facade.startRecording(configuration);
+	StartOniConfig config("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
+	g_facade.startRecording(config);
 
 	printf("PnOSC running ... terminate by hitting ENTER\n");
 	CommonUtils::waitHitEnter(false);

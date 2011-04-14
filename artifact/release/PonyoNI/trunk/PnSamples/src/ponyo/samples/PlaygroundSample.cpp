@@ -44,11 +44,13 @@ void mainInternal() {
 	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)
 //	OpenNIUtils::enableXnLogging(XN_LOG_INFO);
 
-//	StartXmlConfiguration configuration("misc/playground_config.xml", &onUserStateChanged, &onJointPositionChanged);
-//	g_facade.startWithXml(configuration);
+	StartXmlConfig config("misc/playground_config.xml", &onUserStateChanged, &onJointPositionChanged);
+//	config.setMirrorModeEnable(true);
+	config.setImageGeneratorEnabled(true);
+	g_facade.startWithXml(config);
 
-	StartOniConfiguration configuration("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
-	g_facade.startRecording(configuration);
+//	StartOniConfiguration configuration("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
+//	g_facade.startRecording(configuration);
 
 	printf("Hit ENTER to quit\n");
 	CommonUtils::waitHitEnter(false);

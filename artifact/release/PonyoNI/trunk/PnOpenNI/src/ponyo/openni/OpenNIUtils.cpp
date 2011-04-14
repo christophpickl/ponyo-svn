@@ -54,7 +54,7 @@ OpenNIUtils::~OpenNIUtils() {
 }
 
 /*static*/ void OpenNIUtils::dumpNodeInfos(xn::NodeInfoList& existingNodes) throw(OpenNiException) {
-	printf("Existing Nodes DUMP:\n========================================\n");
+//	printf("Existing Nodes DUMP:\n========================================\n");
 	int i = 1;
 	for(xn::NodeInfoList::Iterator it = existingNodes.Begin(); it != existingNodes.End(); it++, i++) {
 		xn::NodeInfo info = *it;

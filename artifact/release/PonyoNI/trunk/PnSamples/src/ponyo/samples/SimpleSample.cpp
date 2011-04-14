@@ -15,8 +15,8 @@ int main() {
 
 	OpenNIFacade facade;
 
-	StartXmlConfiguration configuration("misc/playground_config.xml", &onUserStateChanged, &onJointPositionChanged);
-	facade.startWithXml(configuration);
+	StartXmlConfig config("misc/playground_config.xml", &onUserStateChanged, &onJointPositionChanged);
+	facade.startWithXml(config);
 
 	CommonUtils::waitHitEnter();
 	facade.shutdown();

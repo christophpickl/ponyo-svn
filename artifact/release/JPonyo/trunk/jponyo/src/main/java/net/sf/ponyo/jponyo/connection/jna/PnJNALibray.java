@@ -12,7 +12,7 @@ interface PnJNALibray extends Library {
 	
 	int pnStartByXmlConfig(String configPath, OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback);
 	int pnStartByOniRecording(String oniPath, OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback);
-	void pnDestroy();
+	void pnShutdown();
 
 	interface OnUserStateChangedCallback extends Callback {
 		void onUserStateChanged(int userId, int userState);

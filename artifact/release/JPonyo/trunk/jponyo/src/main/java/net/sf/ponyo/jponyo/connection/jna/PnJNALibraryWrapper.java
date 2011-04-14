@@ -11,7 +11,7 @@ import com.sun.jna.Native;
 /**
  * @since 0.1
  */
-class JnaGate {
+class PnJNALibraryWrapper {
 
 	/*
 	JnaGate gate = new JnaGate();
@@ -24,7 +24,7 @@ class JnaGate {
 		gate.destroy();
 	}
 	*/
-	private static final Log LOG = LogFactory.getLog(JnaGate.class);
+	private static final Log LOG = LogFactory.getLog(PnJNALibraryWrapper.class);
 	
 	/**
 	 * Lazy initialized to safe valueable user time ;)
@@ -34,21 +34,11 @@ class JnaGate {
 	private final OnUserStateChangedCallback userCallback;
 	
 	private final OnJointPositionChangedCallback jointCallback;
+		
 	
-	public JnaGate(OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback) {
+	public PnJNALibraryWrapper(OnUserStateChangedCallback userCallback, OnJointPositionChangedCallback jointCallback) {
 		this.userCallback = userCallback;
 		this.jointCallback = jointCallback;
-	}
-	
-	/**
-	 * Postpone library initialisation as late as possible.
-	 */
-	private void initNativeLibrary() {
-		if(JnaGate.nativeLibrary == null) {
-			LOG.debug("Loading native library: " + PnJNALibray.LIB_NAME);
-//			System.setProperty("jna.encoding", "");
-			JnaGate.nativeLibrary = (PnJNALibray) Native.loadLibrary(PnJNALibray.LIB_NAME, PnJNALibray.class);
-		}
 	}
 
 	public void startByXmlConfig(String configPath) {
@@ -66,20 +56,30 @@ class JnaGate {
 		
 		final int resultCode;
 		if(isStartingByConfig == true) {
-			resultCode = JnaGate.nativeLibrary.pnStartByXmlConfig(configOrOniPath, this.userCallback, this.jointCallback);
+			resultCode = PnJNALibraryWrapper.nativeLibrary.pnStartByXmlConfig(configOrOniPath, this.userCallback, this.jointCallback);
 		} else {
-			resultCode = JnaGate.nativeLibrary.pnStartByOniRecording(configOrOniPath, this.userCallback, this.jointCallback);
+			resultCode = PnJNALibraryWrapper.nativeLibrary.pnStartByOniRecording(configOrOniPath, this.userCallback, this.jointCallback);
 		}
 		LOG.debug("JNA returned resultCode: " + resultCode);
 		if(resultCode != 0) {
 			throw new RuntimeException("resultCode: " + resultCode);
 		}
-		
+	}
+	
+	/**
+	 * Postpone library initialisation as late as possible.
+	 */
+	private void initNativeLibrary() {
+		if(PnJNALibraryWrapper.nativeLibrary == null) {
+			LOG.debug("Loading native library: " + PnJNALibray.LIB_NAME);
+//			System.setProperty("jna.encoding", "");
+			PnJNALibraryWrapper.nativeLibrary = (PnJNALibray) Native.loadLibrary(PnJNALibray.LIB_NAME, PnJNALibray.class);
+		}
 	}
 
-	public void destroy() {
-		LOG.debug("destroy()");
-		JnaGate.nativeLibrary.pnDestroy();
+	public void shutdown() {
+		LOG.debug("shutdown()");
+		PnJNALibraryWrapper.nativeLibrary.pnShutdown();
 	}
 
 	

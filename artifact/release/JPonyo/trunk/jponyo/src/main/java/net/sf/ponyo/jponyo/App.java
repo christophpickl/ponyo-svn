@@ -5,6 +5,7 @@ import net.sf.ponyo.jponyo.connection.ConnectionListener;
 import net.sf.ponyo.jponyo.connection.Connector;
 import net.sf.ponyo.jponyo.connection.jna.JnaByConfigConnector;
 import net.sf.ponyo.jponyo.connection.jna.JnaByRecordingConnector;
+import net.sf.ponyo.jponyo.connection.osc.OscConnector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,7 +22,8 @@ public class App {
 	public static void main(String[] args) throws Exception {
 		LOG.debug("main() START");
 
-		Connector connector = new JnaByRecordingConnector(ONI_PATH);
+		Connector connector = new OscConnector();
+//		Connector connector = new JnaByRecordingConnector(ONI_PATH);
 //		Connector connector = new JnaByConfigConnector(CONFIG_PATH);
 		
 		Connection connection = connector.openConnection();

@@ -1,5 +1,8 @@
 package net.sf.ponyo.jponyo.connection.jna;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.sf.ponyo.jponyo.DefaultAsync;
 import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
@@ -10,30 +13,35 @@ public class JnaConnection
 	extends DefaultAsync<ConnectionListener>
 		implements Connection, OnUserStateChangedCallback, OnJointPositionChangedCallback {
 	
+	private static final Log LOG = LogFactory.getLog(JnaConnection.class);
+	
 	private final String configOrRecordingPath;
-	private JnaGate gate;
+	
+	private PnJNALibraryWrapper jnaLib;
 	
 	public JnaConnection(String configOrRecordingPath) {
 		this.configOrRecordingPath = configOrRecordingPath;
 	}
 	
 	public Connection openByXmlConfig() {
-		this.gate = new JnaGate(this, this);
-		this.gate.startByXmlConfig(this.configOrRecordingPath);
+		this.jnaLib = new PnJNALibraryWrapper(this, this);
+		this.jnaLib.startByXmlConfig(this.configOrRecordingPath);
 		return this;
 	}
 	
 	public Connection openByOniRecording() {
-		this.gate = new JnaGate(this, this);
-		this.gate.startByOniRecording(this.configOrRecordingPath);
+		this.jnaLib = new PnJNALibraryWrapper(this, this);
+		this.jnaLib.startByOniRecording(this.configOrRecordingPath);
 		return this;
 	}
 
 	public void close() {
-		if(this.gate == null) {
-			throw new IllegalStateException();
+		LOG.debug("close()");
+		
+		if(this.jnaLib == null) {
+			throw new IllegalStateException("this.gate == null");
 		}
-		this.gate.destroy();
+		this.jnaLib.shutdown();
 	}
 
 	public void onUserStateChanged(int userId, int userState) {

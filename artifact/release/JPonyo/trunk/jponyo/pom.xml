@@ -19,6 +19,10 @@
         <version>0.1-SNAPSHOT</version>
     	<relativePath>../pn-java-pom/pom.xml</relativePath>
     </parent>
+    
+    <properties>
+    	<version_javaosc>1.0-20060402-josceleton</version_javaosc>
+    </properties>
 	
 	<dependencies>
 	
@@ -28,9 +32,18 @@
 			<version>0.1-SNAPSHOT</version>
 		</dependency>
 		
+	    <!-- E X T E R N A L -->
+    	<!-- *********************************************************** -->
+		
 		<dependency>
 			<groupId>com.sun.jna</groupId>
 			<artifactId>jna</artifactId>
+		</dependency>
+    	
+        <dependency>
+			<groupId>com.illposed</groupId>
+			<artifactId>javaosc</artifactId>
+			<version>${version_javaosc}</version>
 		</dependency>
 		
 	</dependencies>

@@ -11,8 +11,8 @@
 #include <ponyo/openni/includes/headers_config.hpp>
 #include <ponyo/openni/OpenNIFacade.hpp>
 #include <ponyo/openni/OpenNiException.hpp>
-#include <ponyo/openni/UserManager.hpp>
-#include <ponyo/openni/UserState.hpp>
+#include <ponyo/openni/logic/user/UserManager.hpp>
+#include <ponyo/openni/logic/user/UserState.hpp>
 #include <ponyo/openni/OpenNIUtils.hpp>
 
 #endif // PNOPENNI_HPP_

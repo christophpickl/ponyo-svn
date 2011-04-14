@@ -15,6 +15,12 @@ public:
 	 */
 	static void enableXnLogging(const XnLogSeverity& severity);
 
+	/**
+	 * Checks if given file exists as well as logs additional errors if !XN_STATUS_OK.
+	 */
+	static XnStatus safeInitFromXml(xn::Context& context, const char* configXmlPath) throw (OpenNiException, FileNotFoundException);
+	static bool fileExists(const char *filename);
+
 	static const char* mapProductionNodeTypeToLabel(XnProductionNodeType type);
 	static void dumpNodeInfos(xn::NodeInfoList& existingNodes) throw(OpenNiException);
 	static void dumpNodeInfosByContext(xn::Context& context) throw(OpenNiException);
@@ -25,7 +31,6 @@ public:
 private:
 	static Log* LOG;
 	OpenNIUtils();
-	virtual ~OpenNIUtils();
 };
 
 }

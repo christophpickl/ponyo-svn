@@ -1,19 +1,9 @@
 @CMAKE: add cxxunit; http://www.cmake.org/cmake/help/cmake_tutorial.html
 @CMAKE: inject version number in some hpp
-@LOG: support varargs, and optional Exception
+@LOG: support optional Exception
  
-- add toString for all
+@BUILD: add libs with version number, and create/update link to this version
  
  
-// TODO get xnErrors working + OpenNiException + string copy (as it seems as something get unintentionally freed)
-==> e.g.: @Context.InitFromXmlFile
-//	xn::EnumerationErrors xnInitErrors;
-//	XnStatus initXnStatus = this->context.InitFromXmlFile(configPath, &xnInitErrors);
-//	if (initXnStatus != XN_STATUS_OK) {
-//		if (initXnStatus == XN_STATUS_NO_NODE_PRESENT) {
-//			char xnErrorMessages[1024];
-//			xnInitErrors.ToString(xnErrorMessages, 1024);
-//			fprintf(stderr, "OpenNI errors: %s\n", xnErrorMessages);
-//		}
-//		THROW_XN_EXCEPTION(initXnStatus, "Could not initialize OpenNI context from XML!");
-//	}
+@C++ get Exception messages working in printBacktrace()
+	// string copy or similar, as it seems as something get unintentionally freed

@@ -1,5 +1,5 @@
 #include <ponyo/openni/OpenNIUtils.hpp>
-#include <ponyo/openni/UserManager.hpp>
+#include <ponyo/openni/logic/user/UserManager.hpp>
 
 namespace pn {
 

@@ -1,3 +1,61 @@
+* JPonyo klasse, speichert joints in GlobalData objekt
+* hudson verwenden ==> hauptsaechlich fuer reports schon uebersichtlich
+* header.in filter mechanismus
+
+
+
+* lesen c++ konstruktoren&co
+	http://www.parashift.com/c++-faq-lite/ctors.html
+
+
+
+
+
+
+
+http://wiki.nuigroup.com/Main_Page
+http://www.finkproject.org/doc/porting/porting.en.html
+
+
+
+- high level PonyOSC clients schreiben
+	=> JAVA!
+	=> C++
+	=> ActionScript (no flex, wenn dann optional)
+	=> python
+
+
+
+
+XnProductionNodeDescription info = (*iterator).GetDescription();
+                xnProductionNodeDescriptionToString(&info, buffer, 255); 
+
+
+
+
+see: http://groups.google.com/group/openni-dev/browse_thread/thread/c2d5b0eeb6071b84/dd8fca6582764ad2?#dd8fca6582764ad2
+
+Would love to be able to map the color camera image to the depth image
+and generate 3d color video textured geometry! 
+
+excuse, but you can this, with libfreenect + some opencv-stuff
+-> 1) rgbimage convert to grayscale depthImage with
+opencv (and some tricks) you can see in a another window the gray-scale depthMapObject 
+
+AlternativeViewPoint API in OpenNI helps to set PrimeSense depth generator alternative view point to the one of the image generator, thus producing aligned images. 
+
+
+
+ if (xnOSWasKeyboardHit()) {
+	char c = xnOSReadCharFromInput();
+	if(27==c)break;
+} 
+
+
+
+
+
+
 * offizielles sample projekt starten (generell, fuer alle eigenen artifakte!)
 
 

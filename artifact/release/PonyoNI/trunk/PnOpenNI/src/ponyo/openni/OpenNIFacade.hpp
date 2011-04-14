@@ -3,10 +3,10 @@
 #define OpenNIFacade_HPP_
 
 #include <ponyo/openni/pnopenni_inc.hpp>
-#include <ponyo/openni/UserManager.hpp>
-#include <ponyo/openni/UpdateThread.hpp>
 #include <ponyo/openni/UpdateThread.hpp>
 #include <ponyo/openni/includes/headers_config.hpp>
+#include <ponyo/openni/logic/user/UserManager.hpp>
+#include <ponyo/openni/logic/image/ImagaManager.hpp>
 
 namespace pn {
 
@@ -21,18 +21,21 @@ public:
 	void startWithXml(StartXmlConfig& config) throw(OpenNiException);
 	void startRecording(StartOniConfig& config) throw(OpenNiException);
 
+	void toggleMirror();
+
 	void shutdown();
 
 private:
 	static Log* LOG;
 
-	UserManager* userManager;
-	UpdateThread<OpenNIFacade> updateThread;
 	xn::Context context;
+	UpdateThread<OpenNIFacade> updateThread;
 	xn::DepthGenerator depthGenerator;
-
-	/** Depending on start configuration, will be (un)used */
 	xn::ImageGenerator imageGenerator;
+
+	UserManager* userManager;
+	/** Depending on start configuration, will be (un)used */
+	ImagaManager* imageManager;
 
 	xn::DepthMetaData depthMetaData; // TODO this seems like a hack, but is mandatory, as otherwise something like: ...
 	// usergenerator does not get data from its dependent depthgenerator (?!)

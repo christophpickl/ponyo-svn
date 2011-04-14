@@ -3,12 +3,15 @@
 using namespace pn;
 
 Log* LOG = NEW_LOG();
-OpenNIFacade facade;
-bool isRunning = false;
+OpenNIFacade g_facade;
+bool g_isRunning = false;
+bool g_isStartingUp = false; // TODO maybe rework with mutex!
 
 // TODO create struct for each Config type which can be used to create proper Object type (instead of flat struct)
 //      ==> especially to provide java API (in java, provide client again same high level Object type); struct could also used by ponyo c++ users
 //           ... @java api translation: happens all the time, flattening (struct) and high-leveling (oop) again, as JNA/JNI knows no OOP
+
+// TODO should we add shutdown signal hooks?? maybe do it in java only?!
 
 extern "C" int pnStartByXmlConfig(
 		const char* configXmlPath,
@@ -31,21 +34,30 @@ int __pnStart(
 		bool isConfigFlag,
 		UserStateCallback userStateCallback,
 		JointPositionCallback jointPositionCallback) {
+	if(g_isRunning == true) { // multithreaded tried to invoke start multiple times!
+		return 68;
+	}
+	g_isStartingUp = true;
 
-	if(isRunning == true) {
+	if(g_isRunning == true) {
 		return 67;
 	}
 
 	int resultCode = -1;
 	try {
 		if(isConfigFlag) {
-			fprintf(stderr, "TODOOOOOO in PnJNA!\n");
-			// FIXME !!! facade.startWithXml(configOrOniPath, userStateCallback, jointPositionCallback);
+
+			StartXmlConfig config(configOrOniPath, userStateCallback, jointPositionCallback);
+			config.setMirrorModeEnabled(true);
+			config.setImageGeneratorEnabled(true);
+			g_facade.startWithXml(config);
+
 		} else {
-			fprintf(stderr, "TODOOOOOO in PnJNA!\n");
-			// FIXME !!! facade.startRecording(configOrOniPath, userStateCallback, jointPositionCallback);
+			StartOniConfig config(configOrOniPath, userStateCallback, jointPositionCallback);
+			g_facade.startRecording(config);
+
 		}
-		isRunning = true;
+		g_isRunning = true;
 		resultCode = 0;
 		// TODO proper error handling! => additional callback for exceptions (also use for background thread)
 	} catch(const OpenNiException& e) {
@@ -61,17 +73,23 @@ int __pnStart(
 		fprintf(stderr, "Unhandled exception!");
 		resultCode = 4;
 	}
+	g_isStartingUp = false;
 	return resultCode;
 }
 
 extern "C" void pnShutdown() {
 	LOG->info("pnShutdown()");
+	if(g_isStartingUp == true) {
+		// FIXME return some errorcode!!!
+		fprintf(stderr, "tried to shutdown while starting up!\n");
+		return;
+	}
 
 	// FIXME check if currently initializing, as client (awt dispatcher thread) could be async call
-	printf("shutting down; is running = %i\n", isRunning);
-	if(isRunning == true) {
-		facade.shutdown();
-		isRunning = false;
+	printf("shutting down; is running = %i\n", g_isRunning);
+	if(g_isRunning == true) {
+		g_facade.shutdown();
+		g_isRunning = false;
 	} else {
 		LOG->warn("nothing to shutdown");
 	}

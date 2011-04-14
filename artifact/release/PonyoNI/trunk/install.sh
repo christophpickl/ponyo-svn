@@ -16,6 +16,6 @@ exec "make"
 exec "make install"
 
 echo "[INFO]"
-echo "[INFO] FINISHED!"
+echo "[INFO] FINISHED SUCCESSFULLY! :)"
 
 exit 0

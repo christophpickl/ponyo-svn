@@ -7,7 +7,7 @@
 #include <ponyo/PnCommon.hpp>
 #include <ponyo/openni/includes/check_xn.hpp>
 #include <ponyo/openni/OpenNiException.hpp>
-#include <ponyo/openni/UserState.hpp>
+#include <ponyo/openni/logic/user/UserState.hpp>
 
 #define PN_CONFIDENCE_LIMIT 0.5
 

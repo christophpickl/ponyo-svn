@@ -34,6 +34,7 @@ private:
 
 	bool imageGeneratorEnabled;
 	bool mirrorModeEnabled;
+	// TODO SomeLogLevel OpenNilogConfiguration
 };
 }
 #endif // GENERICCONFIG_HPP_

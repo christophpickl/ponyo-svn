@@ -34,7 +34,12 @@ void mainJustStartContextAndDumpInfo() {
 	LOG->info("mainJustStartContextAndDumpInfo()");
 
 	xn::Context context;
-	CHECK_XN(context.InitFromXmlFile("/ponyo/niconfig.xml"), "context init xml");
+
+//	const char* configXmlPath = "/ponyo/niconfig.xml";
+//	const char* configXmlPath = "/ponyo/niconfig_corrupt.xml";
+	const char* configXmlPath = "/NOT_EXISTING.xml";
+	CHECK_XN(OpenNIUtils::safeInitFromXml(context, configXmlPath), "Could not initialize OpenNI context from XML!");
+
 	OpenNIUtils::dumpNodeInfosByContext(context);
 	context.Shutdown();
 }
@@ -44,13 +49,13 @@ void mainInternal() {
 	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)
 //	OpenNIUtils::enableXnLogging(XN_LOG_INFO);
 
-	StartXmlConfig config("misc/playground_config.xml", &onUserStateChanged, &onJointPositionChanged);
-//	config.setMirrorModeEnable(true);
-	config.setImageGeneratorEnabled(true);
-	g_facade.startWithXml(config);
+//	StartXmlConfig config("misc/playground_config.xml", &onUserStateChanged, &onJointPositionChanged);
+//	config.setMirrorModeEnableb(true);
+//	config.setImageGeneratorEnabled(true);
+//	g_facade.startWithXml(config);
 
-//	StartOniConfiguration configuration("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
-//	g_facade.startRecording(configuration);
+	StartOniConfig config("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
+	g_facade.startRecording(config);
 
 	printf("Hit ENTER to quit\n");
 	CommonUtils::waitHitEnter(false);
@@ -63,11 +68,11 @@ int main() {
 	LOG->info("PlaygroundSample main() START");
 	try {
 
-		mainInternal();
-//		mainJustStartContextAndDumpInfo();
+//		mainInternal();
+		mainJustStartContextAndDumpInfo();
 
 	} catch(Exception& e) {
-		fprintf(stderr, "Ponyo Exception:");
+		fprintf(stderr, "Ponyo custom Exception was thrown!\n");
 		e.printBacktrace();
 	} catch(std::exception& e) {
 		fprintf(stderr, "std::exception: %s\n", e.what());

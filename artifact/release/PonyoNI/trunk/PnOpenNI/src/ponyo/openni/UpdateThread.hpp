@@ -5,7 +5,7 @@
 #include <boost/thread.hpp>
 #include <boost/date_time.hpp>
 #include <ponyo/openni/pnopenni_inc.hpp>
-#include <ponyo/openni/UserManager.hpp>
+#include <ponyo/openni/logic/user/UserManager.hpp>
 
 namespace pn {
 
@@ -24,6 +24,7 @@ public:
 
 	void start(xn::Context& context, CallbackType* callbackInstance,  aFunction callbackMethod) {
 		LOG->debug("start(..) ... spawning update thread");
+		LOG->warn("Attention: If 'Bus error' occurs, try running as root ;)");
 		this->callbackInstance = callbackInstance;
 		this->callbackMethod = callbackMethod;
 		this->updateThread = boost::thread(&UpdateThread::onThreadRun, this, context);

@@ -2,7 +2,9 @@
 TIMESHEET CP
 =================================================
 
-              ~~103h~~
+              ~~110h~~
+14.04. - 15:00 -  5h - introducing start configuration object, added configurable image stream generation
+13.04. - 23:00 -  2h - some general openni investigation (forum, api diagram, etc)
 13.04. - 20:00 -  3h - finisihed initial version of PonyoOSC Server
               ~~100h~~
 13.04. - 13:00 -  7h - starting basic jponyo connection setup

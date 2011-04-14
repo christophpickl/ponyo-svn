@@ -8,8 +8,8 @@
 	ss.append(" (OpenNI message: ");                                     \
 	ss.append(xnGetStatusString(xnStatus));                              \
 	ss.append(")");                                                      \
-	std::cerr << "Throwing OpenNiException: " << ss << std::endl;   \
 	throw OpenNiException(ss.c_str(), AT);
+// TODO enable exception output print by default?! std::cerr << "Throwing OpenNiException: " << ss << std::endl;
 
 #define CHECK_XN(xnStatus, customErrorMessage) \
 		if(xnStatus != XN_STATUS_OK) { THROW_XN_EXCEPTION(xnStatus, customErrorMessage); }

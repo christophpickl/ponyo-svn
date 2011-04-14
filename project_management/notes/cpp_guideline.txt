@@ -1,0 +1,14 @@
+=================================================
+Exception Handling
+=================================================
+Guidelines for throwing:
+- Use exceptions only to report errors, not as general control structures
+- Throw exceptions only when the error cannot be handled locally
+- Also throw exceptions in library code: the host application wants to control the user output (imagine std::vector would write something to std::cerr when an error occurs instead of throwing a std::out_of_range)
+- Never allow an exception to leave a destructor
+
+Guidelines for catching:
+- Never allow an exception to leave a destructor
+- Assume that an exception that can be thrown will be thrown
+- When writing "real" applications, design for exception safe code - don't make it an "afterthought"
+- Writing exception safe code doesn't mean 'try'-ing. Learn what code can throw and what the effects would be if an exception was thrown at any given location. 

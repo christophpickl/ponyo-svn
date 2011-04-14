@@ -94,9 +94,9 @@ void glutDisplay (void)
 	g_image.GetMetaData(g_imageMD);
 
 	const XnDepthPixel* pDepth = g_depthMD.Data();
-	const XnUInt8* pImage = g_imageMD.Data();
+//	const XnUInt8* pImage = g_imageMD.Data();
 
-	unsigned int nImageScale = GL_WIN_SIZE_X / g_depthMD.FullXRes();
+//	unsigned int nImageScale = GL_WIN_SIZE_X / g_depthMD.FullXRes();
 
 	// Copied from SimpleViewer
 	// Clear the OpenGL buffers

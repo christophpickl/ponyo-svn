@@ -1,4 +1,4 @@
-#include <ponyo/openni/UserManagerException.hpp>
+#include <ponyo/openni/logic/user/UserManagerException.hpp>
 
 namespace pn {
 

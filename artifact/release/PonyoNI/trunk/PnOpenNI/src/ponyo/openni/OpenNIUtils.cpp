@@ -24,13 +24,40 @@ const char* OpenNIUtils::PN_SKELETON_JOINT[PN_SKELETON_JOINT_PLUS_ONE] = {
 };
 
 OpenNIUtils::OpenNIUtils() {
-	LOG->debug("new OpenNIUtils()");
+	throw IllegalInstantiationException(AT);
 }
 
-OpenNIUtils::~OpenNIUtils() {
-	LOG->debug("~OpenNIUtils()");
+/*static*/ bool OpenNIUtils::fileExists(const char *filename) {
+//  struct stat buffer;
+//  if(stat(filename, &buffer)) {
+	XnBool fileExists;
+	CHECK_XN(xnOSDoesFileExist(filename, &fileExists), "foo");
+	return fileExists == TRUE;
 }
 
+/*static*/ XnStatus OpenNIUtils::safeInitFromXml(xn::Context& context, const char* configXmlPath)
+		throw (OpenNiException, FileNotFoundException) {
+	LOG->debug2("safeInitFromXml(context, configXmlPath=[%s])", configXmlPath);
+
+	if(OpenNIUtils::fileExists(configXmlPath) == false) {
+		throw FileNotFoundException(configXmlPath, AT);
+	}
+
+	xn::EnumerationErrors initErrors;
+	XnStatus initStatus = context.InitFromXmlFile(configXmlPath, &initErrors);
+	if(initStatus != XN_STATUS_OK) {
+		int i = 0;// TODO outsource error enumerating to own method
+		if (initStatus == XN_STATUS_NO_NODE_PRESENT) { // == 65565
+			LOG->error2("Could not initialize context from file '%s' for following reasons: ", configXmlPath);
+			for(xn::EnumerationErrors::Iterator it = initErrors.Begin(); it != initErrors.End(); ++it) {
+				XnChar strDesc[512];
+				xnProductionNodeDescriptionToString(&it.Description(), strDesc, 512);
+				LOG->error2("  %i. Node '%s' failed with error: %s\n", ++i, strDesc, xnGetStatusString(it.Error()));
+			}
+		}
+	}
+	return initStatus;
+}
 
 /*static*/ void OpenNIUtils::enableXnLogging(const XnLogSeverity& severity) {
 	LOG->info("enableXnLogging(severity)");

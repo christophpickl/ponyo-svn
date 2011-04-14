@@ -16,41 +16,43 @@ OpenNIFacade::~OpenNIFacade() {
 }
 
 
-/*public*/ void OpenNIFacade::startRecording(const char* oniFilePath, UserStateCallback userCallback, JointPositionCallback jointCallback) throw(OpenNiException) {
-	LOG->info2("startRecording(oniFilePath=%s)", oniFilePath);
+/*public*/ void OpenNIFacade::startRecording(StartOniConfiguration& configuration) throw(OpenNiException) {
+	LOG->info2("startRecording(configuration=%s)", configuration.toCString());
 
 	LOG->debug("Initializing context ...");
 	CHECK_XN(this->context.Init(), "Could not initialize OpenNI context!");
 
-	LOG->debug("Opening oni file recording ...");
-	printf("opening: %s\n", oniFilePath);
-	CHECK_XN(this->context.OpenFileRecording(oniFilePath), "Could not open *.oni file!");
+	const char* oniRecordingPath = configuration.getOniRecordingPath();
+	printf("Opening oni file recording: %s\n", oniRecordingPath);
+	CHECK_XN(this->context.OpenFileRecording(oniRecordingPath), "Could not open *.oni file!");
 
-	this->internalSetup(userCallback, jointCallback);
+	this->internalSetup(configuration);
 }
 
-/*public*/ void OpenNIFacade::startWithXml(const char* configPath, UserStateCallback userCallback, JointPositionCallback jointCallback) throw(OpenNiException) {
-	LOG->info2("startWithXml(configPath=%s)", configPath);
+/*public*/ void OpenNIFacade::startWithXml(StartXmlConfiguration& configuration) throw(OpenNiException) {
+	LOG->info2("startWithXml(configuration=%s)", configuration.toCString());
 
-	printf("Initializing context from file: %s\n", configPath);
-	CHECK_XN(this->context.InitFromXmlFile(configPath), "Could not initialize OpenNI context from XML! Is the device really properly connected?!");
+	const char* xmlConfigPath = configuration.getXmlConfigPath();
+	printf("Initializing context from file: %s\n", xmlConfigPath);
+	CHECK_XN(this->context.InitFromXmlFile(xmlConfigPath), "Could not initialize OpenNI context from XML! Is the device really properly connected?!");
 
-	this->internalSetup(userCallback, jointCallback);
+	this->internalSetup(configuration);
 }
 
-/*private*/ void OpenNIFacade::internalSetup(UserStateCallback userCallback, JointPositionCallback jointCallback) throw(OpenNiException) {
+/*private*/ void OpenNIFacade::internalSetup(AbstractConfiguration& configuration) throw(OpenNiException) {
 	LOG->info("internalSetup()");
 
 	LOG->debug("Creating depth generator ...");
 	CHECK_XN(this->depthGenerator.Create(this->context), "Could not create depth generator!");
 
+	XnBool xnMirrorMode = TRUE;
+	CHECK_XN(this->context.SetGlobalMirror(), "Setting global mirror mode failed!");
 	// TODO outsource as client configuration option
-//	CHECK_XN(xnSetMirror(this->depthGenerator, true), "Setting mirror mode for depth generator failed!");
 
 	// mandatory to set if starting non-recording, otherwise will fail
 //	... if starting non-recording => CHECK_XN(this->depthGenerator.SetMapOutputMode(this->mapMode), "set depth mode");
 
-	this->userManager = new UserManager(userCallback, jointCallback);
+	this->userManager = new UserManager(configuration.getUserCallback(), configuration.getJointCallback());
 	try {
 		this->userManager->init(this->context);
 	} catch(UserManagerException& e) {

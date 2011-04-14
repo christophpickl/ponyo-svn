@@ -2,22 +2,21 @@
 
 using namespace pn;
 
+OpenNIFacade g_facade;
+Log* LOG = NEW_LOG();
+int g_jointCounter = 0; // to print out every 100th joint change only
+
 void onUserStateChanged(UserId userId, UserState userState) {
-	printf("PlaygroundSample says: onUserStateChanged(userId=%i, userState=%i)\n", userId, userState);
+	printf(">>>>> PlaygroundSample says: onUserStateChanged(userId=%i, userState=%i)\n", userId, userState);
 }
 
-int g_jointCounter = 0;
 void onJointPositionChanged(UserId userId, unsigned int jointId, float x, float y, float z) {
 	if(g_jointCounter == 100) {
-		printf("PlaygroundSample says: 100th onJointPositionChanged(userId=%i, jointId=%i, ...)\n", userId, jointId);
+		printf(">>>>> PlaygroundSample says: 100th onJointPositionChanged(userId=%i, jointId=%i, ...)\n", userId, jointId);
 		g_jointCounter = 0;
 	}
 	g_jointCounter++;
 }
-
-OpenNIFacade g_facade;
-
-Log* LOG = NEW_LOG();
 
 void tearDown() {
 	LOG->info("tearDown()");
@@ -25,26 +24,54 @@ void tearDown() {
 }
 
 void onSignalReceived(int signalCode) {
-	printf("onSignalReceived(signalCode=%d)\n", signalCode);
+	LOG->info2("onSignalReceived(signalCode=%d)\n", signalCode);
 	tearDown();
+	printf("Terminating application by invoking exit()");
+	exit(signalCode);
 }
 
-int main() {
-	LOG->info("PlaygroundSample main() START");
+void mainJustStartContextAndDumpInfo() {
+	LOG->info("mainJustStartContextAndDumpInfo()");
 
+	xn::Context context;
+	CHECK_XN(context.InitFromXmlFile("/ponyo/niconfig.xml"), "context init xml");
+	OpenNIUtils::dumpNodeInfosByContext(context);
+	context.Shutdown();
+}
+
+void mainInternal() {
 	signal(SIGINT, onSignalReceived); // hit CTRL-C keys in terminal (2)
 	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)
 //	OpenNIUtils::enableXnLogging(XN_LOG_INFO);
 
-	g_facade.startRecording("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
-//	g_facade.startWithXml("misc/playground_config.xml");
+//	StartXmlConfiguration configuration("misc/playground_config.xml", &onUserStateChanged, &onJointPositionChanged);
+//	g_facade.startWithXml(configuration);
+
+	StartOniConfiguration configuration("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
+	g_facade.startRecording(configuration);
 
 	printf("Hit ENTER to quit\n");
 	CommonUtils::waitHitEnter(false);
 	printf("ENTER pressed, shutting down.\n");
 
 	tearDown();
+}
 
+int main() {
+	LOG->info("PlaygroundSample main() START");
+	try {
+
+		mainInternal();
+//		mainJustStartContextAndDumpInfo();
+
+	} catch(Exception& e) {
+		fprintf(stderr, "Ponyo Exception:");
+		e.printBacktrace();
+	} catch(std::exception& e) {
+		fprintf(stderr, "std::exception: %s\n", e.what());
+	} catch(...) {
+		fprintf(stderr, "Some unkown error occured! DEBUG!"); // TODO how to process varargs?!
+	}
 	LOG->info("main() END");
 	return 0;
 }

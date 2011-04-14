@@ -6,6 +6,10 @@ Log* LOG = NEW_LOG();
 OpenNIFacade facade;
 bool isRunning = false;
 
+// TODO create struct for each Config type which can be used to create proper Object type (instead of flat struct)
+//      ==> especially to provide java API (in java, provide client again same high level Object type); struct could also used by ponyo c++ users
+//           ... @java api translation: happens all the time, flattening (struct) and high-leveling (oop) again, as JNA/JNI knows no OOP
+
 extern "C" int pnStartByXmlConfig(
 		const char* configXmlPath,
 		UserStateCallback userStateCallback,
@@ -35,9 +39,11 @@ int __pnStart(
 	int resultCode = -1;
 	try {
 		if(isConfigFlag) {
-			facade.startWithXml(configOrOniPath, userStateCallback, jointPositionCallback);
+			fprintf(stderr, "TODOOOOOO in PnJNA!\n");
+			// FIXME !!! facade.startWithXml(configOrOniPath, userStateCallback, jointPositionCallback);
 		} else {
-			facade.startRecording(configOrOniPath, userStateCallback, jointPositionCallback);
+			fprintf(stderr, "TODOOOOOO in PnJNA!\n");
+			// FIXME !!! facade.startRecording(configOrOniPath, userStateCallback, jointPositionCallback);
 		}
 		isRunning = true;
 		resultCode = 0;

@@ -5,6 +5,8 @@
 #include <ponyo/openni/pnopenni_inc.hpp>
 #include <ponyo/openni/UserManager.hpp>
 #include <ponyo/openni/UpdateThread.hpp>
+#include <ponyo/openni/UpdateThread.hpp>
+#include <ponyo/openni/StartConfigurations.hpp>
 
 namespace pn {
 
@@ -12,18 +14,12 @@ namespace pn {
 class OpenNIFacade {
 
 public:
-	/**
-	 * @param userStateCallback non-null function handle
-	 * @param jointPositionCallback non-null function handle
-	 */
 	OpenNIFacade();
 	virtual ~OpenNIFacade();
 
-//	void registerUserStateCallback(UserStateCallback);
-//	void registerJointPositionCallback(JointPositionCallback);
-
-	void startWithXml(const char* configPath, UserStateCallback, JointPositionCallback) throw(OpenNiException);
-	void startRecording(const char* oniFilePath, UserStateCallback, JointPositionCallback) throw(OpenNiException);
+//	TODO void start(StartConfiguration& configuration) throw(OpenNiException);
+	void startWithXml(StartXmlConfiguration& configuration) throw(OpenNiException);
+	void startRecording(StartOniConfiguration& configuration) throw(OpenNiException);
 
 	void shutdown();
 
@@ -38,7 +34,7 @@ private:
 	xn::DepthMetaData depthMetaData; // TODO this seems like a hack, but is mandatory, as otherwise something like: ...
 	// usergenerator does not get data from its dependent depthgenerator (?!)
 
-	void internalSetup(UserStateCallback, JointPositionCallback) throw(OpenNiException);
+	void internalSetup(AbstractConfiguration& configuration) throw(OpenNiException);
 	void onUpdateThread();
 
 };

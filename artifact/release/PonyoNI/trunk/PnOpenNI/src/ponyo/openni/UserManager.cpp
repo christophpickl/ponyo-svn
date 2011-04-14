@@ -152,7 +152,7 @@ UserManager::~UserManager() {
 //	}
 
 //	printf("joint position: %i.X = %f\n", jointEnum, jointPosition.position.X);
-	if(jointPosition.fConfidence > 0.5) {
+	if(jointPosition.fConfidence > PN_CONFIDENCE_LIMIT) {
 		this->jointCallback(userId, jointId,
 			jointPosition.position.X, jointPosition.position.Y, jointPosition.position.Z);
 	}

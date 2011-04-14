@@ -2,7 +2,9 @@
 #ifndef OPENNIUTILS_H_
 #define OPENNIUTILS_H_
 
+#include <XnLog.h>
 #include <ponyo/openni/pnopenni_inc.hpp>
+
 #define PN_SKELETON_JOINT_PLUS_ONE 25 /*+1, to avoid 0/1-index conversion*/
 
 namespace pn {

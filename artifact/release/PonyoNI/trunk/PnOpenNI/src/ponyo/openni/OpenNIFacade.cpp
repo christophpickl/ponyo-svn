@@ -7,6 +7,8 @@ Log* OpenNIFacade::LOG = NEW_LOG();
 
 OpenNIFacade::OpenNIFacade() {
 	LOG->debug("new OpenNIFacade( )");
+//	Exception e("How the hack called the constructor a second time?!", AT);
+//	e.printBacktrace();
 }
 
 OpenNIFacade::~OpenNIFacade() {

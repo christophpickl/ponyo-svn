@@ -45,6 +45,7 @@ void mainJustStartContextAndDumpInfo() {
 }
 
 void mainInternal() {
+	printf(__FILE__ "#mainInternal()\n");
 //	OpenNIUtils::enableXnLogging(XN_LOG_INFO);
 
 	StartXmlConfig config("misc/playground_config.xml", &onUserStateChanged, &onJointPositionChanged);

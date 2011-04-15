@@ -7,6 +7,7 @@
 
 #include <ponyo/PnCommon.hpp>
 #include <ponyo/openni/includes/headers_glut.hpp>
+#include <ponyo/openni/view/GlutThread.hpp>
 
 namespace pn {
 
@@ -34,6 +35,7 @@ private:
 	static ImageWindow* instance;
 	static float angle;
 	static ImageWindowCallback callback;
+	static GlutThread glutThread;
 	int glutWindowHandle;
 
 	bool initialized;

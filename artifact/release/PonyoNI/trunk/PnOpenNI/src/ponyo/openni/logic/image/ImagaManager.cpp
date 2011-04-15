@@ -6,7 +6,7 @@ Log* ImagaManager::LOG = NEW_LOG();
 
 ImagaManager* GLUT_SINGLETON_HACK;
 
-ImagaManager::ImagaManager(xn::ImageGenerator& generator) : generator(generator) {
+ImagaManager::ImagaManager(xn::ImageGenerator& generator) : generator(generator), window(NULL) {
 	LOG->debug("new ImagaManager(..)");
 }
 
@@ -36,17 +36,26 @@ void ImagaManager::init() throw(OpenNiException) {
 void ImagaManager::setWindowVisible(bool setToVisible) {
 	LOG->debug2("setWindowVisible(visible=%s)", boolToString(setToVisible));
 
+	printf("A\n");
 	if(this->window == NULL) { // lazy instantiation
+	printf("B -- window is null, creating!\n");
 		this->window = ImageWindow::getInstance(&ImagaManager::onWindowAction);
 	}
+	std::cout << "window: " << this->window << std::endl;
 
+	printf("C\n");
 	if(setToVisible == true && this->window->isInitialized() == false) { // lazy initialization
-		char *argv[]={"Jan","Feb","Mar","April"};
-		this->window->init(4, argv);
+	printf("D\n");
+		char *argv[]={ "PonyoArgvForWindow" };
+	printf("E\n");
+		this->window->init(1, argv);
+	printf("F\n");
 		// TODO delete[] argv ??
 	}
 
+	printf("G\n");
 	this->window->setVisible(setToVisible);
+	printf("H\n");
 }
 
 void ImagaManager::destroy() {

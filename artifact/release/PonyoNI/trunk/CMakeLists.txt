@@ -3,7 +3,9 @@ MESSAGE ("=> ROOT")
 # GENERAL SETUP
 ###############################################################################
 	CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
-	SET (CMAKE_VERBOSE_MAKEFILE ON)
+	
+	#SET (CMAKE_VERBOSE_MAKEFILE ON)
+	
 	PROJECT (PonyoNI)
 	INCLUDE (build_scripts/cmake_common.txt)
 

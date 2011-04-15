@@ -1,3 +1,4 @@
+/*
 #include <ponyo/jna/PnJNA.hpp>
 
 using namespace pn;
@@ -95,3 +96,4 @@ extern "C" void pnShutdown() {
 	}
 }
 
+*/

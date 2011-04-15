@@ -6,6 +6,7 @@ Log* ImageWindow::LOG = NEW_LOG();
 ImageWindow* ImageWindow::instance = NULL;
 float ImageWindow::angle = 0.0f;
 ImageWindowCallback ImageWindow::callback = NULL;
+GlutThread ImageWindow::glutThread;
 
 /*private*/ ImageWindow::ImageWindow() :
 		initialized(false),
@@ -43,6 +44,7 @@ ImageWindowCallback ImageWindow::callback = NULL;
 
 		if(ImageWindow::instance->created == true) {
 			glutDestroyWindow(ImageWindow::instance->glutWindowHandle);
+			ImageWindow::glutThread.stop();
 		}
 
 		ImageWindow::instance->initialized = false;
@@ -67,11 +69,6 @@ void ImageWindow::init(int argc, char** argv) {
 //		return;
 //	}
 
-	glutKeyboardFunc(&ImageWindow::onGlutKeyboard);
-//	glutIdleFunc(&ImageWindow::onGlutIdle); NO, as will be registered later on in setVisible(bool)
-	glutDisplayFunc(&ImageWindow::onGlutDisplay);
-	glutReshapeFunc(&ImageWindow::onGlutReshape);
-
 	this->initialized = true;
 }
 
@@ -85,22 +82,38 @@ void ImageWindow::setVisible(bool setToVisible) {
 	}
 
 	if(setToVisible == true) {
-
+		printf("1\n");
 		if(this->visible == true) {
 			LOG->warn("Window already visible; ignoring.");
 			return;
 		}
 
+		printf("2\n");
+
 		if(this->created == false) {
-
-//			printf("Entering glut main loop ...\n");
-//			glutMainLoop();
-
+			printf("3\n");
+			LOG->trace("Creating glut window ...");
 			this->glutWindowHandle = glutCreateWindow("PonyoNI Image Window");
+			LOG->trace("Creating glut window ... AFTER");
+
+
+			glutKeyboardFunc(&ImageWindow::onGlutKeyboard);
+			glutIdleFunc(&ImageWindow::onGlutIdle);
+			glutDisplayFunc(&ImageWindow::onGlutDisplay);
+			glutReshapeFunc(&ImageWindow::onGlutReshape);
+
+			printf("4\n");
+			LOG->info("Spawning glut background thread ...");
+			ImageWindow::glutThread.start();
+//			glutMainLoop();
+			printf("5 YEAH\n");
+
 			this->created = true;
+		} else {
+			glutIdleFunc(&ImageWindow::onGlutIdle);
+			glutShowWindow();
 		}
-		glutIdleFunc(&ImageWindow::onGlutIdle);
-		glutShowWindow();
+
 		this->visible = true;
 
 	} else /* (this->isVisible == false) */ {

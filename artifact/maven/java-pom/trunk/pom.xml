@@ -61,12 +61,13 @@
 <!--				<type>pom</type>-->
 <!--			</dependency>-->
 <!--			-->
-<!--	        <dependency>-->
-<!--		        <groupId>com.illposed</groupId>-->
-<!--		        <artifactId>javaosc</artifactId>-->
-<!--		        <version>${version_javaosc}</version>-->
-<!--	        </dependency>-->
-	        
+			
+	        <dependency>
+				<groupId>com.illposed</groupId>
+				<artifactId>javaosc</artifactId>
+				<version>${version_javaosc}</version>
+			</dependency>
+			
     	</dependencies>
     </dependencyManagement>
     
@@ -91,6 +92,12 @@
 <!--			</exclusions>-->
 <!--		</dependency>-->
     
+    	<!-- enable aspectj for all projects -->
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+		</dependency>
+		
     </dependencies>
     
     
@@ -144,6 +151,12 @@
         </pluginManagement>
         
         <plugins>
+	
+			<!-- enable aspectj for all projects; configuration already done in java-abstract-pom -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+			</plugin>
             
             <!-- ECLIPSE -->
             <!-- *********************************************************** -->

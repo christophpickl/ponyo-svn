@@ -53,6 +53,7 @@
     	<version_deploy-plugin>2.5</version_deploy-plugin>
     	<version_gmaven-plugin>1.0</version_gmaven-plugin>
     	<version_release-plugin>2.1</version_release-plugin>
+    	<version_assembly-plugin>2.2.1</version_assembly-plugin>
     	<version_resources-plugin>2.4.3</version_resources-plugin>
     	
    		<!-- ************ REPORT PLUGINS ************ -->
@@ -89,6 +90,10 @@
 					<groupId>org.codehaus.groovy.maven</groupId>
 					<artifactId>gmaven-plugin</artifactId>
 					<version>${version_gmaven-plugin}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${version_assembly-plugin}</version>
 				</plugin>
 				<plugin>
 					<artifactId>maven-recources-plugin</artifactId>

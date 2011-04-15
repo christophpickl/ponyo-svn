@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo;
+package net.sf.ponyo.jponyo.common.async;
 
 /**
  * Just a marker interface.

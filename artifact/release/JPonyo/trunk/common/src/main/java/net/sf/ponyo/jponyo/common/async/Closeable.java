@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo;
+package net.sf.ponyo.jponyo.common.async;
 
 /**
  * Compared to <code>java.io.Closeable</code> this interface does not declare a checked exception to be thrown.

@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo;
+package net.sf.ponyo.jponyo.common.async;
 
 /**
  * Marks a type to interact asynchroniously via a listener defining some callback methods.

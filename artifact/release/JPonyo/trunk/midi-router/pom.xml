@@ -22,6 +22,36 @@
     
     
     <!-- ******************************************************************* -->
+    <!--                       D E P E N D E N C I E S                       -->
+    <!-- ******************************************************************* -->
+    
+	<dependencies>
+    
+	    <!-- I N T E R N A L -->
+    	<!-- *********************************************************** -->
+	
+		<dependency>
+			<groupId>net.sf.ponyo.jponyo</groupId>
+			<artifactId>common</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.sf.ponyo.jponyo</groupId>
+			<artifactId>jponyo</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
+		
+		
+	    <!-- E X T E R N A L -->
+    	<!-- *********************************************************** -->
+		
+		<!-- none -->
+		
+	</dependencies>
+    
+    
+    <!-- ******************************************************************* -->
     <!--                                S C M                                -->
     <!-- ******************************************************************* -->
     

@@ -1,6 +1,6 @@
 package net.sf.ponyo.jponyo.connection.jna;
 
-import net.sf.ponyo.jponyo.DefaultAsync;
+import net.sf.ponyo.jponyo.common.async.DefaultAsync;
 import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
 import net.sf.ponyo.jponyo.connection.jna.PnJNALibray.OnJointPositionChangedCallback;

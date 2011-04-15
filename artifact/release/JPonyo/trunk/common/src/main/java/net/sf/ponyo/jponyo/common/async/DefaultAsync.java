@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo;
+package net.sf.ponyo.jponyo.common.async;
 
 import java.util.HashSet;
 import java.util.Set;

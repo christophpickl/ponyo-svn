@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>JPonyo MidiRouter</name>
+    <packaging>jar</packaging>
+    
+    <groupId>net.sf.ponyo.jponyo</groupId>
+    <artifactId>midi-router</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                             P A R E N T                             -->
+    <!-- ******************************************************************* -->
+    
+    <parent>
+        <groupId>net.sf.ponyo.jponyo.pom</groupId>
+        <artifactId>java-pom</artifactId>
+        <version>0.1-SNAPSHOT</version>
+    	<relativePath>../pn-java-pom/pom.xml</relativePath>
+    </parent>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                                S C M                                -->
+    <!-- ******************************************************************* -->
+    
+    <scm>
+        <connection>scm:svn:http://ponyo-svn.googlecode.com/svn/artifact/release/JPonyo/trunk/midi-router/</connection>
+        <developerConnection>scm:svn:https://ponyo-svn.googlecode.com/svn/artifact/release/JPonyo/trunk/midi-router/</developerConnection>
+        <url>http://code.google.com/p/ponyo-svn/source/browse/#svn/artifact/release/JPonyo/trunk/midi-router/</url>
+    </scm>
+    
+</project>

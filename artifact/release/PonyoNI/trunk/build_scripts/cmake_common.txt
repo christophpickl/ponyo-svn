@@ -1,8 +1,9 @@
-MESSAGE ("===> COMMON")
+MESSAGE ("=> COMMON")
 
 # MACRO: SETUP LIB
 ###############################################################################
 MACRO (PN_SETUP_LIB LIBNAME)
+    MESSAGE ("===> Setting up library: ${LIBNAME}")
     INCLUDE_DIRECTORIES ("${PROJECT_SOURCE_DIR}/${LIBNAME}/src")
 	ADD_SUBDIRECTORY (${LIBNAME})
 	SET (EXTRA_LIBS ${EXTRA_LIBS} ${LIBNAME})
@@ -11,7 +12,7 @@ ENDMACRO (PN_SETUP_LIB)
 # MACRO: INIT LIB
 ###############################################################################
 MACRO (PN_INIT_LIB LIBNAME)
-    MESSAGE ("===> ${LIBNAME}")
+	MESSAGE("// Initializing library: ${LIBNAME}")
 	SET (PROJECT_SOURCE_DIR src)
 	INCLUDE_DIRECTORIES (${PROJECT_SOURCE_DIR})
 	
@@ -25,13 +26,34 @@ MACRO (PN_INIT_LIB LIBNAME)
 	         FILES_MATCHING PATTERN "*.hpp"
 	                        PATTERN ".svn" EXCLUDE
 	        )
+	MESSAGE ("")
 ENDMACRO (PN_INIT_LIB)
 
 # MACRO: SETUP EXE
 ###############################################################################
 MACRO (PN_SETUP_EXE EXENAME)
+    MESSAGE ("===> Setting up application: ${EXENAME}")
 	ADD_SUBDIRECTORY (${EXENAME})
 ENDMACRO (PN_SETUP_EXE) 
+
+# MACRO: INIT EXE
+###############################################################################
+MACRO (PN_INIT_EXE EXENAME TARGETNAME)
+	MESSAGE("// Initializing application: ${EXENAME}")
+	
+	SET (PROJECT_SOURCE_DIR src)
+	
+	SET (EXECUTABLE_OUTPUT_PATH bin)
+	#SET (EXECUTABLE_OUTPUT_PATH ${PROJECT_BINARY_DIR}/samples/bin)
+	
+	# TODO even necessary??
+	INCLUDE_DIRECTORIES (${PROJECT_SOURCE_DIR})
+	
+	FILE (GLOB_RECURSE PNOSC_CPP_FILES "${PROJECT_SOURCE_DIR}/*.cpp")
+	ADD_EXECUTABLE (${TARGETNAME} ${PNOSC_CPP_FILES})
+	TARGET_LINK_LIBRARIES (${TARGETNAME} ${EXTRA_LIBS})
+	MESSAGE ("")
+ENDMACRO (PN_INIT_EXE)
 
 # COMPILER FLAGS
 ###############################################################################
@@ -44,18 +66,21 @@ ENDMACRO (PN_SETUP_EXE)
 ###############################################################################
 
 MACRO (PN_DEPENDENCY_OPENNI)
+	MESSAGE("Adding Dependency OPENNI")
     INCLUDE_DIRECTORIES (/usr/include/ni)
 	FIND_LIBRARY (OpenNI_LIBRARY OpenNI)
 	SET (EXTRA_LIBS ${EXTRA_LIBS} ${OpenNI_LIBRARY})
 ENDMACRO (PN_DEPENDENCY_OPENNI)
 
 MACRO (PN_DEPENDENCY_OSCPACK)
+	MESSAGE("Adding Dependency OSCPACK")
 	INCLUDE_DIRECTORIES (/usr/local/include/oscpack)
 	FIND_LIBRARY (OscPack_LIBRARY oscpack)
 	SET (EXTRA_LIBS ${EXTRA_LIBS} ${OscPack_LIBRARY})
 ENDMACRO (PN_DEPENDENCY_OSCPACK)
 	
 MACRO (PN_DEPENDENCY_BOOST)
+	MESSAGE("Adding Dependency BOOST")
 	SET (BOOST_LIBS thread date_time system)
 	FIND_PACKAGE (Boost COMPONENTS ${BOOST_LIBS} REQUIRED)
 	FIND_PACKAGE (Threads REQUIRED)

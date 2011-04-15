@@ -17,7 +17,7 @@
         <groupId>net.sf.ponyo.jponyo.pom</groupId>
         <artifactId>java-pom</artifactId>
         <version>0.1-SNAPSHOT</version>
-    	<relativePath>../pn-java-pom/pom.xml</relativePath>
+    	<relativePath>../../pn-java-pom/pom.xml</relativePath>
     </parent>
     
     

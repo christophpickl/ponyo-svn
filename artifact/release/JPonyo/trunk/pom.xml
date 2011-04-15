@@ -27,6 +27,8 @@
     <modules>
     	<module>common</module>
     	<module>jponyo</module>
+    	<module>admin-console</module>
+    	<module>midi-router</module>
     </modules>
     
 </project>

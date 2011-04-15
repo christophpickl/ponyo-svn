@@ -6,7 +6,8 @@ Log* ImagaManager::LOG = NEW_LOG();
 
 ImagaManager* GLUT_SINGLETON_HACK;
 
-ImagaManager::ImagaManager(xn::ImageGenerator& generator) : generator(generator), window(NULL) {
+ImagaManager::ImagaManager(xn::ImageGenerator& generator, int xRes, int yRes) :
+		generator(generator), xRes(xRes), yRes(yRes), window(NULL) {
 	LOG->debug("new ImagaManager(..)");
 }
 
@@ -33,6 +34,10 @@ void ImagaManager::init() throw(OpenNiException) {
 	CHECK_XN(this->generator.RegisterToNewDataAvailable(&ImagaManager::onDataAvailable, this, this->onDataAvailableHandle), "Registering to image generator failed!");
 }
 
+/*public*/ void ImagaManager::update() throw(OpenNiException) {
+	this->generator.GetMetaData(this->imageData);
+}
+
 void ImagaManager::setWindowVisible(bool setToVisible) {
 	LOG->debug2("setWindowVisible(visible=%s)", boolToString(setToVisible));
 
@@ -43,7 +48,7 @@ void ImagaManager::setWindowVisible(bool setToVisible) {
 
 	if(setToVisible == true && this->window->isInitialized() == false) { // lazy initialization
 		char *argv[] = { "PonyoArgvForWindow" }; // TODO proper glut args?!
-		this->window->init(1, argv);
+		this->window->init(&this->imageData, this->xRes, this->yRes, 1, argv);
 		// TODO delete[] argv ??
 	}
 	this->window->setVisible(setToVisible);

@@ -4,9 +4,12 @@ namespace pn {
 
 Log* ImageWindow::LOG = NEW_LOG();
 ImageWindow* ImageWindow::instance = NULL;
-float ImageWindow::angle = 0.0f;
 ImageWindowCallback ImageWindow::callback = NULL;
 //GlutThread ImageWindow::glutThread;
+
+XnRGB24Pixel* g_pTexMap = NULL;
+unsigned int g_nTexMapX = 0;
+unsigned int g_nTexMapY = 0;
 
 /*private*/ ImageWindow::ImageWindow() :
 		initialized(false),
@@ -58,24 +61,33 @@ ImageWindowCallback ImageWindow::callback = NULL;
 	}
 }
 
-void ImageWindow::init(int argc, char** argv) {
-	LOG->debug2("init(argc=%i, argv)", argc);
 
+void ImageWindow::init(xn::ImageMetaData* imageData, int xRes, int yRes, int argc, char** argv) {
+	LOG->debug2("init(imageData, xRes, yRes, argc=%i, argv)", argc);
+
+	this->imageData = imageData;
+	this->xRes = xRes;
+	this->yRes = yRes;
+
+	LOG->trace2("Image resolution from metadata: %ix%i", this->imageData->FullXRes(), this->imageData->FullYRes());
+	LOG->trace2("Image resolution from arguments: %ix%i", xRes, yRes);
+
+	// init texture maps
+	g_nTexMapX = (((unsigned short) (this->xRes - 1) / 512) + 1) * 512;
+	g_nTexMapY = (((unsigned short) (this->yRes - 1) / 512) + 1) * 512;
+	g_pTexMap = (XnRGB24Pixel*) malloc(g_nTexMapX * g_nTexMapY * sizeof(XnRGB24Pixel));
+
+	// init opengl/glut
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(GL_WIN_SIZE_X, GL_WIN_SIZE_Y);
 	glutInitWindowPosition(100, 100);
 
-//	TODO if(g_imageMD.PixelFormat() != XN_PIXEL_FORMAT_RGB24) {
-//		printf("ERROR: The device image format must be RGB24\n");
+//	MINOR if(this->imageData->PixelFormat() != XN_PIXEL_FORMAT_RGB24) {
+//		throw Exception("ERROR: The device image format must be RGB24", AT);
 //		return;
 //	}
-
 	this->initialized = true;
-}
-
-/*static*/ void ImageWindow::onGlutVisibility(int state) {
-	LOG->debug2("onGlutVisibility(state=%i)", state);
 }
 
 void ImageWindow::setVisible(bool setToVisible) {
@@ -103,8 +115,13 @@ void ImageWindow::setVisible(bool setToVisible) {
 			glutReshapeFunc(&ImageWindow::onGlutReshape);
 			glutVisibilityFunc(&ImageWindow::onGlutVisibility);
 
+			// MINOR what for? ... buuut: HAS to be invoked AFTER window creation, as otherwise will kill whole process!
+			glDisable(GL_DEPTH_TEST);
+			glEnable(GL_TEXTURE_2D);
+
 //			LOG->info("Spawning glut background thread ...");
 //			ImageWindow::glutThread.start();
+			// TODO osx glut-bug (glut main loop has to run in main thread, otherwise window will be unresponsive)
 			this->created = true;
 			this->visible = true;
 
@@ -128,41 +145,67 @@ void ImageWindow::setVisible(bool setToVisible) {
 	}
 }
 
-bool ImageWindow::isInitialized() const {
-	return this->initialized;
-}
-bool ImageWindow::isVisible() const {
-	return this->visible;
-}
-
-/*static*/ void ImageWindow::onGlutIdle() {
-	glutPostRedisplay();
-}
-
 
 /*static*/ void ImageWindow::onGlutDisplay() {
 //	LOG->debug("onGlutDisplay()");
+//	LOG->trace2("Image resolution from metadata: %ix%i\n", ImageWindow::instance->imageData->FullXRes(), ImageWindow::instance->imageData->FullYRes());
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); // Clear Color and Depth Buffers
+	// TODO glutBitmapCharacter(void* font, 'a')
 
-	glLoadIdentity(); // reset transformations
-	// set the camera
-	gluLookAt(	0.0f, 0.0f, 10.0f,
-				0.0f, 0.0f,  0.0f,
-				0.0f, 1.0f,  0.0f);
+	// TODO what for???
+	const XnUInt8* pImageXXXXX = ImageWindow::instance->imageData->Data();
 
-	glRotatef(ImageWindow::angle, 0.0f, 1.0f, 0.0f);
 
-	glBegin(GL_TRIANGLES);
-		glVertex3f(-2.0f,-2.0f, 0.0f);
-		glVertex3f( 2.0f, 0.0f, 0.0);
-		glVertex3f( 0.0f, 2.0f, 0.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	// Setup the OpenGL viewpoint
+	glMatrixMode(GL_PROJECTION);
+	glPushMatrix();
+	glLoadIdentity();
+	glOrtho(0, GL_WIN_SIZE_X, GL_WIN_SIZE_Y, 0, -1.0, 1.0);
+
+	xnOSMemSet(g_pTexMap, 0, g_nTexMapX*g_nTexMapY*sizeof(XnRGB24Pixel));
+
+	// draw pixels
+	const XnRGB24Pixel* pImageRow = ImageWindow::instance->imageData->RGB24Data();
+	XnRGB24Pixel* pTexRow = g_pTexMap + ImageWindow::instance->imageData->YOffset() * g_nTexMapX;
+	for (XnUInt y = 0; y < ImageWindow::instance->imageData->YRes(); ++y) {
+		const XnRGB24Pixel* pImage = pImageRow;
+		XnRGB24Pixel* pTex = pTexRow + ImageWindow::instance->imageData->XOffset();
+		for (XnUInt x = 0; x < ImageWindow::instance->imageData->XRes(); ++x, ++pImage, ++pTex) {
+			*pTex = *pImage;
+		}
+		pImageRow += ImageWindow::instance->imageData->XRes();
+		pTexRow += g_nTexMapX;
+	}
+
+//	printf("draw image frame to texture\n");
+	glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP_SGIS, GL_TRUE);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, g_nTexMapX, g_nTexMapY, 0, GL_RGB, GL_UNSIGNED_BYTE, g_pTexMap);
+
+
+//	printf("display the OpenGL texture map\n");
+	const int nXRes = ImageWindow::instance->imageData->FullXRes();
+	const int nYRes = ImageWindow::instance->imageData->FullYRes();
+//	LOG->trace2("Image resolution from metadata: %ix%i\n", nXRes, nYRes);
+
+	glColor4f(1, 1, 1, 1);
+	glBegin(GL_QUADS);
+		// upper left
+		glTexCoord2f(0, 0);
+		glVertex2f(0, 0);
+		// upper right
+		glTexCoord2f((float) nXRes / (float) g_nTexMapX, 0);
+		glVertex2f(GL_WIN_SIZE_X, 0);
+		// bottom right
+		glTexCoord2f((float) nXRes / (float) g_nTexMapX, (float) nYRes / (float) g_nTexMapY);
+		glVertex2f(GL_WIN_SIZE_X, GL_WIN_SIZE_Y);
+		// bottom left
+		glTexCoord2f(0, (float) nYRes / (float) g_nTexMapY);
+		glVertex2f(0, GL_WIN_SIZE_Y);
 	glEnd();
 
-	// TODO glutBitmapCharacter(void* font, 'a');
-
-	ImageWindow::angle += 0.1f;
-//	HelloGlutTriangle::angle = 0.1f + HelloGlutTriangle::angle;
 	glutSwapBuffers();
 }
 
@@ -190,4 +233,21 @@ bool ImageWindow::isVisible() const {
 			break;
 	}
 }
+
+/*static*/ void ImageWindow::onGlutIdle() {
+//	printf("ImageWindow::onGlutIdle()\n");
+	glutPostRedisplay();
+}
+
+/*static*/ void ImageWindow::onGlutVisibility(int state) {
+	LOG->debug2("onGlutVisibility(state=%i)", state);
+}
+
+bool ImageWindow::isInitialized() const {
+	return this->initialized;
+}
+bool ImageWindow::isVisible() const {
+	return this->visible;
+}
+
 }

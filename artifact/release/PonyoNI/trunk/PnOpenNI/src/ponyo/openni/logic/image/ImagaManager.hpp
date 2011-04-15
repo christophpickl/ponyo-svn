@@ -8,11 +8,13 @@
 namespace pn {
 class ImagaManager {
 public:
-	ImagaManager(xn::ImageGenerator&);
+	ImagaManager(xn::ImageGenerator&, int xRes, int yRes);
 	virtual ~ImagaManager();
 
 	void init() throw(OpenNiException);
 	void setWindowVisible(bool setToVisible);
+
+	void update() throw(OpenNiException);
 
 	void destroy();
 
@@ -22,6 +24,9 @@ private:
 	xn::ImageGenerator generator;
 	XnCallbackHandle onDataAvailableHandle;
 	ImageWindow* window;
+	xn::ImageMetaData imageData;
+	int xRes;
+	int yRes;
 
 	static void onDataAvailable(xn::ProductionNode& node, void* cookie);
 	static void onWindowAction(WindowAction actionId);

@@ -2,10 +2,11 @@
 #ifndef IMAGEWINDOW_HPP_
 #define IMAGEWINDOW_HPP_
 
-#define GL_WIN_SIZE_X 1280
-#define GL_WIN_SIZE_Y 1024
+#define GL_WIN_SIZE_X XN_VGA_X_RES
+#define GL_WIN_SIZE_Y XN_VGA_Y_RES
 
 #include <ponyo/PnCommon.hpp>
+#include <ponyo/openni/pnopenni_inc.hpp>
 #include <ponyo/openni/includes/headers_glut.hpp>
 #include <ponyo/openni/view/GlutThread.hpp>
 
@@ -24,7 +25,7 @@ public:
 	static ImageWindow* getInstance(ImageWindowCallback callback);
 	static void destroyInstance();
 
-	void init(int argc, char** argv);
+	void init(xn::ImageMetaData* imageData, int xRes, int yRes, int argc, char** argv);
 
 	bool isInitialized() const;
 	bool isVisible() const;
@@ -33,10 +34,13 @@ public:
 private:
 	static Log* LOG;
 	static ImageWindow* instance;
-	static float angle;
 	static ImageWindowCallback callback;
 	static GlutThread glutThread;
+
+	int xRes;
+	int yRes;
 	int glutWindowHandle;
+	xn::ImageMetaData* imageData;
 
 	bool initialized;
 	bool created;

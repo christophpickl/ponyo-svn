@@ -50,15 +50,14 @@ void mainJustStartContextAndDumpInfo() {
 void onThreadRun() {
 	LOG->info("onThreadRun()");
 
-
-	CommonUtils::sleep(2);
-	g_facade.setWindowVisible(false);
-	CommonUtils::sleep(2);
-	printf("XXXXXXXXXXXXXXXXXXXXXXXXXX reshowing window\n");
-	g_facade.setWindowVisible(true);
-	printf("XXXXXXXXXXXXXXXXXXXXXXXXXX reshowing window END\n");
-	CommonUtils::sleep(2);
-	g_facade.setWindowVisible(false);
+//	CommonUtils::sleep(2);
+//	g_facade.setWindowVisible(false);
+//	CommonUtils::sleep(2);
+//	printf("XXXXXXXXXXXXXXXXXXXXXXXXXX reshowing window\n");
+//	g_facade.setWindowVisible(true);
+//	printf("XXXXXXXXXXXXXXXXXXXXXXXXXX reshowing window END\n");
+//	CommonUtils::sleep(2);
+//	g_facade.setWindowVisible(false);
 
 	printf("Hit ENTER to quit\n");
 	CommonUtils::waitHitEnter(false);
@@ -66,8 +65,8 @@ void onThreadRun() {
 
 	tearDown();
 
-	LOG->debug("invoking exit(0), as glut could still block main loop");
-	exit(0);
+//	LOG->debug("invoking exit(0), as glut could still block main loop");
+//	exit(0);
 }
 
 void mainInternal() {
@@ -85,7 +84,7 @@ void mainInternal() {
 	LOG->debug("Spawning new thread ...");
 	g_secondMainThread = boost::thread(&onThreadRun);
 
-	printf("displaying window ...\n");
+	printf("Displaying window (gets stuck in glut mainloop) ...\n");
 	g_facade.setWindowVisible(true);
 }
 

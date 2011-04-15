@@ -54,6 +54,7 @@ private:
 	//	try {
 			while(this->threadShouldRun) {
 				context.WaitAnyUpdateAll();
+//				printf("update thread updated\n");
 				(this->callbackInstance->*this->callbackMethod)();
 			}
 	//	} catch(Exception& e) {

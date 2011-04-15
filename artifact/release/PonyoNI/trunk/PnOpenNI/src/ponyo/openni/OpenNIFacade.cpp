@@ -69,7 +69,7 @@ OpenNIFacade::~OpenNIFacade() {
 		this->imageGenerator->GetMapOutputMode(imageMode);
 		LOG->debug2("imageGenerator mode = FPS: %i, Resolution: %i/%i", imageMode.nFPS, imageMode.nXRes, imageMode.nYRes);
 
-		this->imageManager = new ImagaManager(*this->imageGenerator);
+		this->imageManager = new ImagaManager(*this->imageGenerator, imageMode.nXRes, imageMode.nYRes);
 		this->imageManager->init();
 	} else {
 		LOG->trace("Image generator is disabled.");
@@ -151,6 +151,9 @@ void OpenNIFacade::onUpdateThread() {
 	}
 	if(this->userManager != NULL) {
 		this->userManager->update(); // read and broadcast new skeleton data
+	}
+	if(this->imageManager != NULL) {
+		this->imageManager->update();
 	}
 }
 

@@ -12,7 +12,7 @@ public class Context implements ConnectionListener {
 	
 	private static final Log LOG = LogFactory.getLog(Context.class);
 	
-//	private final 
+	private final GlobalSpace space = new GlobalSpace();
 	
 	private Connection connection;
 	

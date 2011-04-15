@@ -22,6 +22,52 @@
     
     
     <!-- ******************************************************************* -->
+    <!--                       D E P E N D E N C I E S                       -->
+    <!-- ******************************************************************* -->
+    
+	<dependencies>
+    
+	    <!-- I N T E R N A L -->
+    	<!-- *********************************************************** -->
+	
+		<dependency>
+			<groupId>net.sf.ponyo.jponyo</groupId>
+			<artifactId>common</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.sf.ponyo.jponyo</groupId>
+			<artifactId>jponyo</artifactId>
+			<version>0.1-SNAPSHOT</version>
+		</dependency>
+		
+		
+	    <!-- E X T E R N A L -->
+    	<!-- *********************************************************** -->
+		
+		<!-- TODO: jogl {2xjars, 4xjnilib with os-classifier via profile} -->
+		
+		<dependency>
+			<groupId>PONYO-jogl</groupId>
+			<artifactId>jogl</artifactId>
+			<version>0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/jogl_libs/jogl.jar</systemPath>
+		</dependency>
+		
+		<dependency>
+			<groupId>PONYO-jogl</groupId>
+			<artifactId>gluegen-rt</artifactId>
+			<version>0.0</version>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/jogl_libs/gluegen-rt.jar</systemPath>
+		</dependency>
+		
+	</dependencies>
+    
+    
+    <!-- ******************************************************************* -->
     <!--                                S C M                                -->
     <!-- ******************************************************************* -->
     

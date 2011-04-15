@@ -24,9 +24,11 @@ public:
 
 	void start(xn::Context& context, CallbackType* callbackInstance,  aFunction callbackMethod) {
 		LOG->debug("start(..) ... spawning update thread");
-		LOG->warn("Attention: If 'Bus error' occurs, try running as root ;)");
+
 		this->callbackInstance = callbackInstance;
 		this->callbackMethod = callbackMethod;
+
+		LOG->info("Attention: If 'Bus error' occurs, try running as root ;)");
 		this->updateThread = boost::thread(&UpdateThread::onThreadRun, this, context);
 	}
 

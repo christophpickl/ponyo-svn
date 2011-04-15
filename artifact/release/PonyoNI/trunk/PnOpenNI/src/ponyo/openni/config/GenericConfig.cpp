@@ -9,7 +9,9 @@ GenericConfig::GenericConfig(
 		JointPositionCallback jointCallback) :
 			userCallback(userCallback),
 			jointCallback(jointCallback),
-			imageGeneratorEnabled(false) // disabled by default
+			imageGeneratorEnabled(false), // disabled by default
+			depthGeneratorEnabled(true),
+			userGeneratorEnabled(true)
 {
 	LOG->debug("new GenericConfig(..)");
 }

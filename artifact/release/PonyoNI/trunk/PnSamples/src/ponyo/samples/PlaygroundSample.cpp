@@ -24,9 +24,9 @@ void tearDown() {
 }
 
 void onSignalReceived(int signalCode) {
-	LOG->info2("onSignalReceived(signalCode=%d)\n", signalCode);
+	LOG->info2("onSignalReceived(signalCode=%d)", signalCode);
 	tearDown();
-	printf("Terminating application by invoking exit()");
+	printf("Terminating application by invoking exit()\n");
 	exit(signalCode);
 }
 
@@ -45,20 +45,18 @@ void mainJustStartContextAndDumpInfo() {
 }
 
 void mainInternal() {
-	signal(SIGINT, onSignalReceived); // hit CTRL-C keys in terminal (2)
-	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)
 //	OpenNIUtils::enableXnLogging(XN_LOG_INFO);
 
-//	StartXmlConfig config("misc/playground_config.xml", &onUserStateChanged, &onJointPositionChanged);
-//	config.setMirrorModeEnableb(true);
-//	config.setImageGeneratorEnabled(true);
-//	g_facade.startWithXml(config);
-
-	StartOniConfig config("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
-	config.setUserGeneratorEnabled(false);
-	config.setImageGeneratorEnabled(false);
+	StartXmlConfig config("misc/playground_config.xml", &onUserStateChanged, &onJointPositionChanged);
+//	StartOniConfig config("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
+	config.setImageGeneratorEnabled(true);
 	config.setDepthGeneratorEnabled(false);
-	g_facade.startRecording(config);
+	config.setUserGeneratorEnabled(false);
+	g_facade.startWithXml(config);
+//	g_facade.startRecording(config);
+
+	printf("displaying window ...\n");
+	g_facade.setWindowVisible(true);
 
 	printf("Hit ENTER to quit\n");
 	CommonUtils::waitHitEnter(false);
@@ -67,9 +65,27 @@ void mainInternal() {
 	tearDown();
 }
 
-int main() {
+void onWindowAction(WindowAction actionId) {
+	LOG->debug2("onWindowAction(actionId=%i)", actionId);
+	switch(actionId) {
+	case WINDOW_ACTION_ESCAPE:
+		onSignalReceived(0);
+		break;
+	default:
+		LOG->warn2("Unhandled window action [%i]!", actionId);
+	}
+}
+int main(int argc, char** argv) {
 	LOG->info("PlaygroundSample main() START");
+
+	signal(SIGINT, onSignalReceived); // hit CTRL-C keys in terminal (2)
+	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)
+
 	try {
+//		ImageWindow* win = ImageWindow::getInstance(&onWindowAction);
+//		win->init(argc, argv);
+//		win->setWindowVisible(true);
+//		ImageWindow::destroy();
 
 		mainInternal();
 //		mainJustStartContextAndDumpInfo();

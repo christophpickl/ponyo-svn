@@ -17,4 +17,8 @@
 #define NO "No"
 #define BOOL2CHAR(b) (b == 1) ? YES:  NO;
 
+namespace pn {
+	inline const char * const boolToString(bool value) { return value ? "true" : "false"; }
+}
+
 #endif // PNCOMMON_INC_HPP_

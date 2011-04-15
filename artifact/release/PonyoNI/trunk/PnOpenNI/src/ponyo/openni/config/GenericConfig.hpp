@@ -39,6 +39,8 @@ private:
 	// TODO SomeLogLevel OpenNilogConfiguration
 	bool mirrorModeEnabled;
 
+	// FIXME generator configuration is depending on A) content of XML configuration B) state of configuration when ONI was recorded
+
 	bool imageGeneratorEnabled;
 		// bool mirrorModeEnabled
 

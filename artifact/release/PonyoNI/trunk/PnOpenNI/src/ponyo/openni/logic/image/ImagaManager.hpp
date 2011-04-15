@@ -3,6 +3,7 @@
 #define IMAGAMANAGER_HPP_
 
 #include <ponyo/openni/pnopenni_inc.hpp>
+#include <ponyo/openni/view/ImageWindow.hpp>
 
 namespace pn {
 class ImagaManager {
@@ -11,15 +12,19 @@ public:
 	virtual ~ImagaManager();
 
 	void init() throw(OpenNiException);
-	void unregister();
+	void setWindowVisible(bool setToVisible);
+
+	void destroy();
 
 private:
 	static Log* LOG;
 
-	xn::ImageGenerator imageGenerator;
+	xn::ImageGenerator generator;
 	XnCallbackHandle onDataAvailableHandle;
+	ImageWindow* window;
 
 	static void onDataAvailable(xn::ProductionNode& node, void* cookie);
+	static void onWindowAction(WindowAction actionId);
 
 };
 }

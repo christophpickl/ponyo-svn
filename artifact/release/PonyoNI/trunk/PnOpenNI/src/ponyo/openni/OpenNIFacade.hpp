@@ -21,7 +21,8 @@ public:
 	void startWithXml(StartXmlConfig& config) throw(OpenNiException);
 	void startRecording(StartOniConfig& config) throw(OpenNiException);
 
-	void toggleMirror();
+	void toggleMirror() throw (OpenNiException);
+	void setWindowVisible(bool visible) throw (OpenNiException);
 
 	void shutdown();
 
@@ -30,8 +31,9 @@ private:
 
 	xn::Context context;
 	UpdateThread<OpenNIFacade> updateThread;
-	xn::DepthGenerator depthGenerator;
-	xn::ImageGenerator imageGenerator;
+
+	xn::ImageGenerator* imageGenerator;
+	xn::DepthGenerator* depthGenerator;
 
 	UserManager* userManager;
 	/** Depending on start configuration, will be (un)used */

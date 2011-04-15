@@ -39,7 +39,7 @@ UserManager::~UserManager() {
 	this->skeletonCapability.SetSkeletonProfile(XN_SKEL_PROFILE_ALL); //  we want to have all joints
 	// TODO CHECK_XN(this->skeletonCapability.SetSmoothing(0.0f), "Setting smoothing for skeleton capability failed!");
 
-	this->userGenerator.StartGenerating();
+//	this->userGenerator.StartGenerating();
 
 	LOG->debug("init(context) END");
 }

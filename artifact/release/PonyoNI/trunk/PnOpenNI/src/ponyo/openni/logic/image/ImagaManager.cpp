@@ -54,6 +54,10 @@ void ImagaManager::setWindowVisible(bool setToVisible) {
 	this->window->setVisible(setToVisible);
 }
 
+bool ImagaManager::isWindowVisible() {
+	return this->window->isVisible();
+}
+
 void ImagaManager::destroy() {
 	LOG->debug("destroy()");
 

@@ -92,7 +92,7 @@ void ImageWindow::init(xn::ImageMetaData* imageData, int xRes, int yRes, int arg
 }
 
 void ImageWindow::setVisible(bool setToVisible) {
-	LOG->debug2("setVisible(setToVisible=%i) ... this->created=%i", setToVisible, this->created);
+	LOG->debug2("setVisible(setToVisible=%s) ... this->created=%s", boolToString(setToVisible), boolToString(this->created));
 
 	if(this->initialized == false) {
 		LOG->error("Not going to display window as it was not yet initialized!");
@@ -106,13 +106,13 @@ void ImageWindow::setVisible(bool setToVisible) {
 		}
 
 		if(this->created == false) {
+			LOG->trace("Creating glut window ...");
 			this->glutWindowHandle = glutCreateWindow("PonyoNI Image Window");
 			LOG->trace2("Created glut window with id: %i", this->glutWindowHandle);
 
-
+			glutDisplayFunc(&ImageWindow::onGlutDisplay);
 			glutKeyboardFunc(&ImageWindow::onGlutKeyboard);
 			glutIdleFunc(&ImageWindow::onGlutIdle);
-			glutDisplayFunc(&ImageWindow::onGlutDisplay);
 			glutReshapeFunc(&ImageWindow::onGlutReshape);
 			glutVisibilityFunc(&ImageWindow::onGlutVisibility);
 
@@ -161,6 +161,7 @@ void ImageWindow::setVisible(bool setToVisible) {
 	// Setup the OpenGL viewpoint
 	glMatrixMode(GL_PROJECTION);
 	glPushMatrix();
+
 	glLoadIdentity();
 	glOrtho(0, GL_WIN_SIZE_X, GL_WIN_SIZE_Y, 0, -1.0, 1.0);
 
@@ -206,6 +207,22 @@ void ImageWindow::setVisible(bool setToVisible) {
 		glTexCoord2f(0, (float) nYRes / (float) g_nTexMapY);
 		glVertex2f(0, GL_WIN_SIZE_Y);
 	glEnd();
+
+
+	// FIXME get joint points and draw skeleton ;)
+	glLoadIdentity();
+	glOrtho(0, GL_WIN_SIZE_X, GL_WIN_SIZE_Y, 0, -1.0, 1.0);
+//	gluLookAt(	0.0f, 0.0f, 10.0f, // set the camera
+//				0.0f, 0.0f,  0.0f,
+//				0.0f, 1.0f,  0.0f);
+//	glRotatef(xangle, 0.0f, 1.0f, 0.0f);
+	glColor3f(1.0f, 0.0f, 0.0f);
+	glBegin(GL_TRIANGLES);
+		glVertex2f(   1.0f,   1.0f);
+		glVertex2f( 101.0f,   1.0f);
+		glVertex2f(  51.0f, 101.0f);
+	glEnd();
+
 
 	glutSwapBuffers();
 }

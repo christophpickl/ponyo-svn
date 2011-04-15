@@ -134,8 +134,8 @@ void OpenNIFacade::toggleMirror() throw (OpenNiException) {
 	CHECK_XN(this->context.SetGlobalMirror(!this->context.GetGlobalMirror()), "Toggling mirror mode failed!");
 }
 
-void OpenNIFacade::setWindowVisible(bool visible) throw (OpenNiException) {
-	LOG->debug2("setWindowVisible(visible=%i)", visible);
+void OpenNIFacade::setWindowVisible(bool visible) {
+	LOG->debug2("setWindowVisible(visible=%s)", boolToString(visible));
 
 	if(this->imageManager == NULL) {
 		LOG->warn("Can not set window visibility as no image manager is available!");
@@ -144,6 +144,9 @@ void OpenNIFacade::setWindowVisible(bool visible) throw (OpenNiException) {
 	this->imageManager->setWindowVisible(visible);
 }
 
+bool OpenNIFacade::isWindowVisible() {
+	return this->imageManager->isWindowVisible();
+}
 
 void OpenNIFacade::onUpdateThread() {
 	if(this->depthGenerator != NULL) {

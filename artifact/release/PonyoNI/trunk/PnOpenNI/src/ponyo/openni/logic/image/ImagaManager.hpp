@@ -13,6 +13,7 @@ public:
 
 	void init() throw(OpenNiException);
 	void setWindowVisible(bool setToVisible);
+	bool isWindowVisible();
 
 	void update() throw(OpenNiException);
 

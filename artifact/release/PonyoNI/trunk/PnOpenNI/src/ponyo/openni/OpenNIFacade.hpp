@@ -22,7 +22,8 @@ public:
 	void startRecording(StartOniConfig& config) throw(OpenNiException);
 
 	void toggleMirror() throw (OpenNiException);
-	void setWindowVisible(bool visible) throw (OpenNiException);
+	void setWindowVisible(bool visible);
+	bool isWindowVisible();
 
 	void shutdown();
 

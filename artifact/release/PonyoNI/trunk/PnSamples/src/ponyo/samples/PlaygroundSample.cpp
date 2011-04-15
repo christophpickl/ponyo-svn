@@ -1,3 +1,4 @@
+#include <boost/thread.hpp>
 #include <ponyo/PnOpenNI.hpp>
 
 using namespace pn;
@@ -5,6 +6,8 @@ using namespace pn;
 OpenNIFacade g_facade;
 Log* LOG = NEW_LOG();
 int g_jointCounter = 0; // to print out every 100th joint change only
+
+boost::thread g_secondMainThread;
 
 void onUserStateChanged(UserId userId, UserState userState) {
 	printf(">>>>> PlaygroundSample says: onUserStateChanged(userId=%i, userState=%i)\n", userId, userState);
@@ -44,6 +47,29 @@ void mainJustStartContextAndDumpInfo() {
 	context.Shutdown();
 }
 
+void onThreadRun() {
+	LOG->info("onThreadRun()");
+
+
+	CommonUtils::sleep(2);
+	g_facade.setWindowVisible(false);
+	CommonUtils::sleep(2);
+	printf("XXXXXXXXXXXXXXXXXXXXXXXXXX reshowing window\n");
+	g_facade.setWindowVisible(true);
+	printf("XXXXXXXXXXXXXXXXXXXXXXXXXX reshowing window END\n");
+	CommonUtils::sleep(2);
+	g_facade.setWindowVisible(false);
+
+	printf("Hit ENTER to quit\n");
+	CommonUtils::waitHitEnter(false);
+	printf("ENTER pressed, shutting down.\n");
+
+	tearDown();
+
+	LOG->debug("invoking exit(0), as glut could still block main loop");
+	exit(0);
+}
+
 void mainInternal() {
 	printf(__FILE__ "#mainInternal()\n");
 //	OpenNIUtils::enableXnLogging(XN_LOG_INFO);
@@ -56,14 +82,11 @@ void mainInternal() {
 	g_facade.startWithXml(config);
 //	g_facade.startRecording(config);
 
+	LOG->debug("Spawning new thread ...");
+	g_secondMainThread = boost::thread(&onThreadRun);
+
 	printf("displaying window ...\n");
 	g_facade.setWindowVisible(true);
-
-	printf("Hit ENTER to quit\n");
-	CommonUtils::waitHitEnter(false);
-	printf("ENTER pressed, shutting down.\n");
-
-	tearDown();
 }
 
 void onWindowAction(WindowAction actionId) {

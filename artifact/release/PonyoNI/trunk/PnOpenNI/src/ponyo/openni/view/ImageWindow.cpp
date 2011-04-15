@@ -6,7 +6,7 @@ Log* ImageWindow::LOG = NEW_LOG();
 ImageWindow* ImageWindow::instance = NULL;
 float ImageWindow::angle = 0.0f;
 ImageWindowCallback ImageWindow::callback = NULL;
-GlutThread ImageWindow::glutThread;
+//GlutThread ImageWindow::glutThread;
 
 /*private*/ ImageWindow::ImageWindow() :
 		initialized(false),
@@ -32,19 +32,21 @@ GlutThread ImageWindow::glutThread;
 	return ImageWindow::instance;
 }
 
-/*static*/ void ImageWindow::destroy() {
-	LOG->debug("destroy()");
+/*static*/ void ImageWindow::destroyInstance() {
+	LOG->debug("destroyInstance()");
 
 	if(ImageWindow::instance != NULL) {
 		LOG->trace("Destroying window singleton instance.");
 
 		if(ImageWindow::instance->visible) {
+			LOG->trace("Hiding window.");
 			ImageWindow::instance->setVisible(false);
 		}
 
 		if(ImageWindow::instance->created == true) {
+			LOG->trace("Destroying glut window.");
 			glutDestroyWindow(ImageWindow::instance->glutWindowHandle);
-			ImageWindow::glutThread.stop();
+//			ImageWindow::glutThread.stop();
 		}
 
 		ImageWindow::instance->initialized = false;
@@ -72,6 +74,9 @@ void ImageWindow::init(int argc, char** argv) {
 	this->initialized = true;
 }
 
+/*static*/ void ImageWindow::onGlutVisibility(int state) {
+	LOG->debug2("onGlutVisibility(state=%i)", state);
+}
 
 void ImageWindow::setVisible(bool setToVisible) {
 	LOG->debug2("setVisible(setToVisible=%i)", setToVisible);
@@ -82,43 +87,43 @@ void ImageWindow::setVisible(bool setToVisible) {
 	}
 
 	if(setToVisible == true) {
-		printf("1\n");
 		if(this->visible == true) {
 			LOG->warn("Window already visible; ignoring.");
 			return;
 		}
 
-		printf("2\n");
-
 		if(this->created == false) {
-			printf("3\n");
-			LOG->trace("Creating glut window ...");
 			this->glutWindowHandle = glutCreateWindow("PonyoNI Image Window");
-			LOG->trace("Creating glut window ... AFTER");
+			LOG->trace2("Created glut window with id: %i", this->glutWindowHandle);
 
 
 			glutKeyboardFunc(&ImageWindow::onGlutKeyboard);
 			glutIdleFunc(&ImageWindow::onGlutIdle);
 			glutDisplayFunc(&ImageWindow::onGlutDisplay);
 			glutReshapeFunc(&ImageWindow::onGlutReshape);
+			glutVisibilityFunc(&ImageWindow::onGlutVisibility);
 
-			printf("4\n");
-			LOG->info("Spawning glut background thread ...");
-			ImageWindow::glutThread.start();
-//			glutMainLoop();
-			printf("5 YEAH\n");
-
+//			LOG->info("Spawning glut background thread ...");
+//			ImageWindow::glutThread.start();
 			this->created = true;
-		} else {
-			glutIdleFunc(&ImageWindow::onGlutIdle);
-			glutShowWindow();
-		}
+			this->visible = true;
 
-		this->visible = true;
+			LOG->info("entering glutMainLoop() ... thread will never die!!!");
+			glutMainLoop();
+			// THIS CODE IS NEVER REACHED!
+
+		} else {
+			fprintf(stderr, "FIXME!!! reshowing window does not work // glutGetWindow() =%i\n", glutGetWindow()); // FIXME!!! reshowing window does not work
+			glutShowWindow();
+			glutIdleFunc(&ImageWindow::onGlutIdle);
+			this->visible = true;
+		}
+		// only reached when not initially created, as glut main loop blocks
 
 	} else /* (this->isVisible == false) */ {
-		glutIdleFunc(NULL);
+		LOG->debug("Hiding window and nullifying idle function.");
 		glutHideWindow();
+		glutIdleFunc(NULL);
 		this->visible = false;
 	}
 }
@@ -153,6 +158,8 @@ bool ImageWindow::isVisible() const {
 		glVertex3f( 2.0f, 0.0f, 0.0);
 		glVertex3f( 0.0f, 2.0f, 0.0);
 	glEnd();
+
+	// TODO glutBitmapCharacter(void* font, 'a');
 
 	ImageWindow::angle += 0.1f;
 //	HelloGlutTriangle::angle = 0.1f + HelloGlutTriangle::angle;

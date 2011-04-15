@@ -22,7 +22,7 @@ public:
 
 	// MINOR singleton glut hack
 	static ImageWindow* getInstance(ImageWindowCallback callback);
-	static void destroy();
+	static void destroyInstance();
 
 	void init(int argc, char** argv);
 
@@ -49,6 +49,7 @@ private:
 	static void onGlutIdle();
 	static void onGlutReshape(int width, int height);
 	static void onGlutKeyboard(unsigned char key, int x, int y);
+	static void onGlutVisibility(int state);
 
 };
 }

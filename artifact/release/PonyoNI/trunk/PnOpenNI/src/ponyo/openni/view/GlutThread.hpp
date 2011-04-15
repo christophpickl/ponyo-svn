@@ -3,7 +3,6 @@
 #define GLUTTHREAD_HPP_
 
 #include <boost/thread.hpp>
-//#include <boost/date_time.hpp>
 #include <ponyo/openni/includes/headers_glut.hpp>
 #include <ponyo/PnCommon.hpp>
 

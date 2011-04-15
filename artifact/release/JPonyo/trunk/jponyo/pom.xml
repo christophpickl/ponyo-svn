@@ -20,10 +20,20 @@
     	<relativePath>../pn-java-pom/pom.xml</relativePath>
     </parent>
     
+    
+    <!-- ******************************************************************* -->
+    <!--                         P R O P E R T I E S                         -->
+    <!-- ******************************************************************* -->
+    
     <properties>
-    	<version_javaosc>1.0-20060402-josceleton</version_javaosc>
+    	<jponyo_main_class>net.sf.ponyo.jponyo.App</jponyo_main_class>
     </properties>
-	
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                       D E P E N D E N C I E S                       -->
+    <!-- ******************************************************************* -->
+    
 	<dependencies>
 	
 		<dependency>
@@ -43,16 +53,20 @@
         <dependency>
 			<groupId>com.illposed</groupId>
 			<artifactId>javaosc</artifactId>
-			<version>${version_javaosc}</version>
 		</dependency>
 		
 	</dependencies>
     
+    
+    <!-- ******************************************************************* -->
+    <!--                              B U I L D                              -->
+    <!-- ******************************************************************* -->
+    
     <build>
     	<plugins>
+    	
             <plugin>
             	<artifactId>maven-assembly-plugin</artifactId>
-            	<version>2.2.1</version>
             	<executions>
 		            <execution>
 						<id>package-jar-with-deps</id>
@@ -64,7 +78,7 @@
 						<configuration>
 							<archive>
 								<manifest>
-									<mainClass>net.sf.ponyo.jponyo.App</mainClass>
+									<mainClass>${jponyo_main_class}</mainClass>
 								</manifest>
 							</archive>
 		            		<descriptorRefs>
@@ -74,7 +88,19 @@
 					</execution>
             	</executions>
             </plugin>
+            
     	</plugins>
     </build>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                                S C M                                -->
+    <!-- ******************************************************************* -->
+    
+    <scm>
+        <connection>scm:svn:http://ponyo-svn.googlecode.com/svn/artifact/release/JPonyo/trunk/jponyo/</connection>
+        <developerConnection>scm:svn:https://ponyo-svn.googlecode.com/svn/artifact/release/JPonyo/trunk/jponyo/</developerConnection>
+        <url>http://code.google.com/p/ponyo-svn/source/browse/#svn/artifact/release/JPonyo/trunk/jponyo/</url>
+    </scm>
     
 </project>

@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <name>JPonyo Common</name>
+    <name>JPonyo AdminConsole</name>
     <packaging>jar</packaging>
     
     <groupId>net.sf.ponyo.jponyo</groupId>
-    <artifactId>common</artifactId>
+    <artifactId>admin-console</artifactId>
     <version>0.1-SNAPSHOT</version>
     
     
@@ -26,9 +26,9 @@
     <!-- ******************************************************************* -->
     
     <scm>
-        <connection>scm:svn:http://ponyo-svn.googlecode.com/svn/artifact/release/JPonyo/trunk/common/</connection>
-        <developerConnection>scm:svn:https://ponyo-svn.googlecode.com/svn/artifact/release/JPonyo/trunk/common/</developerConnection>
-        <url>http://code.google.com/p/ponyo-svn/source/browse/#svn/artifact/release/JPonyo/trunk/common/</url>
+        <connection>scm:svn:http://ponyo-svn.googlecode.com/svn/artifact/release/JPonyo/trunk/admin-console/</connection>
+        <developerConnection>scm:svn:https://ponyo-svn.googlecode.com/svn/artifact/release/JPonyo/trunk/admin-console/</developerConnection>
+        <url>http://code.google.com/p/ponyo-svn/source/browse/#svn/artifact/release/JPonyo/trunk/admin-console/</url>
     </scm>
     
 </project>

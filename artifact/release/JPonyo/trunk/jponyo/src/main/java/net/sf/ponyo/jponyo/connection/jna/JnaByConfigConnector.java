@@ -1,12 +1,10 @@
 package net.sf.ponyo.jponyo.connection.jna;
 
-import net.sf.ponyo.jponyo.connection.Connection;
-import net.sf.ponyo.jponyo.connection.Connector;
 
 /**
  * @since 0.1
  */
-public class JnaByConfigConnector implements Connector {
+public class JnaByConfigConnector implements JnaConnector {
 	
 	private final String configXmlPath;
 
@@ -20,7 +18,7 @@ public class JnaByConfigConnector implements Connector {
 	/**
 	 * @since 0.1
 	 */
-	public Connection openConnection() {
+	public JnaConnection openConnection() {
 		return new JnaConnection(this.configXmlPath).openByXmlConfig();
 	}
 }

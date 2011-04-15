@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.samples;
+package net.sf.ponyo.jponyo.samples.connection;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -15,19 +15,17 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
+import net.sf.ponyo.jponyo.connection.ConnectionListener;
+import net.sf.ponyo.jponyo.connection.jna.JnaByConfigConnector;
+import net.sf.ponyo.jponyo.connection.jna.JnaConnection;
+import net.sf.ponyo.jponyo.connection.jna.JnaConnector;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import net.sf.ponyo.jponyo.App;
-import net.sf.ponyo.jponyo.connection.Connection;
-import net.sf.ponyo.jponyo.connection.ConnectionListener;
-import net.sf.ponyo.jponyo.connection.Connector;
-import net.sf.ponyo.jponyo.connection.jna.JnaByRecordingConnector;
-import net.sf.ponyo.jponyo.connection.osc.OscConnector;
+public class WindowedConnectionSample {
 
-public class WindowApp {
-
-	private static final Log LOG = LogFactory.getLog(WindowApp.class);
+	private static final Log LOG = LogFactory.getLog(WindowedConnectionSample.class);
 	public static final String CONFIG_PATH = "/ponyo/niconfig.xml";
 	public static final String ONI_PATH = "/ponyo/oni.oni";
 	
@@ -42,12 +40,13 @@ public class WindowApp {
 		
 		final JTextArea txtOutput = new JTextArea();
 
-		Connector connector = new OscConnector();
+//		Connector connector = new OscConnector();
 //		Connector connector = new JnaByRecordingConnector(ONI_PATH);
-//		Connector connector = new JnaByConfigConnector(CONFIG_PATH);
+		JnaConnector connector = new JnaByConfigConnector(CONFIG_PATH);
 		
 		System.out.println("Starting up PonyoNI ...");
-		final Connection connection = connector.openConnection();
+//		final Connection connection = connector.openConnection();
+		final JnaConnection connection = connector.openConnection();
 		System.out.println("Starting up PonyoNI ... DONE");
 		
 		connection.addListener(new ConnectionListener() {
@@ -78,7 +77,7 @@ public class WindowApp {
 			connection.close();
 			System.out.println("pnDestroy() END");
 			frame.setVisible(false);
-			frame.dispose();
+			frame.dispose(); 
 		}});
 		btnQuit.setEnabled(true);
 	}

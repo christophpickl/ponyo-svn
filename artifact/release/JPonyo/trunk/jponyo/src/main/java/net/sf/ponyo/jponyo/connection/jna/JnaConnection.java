@@ -1,13 +1,13 @@
 package net.sf.ponyo.jponyo.connection.jna;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import net.sf.ponyo.jponyo.DefaultAsync;
 import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
 import net.sf.ponyo.jponyo.connection.jna.PnJNALibray.OnJointPositionChangedCallback;
 import net.sf.ponyo.jponyo.connection.jna.PnJNALibray.OnUserStateChangedCallback;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class JnaConnection
 	extends DefaultAsync<ConnectionListener>
@@ -23,18 +23,18 @@ public class JnaConnection
 		this.configOrRecordingPath = configOrRecordingPath;
 	}
 	
-	public Connection openByXmlConfig() {
+	public JnaConnection openByXmlConfig() {
 		this.jnaLib = new PnJNALibraryWrapper(this, this);
 		this.jnaLib.startByXmlConfig(this.configOrRecordingPath);
 		return this;
 	}
 	
-	public Connection openByOniRecording() {
+	public JnaConnection openByOniRecording() {
 		this.jnaLib = new PnJNALibraryWrapper(this, this);
 		this.jnaLib.startByOniRecording(this.configOrRecordingPath);
 		return this;
 	}
-
+	
 	public void close() {
 		LOG.debug("close()");
 		

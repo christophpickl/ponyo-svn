@@ -1,18 +1,16 @@
-package net.sf.ponyo.jponyo;
+package net.sf.ponyo.jponyo.samples.connection;
 
 import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
 import net.sf.ponyo.jponyo.connection.Connector;
-import net.sf.ponyo.jponyo.connection.jna.JnaByConfigConnector;
-import net.sf.ponyo.jponyo.connection.jna.JnaByRecordingConnector;
 import net.sf.ponyo.jponyo.connection.osc.OscConnector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class App {
+public class SimpleConnectionSample {
 	
-	private static final Log LOG = LogFactory.getLog(App.class);
+	private static final Log LOG = LogFactory.getLog(SimpleConnectionSample.class);
 	
 	public static final String CONFIG_PATH = "/ponyo/niconfig.xml";
 	public static final String ONI_PATH = "/ponyo/oni.oni";

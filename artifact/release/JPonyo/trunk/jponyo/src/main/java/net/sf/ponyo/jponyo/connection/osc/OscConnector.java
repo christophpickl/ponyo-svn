@@ -3,18 +3,17 @@ package net.sf.ponyo.jponyo.connection.osc;
 import java.net.SocketException;
 import java.util.Date;
 
+import net.sf.ponyo.jponyo.connection.Connector;
+
 import com.illposed.osc.OSCListener;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPortIn;
 
-import net.sf.ponyo.jponyo.connection.Connection;
-import net.sf.ponyo.jponyo.connection.Connector;
-
-public class OscConnector implements Connector {
+public class OscConnector implements Connector<OscConnection> {
 	
 //	TODO private final int port;
 	
-	public Connection openConnection() {
+	public OscConnection openConnection() {
 		final OSCPortIn port;
 		try {
 			port = new OSCPortIn(7000);

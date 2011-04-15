@@ -50,7 +50,7 @@ class PnJNALibraryWrapper {
 		LOG.debug("startByOniRecording(oniPath=" + oniPath + ")");
 		this.internalStart(oniPath, false);
 	}
-	
+
 	private void internalStart(String configOrOniPath, boolean isStartingByConfig) {
 		this.initNativeLibrary();
 		
@@ -74,6 +74,7 @@ class PnJNALibraryWrapper {
 			LOG.debug("Loading native library: " + PnJNALibray.LIB_NAME);
 //			System.setProperty("jna.encoding", "");
 			PnJNALibraryWrapper.nativeLibrary = (PnJNALibray) Native.loadLibrary(PnJNALibray.LIB_NAME, PnJNALibray.class);
+			LOG.debug("Library successfully loaded.");
 		}
 	}
 

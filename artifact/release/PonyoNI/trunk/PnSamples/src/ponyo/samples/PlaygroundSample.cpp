@@ -1,4 +1,3 @@
-#include <boost/thread.hpp>
 #include <ponyo/PnOpenNI.hpp>
 
 using namespace pn;
@@ -6,8 +5,6 @@ using namespace pn;
 OpenNIFacade g_facade;
 Log* LOG = NEW_LOG();
 int g_jointCounter = 0; // to print out every 100th joint change only
-
-boost::thread g_secondMainThread;
 
 void onUserStateChanged(UserId userId, UserState userState) {
 	printf(">>>>> PlaygroundSample says: onUserStateChanged(userId=%i, userState=%i)\n", userId, userState);
@@ -27,9 +24,9 @@ void tearDown() {
 }
 
 void onSignalReceived(int signalCode) {
-	LOG->info2("onSignalReceived(signalCode=%d)", signalCode);
+	LOG->info2("onSignalReceived(signalCode=%d)\n", signalCode);
 	tearDown();
-	printf("Terminating application by invoking exit()\n");
+	printf("Terminating application by invoking exit()");
 	exit(signalCode);
 }
 
@@ -47,68 +44,32 @@ void mainJustStartContextAndDumpInfo() {
 	context.Shutdown();
 }
 
-void onThreadRun() {
-	LOG->info("onThreadRun()");
+void mainInternal() {
+	signal(SIGINT, onSignalReceived); // hit CTRL-C keys in terminal (2)
+	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)
+//	OpenNIUtils::enableXnLogging(XN_LOG_INFO);
 
-//	CommonUtils::sleep(2);
-//	g_facade.setWindowVisible(false);
-//	CommonUtils::sleep(2);
-//	printf("XXXXXXXXXXXXXXXXXXXXXXXXXX reshowing window\n");
-//	g_facade.setWindowVisible(true);
-//	printf("XXXXXXXXXXXXXXXXXXXXXXXXXX reshowing window END\n");
-//	CommonUtils::sleep(2);
-//	g_facade.setWindowVisible(false);
+//	StartXmlConfig config("misc/playground_config.xml", &onUserStateChanged, &onJointPositionChanged);
+//	config.setMirrorModeEnableb(true);
+//	config.setImageGeneratorEnabled(true);
+//	g_facade.startWithXml(config);
+
+	StartOniConfig config("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
+	config.setUserGeneratorEnabled(false);
+	config.setImageGeneratorEnabled(false);
+	config.setDepthGeneratorEnabled(false);
+	g_facade.startRecording(config);
 
 	printf("Hit ENTER to quit\n");
 	CommonUtils::waitHitEnter(false);
 	printf("ENTER pressed, shutting down.\n");
 
 	tearDown();
-
-//	LOG->debug("invoking exit(0), as glut could still block main loop");
-//	exit(0);
 }
 
-void mainInternal() {
-	printf(__FILE__ "#mainInternal()\n");
-//	OpenNIUtils::enableXnLogging(XN_LOG_INFO);
-
-	StartXmlConfig config("misc/playground_config.xml", &onUserStateChanged, &onJointPositionChanged);
-//	StartOniConfig config("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
-	config.setImageGeneratorEnabled(true);
-	config.setDepthGeneratorEnabled(false);
-	config.setUserGeneratorEnabled(false);
-	g_facade.startWithXml(config);
-//	g_facade.startRecording(config);
-
-	LOG->debug("Spawning new thread ...");
-	g_secondMainThread = boost::thread(&onThreadRun);
-
-	printf("Displaying window (gets stuck in glut mainloop) ...\n");
-	g_facade.setWindowVisible(true);
-}
-
-void onWindowAction(WindowAction actionId) {
-	LOG->debug2("onWindowAction(actionId=%i)", actionId);
-	switch(actionId) {
-	case WINDOW_ACTION_ESCAPE:
-		onSignalReceived(0);
-		break;
-	default:
-		LOG->warn2("Unhandled window action [%i]!", actionId);
-	}
-}
-int main(int argc, char** argv) {
+int main() {
 	LOG->info("PlaygroundSample main() START");
-
-	signal(SIGINT, onSignalReceived); // hit CTRL-C keys in terminal (2)
-	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)
-
 	try {
-//		ImageWindow* win = ImageWindow::getInstance(&onWindowAction);
-//		win->init(argc, argv);
-//		win->setWindowVisible(true);
-//		ImageWindow::destroy();
 
 		mainInternal();
 //		mainJustStartContextAndDumpInfo();

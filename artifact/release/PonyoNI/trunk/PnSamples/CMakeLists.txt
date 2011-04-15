@@ -2,7 +2,7 @@ SET (PROJECT_SOURCE_DIR src)
 
 PN_DEPENDENCY_OPENNI ()
 
-SET (EXECUTABLES SimpleSample PlaygroundSample)
+SET (EXECUTABLES SimpleSample PlaygroundSample WindowedSample)
 SET (EXECUTABLE_OUTPUT_PATH bin/samples)
 
 # TODO even necessary??

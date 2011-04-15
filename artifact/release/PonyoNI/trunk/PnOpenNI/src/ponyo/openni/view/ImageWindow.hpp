@@ -37,14 +37,15 @@ private:
 	static ImageWindowCallback callback;
 	static GlutThread glutThread;
 
-	int xRes;
-	int yRes;
 	int glutWindowHandle;
-	xn::ImageMetaData* imageData;
-
 	bool initialized;
 	bool created;
 	bool visible;
+
+	xn::ImageMetaData* imageData;
+	int xRes;
+	int yRes;
+
 
 	ImageWindow();
 	virtual ~ImageWindow();

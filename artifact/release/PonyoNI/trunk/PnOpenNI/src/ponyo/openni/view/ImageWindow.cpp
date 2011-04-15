@@ -13,6 +13,7 @@ unsigned int g_nTexMapY = 0;
 
 /*private*/ ImageWindow::ImageWindow() :
 		initialized(false),
+		created(false),
 		visible(false)
 {
 	LOG->debug("new ImageWindow()");
@@ -91,7 +92,7 @@ void ImageWindow::init(xn::ImageMetaData* imageData, int xRes, int yRes, int arg
 }
 
 void ImageWindow::setVisible(bool setToVisible) {
-	LOG->debug2("setVisible(setToVisible=%i)", setToVisible);
+	LOG->debug2("setVisible(setToVisible=%i) ... this->created=%i", setToVisible, this->created);
 
 	if(this->initialized == false) {
 		LOG->error("Not going to display window as it was not yet initialized!");
@@ -125,12 +126,12 @@ void ImageWindow::setVisible(bool setToVisible) {
 			this->created = true;
 			this->visible = true;
 
-			LOG->info("entering glutMainLoop() ... thread will never die!!!");
+			LOG->info("entering glutMainLoop() ... this thread will never die!");
 			glutMainLoop();
 			// THIS CODE IS NEVER REACHED!
 
 		} else {
-			fprintf(stderr, "FIXME!!! reshowing window does not work // glutGetWindow() =%i\n", glutGetWindow()); // FIXME!!! reshowing window does not work
+			fprintf(stderr, "FIXME!!! reshowing window does not work // glutGetWindow() is: %i\n", glutGetWindow()); // FIXME!!! reshowing window does not work
 			glutShowWindow();
 			glutIdleFunc(&ImageWindow::onGlutIdle);
 			this->visible = true;

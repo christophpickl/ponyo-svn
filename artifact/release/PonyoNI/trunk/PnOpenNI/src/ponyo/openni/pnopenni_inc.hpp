@@ -16,13 +16,6 @@ namespace pn {
 
 typedef unsigned int UserId;
 
-	// depthGeneratorEnabled
-	// userGeneratorEnabled --> if userGen enabled, depthGen HAS to be enabled as well (validate config!)
-//	bool imageGeneratorEnabled;
-	// map output mode
-	// mirror mode
-	// smoothing
-
 typedef void (*UserStateCallback) (UserId, UserState);
 
 typedef void (*JointPositionCallback) (UserId, unsigned int jointId, float x, float y, float z);

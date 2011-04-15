@@ -55,6 +55,9 @@ void mainInternal() {
 //	g_facade.startWithXml(config);
 
 	StartOniConfig config("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
+	config.setUserGeneratorEnabled(false);
+	config.setImageGeneratorEnabled(false);
+	config.setDepthGeneratorEnabled(false);
 	g_facade.startRecording(config);
 
 	printf("Hit ENTER to quit\n");
@@ -68,8 +71,8 @@ int main() {
 	LOG->info("PlaygroundSample main() START");
 	try {
 
-//		mainInternal();
-		mainJustStartContextAndDumpInfo();
+		mainInternal();
+//		mainJustStartContextAndDumpInfo();
 
 	} catch(Exception& e) {
 		fprintf(stderr, "Ponyo custom Exception was thrown!\n");

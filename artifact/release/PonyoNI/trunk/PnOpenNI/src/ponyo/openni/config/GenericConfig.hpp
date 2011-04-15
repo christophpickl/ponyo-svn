@@ -21,6 +21,12 @@ public:
 	bool isImageGeneratorEnabled() const;
 	void setImageGeneratorEnabled(bool);
 
+	bool isDepthGeneratorEnabled() const;
+	void setDepthGeneratorEnabled(bool);
+
+	/*TODO const?!*/ bool isUserGeneratorEnabled() const;
+	void setUserGeneratorEnabled(bool);
+
 	bool isMirrorModeEnabled() const;
 	void setMirrorModeEnabled(bool);
 
@@ -29,12 +35,24 @@ public:
 
 private:
 	static Log* LOG;
-	UserStateCallback userCallback;
-	JointPositionCallback jointCallback;
+
+	// TODO SomeLogLevel OpenNilogConfiguration
+	bool mirrorModeEnabled;
 
 	bool imageGeneratorEnabled;
-	bool mirrorModeEnabled;
-	// TODO SomeLogLevel OpenNilogConfiguration
+		// bool mirrorModeEnabled
+
+	bool depthGeneratorEnabled;
+		// bool mirrorModeEnabled
+
+	bool userGeneratorEnabled;// TODO if userGen enabled, depthGen HAS to be enabled as well (validate config!)
+		UserStateCallback userCallback;
+		JointPositionCallback jointCallback;
+		// TODO float smoothing;
+		// confidence?
+		// SomeSkeletoProfile toActivateOrDeactivateTrackingOfCertainJoints; ... using: skeletonCapability.SetJointActive(x)
+
+
 };
 }
 #endif // GENERICCONFIG_HPP_

@@ -24,7 +24,7 @@ void ImagaManager::unregister(){
 }
 
 /*static*/ void ImagaManager::onDataAvailable(xn::ProductionNode& node, void* cookie) {
-//	ImageGenerator* tthis = reinterpret_cast<ImageGenerator*>(cookie);
+//	ImageGenerator* tthis = static_cast<ImageGenerator*>(cookie);
 	printf("onImageData!!!\n");
 //	printf("onImageDataAvailable(..) >> tthis->imageGenerator.WaitAndUpdateData();\n");
 //    tthis->imageGenerator.WaitAndUpdateData();

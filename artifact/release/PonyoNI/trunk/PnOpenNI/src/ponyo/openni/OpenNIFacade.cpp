@@ -44,7 +44,7 @@ OpenNIFacade::~OpenNIFacade() {
 }
 
 /*private*/ void OpenNIFacade::internalSetup(GenericConfig& config) throw(OpenNiException) {
-	LOG->info("internalSetup(config)");
+	LOG->debug("internalSetup(config)");
 
 	CHECK_XN(this->context.SetGlobalMirror(config.isMirrorModeEnabled() ? TRUE : FALSE),
 		"Setting global mirror mode failed!");

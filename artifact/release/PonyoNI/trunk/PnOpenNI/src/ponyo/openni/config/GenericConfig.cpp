@@ -25,6 +25,12 @@ JointPositionCallback GenericConfig::getJointCallback() const { return this->joi
 bool GenericConfig::isImageGeneratorEnabled() const { return this->imageGeneratorEnabled; }
 void GenericConfig::setImageGeneratorEnabled(bool value) { this->imageGeneratorEnabled = value; }
 
+bool GenericConfig::isDepthGeneratorEnabled() const { return this->depthGeneratorEnabled; }
+void GenericConfig::setDepthGeneratorEnabled(bool value) { this->depthGeneratorEnabled = value; }
+
+bool GenericConfig::isUserGeneratorEnabled() const { return this->userGeneratorEnabled; }
+void GenericConfig::setUserGeneratorEnabled(bool value) { this->userGeneratorEnabled = value; }
+
 bool GenericConfig::isMirrorModeEnabled() const { return this->mirrorModeEnabled; }
 void GenericConfig::setMirrorModeEnabled(bool value) { this->mirrorModeEnabled = value; }
 

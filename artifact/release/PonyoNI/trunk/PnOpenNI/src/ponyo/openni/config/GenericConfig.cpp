@@ -21,7 +21,6 @@ GenericConfig::~GenericConfig() {
 }
 
 UserStateCallback GenericConfig::getUserCallback() const { return this->userCallback; }
-
 JointPositionCallback GenericConfig::getJointCallback() const { return this->jointCallback; }
 
 AsyncExceptionCallback GenericConfig::getAsyncExceptionCallback() const { return this->asyncExceptionCallback; }

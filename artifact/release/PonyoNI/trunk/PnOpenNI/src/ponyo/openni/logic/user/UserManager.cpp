@@ -8,7 +8,8 @@ Log* UserManager::LOG = NEW_LOG();
 UserManager::UserManager(UserStateCallback pUserCallback, JointPositionCallback pJointCallback) :
 		userCallback(pUserCallback),
 		jointCallback(pJointCallback),
-		skeletonCapability(NULL), callbacksRegistered(false) {
+		skeletonCapability(NULL),
+		callbacksRegistered(false) {
 	LOG->debug("new UserManager(..)");
 	// TODO write NULL CHECK macro
 	if(pUserCallback == NULL) { throw NullArgumentException("UserStateCallback", AT); }
@@ -60,12 +61,10 @@ UserManager::~UserManager() {
 			throw UserManagerException("A pose is required but not supported by your hardware!", AT);
 		}
 
-		// TODO this is mandatory?!
 		this->userGenerator.GetPoseDetectionCap().RegisterToPoseCallbacks(&UserManager::onPoseDetected, NULL/* TODO onPoseDetectedEnd*/, this, this->callbackPose);
-		
 		this->skeletonCapability.GetCalibrationPose(this->requiredPoseName);
-
-		std::cout << "Calibration pose name: '" << this->requiredPoseName << "'" << std::endl;
+		LOG->debug2("Required calibration pose name: '%s'", this->requiredPoseName);
+		
 	} else {
 		LOG->debug("No calibration pose required.");
 	}
@@ -147,8 +146,9 @@ UserManager::~UserManager() {
 	CHECK_XN(this->skeletonCapability.GetSkeletonJointPosition(userId, jointEnum, jointPosition), "Get joint position failed!");
 
 	if(jointPosition.fConfidence > PN_CONFIDENCE_LIMIT) {
+//		printf("invoking joint callback for joint %i\n", jointId);
 		this->jointCallback(userId, jointId, jointPosition.position.X, jointPosition.position.Y, jointPosition.position.Z);
-	}
+	} // TODO else tell client that this joint is currently not available! otherwise joint will stuck at most recent position!
 }
 
 /*private static*/ void XN_CALLBACK_TYPE UserManager::onUserNew(xn::UserGenerator& generator, XnUserID userId, void* cookie) {

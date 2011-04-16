@@ -18,7 +18,7 @@ extern "C" int pnStartByXmlConfig(
 		const char* configXmlPath,
 		UserStateCallback userStateCallback,
 		JointPositionCallback jointPositionCallback) {
-	LOG->info("pnStartByXmlConfig(configXmlPath)");
+	LOG->info("pnStartByXmlConfig(..)");
 	return __pnStart(configXmlPath, true, userStateCallback, jointPositionCallback);
 }
 
@@ -26,7 +26,7 @@ extern "C" int pnStartByOniRecording(
 		const char* recordingOniPath,
 		UserStateCallback userStateCallback,
 		JointPositionCallback jointPositionCallback) {
-	LOG->info("pnStartByOniRecording(recordingOniPath)");
+	LOG->info("pnStartByOniRecording(..)");
 	return __pnStart(recordingOniPath, false, userStateCallback, jointPositionCallback);
 }
 

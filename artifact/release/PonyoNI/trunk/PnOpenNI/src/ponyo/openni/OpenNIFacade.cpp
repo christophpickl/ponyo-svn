@@ -25,7 +25,6 @@ OpenNIFacade::~OpenNIFacade() {
 	}
 }
 
-
 /*public*/ void OpenNIFacade::startRecording(StartOniConfig& config) throw(OpenNiException) {
 	LOG->info2("startRecording(config=%s)", config.toCString());
 

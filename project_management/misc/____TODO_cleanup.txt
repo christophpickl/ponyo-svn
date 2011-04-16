@@ -1,3 +1,81 @@
+
+// http://jogamp.org/deployment/jogl-next/javadoc_public/com/jogamp/opengl/util/awt/TextRenderer.html
+// http://jogamp.org/deployment/jogl-next/javadoc_public/com/jogamp/opengl/util/texture/TextureIO.html
+// sample using jogl-1.1.1-rc8 (needs 32bit jvm)
+//
+// * jogl needs some jars (jogl, gluegen-rt) and some jnilibs (jogl, jogl_awt, jogl_cg, gluegen-rt)
+// * if UnsatisfiedLinkError "no jogl in java.library.path":
+//   ==> JVM ARG += "-Djava.library.path=path/to/jnilib/folder" ||
+//	                (NOO!! System.setProperty("java.library.path", "/var/folder/bla/foo/bar/") ||)
+//	                put jnilibs in system extension folder
+// * if UnsatisfiedLinkError "no matching architecture in universal wrapper":
+//   ==> JVM ARG += "-d32" // switch JVM to 32bit mode
+
+
+
+@init:
+	addLicense("PrimeSense", "0KOIk2JeIBYClPWVnMoRKn5cdY4=");
+
+	void ofxOpenNIContext::addLicense(std::string sVendor, std::string sKey) {
+	XnLicense license = {0};
+	XnStatus status = XN_STATUS_OK;
+	
+	status = xnOSStrNCopy(license.strVendor, sVendor.c_str(),sVendor.size(), sizeof(license.strVendor));
+	if(status != XN_STATUS_OK) {
+		printf("ofxOpenNIContext error creating license (vendor)\n");
+		return;
+	}
+	
+	status = xnOSStrNCopy(license.strKey, sKey.c_str(), sKey.size(), sizeof(license.strKey));
+	if(status != XN_STATUS_OK) {
+		printf("ofxOpenNIContext error creating license (key)\n");
+		return;
+	}	
+	
+	status = context.AddLicense(license);
+	SHOW_RC(status, "AddLicense");
+
+	xnPrintRegisteredLicenses();
+
+
+@logging:
+	void ofxOpenNIContext::enableLogging() {
+
+	XnStatus result = xnLogSetConsoleOutput(true);
+	SHOW_RC(result, "Set console output");
+			
+	result = xnLogSetSeverityFilter(XN_LOG_VERBOSE);
+	SHOW_RC(result, "Set log level");
+	
+	//xnLogInitSystem();
+	//xnLogSetConsoleOutput(bVerbose || bList);
+	//xnLogSetSeverityFilter(bVerbose ? XN_LOG_VERBOSE : XN_LOG_WARNING);
+	xnLogSetMaskState(XN_LOG_MASK_ALL, TRUE);
+
+}
+
+/** Returns the date and time at compile time. */ 
+#define XN_TIMESTAMP __DATE__ " " __TIME__
+
+
+#include <assert.h>
+/** Asserts an expression, only on Debug build. */
+#define XN_ASSERT(x)
+
+
+
+#if (XN_PLATFORM == XN_PLATFORM_WIN32)
+	#include "Win32/XnOSWin32.h"
+#elif (XN_PLATFORM == XN_PLATFORM_LINUX_X86 || XN_PLATFORM == XN_PLATFORM_LINUX_ARM || XN_PLATFORM == XN_PLATFORM_MACOSX)
+	#include "Linux-x86/XnOSLinux-x86.h"
+#else
+	#error OpenNI OS Abstraction Layer - Unsupported Platform!
+#endif
+
+
+
+
+
 * JPonyo klasse, speichert joints in GlobalData objekt
 * hudson verwenden ==> hauptsaechlich fuer reports schon uebersichtlich
 * header.in filter mechanismus

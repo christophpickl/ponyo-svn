@@ -1,15 +1,18 @@
 #include "PnJNA.hpp"
 
 foobarCallback currentCallback = 0;
+foobazCallback zurrentCallback = 0;
 
-extern "C" void addCallback(foobarCallback cb) {
+extern "C" void addCallbacks(foobarCallback cb, foobazCallback zb) {
 //	cb(999);
 	currentCallback = cb;
+	zurrentCallback = zb;
 }
 
 extern "C" int pnGetNumber() {
 	if(currentCallback != 0) {
 		currentCallback(6969);
+		zurrentCallback(42);
 		return 1111;
 	}
 	return 0;

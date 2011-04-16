@@ -33,7 +33,6 @@ void onSignalReceived(int signalCode) {
 }
 
 int main(void) {
-	printf("main() START\n");
 
 	signal(SIGINT, onSignalReceived); // hit CTRL-C keys in terminal (2)
 	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)

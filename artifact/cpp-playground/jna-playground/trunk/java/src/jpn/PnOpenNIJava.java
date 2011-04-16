@@ -24,7 +24,10 @@ public class PnOpenNIJava {
     	
     	// TODO use UncaughtExceptionHandler
     	interface FoobarCallback extends Callback {
-    		void invoke(int someNumber);
+    		void onFoobar(int someNumber);
+    	}
+    	interface FoobazCallback extends Callback {
+    		void onFoobazzz(int someNumber);
     	}
     	
     	PnOpenNICpp INSTANCE = (PnOpenNICpp) Native.loadLibrary("PnOpenNICpp", PnOpenNICpp.class);
@@ -32,7 +35,7 @@ public class PnOpenNIJava {
     	
     	int pnGetNumber(); // will invoke callback handler
     	
-    	/*FoobarCallback old handler*/ void addCallback(FoobarCallback fn);
+    	/*FoobarCallback old handler*/ void addCallbacks(FoobarCallback bar, FoobazCallback baz);
     	int errorSafeAdd2(IntByReference returnCode, int operand);
     	
 //    	public static class JOYCAPSW extends Structure {
@@ -52,14 +55,20 @@ public class PnOpenNIJava {
 				throwable.printStackTrace();
 			}
 		});
-    	
+
     	PnOpenNICpp.FoobarCallback callback = new PnOpenNICpp.FoobarCallback() {
-			@Override public void invoke(int someNumber) {
-				System.out.println("callback.invoke(someNumber=" + someNumber + ")");
+			@Override public void onFoobar(int someNumber) {
+				System.out.println("callback.onFoobar(someNumber=" + someNumber + ")");
 //				throw new RuntimeException("haha!");
 			}
     	};
-    	CPP.addCallback(callback);
+    	PnOpenNICpp.FoobazCallback zallback = new PnOpenNICpp.FoobazCallback() {
+			@Override public void onFoobazzz(int someNumber) {
+				System.out.println("zallback.onFoobazzz(someNumber=" + someNumber + ")");
+//				throw new RuntimeException("haha!");
+			}
+    	};
+    	CPP.addCallbacks(callback, zallback);
 		System.out.println("CPP says number=" + CPP.pnGetNumber());
 		
 		IntByReference returnCode = new IntByReference();

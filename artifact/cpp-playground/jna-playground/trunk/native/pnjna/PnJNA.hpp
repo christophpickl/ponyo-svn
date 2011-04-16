@@ -4,6 +4,7 @@
 
 
 typedef void(*foobarCallback)(int);
+typedef void(*foobazCallback)(int);
 
 extern "C" void addCallback(foobarCallback);
 

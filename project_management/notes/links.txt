@@ -1,17 +1,39 @@
 
 =================================================
-LINKs
+General
 =================================================
 
 - Technical description of Kinect calibration
 	http://www.ros.org/wiki/kinect_calibration/technical
-	
+
+OpenNI
+-------------------------------------------------
+- wiki with good faq
+	http://wiki.openni.org/mediawiki/index.php/Main_Page
+- API Doc
+	http://www.ros.org/doc/api/openni/html/index.html
+	http://www.ros.org/doc/api/nite/html/index.html
+
+
 My OpenNI forum entries
 -------------------------------------------------
 - is it safe to unregister a non-registered callback? 
 	http://groups.google.com/group/openni-dev/browse_thread/thread/cbe42c276727e56a
 - "Failed to set USB interface!" error message 
 	http://groups.google.com/group/openni-dev/browse_frm/thread/742ac6dc41abf613
+
+=================================================
+Java
+=================================================
+
+- aspectj help
+	http://www.eclipse.org/aspectj/doc/released/progguide/starting-aspectj.html
+	http://www.eclipse.org/aspectj/sample-code.html
+
+
+=================================================
+C++
+=================================================
 
 CMake
 -------------------------------------------------
@@ -27,14 +49,6 @@ CMake
 	http://snikt.net/index.php/2010/04/01/howto-use-cmake-with-cc-projects
 - Make documentation
 	http://www.gnu.org/software/make/manual/make.html
-
-OpenNI
--------------------------------------------------
-- wiki with good faq
-	http://wiki.openni.org/mediawiki/index.php/Main_Page
-- API Doc
-	http://www.ros.org/doc/api/openni/html/index.html
-	http://www.ros.org/doc/api/nite/html/index.html
 	
 C++
 -------------------------------------------------
@@ -85,6 +99,11 @@ C++ Lib Boost
 	http://programmingexamples.net/index.php?title=CPP/Boost/Threads
 	http://drdobbs.com/cpp/184401518
 
+
+=================================================
+Misc
+=================================================
+
 Matlab
 -------------------------------------------------
 - matlab tutorials
@@ -101,7 +120,7 @@ OpenGL
 - The Character Animation FAQ
 	http://www.flipcode.com/documents/charfaq.html
 	
-Misc
+somthing ...
 -------------------------------------------------
 - openFrameworks forum
 	http://www.openframeworks.cc/forum

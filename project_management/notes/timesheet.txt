@@ -2,6 +2,12 @@
 TIMESHEET CP
 =================================================
 
+              ~~124h~~
+15.04. - 23:00 -  4h - investing jna callback bug (without success)
+              ~~120h~~
+15.04. - 20:00 -  3h - moving josc midi to ponyo and some other jponyo stuff
+15.04. - 15:00 -  5h - added rgb image window
+15.04. - 13:00 -  2h - some c++ infrastructure rework; added config to enabled/disable image/depth/user generator
               ~~110h~~
 14.04. - 15:00 -  5h - introducing start configuration object, added configurable image stream generation
 13.04. - 23:00 -  2h - some general openni investigation (forum, api diagram, etc)

@@ -7,9 +7,9 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
+import net.sf.ponyo.jponyo.GlobalSpace;
 import net.sf.ponyo.jponyo.adminconsole.gl.GLUtil;
 import net.sf.ponyo.jponyo.adminconsole.gl.ObjectDrawer;
-import net.sf.ponyo.jponyo.global.GlobalSpace;
 
 class MainWindowGL implements GLEventListener {
 

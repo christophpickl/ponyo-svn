@@ -2,9 +2,9 @@ package net.sf.ponyo.jponyo.adminconsole;
 
 import javax.swing.SwingUtilities;
 
+import net.sf.ponyo.jponyo.GlobalSpace;
 import net.sf.ponyo.jponyo.adminconsole.view.MainWindow;
 import net.sf.ponyo.jponyo.adminconsole.view.MainWindowListener;
-import net.sf.ponyo.jponyo.global.GlobalSpace;
 
 public class App implements MainWindowListener {
 

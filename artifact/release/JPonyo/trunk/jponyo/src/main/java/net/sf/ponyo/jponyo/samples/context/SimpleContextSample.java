@@ -15,7 +15,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
 import net.sf.ponyo.jponyo.DevelopmentConstants;
-import net.sf.ponyo.jponyo.global.PonyoContext;
+import net.sf.ponyo.jponyo.PonyoContext;
 
 public class SimpleContextSample {
 	

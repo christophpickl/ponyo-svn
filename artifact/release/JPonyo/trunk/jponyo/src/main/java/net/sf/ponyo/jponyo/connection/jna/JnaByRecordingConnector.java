@@ -1,10 +1,11 @@
 package net.sf.ponyo.jponyo.connection.jna;
 
 
+
 /**
  * @since 0.1
  */
-public class JnaByRecordingConnector implements JnaConnector {
+public class JnaByRecordingConnector extends AbstractJnaConnector {
 	
 	private final String recordingOniPath;
 

@@ -35,14 +35,15 @@ int __pnStart(
 		bool isConfigFlag,
 		UserStateCallback userStateCallback,
 		JointPositionCallback jointPositionCallback) {
-	if(g_isRunning == true) { // multithreaded tried to invoke start multiple times!
+
+	if(g_isStartingUp == true) { // multithreaded tried to invoke start multiple times!
 		return 68;
 	}
-	g_isStartingUp = true;
-
 	if(g_isRunning == true) {
 		return 67;
 	}
+
+	g_isStartingUp = true;
 
 	int resultCode = -1;
 	try {
@@ -50,7 +51,7 @@ int __pnStart(
 
 			StartXmlConfig config(configOrOniPath, userStateCallback, jointPositionCallback);
 			config.setMirrorModeEnabled(true);
-			config.setImageGeneratorEnabled(true);
+			config.setImageGeneratorEnabled(true); // TODO should autodetect itself (may overrule is possible)
 			g_facade.startWithXml(config);
 
 		} else {
@@ -87,7 +88,7 @@ extern "C" void pnShutdown() {
 	}
 
 	// FIXME check if currently initializing, as client (awt dispatcher thread) could be async call
-	printf("shutting down; is running = %i\n", g_isRunning);
+	// LOG->debug2("shutting down; is running = %s\n", boolToString(g_isRunning));
 	if(g_isRunning == true) {
 		g_facade.shutdown();
 		g_isRunning = false;

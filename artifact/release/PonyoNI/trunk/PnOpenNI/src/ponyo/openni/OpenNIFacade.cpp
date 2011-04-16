@@ -124,9 +124,26 @@ OpenNIFacade::~OpenNIFacade() {
 //	LOG->debug("Starting depth generator ...");
 //	CHECK_XN(this->depthGenerator.StartGenerating(), "Could not start depth generator!");
 
-	this->updateThread.start(this->context, this, &OpenNIFacade::onUpdateThread);
+	AsyncExceptionCallback asyncExceptionCallback = config.getAsyncExceptionCallback();
+	if(asyncExceptionCallback == NULL) {
+		LOG->warn("Installing default async exception callback; you will not be able to handle those :(");
+		LOG->warn("Please register to this event via: config.setAsyncExceptionCallback(&myFunction);");
+		asyncExceptionCallback = &OpenNIFacade::defaultAsyncExceptionCallback;
+	}
+
+	this->updateThread.start(this->context, this, &OpenNIFacade::onUpdateThread, asyncExceptionCallback);
 
 	LOG->info("Starting up OpenNiFacade finished successfully.");
+}
+
+/*static*/ void OpenNIFacade::defaultAsyncExceptionCallback(const char* message, Exception& e) throw(Exception) {
+	LOG->fatal2("Background throw died: %s\n", message);
+	LOG->fatal2("Async exception message: %s\n", e.getMessage());
+
+	fprintf(stderr, "Uncaught async exception: %s!\n", e.getMessage());
+	e.printBacktrace();
+
+	throw e; // just kill it ;)
 }
 
 void OpenNIFacade::toggleMirror() throw (OpenNiException) {
@@ -149,8 +166,20 @@ bool OpenNIFacade::isWindowVisible() {
 }
 
 void OpenNIFacade::onUpdateThread() {
+
+	// FIXME complete rework: dont dispatch single events (joints, etc) but rather dispatch ONE BIG event containing all data => therefore max events (== cpp/java ping-pong) as fps defined!
 	if(this->depthGenerator != NULL) {
 		this->depthGenerator->GetMetaData(this->depthMetaData); // have to unnecessary read to get updates from user generator :-/
+
+//		TODO xn::UserPositionCapability userPositions = this->depthGenerator->GetUserPositionCap();
+//		XnUInt32 userCount = userPositions.GetSupportedUserPositionsCount(); =====> always returns 0 :(
+//		printf("GetSupportedUserPositionsCount = %i\n", userCount);
+//		XnBoundingBox3D position;
+//		for (int i = 0; i < userCount; ++i) {
+//			CHECK_XN(userPositions.GetUserPosition(i, position), "Getting user bounding box position failed!");
+//			printf("%i. position LeftBottomNear.Z ==> %f\n", i, position.LeftBottomNear.Z);
+//		}
+
 	}
 	if(this->userManager != NULL) {
 		this->userManager->update(); // read and broadcast new skeleton data

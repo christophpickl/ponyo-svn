@@ -24,6 +24,9 @@ UserStateCallback GenericConfig::getUserCallback() const { return this->userCall
 
 JointPositionCallback GenericConfig::getJointCallback() const { return this->jointCallback; }
 
+AsyncExceptionCallback GenericConfig::getAsyncExceptionCallback() const { return this->asyncExceptionCallback; }
+void GenericConfig::setAsyncExceptionCallback(AsyncExceptionCallback value) { this->asyncExceptionCallback = value; }
+
 bool GenericConfig::isImageGeneratorEnabled() const { return this->imageGeneratorEnabled; }
 void GenericConfig::setImageGeneratorEnabled(bool value) { this->imageGeneratorEnabled = value; }
 

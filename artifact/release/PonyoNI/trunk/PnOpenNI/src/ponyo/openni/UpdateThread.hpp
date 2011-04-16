@@ -22,14 +22,19 @@ public:
 		LOG->debug("~UpdateThread()");
 	}
 
-	void start(xn::Context& context, CallbackType* callbackInstance,  aFunction callbackMethod) {
+	void start(
+			xn::Context& context,
+			CallbackType* callbackInstance,
+			aFunction callbackMethod,
+			AsyncExceptionCallback exceptionCallback
+		) {
 		LOG->debug("start(..) ... spawning update thread");
 
 		this->callbackInstance = callbackInstance;
 		this->callbackMethod = callbackMethod;
 
 		LOG->info("Attention: If 'Bus error' occurs, try running as root ;)");
-		this->updateThread = boost::thread(&UpdateThread::onThreadRun, this, context);
+		this->updateThread = boost::thread(&UpdateThread::onThreadRun, this, context, exceptionCallback);
 	}
 
 	void stopAndJoin() {
@@ -48,18 +53,20 @@ private:
 	boost::thread updateThread;
 	bool threadShouldRun;
 
-	void onThreadRun(xn::Context& context) {
+	void onThreadRun(xn::Context& context, AsyncExceptionCallback exceptionCallback) {
 		LOG->info("onThreadRun(..) START");
 
-	//	try {
+		try {
 			while(this->threadShouldRun) {
 				context.WaitAnyUpdateAll();
 //				printf("update thread updated\n");
 				(this->callbackInstance->*this->callbackMethod)();
 			}
-	//	} catch(Exception& e) {
-	//		TODO this->broadcastThreadException(e);
-	//	}
+		} catch(Exception& e) {
+			LOG->error("Caught and redispatching update exception!");
+			fprintf(stderr, "Caught and redispatching update exception!\n");
+			exceptionCallback("Update thread died!", e);
+		}
 		LOG->info("onThreadRun() END");
 	}
 };

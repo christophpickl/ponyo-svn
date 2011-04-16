@@ -18,6 +18,9 @@ public:
 	UserStateCallback getUserCallback() const;
 	JointPositionCallback getJointCallback() const;
 
+	AsyncExceptionCallback getAsyncExceptionCallback() const;
+	void setAsyncExceptionCallback(AsyncExceptionCallback callback);
+
 	bool isImageGeneratorEnabled() const;
 	void setImageGeneratorEnabled(bool);
 
@@ -37,6 +40,7 @@ private:
 	static Log* LOG;
 
 	// TODO SomeLogLevel OpenNilogConfiguration
+	AsyncExceptionCallback asyncExceptionCallback;
 	bool mirrorModeEnabled;
 
 	// FIXME generator configuration is depending on A) content of XML configuration B) state of configuration when ONI was recorded

@@ -4,22 +4,22 @@
 
 namespace pn {
 
-typedef unsigned int UserState;
+typedef int UserState;
 
 /** When enters the scene. */
-const UserState USER_STATE_NEW                             = 100;
+const UserState USER_STATE_NEW                             = 0;
 
 /** ??? */
-const UserState USER_STATE_POSE_DETECTED                   = 200;
+//const UserState USER_STATE_POSE_DETECTED                   = x;
 
 /** Started standing in Psi, waiting. */
-const UserState USER_STATE_CALIBRATION_STARTED             = 300;
-
-/** Waiting in Psi success, start tracking. */
-const UserState USER_STATE_CALIBRATION_ENDED_SUCCESFULLY   = 410;
+const UserState USER_STATE_CALIBRATION_STARTED             = 1;
 
 /** Waiting in Psi fail, re-requesting calibraiton. */
-const UserState USER_STATE_CALIBRATION_ENDED_UNSUCCESFULLY = 420;
+const UserState USER_STATE_CALIBRATION_ENDED_UNSUCCESFULLY = 2;
+
+/** Waiting in Psi success, start tracking. */
+const UserState USER_STATE_CALIBRATION_ENDED_SUCCESFULLY   = 3; // TODO rename to IS_TRACKING
 
 // TODO add more user states
 // const UserState USER_STATE_TRACKING_STARTED == USER_STATE_CALIBRATION_ENDED_UNSUCCESFULLY = 500;
@@ -27,7 +27,7 @@ const UserState USER_STATE_CALIBRATION_ENDED_UNSUCCESFULLY = 420;
 // const UserState USER_STATE_LOST_PROBABLY_ENDED          = 920; // ... after user was invisible for a while, we received updated joints
 
 /** Timeout occured; user ID will be freed. */
-const UserState USER_STATE_LOST                            = 999;
+const UserState USER_STATE_LOST                            = 4;
 
 }
 

@@ -14,13 +14,13 @@
 
 namespace pn {
 
-typedef unsigned int UserId;
+typedef int UserId;
 
-typedef void (*UserStateCallback) (UserId, UserState);
+typedef void (*UserStateCallback) (UserId id, UserState state);
 
-typedef void (*JointPositionCallback) (UserId, unsigned int jointId, float x, float y, float z);
+typedef void (*JointPositionCallback) (UserId id, unsigned int jointId, float x, float y, float z);
 
-// TODO typedef void (*UpdateThreadThrewExceptionCallback) (int errorCode?? const char* exceptionMessage);
+typedef void (*AsyncExceptionCallback) (/*TODO int errorCode??*/ const char* message, Exception& exception);
 
 }
 

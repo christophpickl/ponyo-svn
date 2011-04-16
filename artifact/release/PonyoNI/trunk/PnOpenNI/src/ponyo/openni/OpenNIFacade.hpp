@@ -10,6 +10,7 @@
 
 namespace pn {
 
+// FIXME rename to PonyoNI / PonyoContext
 
 class OpenNIFacade {
 
@@ -45,6 +46,7 @@ private:
 
 	void internalSetup(GenericConfig& config) throw(OpenNiException);
 	void onUpdateThread();
+	static void defaultAsyncExceptionCallback(const char* message, Exception& e) throw(Exception);
 
 };
 }

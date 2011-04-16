@@ -257,8 +257,8 @@ void ImageWindow::setVisible(bool setToVisible) {
 	glutPostRedisplay();
 }
 
-/*static*/ void ImageWindow::onGlutVisibility(int state) {
-	LOG->debug2("onGlutVisibility(state=%i)", state);
+/*static*/ void ImageWindow::onGlutVisibility(int glutState) {
+	LOG->debug2("onGlutVisibility(glutState=%i)", glutState);
 }
 
 bool ImageWindow::isInitialized() const {

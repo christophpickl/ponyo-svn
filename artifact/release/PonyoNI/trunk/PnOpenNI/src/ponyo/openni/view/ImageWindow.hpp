@@ -54,7 +54,7 @@ private:
 	static void onGlutIdle();
 	static void onGlutReshape(int width, int height);
 	static void onGlutKeyboard(unsigned char key, int x, int y);
-	static void onGlutVisibility(int state);
+	static void onGlutVisibility(int glutState);
 
 };
 }

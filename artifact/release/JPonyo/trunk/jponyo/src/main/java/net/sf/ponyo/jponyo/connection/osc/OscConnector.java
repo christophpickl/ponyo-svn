@@ -47,7 +47,7 @@ public class OscConnector implements Connector<OscConnection> {
 	}
 
 	public UserManager createUserManager() {
-		return new RunningSessionAwareUserManager(callback);
+		return new RunningSessionAwareUserManager(this.callback);
 	}
 
 }

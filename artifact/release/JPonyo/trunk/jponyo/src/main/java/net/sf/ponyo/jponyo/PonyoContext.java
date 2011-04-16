@@ -89,7 +89,7 @@ public class PonyoContext implements ConnectionListener, UserManagerCallback {
 	
 	private int i = 0;
 	public void onJointMessage(int openniId, int jointId, float x, float y, float z) {
-		if(this.i++ == 100) {
+		if(this.i++ == 500) {
 			this.i = 0;
 			LOG.trace("joint for user with OpenNI id: " + openniId + ", joint: " + jointId + ", x: " + x);
 		}

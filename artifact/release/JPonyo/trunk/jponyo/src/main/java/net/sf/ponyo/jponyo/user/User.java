@@ -1,5 +1,8 @@
 package net.sf.ponyo.jponyo.user;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.sf.ponyo.jponyo.common.exception.InvalidArgumentException;
 import net.sf.ponyo.jponyo.entity.Skeleton;
 
@@ -7,7 +10,9 @@ import net.sf.ponyo.jponyo.entity.Skeleton;
  * @since 0.1
  */
 public class User {
-
+	
+	private static final Log LOG = LogFactory.getLog(User.class);
+	
 	private final int uniqueId;
 	private final int openniId;
 	private final int color;
@@ -40,6 +45,7 @@ public class User {
 	}
 	
 	public final void setState(UserState state) {
+		LOG.debug("setState(state="+state+")");
 		this.state = state;
 	}
 

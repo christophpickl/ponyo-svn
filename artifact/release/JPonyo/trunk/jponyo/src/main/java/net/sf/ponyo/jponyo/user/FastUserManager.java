@@ -19,8 +19,7 @@ public class FastUserManager implements UserManager {
 	
 	private static final int MAX_CONCURRENT_USERS = 50; // should be enough ;)
 
-	private final UserFactory userFactory = new UserFactory();
-	
+	private final UserFactory userFactory = new UserFactory(); // TODO inject dependency
 	
 	/** Internal data storage for users, optimized for OpenNI's ID generation algorithm (starting by 1, and reusing old IDs) .*/
 	private final ArrayList<User> usersByOpenniId = new ArrayList<User>(MAX_CONCURRENT_USERS);

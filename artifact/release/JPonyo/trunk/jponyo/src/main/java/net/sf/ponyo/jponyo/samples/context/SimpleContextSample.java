@@ -14,29 +14,31 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
-import net.sf.ponyo.jponyo.DevelopmentConstants;
 import net.sf.ponyo.jponyo.PonyoContext;
 
 public class SimpleContextSample {
 	
 	public static void main(String[] args) {
-		new SimpleContextSample().doit();
+		PonyoContext context = new PonyoContext();
+//		context.startOniRecording(DevelopmentConstants.ONI_PATH);
+		context.startOscReceiver();
+		
+		SimpleContextSample sample = new SimpleContextSample();
+		sample.doit(context);
 	}
 	
-	public void doit() {
+	public void doit(final PonyoContext context) {
 		final Window loadingWindow = this.showLoadingWindow();
 		
-		final PonyoContext ponyoContext = new PonyoContext();
-		ponyoContext.startOniRecording(DevelopmentConstants.ONI_PATH);
 //		GlobalSpace space = context.getGlobalSpace();
 //		Collection<User> users = space.getUsers();
 		
-//		ponyoContext.addUserChangeListener(UserChangeListener);
+//		context.addUserChangeListener(UserChangeListener);
 		
 		JButton btnQuit = new JButton("Quit");
 		final Window mainWindow = createWindow(btnQuit);
 		btnQuit.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent e) {
-			ponyoContext.shutdown();
+			context.shutdown();
 			mainWindow.setVisible(false);
 			mainWindow.dispose(); 
 		}});

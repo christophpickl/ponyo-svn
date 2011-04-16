@@ -2,10 +2,10 @@ package net.sf.ponyo.jponyo.entity;
 
 public class Skeleton {
 	
-	private final float[][] coordinatesByJoint = new float[2][3];
+	private final float[][] coordinatesByJoint = new float[24][3];
 	{
 		this.coordinatesByJoint[Joint.HEAD.getId()] = new float[] { 0.0f, 0.0f, 0.0f };
-		this.coordinatesByJoint[Joint.TORSO.getId()] = new float[] { 0.0f, 0.0f, 0.0f };
+		this.coordinatesByJoint[Joint.NECK.getId()] = new float[] { 0.0f, 0.0f, 0.0f };
 	}
 	
 	public void updateJoint(int jointId, float x, float y, float z) {
@@ -14,9 +14,8 @@ public class Skeleton {
 		this.coordinatesByJoint[jointId][2] = z;
 	}
 	
-	public float[] getCoordinates(int jointId) { // TODO by jointId!?!
-		assert(jointId > 0 && jointId < Joint.MAX_JOINT_ID);
-		return this.coordinatesByJoint[jointId];
+	public float[] getCoordinates(Joint joint) {
+		return this.coordinatesByJoint[joint.getId()];
 	}
 
 }

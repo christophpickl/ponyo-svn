@@ -4,8 +4,8 @@ import java.awt.Color;
 
 import javax.media.opengl.GL;
 
-import jponyo.GlobalData;
-import jponyo.jna.Skel;
+import net.sf.ponyo.jponyo.entity.Joint;
+import net.sf.ponyo.jponyo.entity.Skeleton;
 
 public final class GLUtil {
 	
@@ -23,11 +23,11 @@ public final class GLUtil {
 		gl.glColor3f(rf, gf, bf);
 	}
 	
-	public static void translate(GL gl, GlobalData data, Skel skel) {
-		final int skelId = skel.getId();
-		final float x = data.xByJoint[skelId] / 100.0f;
-		final float y = data.yByJoint[skelId] / 100.0f;
-		final float z = data.zByJoint[skelId] / 100.0f - 30;
+	public static void translate(GL gl, Skeleton skeleton, Joint joint) {
+		final float[] xyz = skeleton.getCoordinates(joint);
+		final float x = xyz[0] / 100.0f;
+		final float y = xyz[1] / 100.0f;
+		final float z = xyz[2] / 100.0f - 30;
 //		System.out.println("translated x/y/z: "+x+"/"+y+"/"+z);
 		gl.glTranslatef(x, y, z);
 	}

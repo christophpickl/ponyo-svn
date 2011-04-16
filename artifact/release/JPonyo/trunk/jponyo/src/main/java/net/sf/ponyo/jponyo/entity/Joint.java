@@ -3,7 +3,7 @@ package net.sf.ponyo.jponyo.entity;
 public enum Joint {
 
 	HEAD(0, "Head"),
-	TORSO(1, "Torso");
+	NECK(1, "Neck");
 	
 	public static final int MAX_JOINT_ID = 1;
 	

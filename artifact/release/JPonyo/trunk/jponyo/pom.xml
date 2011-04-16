@@ -26,7 +26,7 @@
     <!-- ******************************************************************* -->
     
     <properties>
-    	<jponyo_main_class>net.sf.ponyo.jponyo.App</jponyo_main_class>
+    	<jponyo_main_class>net.sf.ponyo.jponyo.samples.connection.WindowedConnectionSample</jponyo_main_class>
     </properties>
     
     

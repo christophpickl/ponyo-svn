@@ -75,8 +75,10 @@ public class PonyoContext implements ConnectionListener {
 	}
 	
 	private void internalStart(Connector<? extends Connection> connector) {
+		LOG.debug("internalStart(..) START");
 		this.connection = connector.openConnection();
 		this.connection.addListener(this);
+		LOG.debug("internalStart(..) END");
 	}
 	// MINOR programatically enable assertions: ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
 
@@ -100,10 +102,7 @@ public class PonyoContext implements ConnectionListener {
 	}
 	
 	public void onUserMessage(int openniId/*is 1-base indexed*/, int userStateId) {
-		LOG.debug("onUserMessage(userId=" + openniId + ", userStateId=" + userStateId + ")");
-		if(true) {
-			return;
-		}
+		LOG.debug("onUserMessage(openniId=" + openniId + ", userStateId=" + userStateId + ")");
 		
 		LOG.debug("  USER_STATE_ENUM_BY_ID[userStateId]=" + USER_STATE_ENUM_BY_ID[userStateId]);
 		

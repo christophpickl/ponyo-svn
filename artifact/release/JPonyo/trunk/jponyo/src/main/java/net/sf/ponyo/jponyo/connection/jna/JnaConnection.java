@@ -30,7 +30,7 @@ public class JnaConnection
 	}
 	
 	public JnaConnection openByOniRecording() {
-		this.jnaLib = new PnJNALibraryWrapper(this, this);
+		this.jnaLib = new PnJNALibraryWrapper( (OnUserStateChangedCallback) this, (OnJointPositionChangedCallback) this);
 		this.jnaLib.startByOniRecording(this.configOrRecordingPath);
 		return this;
 	}

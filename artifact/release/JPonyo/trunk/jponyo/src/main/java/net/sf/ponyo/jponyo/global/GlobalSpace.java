@@ -24,4 +24,6 @@ public class GlobalSpace {
 		return this.users;
 	}
 	
+	public boolean isFooTracking = false;
+	
 }

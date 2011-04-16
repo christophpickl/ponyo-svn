@@ -1,10 +1,10 @@
 package net.sf.ponyo.midirouter;
 
-import net.sf.josceleton.core.impl.async.DefaultAsyncFor;
-import net.sf.josceleton.prototype.midi.logic.bindable.BindingListener;
-import net.sf.josceleton.prototype.midi.logic.bindable.BindingProvider;
-import net.sf.josceleton.prototype.midi.logic.bindable.BindingSetter;
-import net.sf.josceleton.prototype.midi.logic.preference.PersistAsPreference;
+import net.sf.ponyo.jponyo.common.async.DefaultAsyncFor;
+import net.sf.ponyo.jponyo.common.binding.BindingListener;
+import net.sf.ponyo.jponyo.common.binding.BindingProvider;
+import net.sf.ponyo.jponyo.common.binding.BindingSetter;
+import net.sf.ponyo.jponyo.common.pref.PersistAsPreference;
 
 public class Model extends DefaultAsyncFor<String, BindingListener> implements BindingProvider {
 
@@ -58,7 +58,7 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 		}
 	}
 	
-	@Override public Iterable<BindingListener> getBindingListenersFor(final String attributeKey) {
+	public Iterable<BindingListener> getBindingListenersFor(final String attributeKey) {
 		// TODO das bekommt man auch noch raus => DefaultAsyncFor muss teilweise dafuer ein interface hergeben, wo dann aspekt getListenersFor direkt aufrufen kann!
 		return this.getListenersFor(attributeKey);
 	}

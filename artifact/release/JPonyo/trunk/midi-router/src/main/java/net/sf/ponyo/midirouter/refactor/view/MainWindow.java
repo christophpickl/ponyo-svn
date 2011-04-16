@@ -10,9 +10,9 @@ import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import net.sf.josceleton.prototype.console.util.GuiUtil;
-import net.sf.josceleton.prototype.midi.Model;
-import net.sf.josceleton.prototype.midi.util.OSXAdapter;
+import net.pulseproject.commons.util.GuiUtil;
+import net.sf.ponyo.jponyo.common.gui.OSXAdapter;
+import net.sf.ponyo.midirouter.Model;
 
 public class MainWindow extends JFrame {
 	

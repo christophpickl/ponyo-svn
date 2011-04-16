@@ -5,10 +5,11 @@ import java.util.Properties;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
-import net.sf.josceleton.prototype.midi.util.LogUtil;
-import net.sf.josceleton.prototype.midi.util.SomeUtil;
-import net.sf.josceleton.prototype.midi.view.MainWindow;
-import net.sf.josceleton.prototype.midi.view.ViewMediator;
+import net.sf.ponyo.jponyo.common.io.IoUtil;
+import net.sf.ponyo.midirouter.refactor.LogUtil;
+import net.sf.ponyo.midirouter.refactor.SomeUtil;
+import net.sf.ponyo.midirouter.refactor.view.MainWindow;
+import net.sf.ponyo.midirouter.refactor.view.ViewMediator;
 
 public class MidiPrototypeApp {
 
@@ -21,7 +22,7 @@ public class MidiPrototypeApp {
 	}
 	
 	public static void startUp() {
-		final Properties p = SomeUtil.loadPropertiesFromClassPath(MidiPrototypeApp.class.getClassLoader(), "app.properties");
+		final Properties p = IoUtil.loadPropertiesFromClassPath(MidiPrototypeApp.class.getClassLoader(), "app.properties");
 		final String applicationVersion = p.get("app_version").toString();
 		
 		SwingUtilities.invokeLater(new Runnable() {

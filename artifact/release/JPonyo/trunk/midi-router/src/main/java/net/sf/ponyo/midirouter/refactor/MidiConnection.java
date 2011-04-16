@@ -26,14 +26,14 @@ public class MidiConnection {
 		this.port = port;
 	}
 	
-	public void connect() throws InvalidInputException {
+	public void connect() {
 		LOG.info("Connecting on MIDI port [" + this.port + "] ...");
 		try {
 			final MidiDevice device = loadDevice();
 			this.midiReceiver = device.getReceiver();
 			LOG.info("connect() ... FINISHED");
-		} catch(InvalidInputException e) {
-			throw e;
+//		TODO } catch(InvalidInputException e) {
+//			throw e;
 		} catch(Exception e) {
 			throw new RuntimeException("midi connection error", e);
 		}
@@ -54,7 +54,7 @@ public class MidiConnection {
 		this.midiReceiver = null;
 	}
 	
-	private MidiDevice loadDevice() throws MidiUnavailableException, InvalidInputException {
+	private MidiDevice loadDevice() throws MidiUnavailableException {
 		LOG.info("Loading MIDI devices ...");
 		final Info[] infos = MidiSystem.getMidiDeviceInfo();
 		for (final Info info : infos) {
@@ -68,6 +68,7 @@ public class MidiConnection {
 				}
 			}
 		}
-		throw InvalidInputException.newInvalidMidiPort(this.port);
+//		TODO throw InvalidInputException.newInvalidMidiPort(this.port);
+		throw new RuntimeException("invalid port: " + this.port);
 	}
 }

@@ -15,9 +15,9 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
-import net.sf.josceleton.prototype.midi.Model;
-import net.sf.josceleton.prototype.midi.logic.bindable.BindingListener;
-import net.sf.josceleton.prototype.midi.util.LogUtil;
+import net.sf.ponyo.jponyo.common.binding.BindingListener;
+import net.sf.ponyo.midirouter.Model;
+import net.sf.ponyo.midirouter.refactor.LogUtil;
 
 public class MainPanel extends JPanel {
 
@@ -43,20 +43,21 @@ public class MainPanel extends JPanel {
 
 		this.logField.setFont(StyleConstants.FONT);
 
-		model.addListenerFor(Model.STATE, new BindingListener() { @Override public final void onValueChanged(Object newValue) {
-			final int state = ((Integer) newValue).intValue();
-			
-			btnReload.setEnabled(state == Model.STATE_PROCESSING);
-			btnViewConsole.setEnabled(state == Model.STATE_PROCESSING);
-			btnStartStop.setEnabled(state != Model.STATE_CONNECTING);
-			
-			if(state == Model.STATE_PROCESSING) {
-				btnStartStop.setText("Stop");
-				btnStartStop.setToolTipText("Click to close Connection");
-			} else if(state == Model.STATE_IDLE){
-				btnStartStop.setText("Start");
-				btnStartStop.setToolTipText("Click to open Connection");
-			}
+		model.addListenerFor(Model.STATE, new BindingListener() {
+			public final void onValueChanged(Object newValue) {
+				final int state = ((Integer) newValue).intValue();
+				
+				btnReload.setEnabled(state == Model.STATE_PROCESSING);
+				btnViewConsole.setEnabled(state == Model.STATE_PROCESSING);
+				btnStartStop.setEnabled(state != Model.STATE_CONNECTING);
+				
+				if(state == Model.STATE_PROCESSING) {
+					btnStartStop.setText("Stop");
+					btnStartStop.setToolTipText("Click to close Connection");
+				} else if(state == Model.STATE_IDLE){
+					btnStartStop.setText("Start");
+					btnStartStop.setToolTipText("Click to open Connection");
+				}
 		}});
 		
 		this.initComponents();

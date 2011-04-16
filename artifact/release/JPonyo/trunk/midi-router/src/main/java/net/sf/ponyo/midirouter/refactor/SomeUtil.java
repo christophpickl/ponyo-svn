@@ -1,17 +1,10 @@
 package net.sf.ponyo.midirouter.refactor;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Collection;
-import java.util.Properties;
 
 import javax.swing.JOptionPane;
 
 import net.pulseproject.commons.util.StringUtil;
-import net.sf.josceleton.core.api.entity.joint.Joint;
-import net.sf.josceleton.core.api.entity.joint.Joints;
-import net.sf.josceleton.prototype.console.util.CloseableUtil;
-import net.sf.josceleton.prototype.midi.logic.MidiMapping;
 
 public class SomeUtil {
 

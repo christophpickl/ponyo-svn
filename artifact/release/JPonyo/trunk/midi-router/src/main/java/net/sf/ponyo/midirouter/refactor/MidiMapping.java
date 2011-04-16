@@ -1,15 +1,6 @@
 package net.sf.ponyo.midirouter.refactor;
 
 import net.pulseproject.commons.midi.entity.ControllerMessage;
-import net.sf.josceleton.Josceleton;
-import net.sf.josceleton.core.api.entity.joint.Joint;
-import net.sf.josceleton.core.api.entity.joint.Skeleton;
-import net.sf.josceleton.core.api.entity.location.Coordinate;
-import net.sf.josceleton.core.api.entity.location.Direction;
-import net.sf.josceleton.core.api.entity.location.Range;
-import net.sf.josceleton.core.api.entity.location.RangeScaler;
-import net.sf.josceleton.prototype.midi.util.LogUtil;
-import net.sf.josceleton.prototype.midi.util.SomeUtil;
 
 public class MidiMapping {
 	

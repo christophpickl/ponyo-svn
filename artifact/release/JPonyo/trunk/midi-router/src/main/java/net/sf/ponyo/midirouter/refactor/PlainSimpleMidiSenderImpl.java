@@ -28,10 +28,10 @@ public class PlainSimpleMidiSenderImpl implements SimpleMidiSender {
 		this.noteChannel = noteChannel;
 	}
 
-	@Override public final void doSendMidiNote(final int noteValue) {
+	public final void doSendMidiNote(final int noteValue) {
 		new Thread(new Runnable() {
 			@SuppressWarnings("synthetic-access")
-			@Override public void run() {
+			public void run() {
 				PlainSimpleMidiSenderImpl.this.sendMidiNote(noteValue);
 		}}).start();
 	}

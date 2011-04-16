@@ -8,7 +8,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.text.JTextComponent;
 
-import net.sf.josceleton.prototype.midi.Model;
+import net.sf.ponyo.midirouter.Model;
 
 public class Foo extends KeyAdapter {
 	private final Model model;

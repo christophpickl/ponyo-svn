@@ -3,17 +3,11 @@ package net.sf.ponyo.midirouter.refactor;
 import java.util.LinkedList;
 import java.util.List;
 
-import net.sf.josceleton.Josceleton;
-import net.sf.josceleton.core.api.entity.joint.Joint;
-import net.sf.josceleton.core.api.entity.location.Direction;
-import net.sf.josceleton.core.api.entity.location.Range;
-import net.sf.josceleton.prototype.midi.util.SomeUtil;
-
 public class MappingsParser {
 	public static int fooAdd(int x, int y) {
 		return x + y;
 	}
-	public static MidiMapping[] parseMappings(String raw) throws InvalidInputException {
+	public static MidiMapping[] parseMappings(String raw) {
 		List<MidiMapping> mappings = new LinkedList<MidiMapping>();
 		
 		String[] lines = raw.split("\n");

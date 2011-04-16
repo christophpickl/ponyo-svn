@@ -5,21 +5,16 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-import net.sf.josceleton.prototype.console.ConsolePrototypeModule;
-import net.sf.josceleton.prototype.console.glue.ConsolePresenter;
-import net.sf.josceleton.prototype.console.glue.ConsolePresenterFactory;
-import net.sf.josceleton.prototype.console.view.ConsoleWindow;
-import net.sf.josceleton.prototype.midi.Model;
-import net.sf.josceleton.prototype.midi.logic.InvalidInputException;
-import net.sf.josceleton.prototype.midi.logic.MappingsParser;
-import net.sf.josceleton.prototype.midi.logic.MidiMapping;
-import net.sf.josceleton.prototype.midi.logic.PrototypeLogic;
-import net.sf.josceleton.prototype.midi.logic.preference.PreferencesPersister;
-import net.sf.josceleton.prototype.midi.util.LogUtil;
-import net.sf.josceleton.prototype.midi.util.SomeUtil;
+import net.sf.ponyo.jponyo.common.gui.HtmlWindow;
+import net.sf.ponyo.jponyo.common.pref.PreferencesPersister;
+import net.sf.ponyo.midirouter.Model;
+import net.sf.ponyo.midirouter.refactor.LogUtil;
+import net.sf.ponyo.midirouter.refactor.MappingsParser;
+import net.sf.ponyo.midirouter.refactor.MidiMapping;
+import net.sf.ponyo.midirouter.refactor.PrototypeLogic;
+import net.sf.ponyo.midirouter.refactor.SomeUtil;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
@@ -35,7 +30,7 @@ public class ViewMediator implements MainWindowListener {
 	
 	private final Model model;
 	
-	private HelpWindow helpWindow;
+	private HtmlWindow helpWindow;
 	private final String appVersion;
 	
 	public ViewMediator(String appVersion, final Model model) {

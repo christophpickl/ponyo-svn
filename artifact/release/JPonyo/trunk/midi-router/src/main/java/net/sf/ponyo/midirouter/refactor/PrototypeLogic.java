@@ -1,20 +1,10 @@
 package net.sf.ponyo.midirouter.refactor;
 
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.LinkedList;
 
 import net.pulseproject.commons.midi.entity.ControllerMessage;
-import net.sf.josceleton.Josceleton;
-import net.sf.josceleton.connection.api.Connection;
-import net.sf.josceleton.connection.api.service.motion.ContinuousMotionStream;
-import net.sf.josceleton.connection.api.service.motion.MotionStreamListener;
-import net.sf.josceleton.connection.api.service.user.UserServiceListener;
-import net.sf.josceleton.core.api.entity.joint.Joint;
-import net.sf.josceleton.core.api.entity.joint.Skeleton;
-import net.sf.josceleton.core.api.entity.location.Coordinate;
-import net.sf.josceleton.core.api.entity.user.User;
-import net.sf.josceleton.prototype.midi.util.LogUtil;
+import net.sf.ponyo.jponyo.connection.Connection;
+import net.sf.ponyo.jponyo.entity.User;
 
 public class PrototypeLogic implements MotionStreamListener, UserServiceListener {
 	
@@ -35,7 +25,7 @@ public class PrototypeLogic implements MotionStreamListener, UserServiceListener
 		this.mappings = mappings;
 	}
 	
-	public void open() throws InvalidInputException {
+	public void open() { // TODO throws InvalidInputException {
 		this.midiConnection.connect();
 		
 		this.joscConnection = Josceleton.openConnection();

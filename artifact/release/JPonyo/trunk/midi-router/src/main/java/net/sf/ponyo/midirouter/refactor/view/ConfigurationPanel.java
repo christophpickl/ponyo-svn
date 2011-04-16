@@ -15,7 +15,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-import net.sf.josceleton.prototype.midi.Model;
+import net.sf.ponyo.jponyo.common.gui.BoundTextFieldListener;
+import net.sf.ponyo.midirouter.Model;
 
 public class ConfigurationPanel extends JPanel {
 
@@ -61,7 +62,7 @@ public class ConfigurationPanel extends JPanel {
 		c.weightx = 0.0;
 		final JButton btnHelp = new JButton("Help");
 		btnHelp.addActionListener(new ActionListener() {
-			@Override public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e) {
 				listener.onToggleHelp();
 		}});
 		northPanel.add(btnHelp, c);

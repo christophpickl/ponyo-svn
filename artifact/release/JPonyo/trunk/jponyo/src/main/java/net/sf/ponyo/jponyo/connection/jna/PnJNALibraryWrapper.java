@@ -17,8 +17,8 @@ class PnJNALibraryWrapper {
 	JnaGate gate = new JnaGate();
 	try {
 		LOG.info("Starting JNA");
-//		gate.startWithXml("/ponyo/niconfig.xml");
-		gate.startRecording("/ponyo/oni.oni");
+//		gate.startWithXml(Constants.XML_PATH);
+//		gate.startRecording(Constants.ONI_PATH);
 	} finally {
 		LOG.info("Destroying JNA");
 		gate.destroy();

@@ -5,8 +5,8 @@ import net.sf.ponyo.jponyo.common.async.DefaultAsyncFor;
 
 public class BindingSample {
 	public static void main(String[] args) {
-		Model model = new Model();
-		model.addListenerFor(Model.FOO, new BindingListener() {
+		SampleModel model = new SampleModel();
+		model.addListenerFor(SampleModel.FOO, new BindingListener() {
 			public void onValueChanged(Object newValue) {
 				System.out.println("onValueChanged(newValue=" + newValue + ")");
 				// onValueChanged(newValue=init)
@@ -17,7 +17,7 @@ public class BindingSample {
 		model.setFoo("bar");
 	}
 	
-	public static class Model extends DefaultAsyncFor<String, BindingListener> implements BindingProvider {
+	private static class SampleModel extends DefaultAsyncFor<String, BindingListener> implements BindingProvider {
 		
 		public static final String FOO = "FOO";
 		private String foo = "init";

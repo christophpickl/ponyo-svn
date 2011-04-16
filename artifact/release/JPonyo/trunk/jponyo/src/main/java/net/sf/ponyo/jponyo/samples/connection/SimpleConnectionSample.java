@@ -1,8 +1,11 @@
 package net.sf.ponyo.jponyo.samples.connection;
 
+import net.sf.ponyo.jponyo.Constants;
 import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
 import net.sf.ponyo.jponyo.connection.Connector;
+import net.sf.ponyo.jponyo.connection.jna.JnaByConfigConnector;
+import net.sf.ponyo.jponyo.connection.jna.JnaByRecordingConnector;
 import net.sf.ponyo.jponyo.connection.osc.OscConnector;
 
 import org.apache.commons.logging.Log;
@@ -12,17 +15,19 @@ public class SimpleConnectionSample {
 	
 	private static final Log LOG = LogFactory.getLog(SimpleConnectionSample.class);
 	
-	public static final String CONFIG_PATH = "/ponyo/niconfig.xml";
-	public static final String ONI_PATH = "/ponyo/oni.oni";
-	
 	private static int i;
+	
+	// force imports
+	@SuppressWarnings("unused") private OscConnector c1;
+	@SuppressWarnings("unused") private JnaByRecordingConnector c2;
+	@SuppressWarnings("unused") private JnaByConfigConnector c3;
 	
 	public static void main(String[] args) throws Exception {
 		LOG.debug("main() START");
 
-		Connector connector = new OscConnector();
-//		Connector connector = new JnaByRecordingConnector(ONI_PATH);
-//		Connector connector = new JnaByConfigConnector(CONFIG_PATH);
+//		Connector<? extends Connection> connector = new OscConnector();
+		Connector<? extends Connection> connector = new JnaByRecordingConnector(Constants.ONI_PATH);
+//		Connector<? extends Connection> connector = new JnaByConfigConnector(Constants.XML_PATH);
 		
 		Connection connection = connector.openConnection();
 		connection.addListener(new ConnectionListener() {
@@ -36,7 +41,7 @@ public class SimpleConnectionSample {
 			}
 		});
 		System.out.println("Sleeping ...");
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		connection.close();
 		
 		LOG.debug("main() END");

@@ -15,10 +15,13 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
+import net.sf.ponyo.jponyo.Constants;
+import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
+import net.sf.ponyo.jponyo.connection.Connector;
 import net.sf.ponyo.jponyo.connection.jna.JnaByConfigConnector;
-import net.sf.ponyo.jponyo.connection.jna.JnaConnection;
-import net.sf.ponyo.jponyo.connection.jna.JnaConnector;
+import net.sf.ponyo.jponyo.connection.jna.JnaByRecordingConnector;
+import net.sf.ponyo.jponyo.connection.osc.OscConnector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,10 +29,13 @@ import org.apache.commons.logging.LogFactory;
 public class WindowedConnectionSample {
 
 	private static final Log LOG = LogFactory.getLog(WindowedConnectionSample.class);
-	public static final String CONFIG_PATH = "/ponyo/niconfig.xml";
-	public static final String ONI_PATH = "/ponyo/oni.oni";
 	
 	static int i = 0;
+
+	// force imports
+	@SuppressWarnings("unused") private OscConnector c1;
+	@SuppressWarnings("unused") private JnaByRecordingConnector c2;
+	@SuppressWarnings("unused") private JnaByConfigConnector c3;
 	
 	public static void main(String[] args) {
 		final JDialog dialogInit = new JDialog();
@@ -40,13 +46,15 @@ public class WindowedConnectionSample {
 		
 		final JTextArea txtOutput = new JTextArea();
 
-//		Connector connector = new OscConnector();
-//		Connector connector = new JnaByRecordingConnector(ONI_PATH);
-		JnaConnector connector = new JnaByConfigConnector(CONFIG_PATH);
+		@SuppressWarnings("unused") String oniPath = Constants.ONI_PATH;
+		
+//		Connector<? extends Connection> connector = new OscConnector();
+		Connector<? extends Connection> connector = new JnaByRecordingConnector(Constants.ONI_PATH);
+//		Connector<? extends Connection> connector = new JnaByConfigConnector(Constants.XML_PATH);
 		
 		System.out.println("Starting up PonyoNI ...");
 //		final Connection connection = connector.openConnection();
-		final JnaConnection connection = connector.openConnection();
+		final Connection connection = connector.openConnection();
 		System.out.println("Starting up PonyoNI ... DONE");
 		
 		connection.addListener(new ConnectionListener() {

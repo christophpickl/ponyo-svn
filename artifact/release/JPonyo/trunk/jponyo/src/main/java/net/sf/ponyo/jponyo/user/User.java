@@ -1,7 +1,7 @@
 package net.sf.ponyo.jponyo.user;
 
+import net.sf.ponyo.jponyo.common.exception.InvalidArgumentException;
 import net.sf.ponyo.jponyo.entity.Skeleton;
-import net.sf.ponyo.jponyo.exception.InvalidArgumentException;
 
 /**
  * @since 0.1

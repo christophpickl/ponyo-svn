@@ -8,10 +8,16 @@ import java.util.Properties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * @since 0.1
+ */
 public class IoUtil {
 	
 	private static final Log LOG = LogFactory.getLog(IoUtil.class);
-	
+
+	/**
+	 * @since 0.1
+	 */
 	public static Properties loadPropertiesFromClassPath(final ClassLoader loader, final String fileName) {
 		final Properties properties = new Properties();
 		InputStream inputStream = null;
@@ -29,6 +35,9 @@ public class IoUtil {
 		}
 	}
 
+	/**
+	 * @since 0.1
+	 */
 	public static boolean close(final Closeable closeable) {
         if (closeable == null) {
             return false;

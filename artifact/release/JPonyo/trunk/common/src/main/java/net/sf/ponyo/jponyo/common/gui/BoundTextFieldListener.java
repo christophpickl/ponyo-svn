@@ -4,6 +4,9 @@ import javax.swing.text.JTextComponent;
 
 import net.sf.ponyo.jponyo.common.binding.BindingListener;
 
+/**
+ * @since 0.1
+ */
 public class BoundTextFieldListener implements BindingListener {
 	private final JTextComponent text;
 	

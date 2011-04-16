@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.exception;
+package net.sf.ponyo.jponyo.common.exception;
 
 /**
  * Most commonly used to check for constructor arguments, but also for formal parameters of a regular method.

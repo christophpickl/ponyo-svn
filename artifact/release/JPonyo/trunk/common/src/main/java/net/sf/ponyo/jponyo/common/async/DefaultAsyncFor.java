@@ -11,7 +11,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * Can either be used as an super class (and extending from it) or by delegating to a private member instance.
  * 
- * @since 0.4
+ * @since 0.1
  */
 public class DefaultAsyncFor<K, L extends Listener> implements AsyncFor<K, L> {
 	

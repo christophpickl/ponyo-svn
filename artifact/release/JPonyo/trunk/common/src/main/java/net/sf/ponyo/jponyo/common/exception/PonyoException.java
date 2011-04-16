@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.exception;
+package net.sf.ponyo.jponyo.common.exception;
 
 /**
  * @since 0.1

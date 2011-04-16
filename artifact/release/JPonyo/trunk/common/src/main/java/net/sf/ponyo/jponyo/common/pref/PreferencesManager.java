@@ -3,6 +3,9 @@ package net.sf.ponyo.jponyo.common.pref;
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;
 
+/**
+ * @since 0.1
+ */
 class PreferencesManager {
 	
 	private final Preferences javaPreferences;

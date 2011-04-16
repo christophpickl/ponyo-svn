@@ -7,7 +7,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Can either be used as an super class (and extending from it) or by delegating to a private member instance. 
+ * Can either be used as an super class (and extending from it) or by delegating to a private member instance.
+ * 
+ * @since 0.1
  */
 public class DefaultAsync<L extends Listener> implements Async<L> {
 	

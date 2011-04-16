@@ -1,5 +1,8 @@
 package net.sf.ponyo.jponyo.common.os;
 
+/**
+ * @since 0.1
+ */
 public enum OperatingSystem {
 	WIN("Windows"),
 	MAC("Mac OS X"),

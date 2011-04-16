@@ -1,5 +1,8 @@
 package net.sf.ponyo.jponyo.common.gui;
 
+/**
+ * @since 0.1
+ */
 public class OSXAdapterSample {
 	
 	public static void main(String[] args) throws Exception {

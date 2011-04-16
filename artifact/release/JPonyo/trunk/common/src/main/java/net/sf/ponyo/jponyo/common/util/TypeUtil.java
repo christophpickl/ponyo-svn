@@ -5,6 +5,9 @@ import java.lang.reflect.Field;
 import java.util.Collection;
 import java.util.LinkedList;
 
+/**
+ * @since 0.1
+ */
 public class TypeUtil {
 	
 	public static void setField(final Object instance, final Field field, Object value) {

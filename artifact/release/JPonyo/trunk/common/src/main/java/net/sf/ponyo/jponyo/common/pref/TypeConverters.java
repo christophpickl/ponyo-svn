@@ -4,6 +4,9 @@ import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @since 0.1
+ */
 class TypeConverters {
 
 	private Map<Class<?>, TypeConverter> converters = new HashMap<Class<?>, TypeConverter>();

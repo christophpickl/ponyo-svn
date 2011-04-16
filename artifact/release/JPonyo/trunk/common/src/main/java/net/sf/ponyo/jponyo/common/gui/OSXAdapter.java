@@ -61,6 +61,9 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
+/**
+ * @since 0.1
+ */
 public class OSXAdapter implements InvocationHandler {
 
     private Object targetObject;

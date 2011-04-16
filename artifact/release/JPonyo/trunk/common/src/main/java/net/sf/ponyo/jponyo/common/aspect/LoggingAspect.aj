@@ -1,6 +1,9 @@
 package net.sf.ponyo.jponyo.common.aspect;
 
 
+/**
+ * @since 0.1
+ */
 public aspect LoggingAspect {
 	/*
 //	pointcut withinScope(Object someone): within(net.sf.josceleton.prototype.midi..*) && target(someone);

@@ -6,6 +6,9 @@ import java.util.Collection;
 import net.sf.ponyo.jponyo.common.pref.TypeConverters.TypeConverter;
 import net.sf.ponyo.jponyo.common.util.TypeUtil;
 
+/**
+ * @since 0.1
+ */
 public class PreferencesPersister {
 	
 	@SuppressWarnings("unused")

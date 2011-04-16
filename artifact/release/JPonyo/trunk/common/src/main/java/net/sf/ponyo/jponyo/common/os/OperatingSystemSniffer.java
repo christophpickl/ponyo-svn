@@ -3,6 +3,9 @@ package net.sf.ponyo.jponyo.common.os;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+/**
+ * @since 0.1
+ */
 public final class OperatingSystemSniffer {
 
     private static final Log LOG = LogFactory.getLog(OperatingSystemSniffer.class);

@@ -7,6 +7,9 @@ import javax.swing.JEditorPane;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
+/**
+ * @since 0.1
+ */
 public class HtmlWindow extends JDialog {
 
 	private static final long serialVersionUID = -3426364011636153562L;

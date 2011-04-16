@@ -1,6 +1,9 @@
 package net.sf.ponyo.jponyo;
 
-public class Constants {
+/**
+ * @since 0.1
+ */
+public class DevelopmentConstants {
 	
 	public static final String ONI_PATH = "/ponyo/oni.oni";
 	

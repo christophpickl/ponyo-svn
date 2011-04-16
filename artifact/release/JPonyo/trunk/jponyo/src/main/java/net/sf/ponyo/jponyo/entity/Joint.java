@@ -1,5 +1,8 @@
 package net.sf.ponyo.jponyo.entity;
 
+/**
+ * @since 0.1
+ */
 public enum Joint {
 
 	HEAD(0, "Head"),

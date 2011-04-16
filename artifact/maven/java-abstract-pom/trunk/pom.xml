@@ -37,6 +37,7 @@
     	
    		<!-- ************ DEPENDENCIES ************ -->
    		<version_aspectjrt>1.6.10</version_aspectjrt>
+   		<version_guice>3.0</version_guice>
    		<version_jna>3.0.9</version_jna>
    		<version_commons_logging>1.1.1</version_commons_logging>
    		<version_log4j>1.2.14</version_log4j>
@@ -113,7 +114,16 @@
 	        	<artifactId>commons-logging</artifactId>
 	        	<version>${version_commons_logging}</version>
         	</dependency>
-	        
+			<dependency>
+			    <groupId>com.google.inject</groupId>
+			    <artifactId>guice</artifactId>
+			    <version>${version_guice}</version>
+			</dependency>
+			<dependency>
+			    <groupId>com.google.inject.extensions</groupId>
+			    <artifactId>guice-assistedinject</artifactId>
+			    <version>${version_guice}</version>
+			</dependency>
 	        <dependency>
 	        	<groupId>log4j</groupId>
 	        	<artifactId>log4j</artifactId>
@@ -165,17 +175,6 @@
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <scope>test</scope>
-            <!-- exclude TestNG's provided guice, as we are using our own guice2 dependency-->
-            <exclusions>
-            	<exclusion>
-            		<groupId>com.google.inject</groupId>
-            		<artifactId>guice</artifactId>
-            	</exclusion>
-            	<exclusion>
-            		<groupId>aopallicance</groupId>
-            		<artifactId>aopallicance</artifactId>
-            	</exclusion>
-            </exclusions>
         </dependency>
 
 		<dependency>

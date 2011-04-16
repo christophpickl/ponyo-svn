@@ -1,6 +1,6 @@
 package net.sf.ponyo.jponyo.samples.connection;
 
-import net.sf.ponyo.jponyo.Constants;
+import net.sf.ponyo.jponyo.DevelopmentConstants;
 import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
 import net.sf.ponyo.jponyo.connection.Connector;
@@ -26,7 +26,7 @@ public class SimpleConnectionSample {
 		LOG.debug("main() START");
 
 //		Connector<? extends Connection> connector = new OscConnector();
-		Connector<? extends Connection> connector = new JnaByRecordingConnector(Constants.ONI_PATH);
+		Connector<? extends Connection> connector = new JnaByRecordingConnector(DevelopmentConstants.ONI_PATH);
 //		Connector<? extends Connection> connector = new JnaByConfigConnector(Constants.XML_PATH);
 		
 		Connection connection = connector.openConnection();

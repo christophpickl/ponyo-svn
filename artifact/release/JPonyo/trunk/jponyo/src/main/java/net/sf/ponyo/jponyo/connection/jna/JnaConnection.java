@@ -23,13 +23,13 @@ public class JnaConnection
 		this.configOrRecordingPath = configOrRecordingPath;
 	}
 	
-	public JnaConnection openByXmlConfig() {
+	JnaConnection openByXmlConfig() {
 		this.jnaLib = new PnJNALibraryWrapper(this, this);
 		this.jnaLib.startByXmlConfig(this.configOrRecordingPath);
 		return this;
 	}
 	
-	public JnaConnection openByOniRecording() {
+	JnaConnection openByOniRecording() {
 		this.jnaLib = new PnJNALibraryWrapper( (OnUserStateChangedCallback) this, (OnJointPositionChangedCallback) this);
 		this.jnaLib.startByOniRecording(this.configOrRecordingPath);
 		return this;

@@ -32,7 +32,6 @@ public class HtmlWindow extends JDialog {
 //		text.setText(initialText);
 //	    text.setEditable(false);
 			
-//		String url = "http://josceleton.sourceforge.net/static/midi-prototype-help.html?app_version=" + appVersion;
 		try {
 			JEditorPane text = new JEditorPane(url);
 			text.setEditable(false);

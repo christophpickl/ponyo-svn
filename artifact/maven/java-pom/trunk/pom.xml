@@ -30,11 +30,7 @@
     	
         <!-- V E R S I O N S   I N T E R N A L -->
    		<!-- *********************************************************** -->
-    	<version_josceleton_guice>2.3</version_josceleton_guice>
    		<version_ponyo-checkstyle-config>0.1-SNAPSHOT</version_ponyo-checkstyle-config>
-<!--	    <groupId>net.sf.josceleton.thirdparty.com.google.code.guice</groupId>-->
-<!--	    <artifactId>guice-dependencies</artifactId>-->
-<!--	    <version>2.x-SNAPSHOT</version> ... should be updated, if corporate-pom has changed; and changes are needed for guice dep; i dont think so ...-->
    		
         <!-- V E R S I O N S   E X T E R N A L -->
    		<!-- *********************************************************** -->
@@ -53,14 +49,7 @@
 	        
 	        <!-- P S E U D O   E X T E R N A L -->
     		<!-- *********************************************************** -->
-    		
-<!--			<dependency>-->
-<!--				<groupId>net.sf.josceleton.thirdparty.com.google.code.guice</groupId>-->
-<!--				<artifactId>guice-dependencies</artifactId>-->
-<!--				<version>${version_josceleton_guice}</version>-->
-<!--				<type>pom</type>-->
-<!--			</dependency>-->
-<!--			-->
+    		<!-- third party libs provided by jponyo as they are not available in other/official repos -->
 			
 	        <dependency>
 				<groupId>com.illposed</groupId>
@@ -92,10 +81,20 @@
 <!--			</exclusions>-->
 <!--		</dependency>-->
     
-    	<!-- enable aspectj for all projects -->
+    	<!-- enable aspectj for all projects, aop just rules ;) -->
 		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
+		</dependency>
+		
+		<!-- yes, all our projects are using google guice as a dependency injector ;) -->
+		<dependency>
+		    <groupId>com.google.inject</groupId>
+		    <artifactId>guice</artifactId>
+		</dependency>
+		<dependency>
+		    <groupId>com.google.inject.extensions</groupId>
+		    <artifactId>guice-assistedinject</artifactId>
 		</dependency>
 		
     </dependencies>

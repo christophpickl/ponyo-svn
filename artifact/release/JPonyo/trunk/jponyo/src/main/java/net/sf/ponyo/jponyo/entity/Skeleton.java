@@ -1,5 +1,8 @@
 package net.sf.ponyo.jponyo.entity;
 
+/**
+ * @since 0.1
+ */
 public class Skeleton {
 	
 	private final float[][] coordinatesByJoint = new float[24][3];

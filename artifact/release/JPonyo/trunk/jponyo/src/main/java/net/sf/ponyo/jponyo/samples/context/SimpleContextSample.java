@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
-import net.sf.ponyo.jponyo.Constants;
+import net.sf.ponyo.jponyo.DevelopmentConstants;
 import net.sf.ponyo.jponyo.global.PonyoContext;
 
 public class SimpleContextSample {
@@ -27,7 +27,7 @@ public class SimpleContextSample {
 		final Window loadingWindow = this.showLoadingWindow();
 		
 		final PonyoContext ponyoContext = new PonyoContext();
-		ponyoContext.startOniRecording(Constants.ONI_PATH);
+		ponyoContext.startOniRecording(DevelopmentConstants.ONI_PATH);
 //		GlobalSpace space = context.getGlobalSpace();
 //		Collection<User> users = space.getUsers();
 		

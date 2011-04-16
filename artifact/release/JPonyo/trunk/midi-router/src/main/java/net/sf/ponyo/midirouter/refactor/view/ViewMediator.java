@@ -1,11 +1,8 @@
 package net.sf.ponyo.midirouter.refactor.view;
 
-import java.awt.Toolkit;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
-
-import javax.swing.JOptionPane;
 
 import net.sf.ponyo.jponyo.common.gui.HtmlWindow;
 import net.sf.ponyo.jponyo.common.pref.PreferencesPersister;
@@ -16,13 +13,13 @@ import net.sf.ponyo.midirouter.refactor.MidiMapping;
 import net.sf.ponyo.midirouter.refactor.PrototypeLogic;
 import net.sf.ponyo.midirouter.refactor.SomeUtil;
 
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
 import com.google.inject.Injector;
 
 public class ViewMediator implements MainWindowListener {
 	
 	private final static String MODEL_PREF_ID = "MyMainWindow";
+
+//	private ConsoleWindow console;
 	
 	private PrototypeLogic recentLogic;
 	
@@ -32,6 +29,9 @@ public class ViewMediator implements MainWindowListener {
 	
 	private HtmlWindow helpWindow;
 	private final String appVersion;
+	
+	private Injector consoleInjector;
+//	private final ConsolePresenterFactory consolePresenterFactory;
 	
 	public ViewMediator(String appVersion, final Model model) {
 		this.appVersion = appVersion;
@@ -55,12 +55,13 @@ public class ViewMediator implements MainWindowListener {
 		}
 		this.model.setMidiMappings(midiMappings);
 
-		this.consoleInjector = Guice.createInjector(new AbstractModule() {
-			@Override protected void configure() {
-				install(new ConsolePrototypeModule());
-			}
-		});
-		this.consolePresenterFactory = consoleInjector.getInstance(ConsolePresenterFactory.class);
+		// FIXME
+//		this.consoleInjector = Guice.createInjector(new AbstractModule() {
+//			@Override protected void configure() {
+//				install(new ConsolePrototypeModule());
+//			}
+//		});
+//		this.consolePresenterFactory = consoleInjector.getInstance(ConsolePresenterFactory.class);
 	}
 	
 	@SuppressWarnings("synthetic-access")
@@ -92,7 +93,6 @@ public class ViewMediator implements MainWindowListener {
 			}
 		}).start();
 	}
-	@Override
 	public void onReloadMidiMappings() {
 		LogUtil.log("Reloading MIDI Mappings configuration ...");
 		Collection<MidiMapping> mappings = tryToConvert();
@@ -105,14 +105,14 @@ public class ViewMediator implements MainWindowListener {
 	private Collection<MidiMapping> tryToConvert() {
 		final String rawMappings = this.model.getMidiMappings();
 		final MidiMapping[] mappingsArray;
-		try {
+//		try {
 			mappingsArray = MappingsParser.parseMappings(rawMappings);
-		} catch (InvalidInputException e) {
-			this.model.setState(Model.STATE_IDLE);
-			JOptionPane.showMessageDialog(null, e.getMessage(), "Configuration Error", JOptionPane.WARNING_MESSAGE);
-//			LogUtil.log("WARNING: Invalid input: " + e.getMessage());
-			return null;
-		}
+//		} catch (InvalidInputException e) {
+//			this.model.setState(Model.STATE_IDLE);
+//			JOptionPane.showMessageDialog(null, e.getMessage(), "Configuration Error", JOptionPane.WARNING_MESSAGE);
+////			LogUtil.log("WARNING: Invalid input: " + e.getMessage());
+//			return null;
+//		}
 		
 		Collection<MidiMapping> mappings = new LinkedList<MidiMapping>(Arrays.asList(mappingsArray));
 		LogUtil.log("Successfully parsed " + mappings.size()+ " MIDI mapping(s):");
@@ -125,7 +125,6 @@ public class ViewMediator implements MainWindowListener {
 		
 		return mappings;
 	}
-	@Override
 	public void onToggleStartStop() {
 		int state = this.model.getState();
 		if(state == Model.STATE_PROCESSING) {
@@ -139,10 +138,10 @@ public class ViewMediator implements MainWindowListener {
 	private void doStop() {
 		this.model.setState(Model.STATE_IDLE);
 		try {
-			if(this.console != null) {
-				this.console.dispose();
-				this.console = null;
-			}
+//			if(this.console != null) {
+//				this.console.dispose();
+//				this.console = null;
+//			}
 			if(this.recentLogic != null) {
 				this.recentLogic.close();
 				this.recentLogic = null;
@@ -162,32 +161,27 @@ public class ViewMediator implements MainWindowListener {
 		}
 	}
 	
-	private final Injector consoleInjector;
-	private final ConsolePresenterFactory consolePresenterFactory;
-	private ConsoleWindow console;
-	@Override
 	public void onToggleConsole() {
-		if(this.recentLogic == null) {
-			Toolkit.getDefaultToolkit().beep();
-			return;
-		}
-		
-		if(console == null) {
-			this.console = consoleInjector.getInstance(ConsoleWindow.class);
-			if(this.recentLogic.getJoscConnection() == null) {
-				System.err.println("waui");
-			}
-			final ConsolePresenter consolePresenter = this.consolePresenterFactory.create(console, this.recentLogic.getJoscConnection());
-			consolePresenter.init();
-		}
-		
-		console.setVisible(!console.isVisible());
+//		if(this.recentLogic == null) {
+//			Toolkit.getDefaultToolkit().beep();
+//			return;
+//		}
+//		
+//		if(console == null) {
+//			this.console = consoleInjector.getInstance(ConsoleWindow.class);
+//			if(this.recentLogic.getJoscConnection() == null) {
+//				System.err.println("waui");
+//			}
+//			final ConsolePresenter consolePresenter = this.consolePresenterFactory.create(console, this.recentLogic.getJoscConnection());
+//			consolePresenter.init();
+//		}
+//		
+//		console.setVisible(!console.isVisible());
 	}
 	
-	@Override
 	public void onToggleHelp() {
 		if(this.helpWindow == null) {
-			this.helpWindow = new HelpWindow(this.appVersion);
+			this.helpWindow = new HtmlWindow("Some Window Title", "http://josceleton.sourceforge.net/static/midi-prototype-help.html?app_version=" + this.appVersion);
 			this.helpWindow.setLocation(50, 50); // MINOR set realtive to main window
 		}
 		this.helpWindow.setVisible(!this.helpWindow.isVisible());

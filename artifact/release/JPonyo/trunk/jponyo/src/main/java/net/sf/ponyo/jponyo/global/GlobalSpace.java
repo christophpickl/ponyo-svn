@@ -4,8 +4,11 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import net.sf.ponyo.jponyo.entity.User;
+import net.sf.ponyo.jponyo.user.User;
 
+/**
+ * @since 0.1
+ */
 public class GlobalSpace {
 	
 	private final Set<User> users = new HashSet<User>();

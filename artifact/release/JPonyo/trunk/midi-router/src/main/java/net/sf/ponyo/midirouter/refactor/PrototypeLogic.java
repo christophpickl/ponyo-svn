@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import net.pulseproject.commons.midi.entity.ControllerMessage;
 import net.sf.ponyo.jponyo.connection.Connection;
-import net.sf.ponyo.jponyo.entity.User;
+import net.sf.ponyo.jponyo.user.User;
 
 public class PrototypeLogic implements MotionStreamListener, UserServiceListener {
 	

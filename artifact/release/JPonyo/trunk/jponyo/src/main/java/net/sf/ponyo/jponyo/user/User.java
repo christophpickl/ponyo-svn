@@ -1,7 +1,11 @@
-package net.sf.ponyo.jponyo.entity;
+package net.sf.ponyo.jponyo.user;
 
+import net.sf.ponyo.jponyo.entity.Skeleton;
 import net.sf.ponyo.jponyo.exception.InvalidArgumentException;
 
+/**
+ * @since 0.1
+ */
 public class User {
 
 	private final int uniqueId;

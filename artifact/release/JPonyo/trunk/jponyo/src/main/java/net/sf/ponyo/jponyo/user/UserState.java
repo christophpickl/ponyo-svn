@@ -1,5 +1,8 @@
-package net.sf.ponyo.jponyo.entity;
+package net.sf.ponyo.jponyo.user;
 
+/**
+ * @since 0.1
+ */
 public enum UserState {
 	
 	NEW,
@@ -8,5 +11,5 @@ public enum UserState {
 	TRACKING,
 	// TODO PRE_LOST && (PRE_LOST_ABORTED == TRACKING)... shorter timeout
 	LOST;
-
+	
 }

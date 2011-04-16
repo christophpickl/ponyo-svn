@@ -8,19 +8,6 @@ import jponyo.jna.PonyoNI;
 import jponyo.jna.PonyoNIListener;
 import jponyo.jna.UserStateConstant;
 
-// http://jogamp.org/deployment/jogl-next/javadoc_public/com/jogamp/opengl/util/awt/TextRenderer.html
-// http://jogamp.org/deployment/jogl-next/javadoc_public/com/jogamp/opengl/util/texture/TextureIO.html
-
-
-// sample using jogl-1.1.1-rc8 (needs 32bit jvm)
-//
-// * jogl needs some jars (jogl, gluegen-rt) and some jnilibs (jogl, jogl_awt, jogl_cg, gluegen-rt)
-// * if UnsatisfiedLinkError "no jogl in java.library.path":
-//   ==> JVM ARG += "-Djava.library.path=path/to/jnilib/folder" ||
-//	                (NOO!! System.setProperty("java.library.path", "/var/folder/bla/foo/bar/") ||)
-//	                put jnilibs in system extension folder
-// * if UnsatisfiedLinkError "no matching architecture in universal wrapper":
-//   ==> JVM ARG += "-d32" // switch JVM to 32bit mode
 @SuppressWarnings("synthetic-access")
 public class App implements PonyoNIListener, MainWindowListener {
 	

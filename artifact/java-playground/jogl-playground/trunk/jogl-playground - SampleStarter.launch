@@ -8,5 +8,5 @@
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="net.sf.ponyo.playground.jogl.sample.SampleStarter"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="jogl-playground"/>
-<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Djava.library.path=lib_native"/>
+<stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Djava.library.path=jogl_libs"/>
 </launchConfiguration>

@@ -42,6 +42,8 @@ public class MainWindow extends JFrame {
 	    this.addWindowListener(new WindowAdapter() {
 	        @Override public void windowClosing(WindowEvent e) {
 	        	System.out.println("windowClosing()");
+	        	
+	        	// TODO why do we start another thread for that?!
 	        	new Thread(new Runnable() {
 					public void run() {
 	        			listener.onQuit();

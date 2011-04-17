@@ -25,9 +25,10 @@ public enum Joint {
 	RIGHT_FOOT(23, "Right Foot", "r_foot")
 	;
 	
-	public static final int MAX_JOINT_ID = 23;
+	public static final int MAX_JOINT_ID_PLUS_ONE = RIGHT_FOOT.id + 1; // FIXME ! use proper sequence; ignore the fact that there are other (non-kinect-support) joints!
+	
 	private static final Map<String, Joint> JOINT_ENUM_BY_STRING_ID = new HashMap<String, Joint>();
-	private static final Joint[] JOINT_ENUM_BY_ID = new Joint[MAX_JOINT_ID + 1];
+	private static final Joint[] JOINT_ENUM_BY_ID = new Joint[MAX_JOINT_ID_PLUS_ONE];
 	static {
 		for(Joint joint : Joint.values()) {
 			JOINT_ENUM_BY_ID[joint.getId()] = joint;

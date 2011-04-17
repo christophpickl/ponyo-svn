@@ -20,7 +20,7 @@ public class User {
 	private final Skeleton skeleton = new Skeleton();
 	private UserState state = UserState.NEW;
 	
-	public User(final int uniqueId, final int openniId, final int color) {
+	public User(int uniqueId, int openniId, int color) {
 		if(uniqueId < 0) {
 			throw InvalidArgumentException.newInstance("uniqueId", Integer.valueOf(uniqueId), "< 0");
 		}
@@ -61,7 +61,7 @@ public class User {
 		return this.color;
 	}
 
-	@Override public final boolean equals(final Object other) {
+	@Override public boolean equals(final Object other) {
 		if(this == other) { return true; }
 		if((other instanceof User) == false) { return false; }
 		final User that = (User) other;
@@ -71,16 +71,12 @@ public class User {
 			this.getColor() == that.getColor();
 	}
 	
-	@Override public final int hashCode() {
+	@Override public int hashCode() {
 		return Integer.valueOf(this.uniqueId).hashCode();
 	}
 	
-	@Override public final String toString() {
-		return "User[" +
-				"uniqueId=" + this.uniqueId + ", " +
-				"getOpenniId=" + this.openniId + ", " +
-				"color=" + this.color +
-				"]";
+	@Override public String toString() {
+		return "User[uniqueId=" + this.uniqueId + ", openniId=" + this.openniId + ", color=" + this.color + "]";
 	}
 	
 }

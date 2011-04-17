@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import net.sf.ponyo.jponyo.GlobalSpace;
+import net.sf.ponyo.jponyo.core.GlobalSpace;
 
 import com.sun.opengl.util.Animator;
 

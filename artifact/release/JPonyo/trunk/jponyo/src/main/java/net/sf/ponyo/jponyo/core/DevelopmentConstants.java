@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo;
+package net.sf.ponyo.jponyo.core;
 
 /**
  * @since 0.1

@@ -1,12 +1,12 @@
 package net.sf.ponyo.jponyo.samples.connection;
 
-import net.sf.ponyo.jponyo.DevelopmentConstants;
 import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
 import net.sf.ponyo.jponyo.connection.Connector;
 import net.sf.ponyo.jponyo.connection.jna.JnaByConfigConnector;
 import net.sf.ponyo.jponyo.connection.jna.JnaByRecordingConnector;
 import net.sf.ponyo.jponyo.connection.osc.OscConnector;
+import net.sf.ponyo.jponyo.core.DevelopmentConstants;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

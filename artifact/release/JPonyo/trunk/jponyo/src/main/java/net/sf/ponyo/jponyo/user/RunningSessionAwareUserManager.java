@@ -27,7 +27,7 @@ public class RunningSessionAwareUserManager implements UserManager {
 		this.callback = callback;
 	}
 
-	public User lookupUser(int openniId, int userStateId) {
+	public User lookupForUserMessage(int openniId, int userStateId) {
 		LOG.info("lookupUser(openniId="+openniId+", userStateId="+userStateId+")");
 		UserState newState = UserStateConstants.MAP_ID_TO_ENUM[userStateId];
 		
@@ -66,7 +66,7 @@ public class RunningSessionAwareUserManager implements UserManager {
 		return result;
 	}
 	
-	public User getUser(int openniId) {
+	public User lookupForJointMessage(int openniId) {
 		User storedUser = this.userByOpenniId.get(Integer.valueOf(openniId));
 		if(storedUser != null) {
 			return storedUser;

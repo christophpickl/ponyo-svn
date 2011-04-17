@@ -15,13 +15,13 @@ import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
-import net.sf.ponyo.jponyo.DevelopmentConstants;
 import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
 import net.sf.ponyo.jponyo.connection.Connector;
 import net.sf.ponyo.jponyo.connection.jna.JnaByConfigConnector;
 import net.sf.ponyo.jponyo.connection.jna.JnaByRecordingConnector;
 import net.sf.ponyo.jponyo.connection.osc.OscConnector;
+import net.sf.ponyo.jponyo.core.DevelopmentConstants;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

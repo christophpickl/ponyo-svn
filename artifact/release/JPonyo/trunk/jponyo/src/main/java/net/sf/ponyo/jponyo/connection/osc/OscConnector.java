@@ -14,6 +14,8 @@ import com.illposed.osc.OSCPortIn;
 
 public class OscConnector implements Connector<OscConnection> {
 	
+	private static final String OSC_ADDRESS_USER_STATE = "/user_state";
+	private static final String OSC_ADDRESS_JOINT_DATA = "/joint_data";
 //	TODO private final int port;
 	
 	private final UserManagerCallback callback;
@@ -31,12 +33,12 @@ public class OscConnector implements Connector<OscConnection> {
 		}
 		
 		final OscConnection connection = new OscConnection(port);
-		port.addListener("/user_state", new OSCListener() {
+		port.addListener(OSC_ADDRESS_USER_STATE, new OSCListener() {
 			public void acceptMessage(Date timestamp, OSCMessage oscMessage) {
 				connection.onOscUserMessage(oscMessage);
 			}
 		});
-		port.addListener("/joint_data", new OSCListener() {
+		port.addListener(OSC_ADDRESS_JOINT_DATA, new OSCListener() {
 			public void acceptMessage(Date timestamp, OSCMessage oscMessage) {
 				connection.onOscJointMessage(oscMessage);
 			}

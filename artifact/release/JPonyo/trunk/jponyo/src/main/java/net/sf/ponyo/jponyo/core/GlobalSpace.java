@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo;
+package net.sf.ponyo.jponyo.core;
 
 import java.util.Collection;
 import java.util.HashSet;

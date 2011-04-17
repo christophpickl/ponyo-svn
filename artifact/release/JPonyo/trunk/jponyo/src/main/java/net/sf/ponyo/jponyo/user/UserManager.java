@@ -14,7 +14,7 @@ public interface UserManager {
 	 * @see ConnectionListener#onUserMessage(int, int)
 	 * @since 0.1
 	 */
-	User lookupUser(int openniId/*is 1-base indexed*/, int userStateId);
+	User lookupForUserMessage(int openniId/*is 1-base indexed*/, int userStateId);
 
 	/**
 	 * Will be invoked on every received joint data, as we need to get the {@link User} instance by given ID.
@@ -26,6 +26,6 @@ public interface UserManager {
 	 * @see ConnectionListener#onJointMessage(int, int, float, float, float)
 	 * @since 0.1
 	 */
-	User getUser(int openniId);
+	User lookupForJointMessage(int openniId);
 
 }

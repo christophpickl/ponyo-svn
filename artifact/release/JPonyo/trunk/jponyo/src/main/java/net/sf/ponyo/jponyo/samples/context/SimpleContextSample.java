@@ -14,20 +14,19 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
-import net.sf.ponyo.jponyo.PonyoContext;
+import net.sf.ponyo.jponyo.core.Context;
+import net.sf.ponyo.jponyo.core.ContextStarter;
 
 public class SimpleContextSample {
 	
 	public static void main(String[] args) {
-		PonyoContext context = new PonyoContext();
-//		context.startOniRecording(DevelopmentConstants.ONI_PATH);
-		context.startOscReceiver();
-		
+		Context context = new ContextStarter().startOscReceiver();
+
 		SimpleContextSample sample = new SimpleContextSample();
 		sample.doit(context);
 	}
 	
-	public void doit(final PonyoContext context) {
+	public void doit(final Context context) {
 		final Window loadingWindow = this.showLoadingWindow();
 		
 //		GlobalSpace space = context.getGlobalSpace();

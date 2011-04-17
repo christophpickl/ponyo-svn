@@ -28,7 +28,7 @@ public class FastUserManager implements UserManager {
 	}
 	
 
-	public User lookupUser(int openniId/*is 1-base indexed*/, int userStateId) {
+	public User lookupForUserMessage(int openniId/*is 1-base indexed*/, int userStateId) {
 		LOG.debug("delegateOnUserMessage(openniId=" + openniId + ", userStateId=" + userStateId + ")");
 		
 		User returningUser = null;
@@ -70,7 +70,7 @@ public class FastUserManager implements UserManager {
 	 * @param openniId of the returned user
 	 * @param callback ignored, as we assume a stable session (no OSC like stream) and want to be faaast
 	 */
-	public User getUser(int openniId) {
+	public User lookupForJointMessage(int openniId) {
 		return this.usersByOpenniId.get(openniId);
 	}
 	

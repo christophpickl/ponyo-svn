@@ -2,18 +2,18 @@ package net.sf.ponyo.playground.jogl;
 
 import javax.swing.SwingUtilities;
 
-import net.sf.ponyo.jponyo.Constants;
-import net.sf.ponyo.jponyo.entity.User;
-import net.sf.ponyo.jponyo.global.GlobalSpace;
-import net.sf.ponyo.jponyo.global.PonyoContext;
-import net.sf.ponyo.jponyo.global.UserChangeListener;
+import net.sf.ponyo.jponyo.core.Context;
+import net.sf.ponyo.jponyo.core.ContextStarter;
+import net.sf.ponyo.jponyo.core.GlobalSpace;
 
 @SuppressWarnings("synthetic-access")
 public class App implements MainWindowListener {
 	
 	private static final long serialVersionUID = 7633042051769682994L;
 
-	private final PonyoContext context = new PonyoContext();
+	public static boolean isTracking_HACK = false;
+	
+	private Context context;
 	private GlobalSpace data;
 	private MainWindow window;
 	
@@ -22,22 +22,22 @@ public class App implements MainWindowListener {
 	}
 	
 	public void startUp() {
-//		this.context.startOniRecording(Constants.ONI_PATH);
-		this.context.startOscReceiver();
-		this.context.addUserChangeListener(new UserChangeListener() {
-			public void onUserTracking(User user) {
-				data.isFooTracking = true;
-			}
-			public void onUserNew(User newUser) {
-			}
-			public void onUserLost(User user) {
-				data.isFooTracking = false;
-			}
-			public void onUserCalibrationStarted(User user) {
-			}
-			public void onUserCalibrationFailed(User user) {
-			}
-		});
+		this.context = new ContextStarter().startOscReceiver();
+		
+//		this.context.addUserChangeListener(new UserChangeListener() {
+//			public void onUserTracking(User user) {
+//				data.isFooTracking = true;
+//			}
+//			public void onUserNew(User newUser) {
+//			}
+//			public void onUserLost(User user) {
+//				data.isFooTracking = false;
+//			}
+//			public void onUserCalibrationStarted(User user) {
+//			}
+//			public void onUserCalibrationFailed(User user) {
+//			}
+//		});
 		this.data = this.context.getGlobalSpace();
 		
 		this.window = new MainWindow(this.data, this);

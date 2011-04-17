@@ -13,7 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import net.sf.ponyo.jponyo.global.GlobalSpace;
+import net.sf.ponyo.jponyo.core.GlobalSpace;
 
 import com.sun.opengl.util.Animator;
 
@@ -36,7 +36,7 @@ public class MainWindow extends JFrame {
 		GLCanvas canvas = new GLCanvas(glCapabilities);
 		this.animator = new Animator(canvas);
 		
-		canvas.addGLEventListener(new MainWindowGL(this.data));
+		canvas.addGLEventListener(new MainWindowGLRenderer(this.data));
 	    this.initComponents(canvas, listener);
 	    
 	    this.addWindowListener(new WindowAdapter() {

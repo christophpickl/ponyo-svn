@@ -26,7 +26,7 @@
     <!-- ******************************************************************* -->
     
 	<dependencies>
-    
+
 	    <!-- I N T E R N A L -->
     	<!-- *********************************************************** -->
 	
@@ -46,7 +46,9 @@
 	    <!-- E X T E R N A L -->
     	<!-- *********************************************************** -->
 		
-		<!-- TODO: jogl {2xjars, 4xjnilib with os-classifier via profile} -->
+		<!-- jogl consists of: 2xjars (jogl.jar, gluegen-rt.jar) and
+		                       4xjnilib (libgluegen-rt.jnilib, libjogl_awt.jnilib, libjogl_cg.jnilib, libjog.jnilib) -->
+		
 		
 		<dependency>
 			<groupId>PONYO-jogl</groupId>
@@ -55,7 +57,6 @@
 			<scope>system</scope>
 			<systemPath>${project.basedir}/jogl_libs/jogl.jar</systemPath>
 		</dependency>
-		
 		<dependency>
 			<groupId>PONYO-jogl</groupId>
 			<artifactId>gluegen-rt</artifactId>
@@ -64,9 +65,10 @@
 			<systemPath>${project.basedir}/jogl_libs/gluegen-rt.jar</systemPath>
 		</dependency>
 		
+		<!-- TODO we expect having jogl jni libs in some java.library.path already -->
+		
 	</dependencies>
-    
-    
+	
     <!-- ******************************************************************* -->
     <!--                                S C M                                -->
     <!-- ******************************************************************* -->

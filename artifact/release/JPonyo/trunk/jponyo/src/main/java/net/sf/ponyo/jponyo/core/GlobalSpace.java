@@ -36,8 +36,6 @@ public class GlobalSpace {
 		return this.users;
 	}
 	
-	public boolean isFooTracking = false;
-
 	public Collection<User> getFilteredUsers(UserState state) {
 		final Set<User> filteredUsers = new HashSet<User>();
 		for (User user : this.users) {

@@ -24,7 +24,7 @@ public final class GLUtil {
 	}
 	
 	public static void translate(GL gl, Skeleton skeleton, Joint joint) {
-		final float[] xyz = skeleton.getCoordinates(joint);
+		final float[] xyz = skeleton.getCoordinates(joint).data;
 		final float x = xyz[0] / 100.0f;
 		final float y = xyz[1] / 100.0f;
 		final float z = xyz[2] / 100.0f - 30;

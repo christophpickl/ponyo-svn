@@ -36,7 +36,7 @@ public class MainWindow extends JFrame {
 		GLCanvas canvas = new GLCanvas(glCapabilities);
 		this.animator = new Animator(canvas);
 		
-		canvas.addGLEventListener(new MainWindowGL(this.data));
+		canvas.addGLEventListener(new MainWindowGLRenderer(this.data));
 	    this.initComponents(canvas, listener);
 	    
 	    this.addWindowListener(new WindowAdapter() {

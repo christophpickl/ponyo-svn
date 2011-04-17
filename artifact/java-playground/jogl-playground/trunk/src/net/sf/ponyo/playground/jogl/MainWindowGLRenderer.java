@@ -7,13 +7,12 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
+import net.sf.ponyo.jponyo.core.GlobalSpace;
 import net.sf.ponyo.jponyo.entity.Joint;
-import net.sf.ponyo.jponyo.entity.Skeleton;
-import net.sf.ponyo.jponyo.global.GlobalSpace;
 import net.sf.ponyo.playground.jogl.glx.GLUtil;
 import net.sf.ponyo.playground.jogl.glx.ObjectDrawer;
 
-class MainWindowGL implements GLEventListener {
+class MainWindowGLRenderer implements GLEventListener {
 
 	private static final Color PRIMARY_COLOR_OFF = Color.GRAY;
 	private static final float JOINT_SCALE = 0.3f;
@@ -21,7 +20,7 @@ class MainWindowGL implements GLEventListener {
 	
 	private final GlobalSpace data;
 	
-	public MainWindowGL(GlobalSpace data) {
+	public MainWindowGLRenderer(GlobalSpace data) {
 		this.data = data;
 	}
 	
@@ -40,25 +39,25 @@ class MainWindowGL implements GLEventListener {
 		final GL gl = drawable.getGL();
 		
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-		Color primaryColor = this.data.isFooTracking ? null : PRIMARY_COLOR_OFF;
+		Color primaryColor = App.isTracking_HACK ? null : PRIMARY_COLOR_OFF;
 		
 		drawSkel(gl, Joint.HEAD,  primaryColor,  0.0f, +3.5f, SKEL_DEF_Z);
 		drawSkel(gl, Joint.NECK,  primaryColor,  0.0f, +2.0f, SKEL_DEF_Z);
-//		drawSkel(gl, Skel.TORSO, primaryColor,  0.0f, -0.5f, SKEL_DEF_Z);
-//
-//		drawSkel(gl, Skel.LEFT_SHOULDER,  primaryColor, -1.6f, +1.6f, SKEL_DEF_Z);
-//		drawSkel(gl, Skel.RIGHT_SHOULDER, primaryColor, +1.6f, +1.6f, SKEL_DEF_Z);
-//		drawSkel(gl, Skel.LEFT_ELBOW,     primaryColor, -2.6f, +0.5f, SKEL_DEF_Z);
-//		drawSkel(gl, Skel.RIGHT_ELBOW,    primaryColor, +2.6f, +0.5f, SKEL_DEF_Z);
-//		drawSkel(gl, Skel.LEFT_HAND,      primaryColor, -2.2f, -0.8f, SKEL_DEF_Z);
-//		drawSkel(gl, Skel.RIGHT_HAND,     primaryColor, +2.2f, -0.8f, SKEL_DEF_Z);
-//
-//		drawSkel(gl, Skel.LEFT_HIP,   primaryColor, -0.7f, -1.0f, SKEL_DEF_Z);
-//		drawSkel(gl, Skel.RIGHT_HIP,  primaryColor, +0.7f, -1.0f, SKEL_DEF_Z);
-//		drawSkel(gl, Skel.LEFT_KNEE,  primaryColor, -1.2f, -2.0f, SKEL_DEF_Z);
-//		drawSkel(gl, Skel.RIGHT_KNEE, primaryColor, +1.2f, -2.0f, SKEL_DEF_Z);
-//		drawSkel(gl, Skel.LEFT_FOOT,  primaryColor, -1.5f, -3.5f, SKEL_DEF_Z);
-//		drawSkel(gl, Skel.RIGHT_FOOT, primaryColor, +1.5f, -3.5f, SKEL_DEF_Z);
+		drawSkel(gl, Joint.TORSO, primaryColor,  0.0f, -0.5f, SKEL_DEF_Z);
+
+		drawSkel(gl, Joint.LEFT_SHOULDER,  primaryColor, -1.6f, +1.6f, SKEL_DEF_Z);
+		drawSkel(gl, Joint.RIGHT_SHOULDER, primaryColor, +1.6f, +1.6f, SKEL_DEF_Z);
+		drawSkel(gl, Joint.LEFT_ELBOW,     primaryColor, -2.6f, +0.5f, SKEL_DEF_Z);
+		drawSkel(gl, Joint.RIGHT_ELBOW,    primaryColor, +2.6f, +0.5f, SKEL_DEF_Z);
+		drawSkel(gl, Joint.LEFT_HAND,      primaryColor, -2.2f, -0.8f, SKEL_DEF_Z);
+		drawSkel(gl, Joint.RIGHT_HAND,     primaryColor, +2.2f, -0.8f, SKEL_DEF_Z);
+
+		drawSkel(gl, Joint.LEFT_HIP,   primaryColor, -0.7f, -1.0f, SKEL_DEF_Z);
+		drawSkel(gl, Joint.RIGHT_HIP,  primaryColor, +0.7f, -1.0f, SKEL_DEF_Z);
+		drawSkel(gl, Joint.LEFT_KNEE,  primaryColor, -1.2f, -2.0f, SKEL_DEF_Z);
+		drawSkel(gl, Joint.RIGHT_KNEE, primaryColor, +1.2f, -2.0f, SKEL_DEF_Z);
+		drawSkel(gl, Joint.LEFT_FOOT,  primaryColor, -1.5f, -3.5f, SKEL_DEF_Z);
+		drawSkel(gl, Joint.RIGHT_FOOT, primaryColor, +1.5f, -3.5f, SKEL_DEF_Z);
 	}
 	
 	private void drawSkel(GL gl, Joint joint, Color color, float defX, float defY, float defZ) {
@@ -74,7 +73,7 @@ class MainWindowGL implements GLEventListener {
 	}
 	
 	private void translateSkel(GL gl, Joint joint, float defX, float defY, float defZ) {
-		if(this.data.isFooTracking == false) {
+		if(App.isTracking_HACK == false) {
 			gl.glTranslatef(defX, defY, defZ);
 		} else {
 			GLUtil.translate(gl, this.data.getUsers().iterator().next().getSkeleton(), joint);

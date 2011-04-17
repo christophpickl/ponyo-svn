@@ -1,7 +1,7 @@
 package net.sf.ponyo.jponyo.connection.jna;
 
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
-import net.sf.ponyo.jponyo.common.data.Array3f;
+import net.sf.ponyo.jponyo.common.math.Array3f;
 import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
 import net.sf.ponyo.jponyo.connection.JointData;

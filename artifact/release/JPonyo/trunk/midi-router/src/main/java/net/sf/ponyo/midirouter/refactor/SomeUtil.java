@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.swing.JOptionPane;
 
 import net.pulseproject.commons.util.StringUtil;
+import net.sf.ponyo.jponyo.entity.Joint;
 
 public class SomeUtil {
 
@@ -22,16 +23,6 @@ public class SomeUtil {
 		return in + "        ".substring(0, (len - in.length()));
 	}
 	
-
-	public static Joint jointByOsceletonId(String rawJointName) {
-		for (Joint joint : Joints.values()) {
-			if(joint.getOsceletonId().equals(rawJointName)) {
-				return joint;
-			}
-		}
-		throw new RuntimeException("unkown body part: " + rawJointName);
-	}
-
 	public static String toString(final Collection<MidiMapping> maps) {
 		StringBuilder sb = new StringBuilder();
 		

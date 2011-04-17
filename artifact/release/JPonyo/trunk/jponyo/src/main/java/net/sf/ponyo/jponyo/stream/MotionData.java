@@ -1,6 +1,6 @@
 package net.sf.ponyo.jponyo.stream;
 
-import net.sf.ponyo.jponyo.common.data.Array3f;
+import net.sf.ponyo.jponyo.common.math.Array3f;
 import net.sf.ponyo.jponyo.entity.Joint;
 import net.sf.ponyo.jponyo.user.User;
 

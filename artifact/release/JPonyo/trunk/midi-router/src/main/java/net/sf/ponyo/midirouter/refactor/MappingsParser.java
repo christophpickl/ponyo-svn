@@ -3,6 +3,12 @@ package net.sf.ponyo.midirouter.refactor;
 import java.util.LinkedList;
 import java.util.List;
 
+import net.sf.ponyo.jponyo.common.geom.Range;
+import net.sf.ponyo.jponyo.common.math.FloatPair;
+import net.sf.ponyo.jponyo.common.math.IntPair;
+import net.sf.ponyo.jponyo.entity.Direction;
+import net.sf.ponyo.jponyo.entity.Joint;
+
 public class MappingsParser {
 	public static int fooAdd(int x, int y) {
 		return x + y;
@@ -30,17 +36,20 @@ public class MappingsParser {
 				final String[] jointPartParts = jointPart.split("#");
 				rawJointOsceletonId = jointPartParts[0];
 				final String rawRelativeToJoint = jointPartParts[1];
-				relativeToJoint = SomeUtil.jointByOsceletonId(rawRelativeToJoint);
+				relativeToJoint = Joint.byStringId(rawRelativeToJoint);
 			} else {
 				rawJointOsceletonId = jointPart;
 				relativeToJoint = null;
 			}
-			Joint joint = SomeUtil.jointByOsceletonId(rawJointOsceletonId);
+			Joint joint = Joint.byStringId(rawJointOsceletonId);
 			Direction direction = Direction.valueOf(tokens[1].trim());
 			Range range = parseRange(tokens[2].trim());
-			int midiChannel = parseInt(tokens[3]);
-			int controllerNumber = parseInt(tokens[4]);
-			mappings.add(new MidiMapping(joint, direction, range, midiChannel, controllerNumber, relativeToJoint));
+			Integer midiChannel = parseInt(tokens[3]);
+			// FIXME if(midiChannel == null) { display user error message "entered invalid midi channel" }
+			Integer controllerNumber = parseInt(tokens[4]);
+			
+			mappings.add(new MidiMapping(joint, direction, range,
+					midiChannel.intValue(), controllerNumber.intValue(), relativeToJoint));
 		}
 		
 		return mappings.toArray(new MidiMapping[mappings.size()]);
@@ -73,14 +82,14 @@ public class MappingsParser {
 		final int toStart = Integer.parseInt(rawToParts[0].trim());
 		final int toEnd = Integer.parseInt(rawToParts[1].trim());
 		
-		return Josceleton.newRange(fromStart, fromEnd, toStart, toEnd);
+		return new Range(new FloatPair(fromStart, fromEnd), new IntPair(toStart, toEnd));
 	}
 	
-	private static int parseInt(String s) throws InvalidInputException {
+	private static Integer parseInt(String s) {
 		try {
-			return Integer.parseInt(s.trim());
+			return Integer.valueOf(Integer.parseInt(s.trim()));
 		} catch(NumberFormatException e) {
-			throw InvalidInputException.newInvalidNumber(s);
+			return null;
 		}
 	}
 }

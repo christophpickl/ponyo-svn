@@ -1,10 +1,16 @@
 package net.sf.ponyo.midirouter.refactor;
 
 import net.pulseproject.commons.midi.entity.ControllerMessage;
+import net.sf.ponyo.jponyo.common.geom.Range;
+import net.sf.ponyo.jponyo.common.geom.RangeScaler;
+import net.sf.ponyo.jponyo.common.math.Array3f;
+import net.sf.ponyo.jponyo.entity.Direction;
+import net.sf.ponyo.jponyo.entity.Joint;
+import net.sf.ponyo.jponyo.entity.Skeleton;
 
 public class MidiMapping {
 	
-	private static final RangeScaler SCALER = Josceleton.getRangeScaler();
+	private static final RangeScaler SCALER = new RangeScaler();
 	
 	private final Joint joint;
 	private final Direction direction;
@@ -27,14 +33,16 @@ public class MidiMapping {
 		return this.joint == comparingPart;
 	}
 	
-	public ControllerMessage buildMidiMessage(Coordinate coord, Skeleton skeleton) {
+	public ControllerMessage buildMidiMessage(Array3f coord, Skeleton skeleton) {
 		float coordValue = this.direction.extractValue(coord);
 		if(this.relativeToJoint != null) {
-			if(skeleton.isCoordinateAvailable(this.relativeToJoint) == false) {
-				System.err.println("Could not build MIDI message because of unsufficient skeleton data for joint [" + this.relativeToJoint.getLabel() + "]!");
-				return null; // ouch
-			}
-			final float relativeCoordValue = this.direction.extractValue(skeleton.getNullSafe(this.relativeToJoint));
+			// FIXME
+//			if(skeleton.isCoordinateAvailable(this.relativeToJoint) == false) {
+//				System.err.println("Could not build MIDI message because of unsufficient skeleton data for joint [" + this.relativeToJoint.getLabel() + "]!");
+//				return null; // ouch
+//			}
+			Array3f coordinates = skeleton.getCoordinates(this.relativeToJoint);
+			final float relativeCoordValue = this.direction.extractValue(coordinates);
 			coordValue = relativeCoordValue - coordValue;
 			
 		}

@@ -1,6 +1,6 @@
 package net.sf.ponyo.jponyo.connection;
 
-import net.sf.ponyo.jponyo.common.data.Array3f;
+import net.sf.ponyo.jponyo.common.math.Array3f;
 
 public class JointData {
 

@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.common.data;
+package net.sf.ponyo.jponyo.common.math;
 
 public class Array3f {
 	

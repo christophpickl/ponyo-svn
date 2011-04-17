@@ -3,16 +3,23 @@ package net.sf.ponyo.midirouter.refactor;
 import java.util.Collection;
 
 import net.pulseproject.commons.midi.entity.ControllerMessage;
-import net.sf.ponyo.jponyo.connection.Connection;
+import net.sf.ponyo.jponyo.common.math.Array3f;
+import net.sf.ponyo.jponyo.core.Context;
+import net.sf.ponyo.jponyo.core.ContextStarter;
+import net.sf.ponyo.jponyo.entity.Joint;
+import net.sf.ponyo.jponyo.entity.Skeleton;
+import net.sf.ponyo.jponyo.stream.ContinuousMotionStream;
+import net.sf.ponyo.jponyo.stream.MotionData;
+import net.sf.ponyo.jponyo.stream.MotionStreamListener;
 import net.sf.ponyo.jponyo.user.User;
 
-public class PrototypeLogic implements MotionStreamListener, UserServiceListener {
+public class PrototypeLogic implements MotionStreamListener {
 	
-	private Connection joscConnection;
+	private Context joscConnection;
 	private final MidiConnection midiConnection;
 	private Collection<MidiMapping> mappings;
 	
-	private ContinuousMotionStreamListener cms;
+	private ContinuousMotionStream cms;
 
 //	new PrototypeLogic("IAC Driver - Chrisi A",
 //			//           bodyPart              direction        midiChannel  controllerNumber
@@ -28,34 +35,37 @@ public class PrototypeLogic implements MotionStreamListener, UserServiceListener
 	public void open() { // TODO throws InvalidInputException {
 		this.midiConnection.connect();
 		
-		this.joscConnection = Josceleton.openConnection();
-		this.cms = Josceleton.getContinuousMotionStreamFactory().create(this.joscConnection);
-		this.joscConnection.getUserService().addListener(this);
+		this.joscConnection = new ContextStarter().startOscReceiver(); //Josceleton.openConnection();
+		this.cms = this.joscConnection.getContinuousMotionStream(); //Josceleton.getContinuousMotionStreamFactory().create(this.joscConnection);
+		// add user listener and display to user
 		this.cms.addListener(this);
 	}
 	
 	public void close() {
-		if(this.joscConnection != null) { // TODO check hack
+		if(this.joscConnection != null) {
 			this.cms.removeListener(this);
-			this.cms = null;
-			
-			this.joscConnection.getUserService().removeListener(this);
-			this.joscConnection.close();
-			this.joscConnection = null;
-			
+			this.joscConnection.shutdown();
 			this.midiConnection.close();
+			this.joscConnection = null;
 		}
 	}
 	
-	public Connection getJoscConnection() {
+	public Context getJoscConnection() {
 		return this.joscConnection;
 	}
 
 	public synchronized void updateMappings(final Collection<MidiMapping> mappings) {
 		this.mappings = mappings;
 	}
-	@Override
-	public synchronized void onMoved(Joint part, Coordinate updatedCoordinate, Skeleton skeleton) {
+	
+//	public synchronized void onMoved(Joint part, Coordinate updatedCoordinate, Skeleton skeleton) {
+
+	public void onMotion(MotionData data) {
+		Joint part = data.getJoint();
+		User user = data.getUser();
+		Array3f updatedCoordinate = data.getJointPosition();
+		Skeleton skeleton = user.getSkeleton();
+		
 		for (final MidiMapping map : this.mappings) {
 			if(map.appliesPart(part) == false) {
 				continue;
@@ -67,9 +77,4 @@ public class PrototypeLogic implements MotionStreamListener, UserServiceListener
 			}
 		}
 	}
-
-	@Override public void onUserWaiting(User user) { LogUtil.log("New waiting User: " + user.getOsceletonId()); }
-	@Override public void onUserProcessing(User user) { LogUtil.log("New processing User: " + user.getOsceletonId()); }
-	@Override public void onUserDead(User user) { LogUtil.log("Lost User: " + user.getOsceletonId()); }
-	
 }

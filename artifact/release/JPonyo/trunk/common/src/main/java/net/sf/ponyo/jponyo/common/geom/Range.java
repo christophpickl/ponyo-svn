@@ -1,7 +1,7 @@
-package net.sf.ponyo.jponyo.entity;
+package net.sf.ponyo.jponyo.common.geom;
 
-import net.sf.ponyo.jponyo.common.data.FloatPair;
-import net.sf.ponyo.jponyo.common.data.IntPair;
+import net.sf.ponyo.jponyo.common.math.FloatPair;
+import net.sf.ponyo.jponyo.common.math.IntPair;
 
 
 /**

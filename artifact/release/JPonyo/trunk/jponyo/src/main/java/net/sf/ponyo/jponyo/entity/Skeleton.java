@@ -1,5 +1,6 @@
 package net.sf.ponyo.jponyo.entity;
 
+import net.sf.ponyo.jponyo.common.math.Array3f;
 import net.sf.ponyo.jponyo.connection.JointData;
 
 /**
@@ -7,19 +8,22 @@ import net.sf.ponyo.jponyo.connection.JointData;
  */
 public class Skeleton {
 	
-	private final float[][] coordinatesByJoint = new float[24][3];
+	private final Array3f[] coordinatesByJoint = new Array3f[24];
 	{
-		this.coordinatesByJoint[Joint.HEAD.getId()] = new float[] { 0.0f, 0.0f, 0.0f };
-		this.coordinatesByJoint[Joint.NECK.getId()] = new float[] { 0.0f, 0.0f, 0.0f };
+		// initialize data
+		Array3f emptyCoordinates = new Array3f(0.0f, 0.0f, 0.0f);
+		for(Joint joint : Joint.values()) {
+			this.coordinatesByJoint[joint.getId()] = emptyCoordinates;
+		}
 	}
 	
-	public float[] getCoordinates(Joint joint) {
+	public Array3f getCoordinates(Joint joint) {
 		return this.coordinatesByJoint[joint.getId()];
 	}
 
 	public void update(JointData data) {
 		final int jointId = data.getJointId();
-		this.coordinatesByJoint[jointId] = data.getJointPosition().data;
+		this.coordinatesByJoint[jointId] = data.getJointPosition();
 	}
 	
 }

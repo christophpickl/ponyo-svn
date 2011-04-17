@@ -18,12 +18,6 @@ public class OscConnector implements Connector<OscConnection> {
 	private static final String OSC_ADDRESS_JOINT_DATA = "/joint_data";
 //	TODO private final int port;
 	
-	private final UserManagerCallback callback;
-	
-	public OscConnector(UserManagerCallback callback) {
-		this.callback = callback;
-	}
-	
 	public OscConnection openConnection() {
 		final OSCPortIn port;
 		try {
@@ -48,8 +42,8 @@ public class OscConnector implements Connector<OscConnection> {
 		return connection;
 	}
 
-	public UserManager createUserManager() {
-		return new RunningSessionAwareUserManager(this.callback);
+	public UserManager createUserManager(UserManagerCallback callback) {
+		return new RunningSessionAwareUserManager(callback);
 	}
 
 }

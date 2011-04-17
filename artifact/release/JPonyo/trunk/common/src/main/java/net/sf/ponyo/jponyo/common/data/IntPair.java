@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.entity;
+package net.sf.ponyo.jponyo.common.data;
 
 /**
  * @since 0.1

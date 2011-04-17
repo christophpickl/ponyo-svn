@@ -1,5 +1,8 @@
 package net.sf.ponyo.jponyo.entity;
 
+import net.sf.ponyo.jponyo.common.data.FloatPair;
+import net.sf.ponyo.jponyo.common.data.IntPair;
+
 
 /**
  * @since 0.1

@@ -3,6 +3,7 @@ package net.sf.ponyo.jponyo.samples.connection;
 import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
 import net.sf.ponyo.jponyo.connection.Connector;
+import net.sf.ponyo.jponyo.connection.JointMessage;
 import net.sf.ponyo.jponyo.connection.jna.JnaByConfigConnector;
 import net.sf.ponyo.jponyo.connection.jna.JnaByRecordingConnector;
 import net.sf.ponyo.jponyo.connection.osc.OscConnector;
@@ -34,7 +35,7 @@ public class SimpleConnectionSample {
 			public void onUserMessage(int userId, int userState) {
 				LOG.debug("onUserMessage(userId=" + userId + ", userState=" + userState + ")");
 			}
-			public void onJointMessage(int userId, int jointId, float x, float y, float z) {
+			public void onJointMessage(JointMessage message) {
 				if(i++ == 100) {
 					LOG.trace("joint");
 				}

@@ -1,6 +1,7 @@
 package net.sf.ponyo.jponyo.core;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -8,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import net.sf.ponyo.jponyo.user.User;
+import net.sf.ponyo.jponyo.user.UserState;
 
 /**
  * @since 0.1
@@ -35,5 +37,15 @@ public class GlobalSpace {
 	}
 	
 	public boolean isFooTracking = false;
+
+	public Collection<User> getFilteredUsers(UserState state) {
+		final Set<User> filteredUsers = new HashSet<User>();
+		for (User user : this.users) {
+			if(user.getState() == state) {
+				filteredUsers.add(user);
+			}
+		}
+		return filteredUsers;
+	}
 	
 }

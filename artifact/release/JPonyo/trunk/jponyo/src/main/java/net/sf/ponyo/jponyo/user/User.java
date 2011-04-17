@@ -45,7 +45,7 @@ public class User {
 	}
 	
 	public final void setState(UserState state) {
-		LOG.debug("setState(state="+state+")");
+		LOG.debug("setState(state="+state+") for user with uniqueId: " + this.uniqueId);
 		this.state = state;
 	}
 

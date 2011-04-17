@@ -1,5 +1,7 @@
 package net.sf.ponyo.jponyo.entity;
 
+import net.sf.ponyo.jponyo.connection.JointData;
+
 /**
  * @since 0.1
  */
@@ -11,14 +13,13 @@ public class Skeleton {
 		this.coordinatesByJoint[Joint.NECK.getId()] = new float[] { 0.0f, 0.0f, 0.0f };
 	}
 	
-	public void updateJoint(int jointId, float x, float y, float z) {
-		this.coordinatesByJoint[jointId][0] = x;
-		this.coordinatesByJoint[jointId][1] = y;
-		this.coordinatesByJoint[jointId][2] = z;
-	}
-	
 	public float[] getCoordinates(Joint joint) {
 		return this.coordinatesByJoint[joint.getId()];
 	}
 
+	public void update(JointData data) {
+		final int jointId = data.getJointId();
+		this.coordinatesByJoint[jointId] = data.getJointPosition().data;
+	}
+	
 }

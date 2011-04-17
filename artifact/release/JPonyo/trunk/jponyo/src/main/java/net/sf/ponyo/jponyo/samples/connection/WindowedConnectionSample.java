@@ -18,6 +18,7 @@ import javax.swing.WindowConstants;
 import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
 import net.sf.ponyo.jponyo.connection.Connector;
+import net.sf.ponyo.jponyo.connection.JointMessage;
 import net.sf.ponyo.jponyo.connection.jna.JnaByConfigConnector;
 import net.sf.ponyo.jponyo.connection.jna.JnaByRecordingConnector;
 import net.sf.ponyo.jponyo.connection.osc.OscConnector;
@@ -62,11 +63,11 @@ public class WindowedConnectionSample {
 				LOG.debug("onUserMessage(userId=" + userId + ", userState=" + userState + ")");
 				txtOutput.setText("USER: ID="+userId+", STATE="+userState+"\n" + txtOutput.getText());
 			}
-			public void onJointMessage(int userId, int jointId, float x, float y, float z) {
+			public void onJointMessage(JointMessage message) {
 				if(i++ == 100) {
 					i = 0;
-					LOG.trace("onJointMessage(userId="+userId+", jointId="+jointId+", coord="+x+"/"+y+"/"+z+")");
-					txtOutput.setText("JOINT: userId="+userId+", jointId="+jointId+", coord="+x+"/"+y+"/"+z+"\n" + txtOutput.getText());
+					LOG.trace("onJointMessage(message="+message+")");
+					txtOutput.setText("JOINT: "+message+"\n" + txtOutput.getText());
 				}
 			}
 		});

@@ -45,8 +45,18 @@ public class RunningSessionAwareUserManager implements UserManager {
 		} else if(newState == UserState.LOST) {
 			User removedUser = this.userByOpenniId.remove(Integer.valueOf(openniId));
 			LOG.debug("removed user: " + removedUser);
-			assert(removedUser != null && removedUser.getOpenniId() == openniId);
-			result = removedUser;
+			
+			if(removedUser == null) { // if starting up osc, no joint data, suddenly a user lost message only
+				User newUser = this.userFactory.create(openniId);
+				User previouslyStoredUser = this.userByOpenniId.put(Integer.valueOf(openniId), newUser);
+				assert(previouslyStoredUser == null);
+				this.loginUser(newUser);
+				result = newUser;
+				
+			} else {
+				assert(removedUser.getOpenniId() == openniId);
+				result = removedUser;
+			}
 			
 		} else {
 			User storedUser = this.userByOpenniId.get(Integer.valueOf(openniId));
@@ -76,12 +86,15 @@ public class RunningSessionAwareUserManager implements UserManager {
 		
 		User newUser = this.userFactory.create(openniId);
 		this.userByOpenniId.put(Integer.valueOf(openniId), newUser);
+		this.loginUser(newUser);
 		
+		return newUser;
+	}
+	
+	private void loginUser(User newUser) {
 		this.callback.processUserStateChange(newUser, UserState.NEW);
 		this.callback.processUserStateChange(newUser, UserState.CALIBRATION_STARTED);
 		this.callback.processUserStateChange(newUser, UserState.TRACKING);
-		
-		return newUser;
 	}
 
 }

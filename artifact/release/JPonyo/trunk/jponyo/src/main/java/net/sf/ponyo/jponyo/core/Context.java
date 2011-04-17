@@ -1,10 +1,22 @@
 package net.sf.ponyo.jponyo.core;
 
+import java.util.concurrent.LinkedBlockingQueue;
+
+import net.sf.ponyo.jponyo.common.async.DefaultAsync;
 import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
+import net.sf.ponyo.jponyo.connection.JointData;
+import net.sf.ponyo.jponyo.connection.JointMessage;
+import net.sf.ponyo.jponyo.entity.Joint;
+import net.sf.ponyo.jponyo.stream.ContinuousMotionStream;
+import net.sf.ponyo.jponyo.stream.MotionData;
+import net.sf.ponyo.jponyo.stream.MotionStream;
+import net.sf.ponyo.jponyo.stream.MotionStreamImpl;
 import net.sf.ponyo.jponyo.user.User;
 import net.sf.ponyo.jponyo.user.UserChangeListener;
 import net.sf.ponyo.jponyo.user.UserManager;
+import net.sf.ponyo.jponyo.user.UserManagerCallback;
+import net.sf.ponyo.jponyo.user.UserState;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -12,41 +24,79 @@ import org.apache.commons.logging.LogFactory;
 /**
  * @since 0.1
  */
-public class Context implements ConnectionListener {
+public class Context implements ConnectionListener, UserManagerCallback {
 	
 	private static final Log LOG = LogFactory.getLog(Context.class);
-
-	// TODO write state aspect (if started, not may start again)
 	
+	private final DefaultAsync<UserChangeListener> userChangeListeners = new DefaultAsync<UserChangeListener>();
 	private final Connection connection;
-	private final InternalContext iContext;
-	private final UserManager userManager;
+	private /*TODO lazy set*/ UserManager userManager;
+	private final LinkedBlockingQueue<MotionData> jointQueue = new LinkedBlockingQueue<MotionData>();
+	private final GlobalSpace space = new GlobalSpace();
 	
-	static {
-		boolean assertEnabled = false;
-		assert (assertEnabled = true);
-		if(assertEnabled) {
-			System.out.println("Assertions are enabled, gooood ;)");
-		} else {
-			System.err.println("Oh No! Assertions are DISABLED!");
+	private final DispatchThread dispatcher = new DispatchThread(this.jointQueue);
+	private final MotionStreamImpl motionStream = new MotionStreamImpl();
+	private ContinuousMotionStream continuousMotionStream;
+	
+	Context(Connection connection) {
+		this.connection = connection;
+	}
+
+	void start() {
+		LOG.debug("start()");
+		this.dispatcher.addListener(this.motionStream);
+		this.dispatcher.start();
+	}
+	
+	private int i = 0;
+	public void onJointMessage(JointMessage message) {
+		if(this.i++ == 500) {
+			this.i = 0;
+			LOG.trace("onJointMessage(" + message + ")");
+		}
+		
+		if(this.i % 100 == 0) {
+			if(this.jointQueue.size() > 50) {
+				LOG.warn("this.jointQueue: size=" + this.jointQueue.size());
+			}
+		}
+		
+		User user = this.userManager.lookupForJointMessage(message.getUserId());
+		user.getSkeleton().update(message.getData());
+		
+		JointData jointData = message.getData();
+		this.jointQueue.add(new MotionData(user, Joint.byId(jointData.getJointId()), jointData.getJointPosition()));
+	}
+
+	public void processUserStateChange(User user, UserState state) {
+		LOG.debug("processUserStateChange(user="+user+", state="+state+")");
+		
+		if(state == UserState.NEW) {
+			this.space.addUser(user);
+		}
+		for(UserChangeListener listener : this.userChangeListeners.getListeners()) {
+			listener.onUserChanged(user, state);
+		}
+		if(state == UserState.LOST) {
+			this.space.removeUser(user);
 		}
 	}
 	
-	public Context(Connection connection, InternalContext iContext, UserManager userManager) {
-		this.connection = connection;
-		this.iContext = iContext;
-		this.userManager = userManager;
+	public void onUserMessage(int openniId/*is 1-base indexed*/, int userStateId) {
+		LOG.debug("onUserMessage(openniId=" + openniId + ", userStateId=" + userStateId + ")");
+		
+		User user = this.userManager.lookupForUserMessage(openniId, userStateId);
+		this.processUserStateChange(user, user.getState());
 	}
-
-	public static void main(String[] args) {
-		new ContextStarter().startOniRecording(DevelopmentConstants.ONI_PATH);
-//		new PonyoContext().startXmlConfig(Constants.XML_PATH);
-	}
-
-	// MINOR programatically enable assertions: ClassLoader.getSystemClassLoader().setDefaultAssertionStatus(true);
-
-	public GlobalSpace getGlobalSpace() {
-		return this.iContext.getGlobalSpace();
+	
+	private void initializeContinuousMotionStream() {
+		LOG.debug("Lazy initializing ContinuousMotionStream.");
+		
+		this.continuousMotionStream = new ContinuousMotionStream(this.motionStream, this.space);
+		this.continuousMotionStream.initAttachingToUser();
+		
+		this.userChangeListeners.addListener(this.continuousMotionStream);
+		this.dispatcher.addListener(this.continuousMotionStream);
 	}
 	
 	public void shutdown() {
@@ -54,32 +104,50 @@ public class Context implements ConnectionListener {
 			LOG.warn("Tried to shutdown but there is no connection to close!");
 			return;
 		}
+		
+		this.dispatcher.removeListener(this.motionStream);
+		
+		if(this.continuousMotionStream != null) {
+			this.dispatcher.removeListener(this.continuousMotionStream);
+			this.userChangeListeners.removeListener(this.continuousMotionStream);
+		}
+		
+		try {
+			LOG.trace("Waiting for dispatch thread to die.");
+			this.dispatcher.stop();
+		} catch (InterruptedException e) {
+			throw new RuntimeException("Could not stop dispatcher thread!", e);
+		}
+		
 		this.connection.close();
 	}
 	
-	private int i = 0;
-	public void onJointMessage(int openniId, int jointId, float x, float y, float z) {
-		if(this.i++ == 500) {
-			this.i = 0;
-			LOG.trace("joint for user with OpenNI id: " + openniId + ", joint: " + jointId + ", x: " + x);
+	
+	public ContinuousMotionStream getContinuousMotionStream() {
+		if(this.continuousMotionStream == null) {
+			this.initializeContinuousMotionStream();
 		}
-		
-		this.userManager.lookupForJointMessage(openniId).getSkeleton().updateJoint(jointId, x, y, z);
+		return this.continuousMotionStream;
 	}
 	
-	public void onUserMessage(int openniId/*is 1-base indexed*/, int userStateId) {
-		LOG.debug("onUserMessage(openniId=" + openniId + ", userStateId=" + userStateId + ")");
-		
-		User user = this.userManager.lookupForUserMessage(openniId, userStateId);
-		this.iContext.processUserStateChange(user, user.getState());
+	public MotionStream getMotionStream() {
+		return this.motionStream;
 	}
 
 	public void addUserChangeListener(UserChangeListener listener) {
-		this.iContext.addListener(listener);
+		this.userChangeListeners.addListener(listener);
 	}
 	
 	public void removeUserChangeListener(UserChangeListener listener) {
-		this.iContext.removeListener(listener);
+		this.userChangeListeners.removeListener(listener);
+	}
+
+	public void setUserManager(UserManager userManager) {
+		this.userManager = userManager;
+	}
+
+	public GlobalSpace getGlobalSpace() {
+		return this.space;
 	}
 	
 }

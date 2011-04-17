@@ -1,8 +1,11 @@
 package net.sf.ponyo.jponyo.connection.osc;
 
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
+import net.sf.ponyo.jponyo.common.data.Array3f;
 import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
+import net.sf.ponyo.jponyo.connection.JointData;
+import net.sf.ponyo.jponyo.connection.JointMessage;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -38,16 +41,16 @@ class OscConnection extends DefaultAsync<ConnectionListener> implements Connecti
 	}
 	
 	public void onOscUserMessage(OSCMessage oscMessage) {
-		final Object[] messageArgs = oscMessage.getArguments();
+		Object[] messageArgs = oscMessage.getArguments();
 		
 		if(messageArgs.length != 1) {
 //			TODO throw InvalidArgumentException.newInstance("oscMessage.arguments.length", messageArgs.length, "==1");
 		}
 		
-		final Integer userId = (Integer) messageArgs[0];
-		final Integer stateId = (Integer) messageArgs[1];
+		Integer userId = (Integer) messageArgs[0];
+		Integer stateId = (Integer) messageArgs[1];
 		
-		for(final ConnectionListener listener : this.getListeners()) {
+		for(ConnectionListener listener : this.getListeners()) {
 			listener.onUserMessage(userId.intValue(), stateId.intValue());
 		}
 	}
@@ -59,15 +62,16 @@ class OscConnection extends DefaultAsync<ConnectionListener> implements Connecti
 //			TODO throw InvalidArgumentException.newInstance("oscMessage.arguments.length", messageArgs.length, "==5");
 		}
 		
-		final Integer userId = (Integer) messageArgs[0];
-		final Integer jointId = (Integer) messageArgs[1];
+		Integer userId = (Integer) messageArgs[0];
+		Integer jointId = (Integer) messageArgs[1];
 		
-		final float x = ((Float) messageArgs[2]).floatValue();
-		final float y = ((Float) messageArgs[3]).floatValue();
-		final float z = ((Float) messageArgs[4]).floatValue();
+		float x = ((Float) messageArgs[2]).floatValue();
+		float y = ((Float) messageArgs[3]).floatValue();
+		float z = ((Float) messageArgs[4]).floatValue();
 		
+		JointMessage message = new JointMessage(userId.intValue(), new JointData(jointId.intValue(), new Array3f(x, y, z)));
 		for(final ConnectionListener listener : this.getListeners()) {
-			listener.onJointMessage(userId.intValue(), jointId.intValue(), x, y, z);
+			listener.onJointMessage(message);
 		}
 	}
 

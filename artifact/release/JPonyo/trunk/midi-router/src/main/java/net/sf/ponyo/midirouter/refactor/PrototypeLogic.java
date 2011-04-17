@@ -12,7 +12,7 @@ public class PrototypeLogic implements MotionStreamListener, UserServiceListener
 	private final MidiConnection midiConnection;
 	private Collection<MidiMapping> mappings;
 	
-	private ContinuousMotionStream cms;
+	private ContinuousMotionStreamListener cms;
 
 //	new PrototypeLogic("IAC Driver - Chrisi A",
 //			//           bodyPart              direction        midiChannel  controllerNumber

@@ -2,7 +2,7 @@ package net.sf.ponyo.jponyo.adminconsole.view;
 
 import javax.swing.JDialog;
 
-import net.sf.ponyo.jponyo.core.GlobalSpace;
+import net.sf.ponyo.jponyo.stream.MotionData;
 
 public class SkeletonNumberDialog extends JDialog {
 	
@@ -10,8 +10,8 @@ public class SkeletonNumberDialog extends JDialog {
 	
 	private final SkeletonNumberPanel panel;
 	
-	public SkeletonNumberDialog(GlobalSpace space) {
-		this.panel = new SkeletonNumberPanel(space);
+	public SkeletonNumberDialog() {
+		this.panel = new SkeletonNumberPanel();
 		this.setTitle(this.getClass().getSimpleName());
 		this.getContentPane().add(this.panel);
 		this.getRootPane().putClientProperty("Window.style", "small");
@@ -19,8 +19,8 @@ public class SkeletonNumberDialog extends JDialog {
 		this.setResizable(false);
 	}
 	
-	public void update() {
-		this.panel.update();
+	public void update(MotionData data) {
+		this.panel.update(data);
 	}
 	
 }

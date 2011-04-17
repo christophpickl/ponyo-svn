@@ -17,16 +17,20 @@ import net.sf.ponyo.jponyo.user.User;
 import net.sf.ponyo.jponyo.user.UserChangeListener;
 import net.sf.ponyo.jponyo.user.UserState;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 public class AdminConsoleApp
 	implements MainWindowListener, UserChangeListener, MotionStreamListener {
 
-	public static boolean isTracking_HACK = false;
+	private static final Log LOG = LogFactory.getLog(AdminConsoleApp.class);
+	
+	public static UserState userState_HACK = UserState.LOST;
 	
 	private Context context;
 	private GlobalSpace space;
 	private MainWindow window;
 	private SkeletonNumberDialog skeletonDialog;
-	private int userCount = 0;
 	
 	public static void main(String[] args) {
 		System.out.println("main() START");
@@ -38,7 +42,7 @@ public class AdminConsoleApp
 		this.context = new ContextStarter().startOscReceiver();
 		this.space = this.context.getGlobalSpace();
 		this.window = new MainWindow(this.space, this);
-		this.skeletonDialog = new SkeletonNumberDialog(this.space);
+		this.skeletonDialog = new SkeletonNumberDialog();
 
 		this.context.addUserChangeListener(this);
 		this.context.getContinuousMotionStream().addListener(this);
@@ -69,15 +73,11 @@ public class AdminConsoleApp
 	}
 
 	public void onUserChanged(User user, UserState state) {
-		if(state == UserState.NEW) {
-			this.userCount++;
-		} else if(state == UserState.LOST) {
-			this.userCount--;
-		}
-		AdminConsoleApp.isTracking_HACK = this.userCount != 0;
+		LOG.debug("onUserChanged(user="+user+", state="+state+")");
+		AdminConsoleApp.userState_HACK = state;
 	}
 
 	public void onMotion(MotionData data) {
-		this.skeletonDialog.update(); // TODO just update everything ;)
+		this.skeletonDialog.update(data);
 	}
 }

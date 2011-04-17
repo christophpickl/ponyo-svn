@@ -12,10 +12,12 @@ import net.sf.ponyo.jponyo.adminconsole.gl.GLUtil;
 import net.sf.ponyo.jponyo.adminconsole.gl.ObjectDrawer;
 import net.sf.ponyo.jponyo.core.GlobalSpace;
 import net.sf.ponyo.jponyo.entity.Joint;
+import net.sf.ponyo.jponyo.user.UserState;
 
 class MainWindowGLRenderer implements GLEventListener {
 
 	private static final Color PRIMARY_COLOR_OFF = Color.GRAY;
+	private static final Color PRIMARY_COLOR_INIT = Color.GREEN;
 	private static final float JOINT_SCALE = 0.3f;
 	private static final float SKEL_DEF_Z = -10.0f;
 	
@@ -40,7 +42,14 @@ class MainWindowGLRenderer implements GLEventListener {
 		final GL gl = drawable.getGL();
 		
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
-		Color primaryColor = AdminConsoleApp.isTracking_HACK ? null : PRIMARY_COLOR_OFF;
+		final Color primaryColor;
+		if(AdminConsoleApp.userState_HACK == UserState.TRACKING) {
+			primaryColor = null;
+		} else if(AdminConsoleApp.userState_HACK == UserState.LOST) { 
+			primaryColor = PRIMARY_COLOR_OFF;
+		} else {
+			primaryColor = PRIMARY_COLOR_INIT;
+		}
 		
 		drawSkel(gl, Joint.HEAD,  primaryColor,  0.0f, +3.5f, SKEL_DEF_Z);
 		drawSkel(gl, Joint.NECK,  primaryColor,  0.0f, +2.0f, SKEL_DEF_Z);
@@ -74,10 +83,10 @@ class MainWindowGLRenderer implements GLEventListener {
 	}
 	
 	private void translateSkel(GL gl, Joint joint, float defX, float defY, float defZ) {
-		if(AdminConsoleApp.isTracking_HACK == false) {
-			gl.glTranslatef(defX, defY, defZ);
-		} else {
+		if(AdminConsoleApp.userState_HACK == UserState.TRACKING) {
 			GLUtil.translate(gl, this.data.getUsers().iterator().next().getSkeleton(), joint);
+		} else {
+			gl.glTranslatef(defX, defY, defZ);
 		}
 	}
 	

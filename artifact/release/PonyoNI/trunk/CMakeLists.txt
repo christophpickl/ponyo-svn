@@ -1,5 +1,9 @@
 MESSAGE ("=> ROOT")
 
+set (PN_FILTERING_VERSION_MAJOR \"0\")
+set (PN_FILTERING_VERSION_MINOR \"1-SNAPSHOT\")
+
+
 # GENERAL SETUP
 ###############################################################################
 	CMAKE_MINIMUM_REQUIRED (VERSION 2.8)

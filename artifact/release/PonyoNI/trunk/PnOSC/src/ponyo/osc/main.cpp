@@ -59,6 +59,8 @@ void onSignalReceived(int signalCode) {
 
 void startServer() {
 	printf("Ponyo OSC Server starting is starting up.\n");
+	printf("\tPonyo Version: %s\n", PN_VERSION_STRING);
+	printf("\tOpenNI Version: %s\n", XN_BRIEF_VERSION_STRING);
 
 	signal(SIGINT, onSignalReceived); // hit CTRL-C keys in terminal (2)
 	signal(SIGTERM, onSignalReceived); // hit stop button in eclipse CDT (15)

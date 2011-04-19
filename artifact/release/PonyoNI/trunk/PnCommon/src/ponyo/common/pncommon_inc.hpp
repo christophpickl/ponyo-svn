@@ -9,6 +9,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <ponyo/common/pnfiltering.hpp>
 
 #define AT __FILE__, __LINE__
 
@@ -18,7 +19,9 @@
 #define BOOL2CHAR(b) (b == 1) ? YES:  NO;
 
 namespace pn {
-	inline const char * const boolToString(bool value) { return value ? "true" : "false"; }
+
+	inline const char* const boolToString(bool value) { return value ? "true" : "false"; }
+
 }
 
 #endif // PNCOMMON_INC_HPP_

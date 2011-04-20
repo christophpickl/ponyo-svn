@@ -1,3 +1,7 @@
+@JNI: http://docs.codehaus.org/display/MAVENUSER/Projects+With+JNI
+
+- joint realworld projection convertion needed?
+	see: https://github.com/pixelnerve/BlockOpenNI/blob/master/src/VOpenNIUser.cpp
 * autogenerate stuff between c++ and java (user state enum, joint enum)
 * OpenNI detailed investigation: CoD, joint orientation, scene analyzer, nite gestures, ...
 ! custom mylyn installation (eclipse mylyn integration; customize workflow; customize fields)
@@ -54,7 +58,6 @@ TODOs
 
 ! fuer uni projekt => LIBFREENECT verwenden
 - @JNA: have a look at http://code.google.com/p/jnaerator/ 
-! asus competition: http://event.asus.com/wavi/gallery/Event_Term.aspx
 !! register openni callbacks for joint data (skeleton tracking)
 !! refactor Device logic; add depthGenerator
 ! have a look at "g_DepthGenerator.ConvertProjectiveToRealWorld ( (XnUInt32)npixels, pt_proj, pt_world);"

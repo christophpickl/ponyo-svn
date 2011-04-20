@@ -2,7 +2,12 @@
 TIMESHEET CP
 =================================================
 
-              ~~124h~~
+              ~~133h~~
+20.04. - 11:00 -  2h - cxxunit enabled investigation
+19.04. - 22:00 -  1h - some minor infrastructure enhancements (version by filter resources)
+              ~~130h~~
+17.04. - 18:00 -  3h - re-enabled motionstream/continuous ms
+16.04. - 20:00 -  3h - moving some old josc code; finished re-implementing user management (osc session aware + faaast)
 15.04. - 23:00 -  4h - investing jna callback bug (without success)
               ~~120h~~
 15.04. - 20:00 -  3h - moving josc midi to ponyo and some other jponyo stuff

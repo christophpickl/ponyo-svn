@@ -1,7 +1,6 @@
 package net.sf.ponyo.midirouter.logic;
 
 import javax.sound.midi.MidiUnavailableException;
-import javax.sound.midi.ShortMessage;
 
 import net.pulseproject.commons.midi.entity.ControllerMessage;
 import net.sf.ponyo.jponyo.common.io.IoUtil;
@@ -21,7 +20,7 @@ public class RouterService implements MotionStreamListener {
 	
 	private static final Log LOG = LogFactory.getLog(RouterService.class);
 	
-	private final MidiConnector midiConnector = new MidiConnector();
+	private final MidiConnector midiConnector;
 	private Context ponyoContext;
 	
 	private MidiConnection midiConnection;
@@ -30,16 +29,16 @@ public class RouterService implements MotionStreamListener {
 	private Model model;
 	private MidiMappings mappings;
 	
+	public RouterService(MidiConnector midiConnector) {
+		this.midiConnector = midiConnector;
+	}
+
 	public void start(Model startModel, String midiPort, MidiMappings startMappings) {
 		LOG.info("start(..)");
 		this.model = startModel;
 		this.mappings = startMappings;
 		
-		try {
-			this.midiConnection = this.midiConnector.openConnection(midiPort);
-		} catch (MidiUnavailableException e) {
-			throw new RuntimeException("Could not open MIDI port '" + midiPort +"'!", e);
-		}
+		this.midiConnection = this.midiConnector.openConnection(midiPort);
 		if(this.midiConnection == null) {
 			throw new RuntimeException("Could not find MIDI port '" + midiPort +"'!");
 		}

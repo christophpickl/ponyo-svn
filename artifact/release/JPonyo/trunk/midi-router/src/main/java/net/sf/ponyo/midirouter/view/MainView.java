@@ -1,13 +1,20 @@
 package net.sf.ponyo.midirouter.view;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 
+import javax.swing.BorderFactory;
+import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import net.sf.ponyo.jponyo.common.binding.BindingListener;
 import net.sf.ponyo.midirouter.logic.Model;
@@ -17,9 +24,11 @@ import net.sf.ponyo.midirouter.view.framework.AbstractMainView;
 
 public class MainView
 	extends AbstractMainView<MainViewListener, Model>
-		implements ButtonBarListener {
+		implements ButtonBarListener, MainMenuBarListener {
 	
+	private static final Log LOG = LogFactory.getLog(MainView.class);
 	private static final long serialVersionUID = 7350458392797569309L;
+	private static final int FRAME_INNER_GAP = 8;
 	
 	public MainView(Model model) {
 		super(model, "Ponyo MIDI Router");
@@ -27,10 +36,20 @@ public class MainView
 	
 	@Override
 	protected final Component initComponent(Model model) {
-		final JTable dataTable = this.initMidiMappingTable(model);
-		Component westPanel = this.createWestPanel(model);
+		MainMenuBar menuBar = new MainMenuBar();
+		menuBar.addListener(this);
+		this.setJMenuBar(menuBar);
 		
-		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, westPanel , new JScrollPane(dataTable));
+		
+		final JTable dataTable = this.initMidiMappingTable(model);
+		
+		JScrollPane tableScroll = new JScrollPane(dataTable);
+		JPanel tableWrapper = new JPanel(new BorderLayout());
+		tableWrapper.add(tableScroll, BorderLayout.CENTER);
+		tableWrapper.setBorder(BorderFactory.createEmptyBorder(FRAME_INNER_GAP, 0, FRAME_INNER_GAP, FRAME_INNER_GAP));
+		
+		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+				this.createWestPanel(model), tableWrapper);
 		split.setDividerLocation(400);
 		split.setResizeWeight(0.0);
 		return split;
@@ -62,10 +81,13 @@ public class MainView
 	private Component createWestPanel(Model model) {
 		ConfigurationPanel configPanel = new ConfigurationPanel(model);
 		ButtonBar buttonBar = new ButtonBar(model);
+		this.getRootPane().setDefaultButton(buttonBar.getDefaultButton());
 		buttonBar.addListener(this);
 		
 		JPanel westPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
+		
+		c.insets = new Insets(5, FRAME_INNER_GAP, 0, 0);
 		c.gridx = 0;
 		c.gridy = 0;
 		c.fill = GridBagConstraints.BOTH;
@@ -78,18 +100,33 @@ public class MainView
 		c.weighty = 0.0;
 		westPanel.add(buttonBar, c);
 		
+		c.insets = new Insets(0, FRAME_INNER_GAP, 0, 0);
 		return westPanel;
 	}
 
 	public void onStartStopClicked() {
-		for (ButtonBarListener listener : this.getListeners()) {
+		for (MainViewListener listener : this.getListeners()) {
 			listener.onStartStopClicked();
 		}
 	}
 
 	public void onReloadClicked() {
-		for (ButtonBarListener listener : this.getListeners()) {
+		for (MainViewListener listener : this.getListeners()) {
 			listener.onReloadClicked();
+		}
+	}
+
+	public void onMenuQuit() {
+		LOG.debug("onMenuQuit()");
+		for (MainViewListener listener : this.getListeners()) {
+			listener.onQuit();
+		}
+	}
+
+	public void onMenuMidiPorts() {
+		LOG.debug("onMenuMidiPorts()");
+		for (MainViewListener listener : this.getListeners()) {
+			listener.onToggleMidiPortsWindow();
 		}
 	}
 	

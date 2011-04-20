@@ -6,4 +6,6 @@ import net.sf.ponyo.midirouter.view.framework.AbstractMainViewListener;
 public interface MainViewListener
 	extends AbstractMainViewListener, ButtonBarListener {
 
+	void onToggleMidiPortsWindow();
+
 }

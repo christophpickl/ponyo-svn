@@ -1,5 +1,10 @@
 package net.sf.ponyo.midirouter.logic;
 
+import java.util.LinkedList;
+import java.util.List;
+
+import javax.sound.midi.MidiDevice;
+
 import net.sf.ponyo.jponyo.common.async.DefaultAsyncFor;
 import net.sf.ponyo.jponyo.common.binding.BindingListener;
 import net.sf.ponyo.jponyo.common.binding.BindingProvider;
@@ -14,6 +19,7 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 	public static final String APPLICATION_STATE = "APPLICATION_STATE";
 	public static final String ACTIVE_MAPPINGS = "ACTIVE_MAPPINGS";
 	public static final String FRAME_COUNT = "FRAME_COUNT";
+	public static final String MIDI_DEVICES = "MIDI_DEVICES";
 	
 	@PersistAsPreference
 	private String midiPort = "";
@@ -26,6 +32,8 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 	private MidiMappings activeMappings = null;
 	
 	private Integer frameCount = Integer.valueOf(0);
+	
+	private List<MidiDevice> midiDevices = new LinkedList<MidiDevice>();
 	
 	public String getMidiPort() {
 		return this.midiPort;
@@ -59,7 +67,7 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 //		System.out.println("setActiveMappings: " + activeMappings);
 		this.activeMappings = (MidiMappings) activeMappings;
 	}
-	
+
 	public Integer getFrameCount() {
 		return this.frameCount;
 	}
@@ -67,6 +75,17 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 	public void setFrameCount(Object value) {
 		this.frameCount = (Integer) value;
 	}
+
+	public List<MidiDevice> getMidiDevices() {
+		return this.midiDevices;
+	}
+	@SuppressWarnings("unchecked")
+	@BindingSetter(Key = MIDI_DEVICES)
+	public void setMidiDevices(Object value) {
+		this.midiDevices = (List<MidiDevice>) value;
+	}
+
+	
 	
 	public Iterable<BindingListener> getBindingListenersFor(final String attributeKey) {
 		// TODO das bekommt man auch noch raus => DefaultAsyncFor muss teilweise dafuer ein interface hergeben, wo dann aspekt getListenersFor direkt aufrufen kann!
@@ -85,6 +104,8 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 			return this.getActiveMappings();
 		} else if(propertyName.equals(FRAME_COUNT)) {
 			return this.getFrameCount();
+		} else if(propertyName.equals(MIDI_DEVICES)) {
+			return this.getMidiDevices();
 		}
 		throw new RuntimeException("Unhandled property name [" + propertyName + "]!");
 	}
@@ -100,6 +121,8 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 			this.setActiveMappings((MidiMappings) value);
 		} else if(propertyName.equals(FRAME_COUNT)) {
 			this.setFrameCount((Integer) value);
+		} else if(propertyName.equals(MIDI_DEVICES)) {
+			this.setMidiDevices((List<?>) value);
 		} else {
 			throw new RuntimeException("Unhandled property name [" + propertyName + "]!");
 		}

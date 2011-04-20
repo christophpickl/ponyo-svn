@@ -9,6 +9,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
+import net.pulseproject.commons.util.GuiUtil;
 import net.sf.ponyo.jponyo.common.async.Async;
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
 import net.sf.ponyo.jponyo.common.binding.BindingProvider;
@@ -66,7 +67,7 @@ public abstract class AbstractMainView<L extends AbstractMainViewListener, P ext
 			this.setSize(enforcedSize);
 		}
 		
-		this.moveToCenterLocation();
+		GuiUtil.setCenterLocation(this);
 		
 		if(PtUserSniffer.isMacOSX()) {
 			this.registerOsxListener();
@@ -95,13 +96,6 @@ public abstract class AbstractMainView<L extends AbstractMainViewListener, P ext
 	public final void onOsxPreferences() {
 		LOG.debug("onOsxPreferences()");
 		Toolkit.getDefaultToolkit().beep(); // FIXME implement preferences window
-	}
-	
-	private void moveToCenterLocation() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        int x = (screenSize.width - this.getWidth()) / 2;
-        int y = (screenSize.height - this.getHeight()) / 2;
-        this.setLocation(x, y);
 	}
 	
 	void onWindowClosing() {

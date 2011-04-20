@@ -2,7 +2,12 @@ package net.sf.ponyo.midirouter.view;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.util.ArrayList;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
+import javax.sound.midi.MidiDevice;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -14,13 +19,27 @@ import javax.swing.ScrollPaneConstants;
 import net.sf.ponyo.jponyo.common.gui.BoundTextFieldListener;
 import net.sf.ponyo.jponyo.common.gui.ProviderKeyListener;
 import net.sf.ponyo.midirouter.logic.Model;
+import net.sourceforge.jpotpourri.jpotface.inputfield.AbstractTextSuggester;
 
 public class ConfigurationPanel extends JPanel {
 
 	private static final long serialVersionUID = -1166748256589496496L;
 	
 	public static JTextField createTextField(Model model, String key, String tooltip) {
-		JTextField text = new JTextField();
+		List<MidiDevice> devices = model.getMidiDevices();
+		Set<String> deviceNames = new LinkedHashSet<String>();
+		for (MidiDevice midiDevice : devices) {
+			if(midiDevice.getMaxReceivers() != 0) {
+				deviceNames.add(midiDevice.getDeviceInfo().getName());
+			}
+		}
+		final List<String> deviceNameList = new ArrayList<String>(deviceNames);
+		JTextField text = new AbstractTextSuggester() {
+			@Override
+			protected List<String> getValues() {
+				return deviceNameList;
+			}
+		};
 		model.addListenerFor(key, new BoundTextFieldListener(text));
 		text.addKeyListener(new ProviderKeyListener<Model>(model, key));
 		text.setToolTipText(tooltip);

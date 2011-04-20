@@ -19,9 +19,10 @@ public class ButtonBar extends JPanel implements Async<ButtonBarListener> {
 	private static final long serialVersionUID = -4832983778195118152L;
 	
 	private final DefaultAsync<ButtonBarListener> async = new DefaultAsync<ButtonBarListener>();
+	private final JButton btnStartStop = new JButton();
 	
 	public ButtonBar(Model model) {
-		final JButton btnStartStop = new JButton();
+		
 		final JButton btnReload = new JButton("Reload");
 		
 		model.addListenerFor(Model.APPLICATION_STATE, new BindingListener() {
@@ -52,12 +53,12 @@ public class ButtonBar extends JPanel implements Async<ButtonBarListener> {
 			}
 		});
 		
-		btnStartStop.addActionListener(new ActionListener() {
+		this.btnStartStop.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionevent) {
 				dispatchStartStopClicked();
 			}
 		});
-		btnStartStop.setToolTipText("Just start that damn kreiwl!");
+		this.btnStartStop.setToolTipText("Just start that damn kreiwl!");
 		
 		btnReload.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent actionevent) {
@@ -67,7 +68,7 @@ public class ButtonBar extends JPanel implements Async<ButtonBarListener> {
 		btnReload.setToolTipText("On-the-fly reload mappings");
 		
 		this.setLayout(new FlowLayout());
-		this.add(btnStartStop);
+		this.add(this.btnStartStop);
 		this.add(btnReload);
 	}
 
@@ -76,7 +77,11 @@ public class ButtonBar extends JPanel implements Async<ButtonBarListener> {
 			listener.onStartStopClicked();
 		}
 	}
-
+	
+	public JButton getDefaultButton() {
+		return this.btnStartStop;
+	}
+	
 	void dispatchReloadClicked() {
 		for (ButtonBarListener listener : this.async.getListeners()) {
 			listener.onReloadClicked();

@@ -3,6 +3,9 @@ package net.sf.ponyo.jponyo.connection.osc;
 import java.net.SocketException;
 import java.util.Date;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.sf.ponyo.jponyo.connection.Connector;
 import net.sf.ponyo.jponyo.user.RunningSessionAwareUserManager;
 import net.sf.ponyo.jponyo.user.UserManager;
@@ -14,14 +17,18 @@ import com.illposed.osc.OSCPortIn;
 
 public class OscConnector implements Connector<OscConnection> {
 	
+	private static final Log LOG = LogFactory.getLog(OscConnector.class);
+	
 	private static final String OSC_ADDRESS_USER_STATE = "/user_state";
 	private static final String OSC_ADDRESS_JOINT_DATA = "/joint_data";
+	private static final int DEFAULT_PORT = 7000;
 //	TODO private final int port;
 	
 	public OscConnection openConnection() {
+		LOG.debug("Opening connectoin to default port " + DEFAULT_PORT + " ...");
 		final OSCPortIn port;
 		try {
-			port = new OSCPortIn(7000);
+			port = new OSCPortIn(DEFAULT_PORT);
 		} catch (SocketException e) {
 			throw new RuntimeException("Could not open oscport!", e);
 		}

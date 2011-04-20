@@ -51,5 +51,22 @@ public class IoUtil {
             return false;
         }
 	}
+
+	/**
+	 * @since 0.1
+	 */
+	public static boolean close(final net.sf.ponyo.jponyo.common.async.Closeable closeable) {
+        if (closeable == null) {
+            return false;
+        }
+        
+        try {
+	        closeable.close();
+	        return true;
+        } catch (final Exception e) {
+            LOG.warn("Could not close closeable [" + closeable.getClass().getSimpleName() + "]!", e);
+            return false;
+        }
+	}
 	
 }

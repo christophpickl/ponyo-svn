@@ -29,15 +29,15 @@ public class ConfigurationPanel extends JPanel {
 	}
 	
 	public ConfigurationPanel(Model model) {
-//		model.addListenerFor(Model.MIDI_MAPPINGS, new BoundTextFieldListener(inpMappings));
-//		inpMappings.addKeyListener(new ModelSettingKeyListener(model, Model.MIDI_MAPPINGS));
+		final JTextArea inpMappings = new JTextArea();//14, 45);
+		model.addListenerFor(Model.MIDI_MAPPINGS, new BoundTextFieldListener(inpMappings));
+		inpMappings.addKeyListener(new ProviderKeyListener<Model>(model, Model.MIDI_MAPPINGS));
 		
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
 		final JTextField inpPort = createTextField(model, Model.MIDI_PORT, "Enter a (receivable) MIDI Port Name");
 		
-		final JTextArea inpMappings = new JTextArea();//14, 45);
 		inpMappings.setToolTipText("Define MIDI Mappings, e.g.: 'l_hand(#torso), X, [0.0 .. 1.0 => 0 .. 127], 0, 1'");
 		inpMappings.setFont(Styles.FONT_MONOSPACED);
 		

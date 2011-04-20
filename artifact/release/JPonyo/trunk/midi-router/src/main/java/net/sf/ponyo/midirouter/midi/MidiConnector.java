@@ -21,9 +21,10 @@ public class MidiConnector {
 				continue;
 			}
 			
-			LOG.debug("Found MIDI device with port [" + midiPort + "].");
 			MidiDevice device = MidiSystem.getMidiDevice(info);
-			if(device.getMaxReceivers() != 0) {
+			int maxReceivers = device.getMaxReceivers();
+			LOG.debug("Found MIDI device with port [" + midiPort + "] and maxReceivers [" + maxReceivers + "].");
+			if(maxReceivers  != 0) {
 				return new MidiConnection(device.getReceiver());
 			}
 		}

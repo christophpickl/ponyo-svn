@@ -1,15 +1,22 @@
 package net.sf.ponyo.midirouter.presenter;
 
 import java.awt.Dimension;
+import java.awt.Toolkit;
 
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
-import net.sf.ponyo.jponyo.common.gui.HtmlWindow;
 import net.sf.ponyo.jponyo.common.pref.PreferencesPersister;
+import net.sf.ponyo.midirouter.ApplicationState;
 import net.sf.ponyo.midirouter.Model;
+import net.sf.ponyo.midirouter.logic.MidiMappings;
+import net.sf.ponyo.midirouter.logic.RouterService;
+import net.sf.ponyo.midirouter.logic.parser.MappingsParser;
+import net.sf.ponyo.midirouter.logic.parser.ParseErrors;
 import net.sf.ponyo.midirouter.view.MainView;
 import net.sf.ponyo.midirouter.view.MainViewListener;
+import net.sourceforge.jpotpourri.jpotface.dialog.PtErrorDialog;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -21,6 +28,8 @@ public class MainPresenter
 	private static final Log LOG = LogFactory.getLog(MainPresenter.class);
 	private final static String MODEL_PREF_ID = MainPresenter.class.getName() + "-MODEL_PREF_ID";
 	
+	private final MappingsParser parser = new MappingsParser();
+	private final RouterService router = new RouterService();
 	private final Model model;
 	final MainView window;
 
@@ -57,8 +66,47 @@ public class MainPresenter
 //	}
 	
 	public void onStartStopClicked() {
-		LOG.debug("onStartStopClicked()");
+		LOG.debug("onStartStopClicked() ... this.model.getApplicationState()=" + this.model.getApplicationState());
 		
+		if(this.model.getApplicationState() == ApplicationState.IDLE) {
+			this.doStart();
+		} else {
+			this.doStop();
+		}
+	}
+	private void doStart() {
+		LOG.debug("doStart()");
+		final String midiPort = this.model.getMidiPort();
+		final String midiMappings = this.model.getMidiMappings();
+		
+		ParseErrors parseErrors = new ParseErrors();
+		final MidiMappings mappings = this.parser.parseMappings(midiMappings, parseErrors);
+		if(parseErrors.hasErrors() == true) {
+			Toolkit.getDefaultToolkit().beep();
+			JOptionPane.showMessageDialog(this.window, "Following error(s) occured:\n" + parseErrors.prettyPrint(), "Invalid Configuration", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		
+		MainPresenter.this.model.setApplicationState(ApplicationState.CONNECTING);
+		new Thread(new Runnable() {
+			public void run() {
+				try {
+					MainPresenter.this.router.start(midiPort, mappings);
+					MainPresenter.this.model.setApplicationState(ApplicationState.RUNNING);
+				} catch(Exception e) { // TODO use custom connection exception type
+					LOG.warn("Startup error!", e);
+					MainPresenter.this.model.setApplicationState(ApplicationState.IDLE);
+					Toolkit.getDefaultToolkit().beep();
+					PtErrorDialog.newDialog(MainPresenter.this.window, "Startup Error", "Could not establish connection!", e).setVisible(true);
+				}
+			}
+		}, "ConnectionStarterThread").start();
+	}
+	
+	private void doStop() {
+		LOG.debug("doStop()");
+		this.router.stop();
+		this.model.setApplicationState(ApplicationState.IDLE);
 	}
 
 	public void onReloadClicked() {

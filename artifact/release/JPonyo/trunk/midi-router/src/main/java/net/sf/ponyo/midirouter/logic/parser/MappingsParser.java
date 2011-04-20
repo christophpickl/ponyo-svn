@@ -1,24 +1,35 @@
-package net.sf.ponyo.midirouter.refactor;
+package net.sf.ponyo.midirouter.logic.parser;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import net.sf.ponyo.jponyo.common.geom.Range;
 import net.sf.ponyo.jponyo.common.math.FloatPair;
 import net.sf.ponyo.jponyo.common.math.IntPair;
 import net.sf.ponyo.jponyo.entity.Direction;
 import net.sf.ponyo.jponyo.entity.Joint;
+import net.sf.ponyo.midirouter.logic.MidiMapping;
+import net.sf.ponyo.midirouter.logic.MidiMappings;
 
-@Deprecated
 public class MappingsParser {
-	public static int fooAdd(int x, int y) {
-		return x + y;
-	}
-	public static MidiMapping[] parseMappings(String raw) {
+	
+	private static final Log LOG = LogFactory.getLog(MappingsParser.class);
+	
+	public MidiMappings parseMappings(String raw, ParseErrors errors) {
 		List<MidiMapping> mappings = new LinkedList<MidiMapping>();
 		
+		if(raw.trim().isEmpty()) {
+			errors.addError(new ParseError("Configuration is completely empty!", -1));
+			return null;
+		}
+		
 		String[] lines = raw.split("\n");
+		int lineNumber = 0;
 		for (String line : lines) {
+			lineNumber++;
 			line = line.trim();
 			if(line.startsWith("#") || line.isEmpty()) {
 				continue;
@@ -27,7 +38,8 @@ public class MappingsParser {
 			String[] tokens = line.split(",");
 			
 			if(tokens.length != 5) {
-				throw new RuntimeException("Expected 5 arguments, but given: " + tokens.length);
+				errors.addError(new ParseError("Expected 5 arguments, but given: " + tokens.length, lineNumber));
+				continue;
 			}
 			
 			final String jointPart = tokens[0].trim();
@@ -44,33 +56,53 @@ public class MappingsParser {
 			}
 			Joint joint = Joint.byStringId(rawJointOsceletonId);
 			Direction direction = Direction.valueOf(tokens[1].trim());
-			Range range = parseRange(tokens[2].trim());
+			
+			Range range = parseRange(tokens[2].trim(), lineNumber, errors);
+			if(range == null) {
+				continue;
+			}
+			
 			Integer midiChannel = parseInt(tokens[3]);
 			// FIXME if(midiChannel == null) { display user error message "entered invalid midi channel" }
 			Integer controllerNumber = parseInt(tokens[4]);
 			
-			mappings.add(new MidiMapping(joint, direction, range,
-					midiChannel.intValue(), controllerNumber.intValue(), relativeToJoint));
+			MidiMapping mapping = new MidiMapping(joint, direction, range, midiChannel.intValue(), controllerNumber.intValue(), relativeToJoint);
+			LOG.debug("successfully parsed mapping: " + mapping);
+			mappings.add(mapping);
 		}
 		
-		return mappings.toArray(new MidiMapping[mappings.size()]);
+		if(errors.hasErrors() == false && mappings.isEmpty() == true) {
+			errors.addError(new ParseError("Configuration is empty!", -1));
+		}
+		
+		if(errors.hasErrors() == true) {
+			return null;
+		}
+		
+		return new MidiMappings(mappings);
 	}
 	
-	private static Range parseRange(String in) {
+	private Range parseRange(String in, int lineNumber, ParseErrors errors) {
 		if(in.charAt(0) != '[') {
-			throw new RuntimeException("Invalid: " + in);
+			errors.addError(new ParseError("Invalid: " + in, lineNumber));
+			return null;
 		}
+		
 		if(in.charAt(in.length() - 1) != ']') {
-			throw new RuntimeException("Invalid: " + in);
+			errors.addError(new ParseError("Invalid: " + in, lineNumber));
+			return null;
 		}
+		
 		final String inBracketsCleanded = in.substring(1, in.length() - 1).trim();
 		if(inBracketsCleanded.indexOf("=") == -1) {
-			throw new RuntimeException("Invalid: " + in);
+			errors.addError(new ParseError("Invalid: " + in, lineNumber));
+			return null;
 		}
 		
 		final String[] inFromToPair = inBracketsCleanded.split("=>");
 		if(inFromToPair.length != 2) {
-			throw new RuntimeException("Invalid: " + in);
+			errors.addError(new ParseError("Invalid: " + in, lineNumber));
+			return null;
 		}
 		final String rawFrom = inFromToPair[0].trim();
 		final String rawTo = inFromToPair[1].trim();

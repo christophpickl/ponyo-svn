@@ -26,14 +26,14 @@ public class MainView
 		DataFlowPanel dataPanel = new DataFlowPanel();
 		Component westPanel = this.createWestPanel(model);
 		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, westPanel , dataPanel);
-		split.setDividerLocation(300);
+		split.setDividerLocation(400);
 		split.setResizeWeight(0.0);
 		return split;
 	}
 	
 	private Component createWestPanel(Model model) {
 		ConfigurationPanel configPanel = new ConfigurationPanel(model);
-		ButtonBar buttonBar = new ButtonBar();
+		ButtonBar buttonBar = new ButtonBar(model);
 		buttonBar.addListener(this);
 		
 		JPanel westPanel = new JPanel(new GridBagLayout());

@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <name>${project.artifactId} (${project.version})</name>
+    <description>TODO</description>
+    <packaging>jar</packaging>
+    
+    <groupId>net.pulse-project.mkinector</groupId>
+    <artifactId>mkinector-debug-app</artifactId>
+    <version>0.1-SNAPSHOT</version>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                             P A R E N T                             -->
+    <!-- ******************************************************************* -->
+    
+    <parent>
+        <groupId>net.pulse-project.pom</groupId>
+        <artifactId>java-pom</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                         P R O P E R T I E S                         -->
+    <!-- ******************************************************************* -->
+    
+    <properties>
+    	<coverageClassRate>0</coverageClassRate>
+    	<coveragePackageRate>0</coveragePackageRate>
+    	<coverageTotalRate>0</coverageTotalRate>
+    </properties>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                       D E P E N D E N C I E S                       -->
+    <!-- ******************************************************************* -->
+    
+    <dependencies>
+    
+        <dependency>
+            <groupId>net.pulse-project.josceleton</groupId>
+            <artifactId>josceleton</artifactId>
+        </dependency>
+    
+        <dependency>
+            <groupId>net.pulse-project.josceleton</groupId>
+            <artifactId>josceleton-api</artifactId>
+        </dependency>
+    
+        <dependency>
+            <groupId>net.pulse-project.josceleton</groupId>
+            <artifactId>josceleton-core</artifactId>
+        </dependency>
+    
+        <dependency>
+            <groupId>net.pulse-project.josceleton</groupId>
+            <artifactId>josceleton-gestures</artifactId>
+        </dependency>
+    
+        <dependency>
+            <groupId>net.pulse-project.commons</groupId>
+            <artifactId>common-util</artifactId>
+        </dependency>
+    
+        <dependency>
+            <groupId>net.pulse-project.router</groupId>
+            <artifactId>router-midi</artifactId>
+        </dependency>
+    
+<!--        <dependency>-->
+<!--            <groupId>${project.groupId}</groupId>-->
+<!--            <artifactId>mkinector-logic</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--        </dependency>-->
+        
+<!--    -->
+<!--        <dependency>-->
+<!--            <groupId>${project.groupId}</groupId>-->
+<!--            <artifactId>midi</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--        </dependency>-->
+        
+<!--        <dependency>-->
+<!--            <groupId>${project.groupId}</groupId>-->
+<!--            <artifactId>core</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--        </dependency>-->
+<!--    -->
+<!--        <dependency>-->
+<!--            <groupId>${project.groupId}</groupId>-->
+<!--            <artifactId>test-lib</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--            <scope>test</scope>-->
+<!--        </dependency>-->
+        
+    </dependencies>
+    
+	
+    <!-- ******************************************************************* -->
+    <!--                           P R O F I L E S                           -->
+    <!-- ******************************************************************* -->
+    
+    <profiles>
+    	<!-- TODO copy'n'pasted profile -->
+    	<profile>
+    		<id>disableTests</id>
+    		<activation>
+    			<activeByDefault>false</activeByDefault>
+    		</activation>
+		    <properties>
+		    	<coverageClassRate>0</coverageClassRate>
+		    	<coveragePackageRate>0</coveragePackageRate>
+		    	<coverageTotalRate>0</coverageTotalRate>
+		    </properties>
+    	</profile>
+    </profiles>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                                S C M                                -->
+    <!-- ******************************************************************* -->
+    
+    <scm>
+        <connection>scm:svn:http://pulse-music.googlecode.com/svn/artifacts/mkinector-reactor/trunk/mkinector-debug-app</connection>
+        <developerConnection>scm:svn:https://pulse-music.googlecode.com/svn/artifacts/mkinector-reactor/trunk/mkinector-debug-app</developerConnection>
+        <url>http://pulse-music.googlecode.com/svn/artifacts/mkinector-reactor/trunk/mkinector-debug-app</url>
+    </scm>
+    
+</project>

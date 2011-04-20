@@ -13,16 +13,19 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 	public static final String MIDI_MAPPINGS = "MIDI_MAPPINGS";
 	public static final String APPLICATION_STATE = "APPLICATION_STATE";
 	public static final String ACTIVE_MAPPINGS = "ACTIVE_MAPPINGS";
+	public static final String FRAME_COUNT = "FRAME_COUNT";
 	
 	@PersistAsPreference
 	private String midiPort = "";
 	
 //	FIXME @PersistAsXml
-	private String midiMappings = "r_hand, X, [0.0 .. 1.0 => 0 .. 127], 1, 1";
+	private String midiMappings = "r_hand, X, [-300.0 .. 500.0 => 0 .. 127], 1, 1";
 
 	private ApplicationState applicationState = ApplicationState.IDLE;
 	
 	private MidiMappings activeMappings = null;
+	
+	private Integer frameCount = Integer.valueOf(0);
 	
 	public String getMidiPort() {
 		return this.midiPort;
@@ -53,7 +56,16 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 	}
 	@BindingSetter(Key = ACTIVE_MAPPINGS)
 	public void setActiveMappings(Object activeMappings) { // TODO hack: have to type mappings to object, as otherwise would have not been recognized by custom aspect :-/
+//		System.out.println("setActiveMappings: " + activeMappings);
 		this.activeMappings = (MidiMappings) activeMappings;
+	}
+	
+	public Integer getFrameCount() {
+		return this.frameCount;
+	}
+	@BindingSetter(Key = FRAME_COUNT)
+	public void setFrameCount(Object value) {
+		this.frameCount = (Integer) value;
 	}
 	
 	public Iterable<BindingListener> getBindingListenersFor(final String attributeKey) {
@@ -71,6 +83,8 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 			return this.getApplicationState();
 		} else if(propertyName.equals(ACTIVE_MAPPINGS)) {
 			return this.getActiveMappings();
+		} else if(propertyName.equals(FRAME_COUNT)) {
+			return this.getFrameCount();
 		}
 		throw new RuntimeException("Unhandled property name [" + propertyName + "]!");
 	}
@@ -84,6 +98,8 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 			this.setApplicationState((ApplicationState) value);
 		} else if(propertyName.equals(ACTIVE_MAPPINGS)) {
 			this.setActiveMappings((MidiMappings) value);
+		} else if(propertyName.equals(FRAME_COUNT)) {
+			this.setFrameCount((Integer) value);
 		} else {
 			throw new RuntimeException("Unhandled property name [" + propertyName + "]!");
 		}

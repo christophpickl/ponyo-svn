@@ -50,7 +50,7 @@ public class Context implements ConnectionListener, UserManagerCallback {
 	
 	private int i = 0;
 	public void onJointMessage(JointMessage message) {
-		if(this.i++ == 500) {
+		if(this.i++ == 1000) {
 			this.i = 0;
 			LOG.trace("onJointMessage(" + message + ")");
 		}

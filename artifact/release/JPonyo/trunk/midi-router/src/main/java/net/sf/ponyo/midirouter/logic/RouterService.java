@@ -3,6 +3,7 @@ package net.sf.ponyo.midirouter.logic;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.ShortMessage;
 
+import net.pulseproject.commons.midi.entity.ControllerMessage;
 import net.sf.ponyo.jponyo.common.io.IoUtil;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
@@ -25,10 +26,13 @@ public class RouterService implements MotionStreamListener {
 	
 	private MidiConnection midiConnection;
 	private final MessageTransformer transformer = new MessageTransformer();
+	
+	private Model model;
 	private MidiMappings mappings;
 	
-	public void start(String midiPort, MidiMappings startMappings) {
+	public void start(Model startModel, String midiPort, MidiMappings startMappings) {
 		LOG.info("start(..)");
+		this.model = startModel;
 		this.mappings = startMappings;
 		
 		try {
@@ -66,15 +70,23 @@ public class RouterService implements MotionStreamListener {
 //		MINOR PonyoContext should implement Closeable, so to be used by IoUtil.close(this.ponyoContext);
 		IoUtil.close(this.midiConnection);
 		this.mappings = null;
+		this.model = null;
+	}
+	
+
+	public synchronized void setMappings(MidiMappings mappings) {
+		this.mappings = mappings;
 	}
 
-	public void onMotion(MotionData data) {
+	public synchronized void onMotion(MotionData data) {
 		for (final MidiMapping map : this.mappings.getMappings()) {
 			if(data.getJoint() != map.getJoint()) {
 				continue;
 			}
-			ShortMessage message = this.transformer.transform(data, map);
-			this.midiConnection.send(message);
+			
+			ControllerMessage message = this.transformer.transformAndUpdate(data, map);
+			this.midiConnection.send(message.build());
+			this.model.setFrameCount(Integer.valueOf(this.model.getFrameCount().intValue() + 1));
 		}
 		
 	}

@@ -14,8 +14,8 @@ public class MidiMapping {
 	private final int controllerNumber;
 	private final Joint relativeToJoint;
 	
-//	private double recentReceivedData; ... raw data by openni
-//	private double recentSentData; ... scaled by range
+	private float recentReceivedData; // ... raw data by openni
+	private int recentSentData; // ... scaled by range
 
 	public MidiMapping(Joint joint, Direction direction, Range range, int midiChannel, int controllerNumber, Joint relativeToJoint) {
 		this.joint = joint;
@@ -43,6 +43,19 @@ public class MidiMapping {
 	}
 	public Joint getRelativeToJoint() {
 		return this.relativeToJoint;
+	}
+
+	public float getRecentReceivedData() {
+		return this.recentReceivedData;
+	}
+	public void setRecentReceivedData(float recentReceivedData) {
+		this.recentReceivedData = recentReceivedData;
+	}
+	public int getRecentSentData() {
+		return this.recentSentData;
+	}
+	public void setRecentSentData(int recentSentData) {
+		this.recentSentData = recentSentData;
 	}
 
 	@Override public String toString() {

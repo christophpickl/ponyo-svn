@@ -77,13 +77,9 @@ public class MainPresenter
 	private void doStart() {
 		LOG.debug("doStart()");
 		final String midiPort = this.model.getMidiPort();
-		final String midiMappings = this.model.getMidiMappings();
 		
-		ParseErrors parseErrors = new ParseErrors();
-		final MidiMappings mappings = this.parser.parseMappings(midiMappings, parseErrors);
-		if(parseErrors.hasErrors() == true) {
-			Toolkit.getDefaultToolkit().beep();
-			JOptionPane.showMessageDialog(this.window, "Following error(s) occured:\n" + parseErrors.prettyPrint(), "Invalid Configuration", JOptionPane.ERROR_MESSAGE);
+		final MidiMappings mappings = this.parseAndSetModelMappings();
+		if(mappings == null) {
 			return;
 		}
 		
@@ -91,10 +87,11 @@ public class MainPresenter
 		new Thread(new Runnable() {
 			public void run() {
 				try {
-					MainPresenter.this.router.start(midiPort, mappings);
+					MainPresenter.this.router.start(model, midiPort, mappings);
 					MainPresenter.this.model.setApplicationState(ApplicationState.RUNNING);
 				} catch(Exception e) { // TODO use custom connection exception type
 					LOG.warn("Startup error!", e);
+					MainPresenter.this.model.setActiveMappings(null);
 					MainPresenter.this.model.setApplicationState(ApplicationState.IDLE);
 					Toolkit.getDefaultToolkit().beep();
 					PtErrorDialog.newDialog(MainPresenter.this.window, "Startup Error", "Could not establish connection!", e).setVisible(true);
@@ -103,14 +100,35 @@ public class MainPresenter
 		}, "ConnectionStarterThread").start();
 	}
 	
+	private MidiMappings parseAndSetModelMappings() {
+		final String midiMappings = this.model.getMidiMappings();
+		ParseErrors parseErrors = new ParseErrors();
+		
+		final MidiMappings mappings = this.parser.parseMappings(midiMappings, parseErrors);
+		if(parseErrors.hasErrors() == true) {
+			Toolkit.getDefaultToolkit().beep();
+			JOptionPane.showMessageDialog(this.window, "Following error(s) occured:\n" + parseErrors.prettyPrint(), "Invalid Configuration", JOptionPane.ERROR_MESSAGE);
+		} else {
+			this.model.setActiveMappings(mappings);
+		}
+		
+		return mappings;
+	}
+	
 	private void doStop() {
 		LOG.debug("doStop()");
 		this.router.stop();
+		this.model.setActiveMappings(null);
 		this.model.setApplicationState(ApplicationState.IDLE);
+		this.model.setFrameCount(Integer.valueOf(0));
 	}
 
 	public void onReloadClicked() {
 		LOG.debug("onReloadClicked()");
+		MidiMappings mappings = this.parseAndSetModelMappings();
+		if(mappings != null) {
+			this.router.setMappings(mappings);
+		}
 	}
 	
 	public void onQuit() {

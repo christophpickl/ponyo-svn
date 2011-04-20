@@ -5,9 +5,13 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import javax.swing.JTable;
 
+import net.sf.ponyo.jponyo.common.binding.BindingListener;
 import net.sf.ponyo.midirouter.logic.Model;
+import net.sf.ponyo.midirouter.logic.midi.MidiMappings;
 import net.sf.ponyo.midirouter.refactor.ButtonBarListener;
 import net.sf.ponyo.midirouter.view.framework.AbstractMainView;
 
@@ -23,12 +27,36 @@ public class MainView
 	
 	@Override
 	protected final Component initComponent(Model model) {
-		DataFlowPanel dataPanel = new DataFlowPanel();
+		final JTable dataTable = this.initMidiMappingTable(model);
 		Component westPanel = this.createWestPanel(model);
-		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, westPanel , dataPanel);
+		
+		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, westPanel , new JScrollPane(dataTable));
 		split.setDividerLocation(400);
 		split.setResizeWeight(0.0);
 		return split;
+	}
+	
+	private JTable initMidiMappingTable(Model model) {
+		final MidiMappingTableModel tableModel = new MidiMappingTableModel();
+		final MidiMappingTable dataTable = new MidiMappingTable(tableModel);
+
+		model.addListenerFor(Model.ACTIVE_MAPPINGS, new BindingListener() {
+			public void onValueChanged(Object newValue) {
+				if(newValue == null) {
+					tableModel.setMappings(null);
+				} else {
+					MidiMappings mappings = (MidiMappings) newValue;
+					tableModel.setMappings(mappings.getMappings());
+				}
+			}
+		});
+
+		model.addListenerFor(Model.FRAME_COUNT, new BindingListener() {
+			public void onValueChanged(Object newValue) {
+				tableModel.fireTableDataChanged();
+			}
+		});
+		return dataTable;
 	}
 	
 	private Component createWestPanel(Model model) {

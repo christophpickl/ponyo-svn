@@ -1,0 +1,8 @@
+PROJECT (OpenNIUserBoxes)
+
+CMAKE_MINIMUM_REQUIRED (VERSION 2.8)
+#SET (CMAKE_VERBOSE_MAKEFILE ON)
+INCLUDE (build_scripts/cmake_common.txt)
+
+PN_DEPENDENCY_OPENNI ()
+PN_INIT_EXE (OpenNIUserBoxes OpenNIUserBoxes.exe)

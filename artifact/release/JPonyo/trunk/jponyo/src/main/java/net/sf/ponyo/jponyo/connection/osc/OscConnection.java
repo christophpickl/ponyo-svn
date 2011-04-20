@@ -2,6 +2,7 @@ package net.sf.ponyo.jponyo.connection.osc;
 
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
 import net.sf.ponyo.jponyo.common.math.Array3f;
+import net.sf.ponyo.jponyo.connection.AdvancedCapabilities;
 import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
 import net.sf.ponyo.jponyo.connection.JointData;
@@ -73,6 +74,14 @@ class OscConnection extends DefaultAsync<ConnectionListener> implements Connecti
 		for(final ConnectionListener listener : this.getListeners()) {
 			listener.onJointMessage(message);
 		}
+	}
+
+	public AdvancedCapabilities getAdvancedCapabilities() {
+		throw new UnsupportedOperationException("An OSC connection has no advanced capabilities!");
+	}
+
+	public boolean hasAdvancedCapabilities() {
+		return false;
 	}
 
 }

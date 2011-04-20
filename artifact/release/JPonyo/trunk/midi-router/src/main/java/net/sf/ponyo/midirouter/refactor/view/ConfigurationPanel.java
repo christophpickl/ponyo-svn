@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
 import net.sf.ponyo.jponyo.common.gui.BoundTextFieldListener;
-import net.sf.ponyo.midirouter.Model;
+import net.sf.ponyo.midirouter.refactor.Model;
 
 public class ConfigurationPanel extends JPanel {
 
@@ -28,16 +28,17 @@ public class ConfigurationPanel extends JPanel {
 
 		model.addListenerFor(Model.MIDI_PORT, new BoundTextFieldListener(inpPort));
 		model.addListenerFor(Model.MIDI_MAPPINGS, new BoundTextFieldListener(inpMappings));
-		inpPort.addKeyListener(new Foo(model, Model.MIDI_PORT));
-		inpMappings.addKeyListener(new Foo(model, Model.MIDI_MAPPINGS));
+		inpPort.addKeyListener(new ModelSettingKeyListener(model, Model.MIDI_PORT));
+		inpMappings.addKeyListener(new ModelSettingKeyListener(model, Model.MIDI_MAPPINGS));
 		
 		this.initComponents(listener, inpPort, inpMappings);
 	}
+	
 	private void initComponents(final MainPanelListener listener, final JTextField inpPort, final JTextArea inpMappings) {
 		inpPort.setToolTipText("Enter a (receivable) MIDI Port Name");
 		inpMappings.setToolTipText("Define MIDI Mappings, e.g.: 'l_hand(#torso), X, [0.0 .. 1.0 => 0 .. 127], 0, 1'");
-		inpPort.setFont(StyleConstants.FONT);
-		inpMappings.setFont(StyleConstants.FONT);
+		inpPort.setFont(MainWindow.FONT);
+		inpMappings.setFont(MainWindow.FONT);
 		
 		final JScrollPane mappingsScrollable = new JScrollPane(inpMappings);
 		inpMappings.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));

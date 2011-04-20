@@ -1,6 +1,7 @@
 package net.sf.ponyo.midirouter.refactor.view;
 
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
@@ -12,12 +13,12 @@ import javax.swing.WindowConstants;
 
 import net.pulseproject.commons.util.GuiUtil;
 import net.sf.ponyo.jponyo.common.gui.OSXAdapter;
-import net.sf.ponyo.midirouter.Model;
+import net.sf.ponyo.midirouter.refactor.Model;
 
 public class MainWindow extends JFrame {
 	
 	private static final long serialVersionUID = -2564259433681771255L;
-	
+	public static final Font FONT = new Font("Monaco", Font.PLAIN, 11);
 	private final MainWindowListener listener;
 	
 	private final Model model;

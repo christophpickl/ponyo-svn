@@ -6,10 +6,10 @@ import java.util.LinkedList;
 
 import net.sf.ponyo.jponyo.common.gui.HtmlWindow;
 import net.sf.ponyo.jponyo.common.pref.PreferencesPersister;
-import net.sf.ponyo.midirouter.Model;
 import net.sf.ponyo.midirouter.refactor.LogUtil;
 import net.sf.ponyo.midirouter.refactor.MappingsParser;
 import net.sf.ponyo.midirouter.refactor.MidiMapping;
+import net.sf.ponyo.midirouter.refactor.Model;
 import net.sf.ponyo.midirouter.refactor.PrototypeLogic;
 import net.sf.ponyo.midirouter.refactor.SomeUtil;
 

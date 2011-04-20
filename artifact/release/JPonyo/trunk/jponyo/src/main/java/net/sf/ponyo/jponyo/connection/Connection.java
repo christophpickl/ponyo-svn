@@ -8,4 +8,7 @@ import net.sf.ponyo.jponyo.common.async.Closeable;
  */
 public interface Connection extends Async<ConnectionListener>, Closeable {
 	
+	boolean hasAdvancedCapabilities();
+	AdvancedCapabilities getAdvancedCapabilities();
+	
 }

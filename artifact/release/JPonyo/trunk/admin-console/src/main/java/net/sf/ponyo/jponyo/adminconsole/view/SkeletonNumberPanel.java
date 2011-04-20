@@ -6,7 +6,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-import net.sf.ponyo.jponyo.core.GlobalSpace;
 import net.sf.ponyo.jponyo.entity.Joint;
 import net.sf.ponyo.jponyo.stream.MotionData;
 

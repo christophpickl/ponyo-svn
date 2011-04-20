@@ -8,13 +8,13 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.text.JTextComponent;
 
-import net.sf.ponyo.midirouter.Model;
+import net.sf.ponyo.midirouter.refactor.Model;
 
-public class Foo extends KeyAdapter {
+public class ModelSettingKeyListener extends KeyAdapter {
 	private final Model model;
 	private final String key;
 	
-	public Foo(Model model, String key) {
+	public ModelSettingKeyListener(Model model, String key) {
 		this.model = model;
 		this.key = key;
 	}

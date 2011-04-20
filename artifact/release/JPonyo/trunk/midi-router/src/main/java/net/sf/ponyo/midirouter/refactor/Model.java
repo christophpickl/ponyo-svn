@@ -1,4 +1,4 @@
-package net.sf.ponyo.midirouter;
+package net.sf.ponyo.midirouter.refactor;
 
 import net.sf.ponyo.jponyo.common.async.DefaultAsyncFor;
 import net.sf.ponyo.jponyo.common.binding.BindingListener;

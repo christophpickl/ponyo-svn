@@ -1,4 +1,4 @@
-package net.sf.ponyo.midirouter;
+package net.sf.ponyo.midirouter.refactor;
 
 import java.util.Properties;
 
@@ -6,8 +6,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
 import net.sf.ponyo.jponyo.common.io.IoUtil;
-import net.sf.ponyo.midirouter.refactor.LogUtil;
-import net.sf.ponyo.midirouter.refactor.SomeUtil;
 import net.sf.ponyo.midirouter.refactor.view.MainWindow;
 import net.sf.ponyo.midirouter.refactor.view.ViewMediator;
 

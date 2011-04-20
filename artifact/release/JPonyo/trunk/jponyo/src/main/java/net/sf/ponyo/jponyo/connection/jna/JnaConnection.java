@@ -2,6 +2,7 @@ package net.sf.ponyo.jponyo.connection.jna;
 
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
 import net.sf.ponyo.jponyo.common.math.Array3f;
+import net.sf.ponyo.jponyo.connection.AdvancedCapabilities;
 import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
 import net.sf.ponyo.jponyo.connection.JointData;
@@ -14,7 +15,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class JnaConnection
 	extends DefaultAsync<ConnectionListener>
-		implements Connection, OnUserStateChangedCallback, OnJointPositionChangedCallback {
+		implements Connection, OnUserStateChangedCallback, OnJointPositionChangedCallback, AdvancedCapabilities {
 	
 	private static final Log LOG = LogFactory.getLog(JnaConnection.class);
 	
@@ -58,5 +59,21 @@ public class JnaConnection
 		for(ConnectionListener listener : this.getListeners()) {
 			listener.onJointMessage(message);
 		}
+	}
+
+	public AdvancedCapabilities getAdvancedCapabilities() {
+		return this;
+	}
+
+	public boolean hasAdvancedCapabilities() {
+		return true;
+	}
+
+	public String getOpenNIVersion() {
+		return this.jnaLib.getOpenNIVersion();
+	}
+
+	public String getPonyoVersion() {
+		return this.jnaLib.getPonyoVersion();
 	}
 }

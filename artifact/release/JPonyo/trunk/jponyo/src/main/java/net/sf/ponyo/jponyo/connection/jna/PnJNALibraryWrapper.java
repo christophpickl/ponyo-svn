@@ -66,6 +66,16 @@ class PnJNALibraryWrapper {
 		}
 	}
 	
+	public String getPonyoVersion() {
+		this.initNativeLibrary();
+		return PnJNALibraryWrapper.nativeLibrary.pnGetPonyoVersion();
+	}
+	
+	public String getOpenNIVersion() {
+		this.initNativeLibrary();
+		return PnJNALibraryWrapper.nativeLibrary.pnGetOpenNIVersion();
+	}
+	
 	/**
 	 * Postpone library initialisation as late as possible.
 	 */

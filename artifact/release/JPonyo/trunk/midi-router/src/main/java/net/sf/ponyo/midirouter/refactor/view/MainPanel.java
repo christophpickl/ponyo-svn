@@ -16,8 +16,8 @@ import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
 
 import net.sf.ponyo.jponyo.common.binding.BindingListener;
-import net.sf.ponyo.midirouter.Model;
 import net.sf.ponyo.midirouter.refactor.LogUtil;
+import net.sf.ponyo.midirouter.refactor.Model;
 
 public class MainPanel extends JPanel {
 
@@ -41,7 +41,7 @@ public class MainPanel extends JPanel {
 		LogUtil.setLogField(this.logField);
 		
 
-		this.logField.setFont(StyleConstants.FONT);
+		this.logField.setFont(MainWindow.FONT);
 
 		model.addListenerFor(Model.STATE, new BindingListener() {
 			public final void onValueChanged(Object newValue) {

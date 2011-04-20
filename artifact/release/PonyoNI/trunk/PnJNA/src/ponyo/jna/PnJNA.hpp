@@ -27,6 +27,8 @@ extern "C" int pnStartByOniRecording(
  */
 extern "C" void pnShutdown();
 
+extern "C" const char* pnGetPonyoVersion();
+extern "C" const char* pnGetOpenNIVersion();
 
 /**
  * Internal method containing common generic startup logic.

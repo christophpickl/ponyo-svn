@@ -14,6 +14,10 @@ class CommonUtils {
 public:
 	static void sleep(int seconds);
 	static void waitHitEnter(bool printDefaultPrompt = true);
+
+	static const char* getOpenNIVersion();
+	static const char* getPonyoVersion();
+
 private:
 	static Log* LOG;
 

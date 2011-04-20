@@ -1,7 +1,8 @@
 #include <boost/thread.hpp>
 #include <boost/date_time.hpp>
+
+#include <ponyo/common/pnfiltering.hpp>
 #include <ponyo/common/CommonUtils.hpp>
-//#include <XnCppWrapper.h>
 
 namespace pn {
 Log* CommonUtils::LOG = NEW_LOG();
@@ -23,6 +24,14 @@ Log* CommonUtils::LOG = NEW_LOG();
 
 	boost::posix_time::seconds workTime(seconds);
 	boost::this_thread::sleep(workTime);
+}
+
+/*static*/ const char* CommonUtils::getOpenNIVersion() {
+	return XN_BRIEF_VERSION_STRING;
+}
+
+/*static*/ const char* CommonUtils::getPonyoVersion() {
+	return PN_VERSION_STRING_AND_CO;
 }
 
 }

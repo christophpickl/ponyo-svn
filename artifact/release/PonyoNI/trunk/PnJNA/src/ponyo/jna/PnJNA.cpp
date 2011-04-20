@@ -1,4 +1,3 @@
-
 #include <ponyo/jna/PnJNA.hpp>
 
 using namespace pn;
@@ -96,3 +95,12 @@ extern "C" void pnShutdown() {
 		LOG->warn("nothing to shutdown");
 	}
 }
+
+extern "C" const char* pnGetPonyoVersion() {
+	return CommonUtils::getPonyoVersion();
+}
+
+extern "C" const char* pnGetOpenNIVersion() {
+	return CommonUtils::getOpenNIVersion();
+}
+

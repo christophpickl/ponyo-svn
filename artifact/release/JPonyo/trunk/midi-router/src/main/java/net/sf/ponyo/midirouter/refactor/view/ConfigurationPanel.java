@@ -18,6 +18,7 @@ import javax.swing.ScrollPaneConstants;
 import net.sf.ponyo.jponyo.common.gui.BoundTextFieldListener;
 import net.sf.ponyo.midirouter.refactor.Model;
 
+@Deprecated
 public class ConfigurationPanel extends JPanel {
 
 	private static final long serialVersionUID = 7313613687940417715L;

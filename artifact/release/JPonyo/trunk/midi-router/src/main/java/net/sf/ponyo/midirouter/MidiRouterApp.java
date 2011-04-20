@@ -1,15 +1,17 @@
 package net.sf.ponyo.midirouter;
 
-import javax.swing.SwingUtilities;
+import net.sf.ponyo.midirouter.presenter.MainPresenter;
+import net.sf.ponyo.midirouter.presenter.MainPresenterListener;
+import net.sf.ponyo.midirouter.view.MainView;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import net.sf.ponyo.midirouter.view.MainWindow;
-
-public class MidiRouterApp {
+public class MidiRouterApp implements MainPresenterListener {
 	
 	private static final Log LOG = LogFactory.getLog(MidiRouterApp.class);
+	
+	private MainPresenter presenter;
 	
 	public static void main(String[] args) {
 		new MidiRouterApp().startApplication();
@@ -17,16 +19,15 @@ public class MidiRouterApp {
 	
 	public void startApplication() {
 		LOG.info("startApplication()");
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				onShowMainWindow();
-			}
-		});
+		final MainView window =  new MainView();
+		this.presenter = new MainPresenter(window);
+		this.presenter.addListener(this);
+		this.presenter.show();
 	}
 
-	void onShowMainWindow() {
-		LOG.info("onShowMainWindow()");
-		MainWindow window = new MainWindow();
-		window.setVisible(true);
+	public void onQuit() {
+		LOG.debug("onQuit()");
+		// TODO destroy connection, etc
 	}
+
 }

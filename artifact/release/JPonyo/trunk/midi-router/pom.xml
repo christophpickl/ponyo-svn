@@ -65,6 +65,11 @@
 			<version>0.1-SNAPSHOT</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>net.sourceforge.jpotpourri</groupId>
+			<artifactId>jpotface</artifactId>
+<!--			<version>0.0.1-SNAPSHOT</version>-->
+		</dependency>
 		
 	    <!-- E X T E R N A L -->
     	<!-- *********************************************************** -->

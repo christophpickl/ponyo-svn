@@ -15,6 +15,7 @@ import net.pulseproject.commons.util.GuiUtil;
 import net.sf.ponyo.jponyo.common.gui.OSXAdapter;
 import net.sf.ponyo.midirouter.refactor.Model;
 
+@Deprecated
 public class MainWindow extends JFrame {
 	
 	private static final long serialVersionUID = -2564259433681771255L;

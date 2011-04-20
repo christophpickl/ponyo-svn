@@ -31,6 +31,8 @@
         <!-- V E R S I O N S   I N T E R N A L -->
    		<!-- *********************************************************** -->
    		<version_ponyo-checkstyle-config>0.1-SNAPSHOT</version_ponyo-checkstyle-config>
+   		<version_jpotface>0.0.1-SNAPSHOT</version_jpotface>
+   		<version_jpotpourri>0.0.2-SNAPSHOT</version_jpotpourri>
    		
         <!-- V E R S I O N S   E X T E R N A L -->
    		<!-- *********************************************************** -->
@@ -46,7 +48,19 @@
     
     <dependencyManagement>
     	<dependencies>
-	        
+		        
+			<dependency>
+				<groupId>net.sourceforge.jpotpourri</groupId>
+				<artifactId>jpotface</artifactId>
+				<version>${version_jpotface}</version>
+			</dependency>
+		        
+			<dependency>
+				<groupId>net.sourceforge.jpotpourri</groupId>
+				<artifactId>jpotpourri</artifactId>
+				<version>${version_jpotpourri}</version>
+			</dependency>
+		
 	        <!-- P S E U D O   E X T E R N A L -->
     		<!-- *********************************************************** -->
     		<!-- third party libs provided by jponyo as they are not available in other/official repos -->

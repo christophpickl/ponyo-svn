@@ -8,9 +8,9 @@ import javax.swing.SwingUtilities;
 
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
 import net.sf.ponyo.jponyo.common.pref.PreferencesPersister;
-import net.sf.ponyo.midirouter.ApplicationState;
-import net.sf.ponyo.midirouter.Model;
+import net.sf.ponyo.midirouter.logic.ApplicationState;
 import net.sf.ponyo.midirouter.logic.MidiMappings;
+import net.sf.ponyo.midirouter.logic.Model;
 import net.sf.ponyo.midirouter.logic.RouterService;
 import net.sf.ponyo.midirouter.logic.parser.MappingsParser;
 import net.sf.ponyo.midirouter.logic.parser.ParseErrors;

@@ -13,7 +13,7 @@ import javax.swing.ScrollPaneConstants;
 
 import net.sf.ponyo.jponyo.common.gui.BoundTextFieldListener;
 import net.sf.ponyo.jponyo.common.gui.ProviderKeyListener;
-import net.sf.ponyo.midirouter.Model;
+import net.sf.ponyo.midirouter.logic.Model;
 
 public class ConfigurationPanel extends JPanel {
 

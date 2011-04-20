@@ -8,8 +8,8 @@ import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
 import net.sf.ponyo.jponyo.stream.MotionData;
 import net.sf.ponyo.jponyo.stream.MotionStreamListener;
-import net.sf.ponyo.midirouter.midi.MidiConnection;
-import net.sf.ponyo.midirouter.midi.MidiConnector;
+import net.sf.ponyo.midirouter.logic.midi.MidiConnection;
+import net.sf.ponyo.midirouter.logic.midi.MidiConnector;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -1,5 +1,6 @@
 package net.sf.ponyo.midirouter;
 
+import net.sf.ponyo.midirouter.logic.Model;
 import net.sf.ponyo.midirouter.presenter.MainPresenter;
 import net.sf.ponyo.midirouter.presenter.MainPresenterListener;
 import net.sf.ponyo.midirouter.view.MainView;

@@ -1,4 +1,4 @@
-package net.sf.ponyo.midirouter.midi;
+package net.sf.ponyo.midirouter.logic.midi;
 
 import javax.sound.midi.MidiDevice;
 import javax.sound.midi.MidiSystem;

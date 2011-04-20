@@ -1,4 +1,4 @@
-package net.sf.ponyo.midirouter;
+package net.sf.ponyo.midirouter.view.framework;
 
 public interface QuitHandler {
 	

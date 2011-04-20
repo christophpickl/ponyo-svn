@@ -1,4 +1,4 @@
-package net.sf.ponyo.midirouter.midi;
+package net.sf.ponyo.midirouter.logic.midi;
 
 import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;

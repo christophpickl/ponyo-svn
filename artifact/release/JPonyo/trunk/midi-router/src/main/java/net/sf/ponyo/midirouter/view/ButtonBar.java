@@ -10,8 +10,8 @@ import javax.swing.JPanel;
 import net.sf.ponyo.jponyo.common.async.Async;
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
 import net.sf.ponyo.jponyo.common.binding.BindingListener;
-import net.sf.ponyo.midirouter.ApplicationState;
-import net.sf.ponyo.midirouter.Model;
+import net.sf.ponyo.midirouter.logic.ApplicationState;
+import net.sf.ponyo.midirouter.logic.Model;
 import net.sf.ponyo.midirouter.refactor.ButtonBarListener;
 
 public class ButtonBar extends JPanel implements Async<ButtonBarListener> {

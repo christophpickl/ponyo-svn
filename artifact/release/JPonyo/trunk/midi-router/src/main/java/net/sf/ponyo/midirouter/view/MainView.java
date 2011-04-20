@@ -7,7 +7,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
-import net.sf.ponyo.midirouter.Model;
+import net.sf.ponyo.midirouter.logic.Model;
 import net.sf.ponyo.midirouter.refactor.ButtonBarListener;
 import net.sf.ponyo.midirouter.view.framework.AbstractMainView;
 

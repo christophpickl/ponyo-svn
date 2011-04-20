@@ -1,11 +1,10 @@
-package net.sf.ponyo.midirouter;
+package net.sf.ponyo.midirouter.logic;
 
 import net.sf.ponyo.jponyo.common.async.DefaultAsyncFor;
 import net.sf.ponyo.jponyo.common.binding.BindingListener;
 import net.sf.ponyo.jponyo.common.binding.BindingProvider;
 import net.sf.ponyo.jponyo.common.binding.BindingSetter;
 import net.sf.ponyo.jponyo.common.pref.PersistAsPreference;
-import net.sf.ponyo.midirouter.logic.MidiMappings;
 
 public class Model extends DefaultAsyncFor<String, BindingListener> implements BindingProvider {
 	

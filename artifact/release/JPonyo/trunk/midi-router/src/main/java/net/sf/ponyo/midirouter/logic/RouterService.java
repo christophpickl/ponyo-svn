@@ -63,7 +63,7 @@ public class RouterService implements MotionStreamListener {
 	private void safeClose() {
 		this.ponyoContext.shutdown();
 		
-//		TODO IoUtil.close(this.ponyoContext);
+//		MINOR PonyoContext should implement Closeable, so to be used by IoUtil.close(this.ponyoContext);
 		IoUtil.close(this.midiConnection);
 		this.mappings = null;
 	}

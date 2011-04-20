@@ -3,49 +3,32 @@ package net.sf.ponyo.midirouter.logic;
 import javax.sound.midi.ShortMessage;
 
 import net.pulseproject.commons.midi.entity.ControllerMessage;
+import net.sf.ponyo.jponyo.common.geom.RangeScaler;
 import net.sf.ponyo.jponyo.common.math.Array3f;
 import net.sf.ponyo.jponyo.entity.Joint;
 import net.sf.ponyo.jponyo.stream.MotionData;
 import net.sf.ponyo.midirouter.logic.midi.MidiMapping;
-import net.sf.ponyo.midirouter.refactor.LogUtil;
-import net.sf.ponyo.midirouter.refactor.SomeUtil;
 
 public class MessageTransformer {
-
+	
+	private final RangeScaler scaler = new RangeScaler();
+	
 	public ShortMessage transform(MotionData data, MidiMapping map) {
-		Joint joint = data.getJoint();
+		assert(data.getJoint() == map.getJoint());
+		
 		Array3f position = data.getJointPosition();
+		float positionValue = map.getDirection().extractValue(position);
 		
-		/*
-		float coordValue = this.direction.extractValue(coord);
-		if(this.relativeToJoint != null) {
-			// FIXME
-//			if(skeleton.isCoordinateAvailable(this.relativeToJoint) == false) {
-//				System.err.println("Could not build MIDI message because of unsufficient skeleton data for joint [" + this.relativeToJoint.getLabel() + "]!");
-//				return null; // ouch
-//			}
-			Array3f coordinates = skeleton.getCoordinates(this.relativeToJoint);
-			final float relativeCoordValue = this.direction.extractValue(coordinates);
-			coordValue = relativeCoordValue - coordValue;
-			
-		}
-		final int controllerValue = SCALER.scale(coordValue, this.range);
-		
-		this.currentLogCount++;
-		if(this.currentLogCount == LogUtil.LOG_JOINT_EVERY) {
-//			final int prettyCoordValue = Math.round(coordValue * 100);
-			this.currentLogCount = 0;
-			LogUtil.log("Captured " +
-					SomeUtil.fillString(this.joint.getLabel(), 12) + " (coord: " + coordValue + ") -> " +
-					"MIDI ch |ctl|val: " +
-						this.midiChannel + " | " +
-						this.controllerNumber + " | " +
-						controllerValue);
+		Joint relativeToJoint = map.getRelativeToJoint();
+		if(relativeToJoint != null) {
+			Array3f relativePosition = data.getUser().getSkeleton().getCoordinates(relativeToJoint);
+			float relativePositionValue = map.getDirection().extractValue(relativePosition);
+			positionValue = relativePositionValue - positionValue;
 		}
 		
-		return new ControllerMessage(this.midiChannel, this.controllerNumber, controllerValue).build();
-		*/
-		return null;
+		int controllerValue = this.scaler.scale(positionValue, map.getRange());
+		
+		return new ControllerMessage(map.getMidiChannel(), map.getControllerNumber(), controllerValue).build();
 	}
 
 }

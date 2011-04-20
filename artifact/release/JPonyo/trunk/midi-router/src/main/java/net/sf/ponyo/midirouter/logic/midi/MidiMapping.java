@@ -29,7 +29,22 @@ public class MidiMapping {
 	public final Joint getJoint() {
 		return this.joint;
 	}
-	
+	public Direction getDirection() {
+		return this.direction;
+	}
+	public Range getRange() {
+		return this.range;
+	}
+	public int getMidiChannel() {
+		return this.midiChannel;
+	}
+	public int getControllerNumber() {
+		return this.controllerNumber;
+	}
+	public Joint getRelativeToJoint() {
+		return this.relativeToJoint;
+	}
+
 	@Override public String toString() {
 		return "MidiMapping[joint="+this.joint+", direction="+this.direction+"]";
 	}

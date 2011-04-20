@@ -3,6 +3,7 @@ package net.sf.ponyo.midirouter.logic.midi;
 import javax.sound.midi.Receiver;
 import javax.sound.midi.ShortMessage;
 
+import net.pulseproject.commons.util.MidiUtil;
 import net.sf.ponyo.jponyo.common.async.Closeable;
 
 import org.apache.commons.logging.Log;
@@ -19,6 +20,7 @@ public class MidiConnection implements Closeable {
 	}
 	
 	public void send(ShortMessage message) {
+		LOG.trace("send(message="+MidiUtil.toString(message)+")");
 		this.receiver.send(message, 0);
 	}
 	

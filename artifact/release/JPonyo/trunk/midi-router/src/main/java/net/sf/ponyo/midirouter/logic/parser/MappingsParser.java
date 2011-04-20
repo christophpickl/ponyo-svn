@@ -11,8 +11,8 @@ import net.sf.ponyo.jponyo.common.math.FloatPair;
 import net.sf.ponyo.jponyo.common.math.IntPair;
 import net.sf.ponyo.jponyo.entity.Direction;
 import net.sf.ponyo.jponyo.entity.Joint;
-import net.sf.ponyo.midirouter.logic.MidiMapping;
-import net.sf.ponyo.midirouter.logic.MidiMappings;
+import net.sf.ponyo.midirouter.logic.midi.MidiMapping;
+import net.sf.ponyo.midirouter.logic.midi.MidiMappings;
 
 public class MappingsParser {
 	

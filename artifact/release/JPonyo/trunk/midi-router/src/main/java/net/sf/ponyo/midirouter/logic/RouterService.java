@@ -10,6 +10,8 @@ import net.sf.ponyo.jponyo.stream.MotionData;
 import net.sf.ponyo.jponyo.stream.MotionStreamListener;
 import net.sf.ponyo.midirouter.logic.midi.MidiConnection;
 import net.sf.ponyo.midirouter.logic.midi.MidiConnector;
+import net.sf.ponyo.midirouter.logic.midi.MidiMapping;
+import net.sf.ponyo.midirouter.logic.midi.MidiMappings;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

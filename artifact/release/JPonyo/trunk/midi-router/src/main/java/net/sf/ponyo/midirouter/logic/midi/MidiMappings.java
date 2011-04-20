@@ -1,4 +1,4 @@
-package net.sf.ponyo.midirouter.logic;
+package net.sf.ponyo.midirouter.logic.midi;
 
 import java.util.List;
 

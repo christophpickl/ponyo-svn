@@ -1,4 +1,4 @@
-package net.sf.ponyo.midirouter.logic;
+package net.sf.ponyo.midirouter.logic.midi;
 
 import net.sf.ponyo.jponyo.common.geom.Range;
 import net.sf.ponyo.jponyo.entity.Direction;

@@ -6,6 +6,7 @@ import net.pulseproject.commons.midi.entity.ControllerMessage;
 import net.sf.ponyo.jponyo.common.math.Array3f;
 import net.sf.ponyo.jponyo.entity.Joint;
 import net.sf.ponyo.jponyo.stream.MotionData;
+import net.sf.ponyo.midirouter.logic.midi.MidiMapping;
 import net.sf.ponyo.midirouter.refactor.LogUtil;
 import net.sf.ponyo.midirouter.refactor.SomeUtil;
 

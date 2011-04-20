@@ -15,6 +15,7 @@ public aspect BindingAspect {
 		//call(void *.addListenerFor(String, BindingListener));
 	
 	after(BindingProvider bp, String key, BindingListener listener) returning: bindingAddFor(bp, key, listener) {
+		System.out.println("after(BindingProvider bp, String key, BindingListener listener) returning: bindingAddFor(bp, key, listener) { XXXXXXXXXXX");
 		final Method setter = findSetterByKey(bp, key);
 		final Object newValue = safeInvokeMethod(bp, lookupGetterForSetter(bp.getClass(), setter.getName()));
 		this.dispatchValueChanged(bp, key, newValue);

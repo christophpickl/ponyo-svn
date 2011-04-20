@@ -28,6 +28,11 @@ public class BindingSample {
 			// TODO das bekommt man auch noch raus => DefaultAsyncFor muss teilweise dafuer ein interface hergeben, wo dann aspekt getListenersFor direkt aufrufen kann!
 			return this.getListenersFor(attributeKey);
 		}
+		public Object get(String propertyName) {
+			return null;
+		}
+		public void set(String propertyName, Object value) {
+		}
 		
 	}
 }

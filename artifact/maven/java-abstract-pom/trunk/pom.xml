@@ -62,7 +62,11 @@
 		<version_compiler_plugin>2.3.2</version_compiler_plugin>
 		<version_eclipse_ajdt>2.1</version_eclipse_ajdt>
 		<version_jar_plugin>2.3.1</version_jar_plugin>
-		<version_osxappbundle_plugin>1.0-alpha-2</version_osxappbundle_plugin>
+		
+		<!-- we are using our own homebrewed osxappbundle version ;) -->
+		<version_osxappbundle_plugin>1.0-alpha-3-SNAPSHOT</version_osxappbundle_plugin>
+<!--		<version_osxappbundle_plugin>1.0-alpha-2</version_osxappbundle_plugin>-->
+		
 		<version_source_plugin>2.1.2</version_source_plugin>
    		
    		<!-- ************ REPORT PLUGINS ************ -->

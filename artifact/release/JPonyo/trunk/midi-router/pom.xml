@@ -85,6 +85,8 @@
     <!-- ******************************************************************* -->
     
     <build>
+    	<finalName>PonyoMidiRouter-${project.version}</finalName>
+    	
 <!--        <resources>-->
 <!--            <resource>-->
 <!--                <directory>src/main/resources</directory>-->
@@ -104,6 +106,26 @@
 <!--        </resources>-->
         
         <plugins>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>aspectj-maven-plugin</artifactId>
+				<configuration>
+					<aspectLibraries>
+						<aspectLibrary>
+							<groupId>net.sf.ponyo.jponyo</groupId>
+							<artifactId>common</artifactId>
+						</aspectLibrary>
+					</aspectLibraries>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>compile</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+        
         
 <!--            <plugin>-->
 <!--                <artifactId>maven-assembly-plugin</artifactId>-->
@@ -138,7 +160,8 @@
 					<bundleName>${project.name}</bundleName>
 <!--					maybe we could use a custom dict file to change some advanced settings: <dictionaryFile>Info.plist.template</dictionaryFile>-->
 					<useScreenMenuBar>true</useScreenMenuBar>
-					<diskImageFile>${project.build.directory}/PonyoMidiRouter-${project.version}.dmg</diskImageFile>
+<!--					<diskImageFile>${project.build.directory}/PonyoMidiRouter-${project.version}.dmg</diskImageFile>-->
+					
 					<additionalResources>
                         <fileSet>
                             <directory>${path_resources_osx}</directory>
@@ -160,7 +183,8 @@
            
 		</plugins>
 	</build>
-    
+	
+	    
     <!-- ******************************************************************* -->
     <!--                                S C M                                -->
     <!-- ******************************************************************* -->

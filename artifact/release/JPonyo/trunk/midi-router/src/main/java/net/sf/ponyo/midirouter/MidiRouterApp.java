@@ -19,8 +19,9 @@ public class MidiRouterApp implements MainPresenterListener {
 	
 	public void startApplication() {
 		LOG.info("startApplication()");
-		final MainView window =  new MainView();
-		this.presenter = new MainPresenter(window);
+		final Model model = new Model();
+		final MainView window =  new MainView(model);
+		this.presenter = new MainPresenter(model, window);
 		this.presenter.addListener(this);
 		this.presenter.show();
 	}

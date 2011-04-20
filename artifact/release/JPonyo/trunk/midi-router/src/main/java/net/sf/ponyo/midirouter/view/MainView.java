@@ -7,30 +7,34 @@ import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 
+import net.sf.ponyo.midirouter.Model;
+import net.sf.ponyo.midirouter.refactor.ButtonBarListener;
 import net.sf.ponyo.midirouter.view.framework.AbstractMainView;
-import net.sf.ponyo.midirouter.view.framework.AbstractMainViewListener;
 
-public class MainView extends AbstractMainView<AbstractMainViewListener> {
+public class MainView
+	extends AbstractMainView<MainViewListener, Model>
+		implements ButtonBarListener {
 	
 	private static final long serialVersionUID = 7350458392797569309L;
 	
-	public MainView() {
-		super("Ponyo MIDI Router");
+	public MainView(Model model) {
+		super(model, "Ponyo MIDI Router");
 	}
 	
 	@Override
-	protected final Component initComponent() {
+	protected final Component initComponent(Model model) {
 		DataFlowPanel dataPanel = new DataFlowPanel();
-		Component westPanel = this.createWestPanel();
+		Component westPanel = this.createWestPanel(model);
 		JSplitPane split = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, westPanel , dataPanel);
 		split.setDividerLocation(300);
 		split.setResizeWeight(0.0);
 		return split;
 	}
 	
-	private Component createWestPanel() {
-		ConfigurationPanel configPanel = new ConfigurationPanel();
+	private Component createWestPanel(Model model) {
+		ConfigurationPanel configPanel = new ConfigurationPanel(model);
 		ButtonBar buttonBar = new ButtonBar();
+		buttonBar.addListener(this);
 		
 		JPanel westPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
@@ -47,6 +51,18 @@ public class MainView extends AbstractMainView<AbstractMainViewListener> {
 		westPanel.add(buttonBar, c);
 		
 		return westPanel;
+	}
+
+	public void onStartStopClicked() {
+		for (ButtonBarListener listener : this.getListeners()) {
+			listener.onStartStopClicked();
+		}
+	}
+
+	public void onReloadClicked() {
+		for (ButtonBarListener listener : this.getListeners()) {
+			listener.onReloadClicked();
+		}
 	}
 	
 }

@@ -9,23 +9,26 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import net.sf.ponyo.jponyo.common.async.Async;
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
+import net.sf.ponyo.jponyo.common.binding.BindingProvider;
 import net.sf.ponyo.jponyo.common.gui.OSXAdapter;
 import net.sourceforge.jpotpourri.tools.PtUserSniffer;
 
-public abstract class AbstractMainView<L extends AbstractMainViewListener> extends JFrame implements Async<L> {
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+public abstract class AbstractMainView<L extends AbstractMainViewListener, P extends BindingProvider> extends JFrame implements Async<L> {
 
 	private static final long serialVersionUID = -1714573026004141885L;
 	private static final Log LOG = LogFactory.getLog(AbstractMainView.class);
 	
-	private final DefaultAsync<L> listenersAsync = new DefaultAsync<L>();
+	private final P provider;
+	private final DefaultAsync<L> async = new DefaultAsync<L>();
 	private boolean isInitialized = false;
 	
-	public AbstractMainView(String windowTitle) {
+	public AbstractMainView(P provider, String windowTitle) {
+		this.provider = provider;
 		this.setTitle(windowTitle);
 		
 		this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -38,10 +41,13 @@ public abstract class AbstractMainView<L extends AbstractMainViewListener> exten
 //			public void windowActivated(WindowEvent arg0) {
 		});
 	}
+	
+	protected abstract Component initComponent(P provider);
 
 	public void display() {
 		this.display(null);
 	}
+	
 	public void display(Dimension enforcedSize) {
 		if(this.isInitialized == false) {
 			this.initialize(enforcedSize);
@@ -52,7 +58,7 @@ public abstract class AbstractMainView<L extends AbstractMainViewListener> exten
 	
 	private void initialize(Dimension enforcedSize) {
 		LOG.debug("initialize()");
-		this.getContentPane().add(this.initComponent());
+		this.getContentPane().add(this.initComponent(this.provider));
 		
 		if(enforcedSize == null) {
 			this.pack();
@@ -98,23 +104,25 @@ public abstract class AbstractMainView<L extends AbstractMainViewListener> exten
         this.setLocation(x, y);
 	}
 	
-	protected abstract Component initComponent();
-	
 	void onWindowClosing() {
 		LOG.debug("onWindowClosing()");
 		this.dispatchQuit();
 	}
 	
 	private void dispatchQuit() {
-		for (L listener : this.listenersAsync.getListeners()) {
+		for (L listener : this.async.getListeners()) {
 			listener.onQuit();
 		}
 	}
 	public final void addListener(L listener) {
-		this.listenersAsync.addListener(listener);
+		this.async.addListener(listener);
 	}
 
-	public void removeListener(L listener) {
-		this.listenersAsync.removeListener(listener);
+	public final void removeListener(L listener) {
+		this.async.removeListener(listener);
+	}
+	
+	protected final Iterable<L> getListeners() {
+		return this.async.getListeners();
 	}
 }

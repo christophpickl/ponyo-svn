@@ -3,7 +3,6 @@ package net.sf.ponyo.midirouter.midi;
 import javax.sound.midi.MidiDevice;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
-import javax.sound.midi.Receiver;
 import javax.sound.midi.MidiDevice.Info;
 
 import org.apache.commons.logging.Log;
@@ -13,8 +12,8 @@ public class MidiConnector {
 
 	private static final Log LOG = LogFactory.getLog(MidiConnector.class);
 	
-	public MidiConnection loadMidiReceiver(String midiPort) throws MidiUnavailableException {
-		LOG.info("loadReceiverDevice(midiPort=" + midiPort + ")");
+	public MidiConnection openConnection(String midiPort) throws MidiUnavailableException {
+		LOG.info("openConnection(midiPort=" + midiPort + ")");
 		
 		Info[] infos = MidiSystem.getMidiDeviceInfo();
 		for (Info info : infos) {

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <name>JPonyo MidiRouter</name>
+    <name>Ponyo Midi Router</name>
     <packaging>jar</packaging>
     
     <groupId>net.sf.ponyo.jponyo</groupId>
@@ -19,6 +19,16 @@
         <version>0.1-SNAPSHOT</version>
     	<relativePath>../../pn-java-pom/pom.xml</relativePath>
     </parent>
+    
+    
+    <!-- ******************************************************************* -->
+    <!--                         P R O P E R T I E S                         -->
+    <!-- ******************************************************************* -->
+    
+    <properties>
+    	<mainClassName>net.sf.ponyo.midirouter.MidiRouterApp</mainClassName>
+    	<path_resources_osx>${basedir}/src/main/resources-osx</path_resources_osx>
+    </properties>
     
     
     <!-- ******************************************************************* -->
@@ -63,6 +73,88 @@
 		
 	</dependencies>
     
+    
+
+    <!-- ******************************************************************* -->
+    <!--                              B U I L D                              -->
+    <!-- ******************************************************************* -->
+    
+    <build>
+<!--        <resources>-->
+<!--            <resource>-->
+<!--                <directory>src/main/resources</directory>-->
+<!--                <filtering>true</filtering>-->
+<!--                <includes>-->
+<!--                    <include>*.properties</include>-->
+<!--                    <include>*.txt</include>-->
+<!--                </includes>-->
+<!--            </resource>-->
+<!--            <resource>-->
+<!--                <directory>src/main/resources/images</directory>-->
+<!--                <filtering>false</filtering>-->
+<!--                <includes>-->
+<!--                    <include>**.*</include>-->
+<!--                </includes>-->
+<!--            </resource>-->
+<!--        </resources>-->
+        
+        <plugins>
+        
+<!--            <plugin>-->
+<!--                <artifactId>maven-assembly-plugin</artifactId>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <id>distribution</id>-->
+<!--                        <phase>package</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>single</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <descriptorRefs>-->
+<!--                                <descriptorRef>jar-with-dependencies</descriptorRef>-->
+<!--                            </descriptorRefs>-->
+<!--                            <archive>-->
+<!--                                <manifest>-->
+<!--                                    <mainClass>net.pulseproject.javaapp.App</mainClass>-->
+<!--                                </manifest>-->
+<!--                            </archive>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+        	
+        	<plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>osxappbundle-maven-plugin</artifactId>
+                <configuration>
+                	<!-- http://mojo.codehaus.org/osxappbundle-maven-plugin/bundle-mojo.html -->
+                    <mainClass>${mainClassName}</mainClass>
+                    <iconFile>${path_resources_osx}/ponyo-midi-router.icns</iconFile>
+					<bundleName>${project.name}</bundleName>
+<!--					maybe we could use a custom dict file to change some advanced settings: <dictionaryFile>Info.plist.template</dictionaryFile>-->
+					<useScreenMenuBar>true</useScreenMenuBar>
+					<diskImageFile>${project.build.directory}/PonyoMidiRouter-${project.version}.dmg</diskImageFile>
+					<additionalResources>
+                        <fileSet>
+                            <directory>${path_resources_osx}</directory>
+                            <includes>
+                                <include>README.txt</include>
+                            </includes>
+                        </fileSet>
+                    </additionalResources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>bundle</goal>
+                        </goals>
+                    </execution>
+               </executions>
+           </plugin>
+           
+		</plugins>
+	</build>
     
     <!-- ******************************************************************* -->
     <!--                                S C M                                -->

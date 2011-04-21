@@ -2,8 +2,11 @@ package net.sf.ponyo.jponyo.common.util;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 /**
  * @since 0.1
@@ -49,6 +52,23 @@ public class TypeUtil {
 			}
 		}
 		return false;
+	}
+
+	public static Map<Class<?>, Collection<Field>> getAllDeclaredFieldsByClass(Class<?> clazz) {
+		Map<Class<?>, Collection<Field>> result = new HashMap<Class<?>, Collection<Field>>();
+		
+		result.put(clazz, Arrays.asList(clazz.getDeclaredFields()));
+		
+		Class<?> superClazz = clazz.getSuperclass();
+//		System.out.println("superClazz: " + superClazz);
+		while(superClazz != null && superClazz != Object.class) {
+			
+//			System.out.println("processing superclass: " + superClazz.getName() + " => " + Arrays.toString(superClazz.getDeclaredFields()));
+			result.put(superClazz, Arrays.asList(superClazz.getDeclaredFields()));
+			superClazz = superClazz.getSuperclass();
+		}
+		
+		return result;
 	}
 	
 }

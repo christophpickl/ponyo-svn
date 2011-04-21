@@ -58,7 +58,7 @@ public abstract class AbstractMainView<L extends AbstractMainViewListener, P ext
 	}
     
 	void windowDidActivate(boolean didActivate) {
-    	LOG.trace("windowDidActivate(" + didActivate + ")");
+//    	LOG.trace("windowDidActivate(" + didActivate + ")");
     	
 //    	this.activated = didActivate;
     	this.mainPanel.setActive(didActivate);

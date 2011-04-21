@@ -2,13 +2,15 @@ package net.sf.ponyo.midirouter.logic;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.io.File;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import net.sf.ponyo.jponyo.adminconsole.view.AdminDialog;
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
-import net.sf.ponyo.jponyo.common.simplepersist.PreferencesPersister;
+import net.sf.ponyo.jponyo.common.simplepersist.SimplePersister;
+import net.sf.ponyo.jponyo.common.simplepersist.SimplePersisterImpl;
 import net.sf.ponyo.midirouter.logic.midi.MidiMappings;
 import net.sf.ponyo.midirouter.logic.parser.MappingsParser;
 import net.sf.ponyo.midirouter.logic.parser.ParseErrors;
@@ -28,7 +30,6 @@ class MainPresenterImpl
 		implements MainViewListener, MainPresenter {
 	
 	private static final Log LOG = LogFactory.getLog(MainPresenterImpl.class);
-	private final static String MODEL_PREF_ID = MainPresenterImpl.class.getName() + "-MODEL_PREF_ID";
 
 	private final Model model;
 	private final RouterService router;
@@ -38,7 +39,6 @@ class MainPresenterImpl
 	final MainView window;
 	private MidiPortsDialog midiPortsDialog;
 	private AdminDialog adminDialog;
-	private final PreferencesPersister persister = new PreferencesPersister();
 	
 	@Inject
 	public MainPresenterImpl(Model model, MainView window, RouterService router, MidiPortsDialogProvider midiDialogProvider) {
@@ -52,11 +52,6 @@ class MainPresenterImpl
 
 	public void show() {
 		LOG.info("show()");
-		
-		this.persister.init(this.model, MODEL_PREF_ID);
-		this.model.dispatchPersistentFieldsChange();
-		this.model.setApplicationState(ApplicationState.IDLE);
-		this.model.setMidiMappings("r_hand, X, [-300.0 .. 500.0 => 0 .. 127], 1, 1");
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -159,29 +154,6 @@ class MainPresenterImpl
 			this.router.updateMappings();
 		}
 	}
-	
-	public void onQuit() {
-		LOG.debug("onQuit()");
-		
-		if(this.midiPortsDialog != null) {
-			this.midiPortsDialog.setVisible(false);
-			this.midiPortsDialog.dispose();
-			this.midiPortsDialog = null;
-		}
-		if(this.adminDialog != null) {
-			this.adminDialog.setVisible(false);
-			this.adminDialog.dispose();
-			this.adminDialog = null;
-		}
-		this.window.setVisible(false);
-		this.window.dispose();
-		
-		this.persister.persist(this.model, MODEL_PREF_ID);
-		
-		for (MainPresenterListener listener : this.getListeners()) {
-			listener.onQuit();
-		}
-	}
 
 	public void onToggleMidiPortsWindow() {
 		LOG.debug("onToggleMidiPortsWindow()");
@@ -205,7 +177,27 @@ class MainPresenterImpl
 		}
 		
 		this.adminDialog.setVisible(!this.adminDialog.isVisible());
+	}
+	
+	public void onQuit() {
+		LOG.debug("onQuit()");
 		
+		if(this.midiPortsDialog != null) {
+			this.midiPortsDialog.setVisible(false);
+			this.midiPortsDialog.dispose();
+			this.midiPortsDialog = null;
+		}
+		if(this.adminDialog != null) {
+			this.adminDialog.setVisible(false);
+			this.adminDialog.dispose();
+			this.adminDialog = null;
+		}
+		this.window.setVisible(false);
+		this.window.dispose();
+		
+		for (MainPresenterListener listener : this.getListeners()) {
+			listener.onQuit();
+		}
 	}
 	
 }

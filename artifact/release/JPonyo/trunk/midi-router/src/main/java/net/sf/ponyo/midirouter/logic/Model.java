@@ -5,15 +5,16 @@ import java.util.List;
 
 import javax.sound.midi.MidiDevice;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import net.sf.ponyo.jponyo.common.async.DefaultAsyncFor;
 import net.sf.ponyo.jponyo.common.binding.BindingListener;
 import net.sf.ponyo.jponyo.common.binding.BindingProvider;
 import net.sf.ponyo.jponyo.common.binding.BindingSetter;
 import net.sf.ponyo.jponyo.common.simplepersist.PersistAsPreference;
+import net.sf.ponyo.jponyo.common.simplepersist.PersistAsXml;
 import net.sf.ponyo.midirouter.logic.midi.MidiMappings;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class Model extends DefaultAsyncFor<String, BindingListener> implements BindingProvider {
 	
@@ -29,7 +30,7 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 	@PersistAsPreference
 	private String midiPort = "";
 	
-//	FIXME @PersistAsXml
+	@PersistAsXml
 	private String midiMappings = "";
 
 	private ApplicationState applicationState;
@@ -149,7 +150,7 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 	/** After data was loaded from pesister, we have to notify all listeners manually (pref persister injects via fields, not setter) */
 	public void dispatchPersistentFieldsChange() {
 		this.dispatch(MIDI_PORT, this.midiPort);
-//		this.dispatch(MIDI_MAPPINGS, this.midiMappings);
+		this.dispatch(MIDI_MAPPINGS, this.midiMappings);
 		
 	}
 	private void dispatch(String key, Object value) {

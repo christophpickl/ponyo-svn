@@ -1,0 +1,28 @@
+SOURCE: http://groups.google.com/group/openni-dev/browse_thread/thread/673021887a5eca14
+
+*Sensor*
+Colour and depth-sensing lenses
+Voice microphone array
+Tilt motor for sensor adjustment
+Fully compatible with existing Xbox 360 consoles
+
+*Field of View*
+Horizontal field of view: 57 degrees
+Vertical field of view: 43 degrees
+Physical tilt range: ± 27 degrees
+Depth sensor range: 1.2m - 3.5m
+
+*Data Streams*
+320x240 16-bit depth @ 30 frames/sec
+640x480 32-bit colour@ 30 frames/sec
+16-bit audio @ 16 kHz
+
+*Skeletal Tracking System*
+Tracks up to 6 people, including 2 active players
+Tracks 20 joints per active player
+Ability to map active players to LIVE Avatars
+
+*Audio System*
+LIVE party chat and in-game voice chat (requires Xbox LIVE Gold Membership)
+Echo cancellation system enhances voice input
+Speech recognition in multiple 

@@ -2,7 +2,13 @@
 TIMESHEET CP
 =================================================
 
-              ~~133h~~
+              ~~146h~~
+21.04. - 19:00 -  2h - enhanced admin-console
+21.04. - 16:00 -  3h - using guice again in rewritten jponyo (midi-router, admin-console)
+21.04. - 00:00 -  3h - pimping midi-router gui; using and improving admin-console for midi-router
+              ~~140h~~
+20.04. - 18:00 -  6h - re-implementing midi-router (nearly done, with new fancy dataflow table)
+20.04. - 15:00 -  1h - investigating openni/nite featres (user box, CoM, samples=NiViewer)
 20.04. - 11:00 -  2h - cxxunit enabled investigation
 19.04. - 22:00 -  1h - some minor infrastructure enhancements (version by filter resources)
               ~~130h~~

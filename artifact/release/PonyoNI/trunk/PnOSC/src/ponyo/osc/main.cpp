@@ -69,6 +69,8 @@ void startServer() {
 
 	StartOniConfig config("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
 	g_facade.startRecording(config);
+//	StartXmlConfig config("/ponyo/niconfig.xml", &onUserStateChanged, &onJointPositionChanged);
+//	g_facade.startWithXml(config);
 
 	printf("PnOSC running ... terminate by hitting ENTER\n");
 	CommonUtils::waitHitEnter(false);

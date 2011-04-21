@@ -1,10 +1,8 @@
 package net.sf.ponyo.midirouter.logic;
 
-import javax.sound.midi.ShortMessage;
-
-import net.pulseproject.commons.midi.entity.ControllerMessage;
 import net.sf.ponyo.jponyo.common.geom.RangeScaler;
 import net.sf.ponyo.jponyo.common.math.Array3f;
+import net.sf.ponyo.jponyo.common.midi.ControllerMessage;
 import net.sf.ponyo.jponyo.entity.Joint;
 import net.sf.ponyo.jponyo.stream.MotionData;
 import net.sf.ponyo.midirouter.logic.midi.MidiMapping;

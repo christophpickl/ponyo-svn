@@ -7,15 +7,13 @@ import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
-import net.pulseproject.commons.util.GuiUtil;
 import net.sf.ponyo.jponyo.common.async.Async;
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
 import net.sf.ponyo.jponyo.common.binding.BindingProvider;
+import net.sf.ponyo.jponyo.common.gui.GuiUtil;
 import net.sf.ponyo.jponyo.common.gui.OSXAdapter;
 import net.sourceforge.jpotpourri.jpotface.panel.brushed.PtBrushedMetalPanel;
 import net.sourceforge.jpotpourri.tools.PtUserSniffer;

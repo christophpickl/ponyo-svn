@@ -1,9 +1,9 @@
 package net.sf.ponyo.midirouter.refactor;
 
-import net.pulseproject.commons.midi.entity.ControllerMessage;
 import net.sf.ponyo.jponyo.common.geom.Range;
 import net.sf.ponyo.jponyo.common.geom.RangeScaler;
 import net.sf.ponyo.jponyo.common.math.Array3f;
+import net.sf.ponyo.jponyo.common.midi.ControllerMessage;
 import net.sf.ponyo.jponyo.entity.Direction;
 import net.sf.ponyo.jponyo.entity.Joint;
 import net.sf.ponyo.jponyo.entity.Skeleton;

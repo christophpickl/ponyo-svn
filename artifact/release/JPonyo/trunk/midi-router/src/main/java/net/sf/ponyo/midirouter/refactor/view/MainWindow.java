@@ -11,7 +11,7 @@ import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
-import net.pulseproject.commons.util.GuiUtil;
+import net.sf.ponyo.jponyo.common.gui.GuiUtil;
 import net.sf.ponyo.jponyo.common.gui.OSXAdapter;
 import net.sf.ponyo.midirouter.refactor.Model;
 

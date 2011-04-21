@@ -2,15 +2,12 @@ package net.sf.ponyo.midirouter.logic;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.io.File;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 import net.sf.ponyo.jponyo.adminconsole.view.AdminDialog;
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
-import net.sf.ponyo.jponyo.common.simplepersist.SimplePersister;
-import net.sf.ponyo.jponyo.common.simplepersist.SimplePersisterImpl;
 import net.sf.ponyo.midirouter.logic.midi.MidiMappings;
 import net.sf.ponyo.midirouter.logic.parser.MappingsParser;
 import net.sf.ponyo.midirouter.logic.parser.ParseErrors;

@@ -16,9 +16,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import net.sf.ponyo.jponyo.common.binding.BindingListener;
 import net.sf.ponyo.jponyo.common.gui.BoundTextFieldListener;
 import net.sf.ponyo.jponyo.common.gui.ProviderKeyListener;

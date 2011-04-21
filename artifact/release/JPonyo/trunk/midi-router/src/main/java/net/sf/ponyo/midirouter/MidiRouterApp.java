@@ -34,7 +34,7 @@ public class MidiRouterApp implements MainPresenterListener {
 	private final Model model;
 	
 	private final static String MODEL_PREF_ID = MidiRouterApp.class.getName() + "-MODEL_PREF_ID";
-	private final SimplePersister persister = new SimplePersisterImpl(new File("ponyo_midirouter_data"));
+	private final SimplePersister persister = new SimplePersisterImpl(new File("target/ponyo_midirouter_data"));
 	
 	public static void main(String[] args) {
 		LOG.debug("main() START");

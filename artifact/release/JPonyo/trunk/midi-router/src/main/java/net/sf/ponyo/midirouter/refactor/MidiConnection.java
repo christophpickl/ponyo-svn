@@ -6,9 +6,7 @@ import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Receiver;
 import javax.sound.midi.MidiDevice.Info;
 
-import net.pulseproject.commons.midi.entity.ControllerMessage;
-import net.pulseproject.commons.midi.entity.DeviceKind;
-import net.pulseproject.commons.midi.entity.DeviceState;
+import net.sf.ponyo.jponyo.common.midi.ControllerMessage;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -59,13 +57,13 @@ public class MidiConnection {
 		final Info[] infos = MidiSystem.getMidiDeviceInfo();
 		for (final Info info : infos) {
 			if(info.getName().equals(this.port)) {
-				final MidiDevice device = MidiSystem.getMidiDevice(info);
-				final int maxCount = DeviceKind.TRANSMITTER.stateIsApplicable(DeviceState.RECEIVING_ONLY) ?
-										device.getMaxTransmitters() :
-										device.getMaxReceivers();
-				if(maxCount != 0) {
-					return device;
-				}
+//				final MidiDevice device = MidiSystem.getMidiDevice(info);
+//				final int maxCount = DeviceKind.TRANSMITTER.stateIsApplicable(DeviceState.RECEIVING_ONLY) ?
+//										device.getMaxTransmitters() :
+//										device.getMaxReceivers();
+//				if(maxCount != 0) {
+//					return device;
+//				}
 			}
 		}
 //		TODO throw InvalidInputException.newInvalidMidiPort(this.port);

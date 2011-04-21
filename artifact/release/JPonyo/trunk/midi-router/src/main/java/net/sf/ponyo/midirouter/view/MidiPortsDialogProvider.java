@@ -1,9 +1,9 @@
 package net.sf.ponyo.midirouter.view;
 
+import net.sf.ponyo.midirouter.logic.Model;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import net.sf.ponyo.midirouter.logic.Model;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

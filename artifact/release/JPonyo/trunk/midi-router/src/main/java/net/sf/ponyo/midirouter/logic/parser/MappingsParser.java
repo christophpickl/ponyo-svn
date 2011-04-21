@@ -3,9 +3,6 @@ package net.sf.ponyo.midirouter.logic.parser;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import net.sf.ponyo.jponyo.common.geom.Range;
 import net.sf.ponyo.jponyo.common.math.FloatPair;
 import net.sf.ponyo.jponyo.common.math.IntPair;
@@ -13,6 +10,9 @@ import net.sf.ponyo.jponyo.entity.Direction;
 import net.sf.ponyo.jponyo.entity.Joint;
 import net.sf.ponyo.midirouter.logic.midi.MidiMapping;
 import net.sf.ponyo.midirouter.logic.midi.MidiMappings;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class MappingsParser {
 	

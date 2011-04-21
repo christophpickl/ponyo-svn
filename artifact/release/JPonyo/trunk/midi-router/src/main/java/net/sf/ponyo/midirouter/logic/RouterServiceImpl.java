@@ -1,18 +1,14 @@
 package net.sf.ponyo.midirouter.logic;
 
-import java.util.Collection;
-
-import net.pulseproject.commons.midi.entity.ControllerMessage;
 import net.sf.ponyo.jponyo.adminconsole.view.AdminDialog;
 import net.sf.ponyo.jponyo.common.io.IoUtil;
+import net.sf.ponyo.jponyo.common.midi.ControllerMessage;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
 import net.sf.ponyo.jponyo.stream.MotionData;
 import net.sf.ponyo.jponyo.stream.MotionStreamListener;
 import net.sf.ponyo.jponyo.user.ContinuousUserListener;
 import net.sf.ponyo.jponyo.user.User;
-import net.sf.ponyo.jponyo.user.UserChangeListener;
-import net.sf.ponyo.jponyo.user.UserState;
 import net.sf.ponyo.midirouter.logic.midi.MidiConnection;
 import net.sf.ponyo.midirouter.logic.midi.MidiConnector;
 import net.sf.ponyo.midirouter.logic.midi.MidiMapping;
@@ -34,7 +30,6 @@ class RouterServiceImpl implements MotionStreamListener, ContinuousUserListener,
 	
 	private Context ponyoContext;
 	private MidiConnection midiConnection;
-	private User recentUser;
 	private MidiMappings mappings;
 	private AdminDialog adminDialog;
 	
@@ -114,7 +109,6 @@ class RouterServiceImpl implements MotionStreamListener, ContinuousUserListener,
 	}
 
 	public void onCurrentUserChanged(User user) {
-		this.recentUser = user;
 		if(this.adminDialog != null) {
 			this.adminDialog.onCurrentUserChanged(user);
 		}

@@ -2,18 +2,13 @@ package net.sf.ponyo.midirouter.refactor;
 
 import java.util.Collection;
 
-import javax.swing.JOptionPane;
-
-import net.pulseproject.commons.util.StringUtil;
-import net.sf.ponyo.jponyo.entity.Joint;
-
 public class SomeUtil {
 
 	public static void handleException(Exception e) {
-		e.printStackTrace();
-		JOptionPane.showMessageDialog(null, e.getMessage(), "Josceleton Midi Route Error", JOptionPane.ERROR_MESSAGE);
-		LogUtil.log("Stack trace:\n" + StringUtil.exceptionToString(e));
-		LogUtil.log("Error: " + e.getMessage());
+//		e.printStackTrace();
+//		JOptionPane.showMessageDialog(null, e.getMessage(), "Josceleton Midi Route Error", JOptionPane.ERROR_MESSAGE);
+//		LogUtil.log("Stack trace:\n" + StringUtil.exceptionToString(e));
+//		LogUtil.log("Error: " + e.getMessage());
 	}
 
 	public static String fillString(String in, int len) {

@@ -3,9 +3,6 @@ package net.sf.ponyo.midirouter.view;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Font;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.sound.midi.MidiDevice;
@@ -15,8 +12,8 @@ import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import net.pulseproject.commons.util.GuiUtil;
 import net.sf.ponyo.jponyo.common.binding.BindingListener;
+import net.sf.ponyo.jponyo.common.gui.GuiUtil;
 import net.sf.ponyo.midirouter.logic.Model;
 
 import org.apache.commons.logging.Log;

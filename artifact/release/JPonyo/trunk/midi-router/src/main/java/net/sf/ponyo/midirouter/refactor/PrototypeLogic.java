@@ -2,10 +2,8 @@ package net.sf.ponyo.midirouter.refactor;
 
 import java.util.Collection;
 
-import net.pulseproject.commons.midi.entity.ControllerMessage;
 import net.sf.ponyo.jponyo.common.math.Array3f;
 import net.sf.ponyo.jponyo.core.Context;
-import net.sf.ponyo.jponyo.core.ContextStarterImpl;
 import net.sf.ponyo.jponyo.entity.Joint;
 import net.sf.ponyo.jponyo.entity.Skeleton;
 import net.sf.ponyo.jponyo.stream.ContinuousMotionStream;
@@ -71,10 +69,10 @@ public class PrototypeLogic implements MotionStreamListener {
 				continue;
 			}
 			
-			final ControllerMessage midiMsg = map.buildMidiMessage(updatedCoordinate, skeleton);
-			if(midiMsg != null) {
-				this.midiConnection.send(midiMsg);
-			}
+//			final ControllerMessage midiMsg = map.buildMidiMessage(updatedCoordinate, skeleton);
+//			if(midiMsg != null) {
+//				this.midiConnection.send(midiMsg);
+//			}
 		}
 	}
 }

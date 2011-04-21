@@ -38,17 +38,17 @@
 	<dependencies>
         
         <!-- FIXME get rid of pulse dependency and create own midi lib instead! -->
-        <dependency>
-        	<groupId>net.pulse-project.router</groupId>
-        	<artifactId>router-midi</artifactId>
-        	<version>0.1-SNAPSHOT</version>
-        	<exclusions>
-        		<exclusion>
-				    <groupId>net.pulse-project.pom</groupId>
-				    <artifactId>guice-dependencies</artifactId>
-        		</exclusion>
-        	</exclusions>
-        </dependency>
+<!--        <dependency>-->
+<!--        	<groupId>net.pulse-project.router</groupId>-->
+<!--        	<artifactId>router-midi</artifactId>-->
+<!--        	<version>0.1-SNAPSHOT</version>-->
+<!--        	<exclusions>-->
+<!--        		<exclusion>-->
+<!--				    <groupId>net.pulse-project.pom</groupId>-->
+<!--				    <artifactId>guice-dependencies</artifactId>-->
+<!--        		</exclusion>-->
+<!--        	</exclusions>-->
+<!--        </dependency>-->
     
 	    <!-- I N T E R N A L -->
     	<!-- *********************************************************** -->

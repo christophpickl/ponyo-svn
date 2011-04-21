@@ -4,8 +4,8 @@ import net.sf.ponyo.jponyo.connection.Connection;
 import net.sf.ponyo.jponyo.connection.ConnectionListener;
 import net.sf.ponyo.jponyo.connection.Connector;
 import net.sf.ponyo.jponyo.connection.JointMessage;
-import net.sf.ponyo.jponyo.connection.jna.JnaByConfigConnector;
-import net.sf.ponyo.jponyo.connection.jna.JnaByRecordingConnector;
+import net.sf.ponyo.jponyo.connection.jna.JnaByConfigConnectorImpl;
+import net.sf.ponyo.jponyo.connection.jna.JnaByRecordingConnectorImpl;
 import net.sf.ponyo.jponyo.connection.osc.OscConnector;
 import net.sf.ponyo.jponyo.core.DevelopmentConstants;
 
@@ -20,14 +20,14 @@ public class SimpleConnectionSample {
 	
 	// force imports
 	@SuppressWarnings("unused") private OscConnector c1;
-	@SuppressWarnings("unused") private JnaByRecordingConnector c2;
-	@SuppressWarnings("unused") private JnaByConfigConnector c3;
+	@SuppressWarnings("unused") private JnaByRecordingConnectorImpl c2;
+	@SuppressWarnings("unused") private JnaByConfigConnectorImpl c3;
 	
 	public static void main(String[] args) throws Exception {
 		LOG.debug("main() START");
 
 //		Connector<? extends Connection> connector = new OscConnector();
-		Connector<? extends Connection> connector = new JnaByRecordingConnector(DevelopmentConstants.ONI_PATH);
+		Connector<? extends Connection> connector = new JnaByRecordingConnectorImpl(DevelopmentConstants.ONI_PATH);
 //		Connector<? extends Connection> connector = new JnaByConfigConnector(Constants.XML_PATH);
 		
 		Connection connection = connector.openConnection();

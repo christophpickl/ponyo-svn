@@ -14,19 +14,32 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
+import net.sf.ponyo.jponyo.core.ContextStarterImpl;
+import net.sf.ponyo.jponyo.samples.SampleJPonyoModule;
 
 public class SimpleContextSample {
 	
+	private final ContextStarter contextStarter;
+	
 	public static void main(String[] args) {
-		Context context = new ContextStarter().startOscReceiver();
-
-		SimpleContextSample sample = new SimpleContextSample();
-		sample.doit(context);
+		Injector injector = Guice.createInjector(new SampleJPonyoModule());
+		SimpleContextSample sample = injector.getInstance(SimpleContextSample.class);
+		sample.doit();
 	}
 	
-	public void doit(final Context context) {
+	@Inject
+	public SimpleContextSample(ContextStarter contextStarter) {
+		this.contextStarter = contextStarter;
+	}
+	
+	public void doit() {
+		final Context context = this.contextStarter.startOscReceiver();
 		final Window loadingWindow = this.showLoadingWindow();
 		
 //		GlobalSpace space = context.getGlobalSpace();

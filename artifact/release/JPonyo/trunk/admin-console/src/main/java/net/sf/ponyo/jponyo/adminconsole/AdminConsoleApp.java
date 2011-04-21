@@ -10,6 +10,7 @@ import net.sf.ponyo.jponyo.adminconsole.view.AdminPanelListener;
 import net.sf.ponyo.jponyo.adminconsole.view.SkeletonDataDialog;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
+import net.sf.ponyo.jponyo.core.ContextStarterImpl;
 import net.sf.ponyo.jponyo.core.GlobalSpace;
 import net.sf.ponyo.jponyo.stream.MotionData;
 import net.sf.ponyo.jponyo.stream.MotionStreamListener;
@@ -20,11 +21,16 @@ import net.sf.ponyo.jponyo.user.UserState;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.google.inject.Guice;
+import com.google.inject.Inject;
+import com.google.inject.Injector;
+
 public class AdminConsoleApp
 	implements AdminPanelListener, UserChangeListener, MotionStreamListener {
 
 	private static final Log LOG = LogFactory.getLog(AdminConsoleApp.class);
 	
+	private final ContextStarter contextStarter;
 	private Context context;
 	private GlobalSpace space;
 	private AdminConsoleWindow window;
@@ -33,12 +39,19 @@ public class AdminConsoleApp
 	
 	public static void main(String[] args) {
 		System.out.println("main() START");
-		new AdminConsoleApp().startUp();
+		Injector injector = Guice.createInjector(new AdminConsoleModule());
+		AdminConsoleApp app = injector.getInstance(AdminConsoleApp.class);
+		app.startUp();
 		System.out.println("main() END");
 	}
 
+	@Inject
+	public AdminConsoleApp(ContextStarter contextStarter) {
+		this.contextStarter = contextStarter;
+	}
+
 	public void startUp() {
-		this.context = new ContextStarter().startOscReceiver();
+		this.context = this.contextStarter.startOscReceiver();
 		this.space = this.context.getGlobalSpace();
 		this.window = new AdminConsoleWindow(this);
 		this.skeletonDialog = new SkeletonDataDialog();

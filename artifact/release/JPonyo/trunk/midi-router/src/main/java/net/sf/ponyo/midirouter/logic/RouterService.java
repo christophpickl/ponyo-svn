@@ -6,7 +6,7 @@ import net.pulseproject.commons.midi.entity.ControllerMessage;
 import net.sf.ponyo.jponyo.adminconsole.view.AdminDialog;
 import net.sf.ponyo.jponyo.common.io.IoUtil;
 import net.sf.ponyo.jponyo.core.Context;
-import net.sf.ponyo.jponyo.core.ContextStarter;
+import net.sf.ponyo.jponyo.core.ContextStarterImpl;
 import net.sf.ponyo.jponyo.stream.MotionData;
 import net.sf.ponyo.jponyo.stream.MotionStreamListener;
 import net.sf.ponyo.jponyo.user.User;
@@ -52,7 +52,7 @@ public class RouterService implements MotionStreamListener, UserChangeListener {
 		}
 		
 		try {
-			this.ponyoContext = new ContextStarter().startOscReceiver();
+			this.ponyoContext = null; // FIXME !!! new ContextStarterImpl().startOscReceiver();
 		} catch(Exception e) {
 			this.safeClose();
 			throw new RuntimeException("Could not open JPonyo connection!", e);

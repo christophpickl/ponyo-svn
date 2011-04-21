@@ -27,6 +27,9 @@ public class FastUserManager implements UserManager {
 		this.usersByOpenniId.add(null); // setup 0/1 base index conversation
 	}
 	
+	public FastUserManager() {
+		LOG.debug("new FastUserManager()");
+	}
 
 	public User lookupForUserMessage(int openniId/*is 1-base indexed*/, int userStateId) {
 		LOG.debug("delegateOnUserMessage(openniId=" + openniId + ", userStateId=" + userStateId + ")");

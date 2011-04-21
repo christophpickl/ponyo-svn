@@ -21,6 +21,7 @@ class OscConnection extends DefaultAsync<ConnectionListener> implements Connecti
 	private final OSCPortIn port;
 	
 	public OscConnection(OSCPortIn port) {
+		LOG.debug("new OscConnection(..)");
 		this.port = port;
 	}
 

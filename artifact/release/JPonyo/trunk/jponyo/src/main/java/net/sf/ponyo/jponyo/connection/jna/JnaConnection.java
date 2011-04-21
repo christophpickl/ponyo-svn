@@ -24,12 +24,14 @@ public class JnaConnection
 	private PnJNALibraryWrapper jnaLib;
 	
 	public JnaConnection(String configOrRecordingPath) {
+		LOG.debug("new JnaConnection(configOrRecordingPath=" + configOrRecordingPath + ")");
 		this.configOrRecordingPath = configOrRecordingPath;
 	}
 	
 	JnaConnection openByXmlConfig() {
 		this.jnaLib = new PnJNALibraryWrapper(this, this);
-		this.jnaLib.startByXmlConfig(this.configOrRecordingPath);
+		System.err.println("JnaConnection OUTCOMMENTED !!!!!!!!!!!!!!!!!!!");
+//		FIXME this.jnaLib.startByXmlConfig(this.configOrRecordingPath);
 		return this;
 	}
 	

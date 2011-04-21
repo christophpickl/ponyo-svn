@@ -5,7 +5,7 @@ import java.util.Collection;
 import net.pulseproject.commons.midi.entity.ControllerMessage;
 import net.sf.ponyo.jponyo.common.math.Array3f;
 import net.sf.ponyo.jponyo.core.Context;
-import net.sf.ponyo.jponyo.core.ContextStarter;
+import net.sf.ponyo.jponyo.core.ContextStarterImpl;
 import net.sf.ponyo.jponyo.entity.Joint;
 import net.sf.ponyo.jponyo.entity.Skeleton;
 import net.sf.ponyo.jponyo.stream.ContinuousMotionStream;
@@ -35,7 +35,7 @@ public class PrototypeLogic implements MotionStreamListener {
 	public void open() { // TODO throws InvalidInputException {
 		this.midiConnection.connect();
 		
-		this.joscConnection = new ContextStarter().startOscReceiver(); //Josceleton.openConnection();
+		this.joscConnection = null; // new ContextStarterImpl().startOscReceiver(); //Josceleton.openConnection();
 		this.cms = this.joscConnection.getContinuousMotionStream(); //Josceleton.getContinuousMotionStreamFactory().create(this.joscConnection);
 		// add user listener and display to user
 		this.cms.addListener(this);

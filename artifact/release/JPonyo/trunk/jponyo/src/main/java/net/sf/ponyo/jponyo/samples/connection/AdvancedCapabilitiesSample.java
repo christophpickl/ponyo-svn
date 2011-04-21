@@ -5,7 +5,7 @@ import org.apache.commons.logging.LogFactory;
 
 import net.sf.ponyo.jponyo.connection.AdvancedCapabilities;
 import net.sf.ponyo.jponyo.connection.Connection;
-import net.sf.ponyo.jponyo.connection.jna.JnaByRecordingConnector;
+import net.sf.ponyo.jponyo.connection.jna.JnaByRecordingConnectorImpl;
 import net.sf.ponyo.jponyo.core.DevelopmentConstants;
 
 public class AdvancedCapabilitiesSample {
@@ -14,7 +14,7 @@ public class AdvancedCapabilitiesSample {
 	
 	public static void main(String[] args) {
 		LOG.debug("main() START");
-		Connection connection = new JnaByRecordingConnector(DevelopmentConstants.ONI_PATH).openConnection();
+		Connection connection = new JnaByRecordingConnectorImpl(DevelopmentConstants.ONI_PATH).openConnection();
 		
 		if(connection.hasAdvancedCapabilities() == false) {
 			System.err.println("Has no advanced capabilities!");

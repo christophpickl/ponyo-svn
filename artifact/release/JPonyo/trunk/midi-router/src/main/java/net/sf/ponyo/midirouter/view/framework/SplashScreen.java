@@ -20,6 +20,7 @@
 package net.sf.ponyo.midirouter.view.framework;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -38,14 +39,20 @@ public class SplashScreen extends JWindow {
 
     private static final long serialVersionUID = -1539009650852919347L;
     
+    private final JLabel lblLoading = new JLabel();
     
-    public SplashScreen(ImageIcon icon, String loadingMessage) {
-        this.getContentPane().add(this.initComponents(icon, loadingMessage));
+    public SplashScreen(ImageIcon icon, String topTitle) {
+        this.getContentPane().add(this.initComponents(icon, topTitle));
         this.pack();
         PtGuiUtil.setCenterLocation(this, 0, -30);
     }
     
-    private JPanel initComponents(ImageIcon icon, String loadingMessage) {
+    public void setLoadingMessage(String loadingMessage) {
+    	this.lblLoading.setText(loadingMessage);
+    	this.repaint();
+    }
+    
+    private JPanel initComponents(ImageIcon icon, String topTitle) {
         final JPanel panel = new PtBrushedMetalPanel();
         panel.setLayout(new BorderLayout());
         panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
@@ -53,8 +60,15 @@ public class SplashScreen extends JWindow {
         final JPanel panelSouth = new JPanel();
         panelSouth.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
         panelSouth.setOpaque(false);
-        panelSouth.add(new JLabel(loadingMessage));
         
+        this.lblLoading.setOpaque(false);
+		panelSouth.add(this.lblLoading);
+        
+		JLabel lblTop = new JLabel(topTitle);
+		lblTop.setOpaque(false);
+		Font topFont = new Font(Font.DIALOG, Font.BOLD, 20);
+		lblTop.setFont(topFont);
+		panel.add(lblTop, BorderLayout.NORTH);
         panel.add(new JLabel(icon), BorderLayout.CENTER);
         panel.add(panelSouth, BorderLayout.SOUTH);
 

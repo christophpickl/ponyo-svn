@@ -10,25 +10,26 @@ import javax.media.opengl.glu.GLU;
 import net.sf.ponyo.jponyo.adminconsole.AdminConsoleApp;
 import net.sf.ponyo.jponyo.adminconsole.gl.GLUtil;
 import net.sf.ponyo.jponyo.adminconsole.gl.ObjectDrawer;
-import net.sf.ponyo.jponyo.core.GlobalSpace;
 import net.sf.ponyo.jponyo.entity.Joint;
+import net.sf.ponyo.jponyo.user.User;
 import net.sf.ponyo.jponyo.user.UserState;
 
-class MainWindowGLRenderer implements GLEventListener {
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
+public class SkeletonGLRenderer implements GLEventListener {
+	
+	private static final Log LOG = LogFactory.getLog(SkeletonGLRenderer.class);
 	private static final Color PRIMARY_COLOR_OFF = Color.GRAY;
 	private static final Color PRIMARY_COLOR_INIT = Color.GREEN;
 	private static final float JOINT_SCALE = 0.3f;
 	private static final float SKEL_DEF_Z = -10.0f;
 	
-	private final GlobalSpace data;
-	
-	public MainWindowGLRenderer(GlobalSpace data) {
-		this.data = data;
-	}
+//	private final GlobalSpace data;
+	private User user;
 	
 	public void init(GLAutoDrawable drawable) {
-		System.out.println("init GL");
+		LOG.debug("init(..)");
 		final GL gl = drawable.getGL();
 		gl.glShadeModel(GL.GL_SMOOTH);
 		gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -43,12 +44,15 @@ class MainWindowGLRenderer implements GLEventListener {
 		
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 		final Color primaryColor;
-		if(AdminConsoleApp.userState_HACK == UserState.TRACKING) {
-			primaryColor = null;
-		} else if(AdminConsoleApp.userState_HACK == UserState.LOST) { 
+		
+		if(this.user == null) { 
 			primaryColor = PRIMARY_COLOR_OFF;
 		} else {
-			primaryColor = PRIMARY_COLOR_INIT;
+			if(this.user.getState() == UserState.TRACKING) {
+				primaryColor = null;
+			} else {
+				primaryColor = PRIMARY_COLOR_INIT;
+			}
 		}
 		
 		drawSkel(gl, Joint.HEAD,  primaryColor,  0.0f, +3.5f, SKEL_DEF_Z);
@@ -83,11 +87,16 @@ class MainWindowGLRenderer implements GLEventListener {
 	}
 	
 	private void translateSkel(GL gl, Joint joint, float defX, float defY, float defZ) {
-		if(AdminConsoleApp.userState_HACK == UserState.TRACKING) {
-			GLUtil.translate(gl, this.data.getUsers().iterator().next().getSkeleton(), joint);
+		if(this.user != null) {
+			GLUtil.translate(gl, this.user.getSkeleton(), joint);
 		} else {
 			gl.glTranslatef(defX, defY, defZ);
 		}
+	}
+
+	public void setUser(User user) {
+		LOG.debug("setUser(user="+user+")");
+		this.user = user;
 	}
 	
 	public void displayChanged(GLAutoDrawable drawable, boolean modeChanged, boolean deviceChanged) {
@@ -95,7 +104,7 @@ class MainWindowGLRenderer implements GLEventListener {
 	}
 	
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
-		System.out.println("reshape(drawable, x="+x+", y="+y+", width="+width+", height="+height+")");
+		LOG.trace("reshape(drawable, x="+x+", y="+y+", width="+width+", height="+height+")");
 		final GL gl = drawable.getGL();
 		
 		gl.setSwapInterval(1);

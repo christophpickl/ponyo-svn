@@ -9,13 +9,13 @@ import javax.swing.table.TableModel;
 import net.sf.ponyo.jponyo.entity.Joint;
 import net.sf.ponyo.jponyo.stream.MotionData;
 
-public class SkeletonNumberPanel extends JPanel {
+public class SkeletonDataPanel extends JPanel {
 	
 	private static final long serialVersionUID = -6412556352307293613L;
 
 	private JTable table;
 	
-	public SkeletonNumberPanel() {
+	public SkeletonDataPanel() {
 		Object[][] tableData = new Object[Joint.MAX_JOINT_ID_PLUS_ONE][4];
 		for(Joint joint : Joint.values()) {
 			tableData[joint.getId()] = new String[] { joint.getLabel(), "X", "X", "X" };

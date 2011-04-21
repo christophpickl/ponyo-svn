@@ -8,4 +8,8 @@ public interface MainViewListener
 
 	void onToggleMidiPortsWindow();
 
+	void onToggleHelpWindow();
+
+	void onToggleAdminConsole();
+
 }

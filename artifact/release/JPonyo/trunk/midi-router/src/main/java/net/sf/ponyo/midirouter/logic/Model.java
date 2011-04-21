@@ -35,6 +35,8 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 	
 	private List<MidiDevice> midiDevices = new LinkedList<MidiDevice>();
 	
+	public String appVersion;
+	
 	public String getMidiPort() {
 		return this.midiPort;
 	}

@@ -22,18 +22,18 @@ import net.sf.ponyo.midirouter.logic.Model;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class MidiPortsWindow extends JDialog {
+public class MidiPortsDialog extends JDialog {
 
 	private static final long serialVersionUID = 3921063116921815056L;
 
-	private static final Log LOG = LogFactory.getLog(MidiPortsWindow.class);
+	private static final Log LOG = LogFactory.getLog(MidiPortsDialog.class);
 	
 	private final JPanel transmittersPanel = new JPanel();
 	private final JPanel receiversPanel = new JPanel();
 	
 	private final Font headerFont = new Font(Font.DIALOG, Font.BOLD, 12);
 	
-	public MidiPortsWindow(Model model) {
+	public MidiPortsDialog(Model model) {
 		this.setTitle("MIDI Ports");
 
 		this.getRootPane().putClientProperty("apple.awt.brushMetalLook", Boolean.TRUE);

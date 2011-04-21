@@ -19,10 +19,10 @@ public class ButtonBar extends JPanel implements Async<ButtonBarListener> {
 	private static final long serialVersionUID = -4832983778195118152L;
 	
 	private final DefaultAsync<ButtonBarListener> async = new DefaultAsync<ButtonBarListener>();
-	private final JButton btnStartStop = new JButton();
+	private final JButton btnStartStop = new JButton("!NOT SET!");
 	
 	public ButtonBar(Model model) {
-		
+		this.setOpaque(false);
 		final JButton btnReload = new JButton("Reload");
 		
 		model.addListenerFor(Model.APPLICATION_STATE, new BindingListener() {

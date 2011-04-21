@@ -43,6 +43,7 @@ public class GlobalSpace {
 				filteredUsers.add(user);
 			}
 		}
+//		System.out.println("getFilteredUsers(state="+state+") ... this.users: " + this.users + "; returning: " + filteredUsers);
 		return filteredUsers;
 	}
 	

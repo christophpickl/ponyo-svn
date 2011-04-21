@@ -1,12 +1,15 @@
 package net.sf.ponyo.midirouter.view.framework;
 
+import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 import javax.swing.WindowConstants;
 
 import net.pulseproject.commons.util.GuiUtil;
@@ -14,12 +17,15 @@ import net.sf.ponyo.jponyo.common.async.Async;
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
 import net.sf.ponyo.jponyo.common.binding.BindingProvider;
 import net.sf.ponyo.jponyo.common.gui.OSXAdapter;
+import net.sourceforge.jpotpourri.jpotface.panel.brushed.PtBrushedMetalPanel;
 import net.sourceforge.jpotpourri.tools.PtUserSniffer;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public abstract class AbstractMainView<L extends AbstractMainViewListener, P extends BindingProvider> extends JFrame implements Async<L> {
+public abstract class AbstractMainView<L extends AbstractMainViewListener, P extends BindingProvider>
+	extends JFrame
+		implements Async<L> {
 
 	private static final long serialVersionUID = -1714573026004141885L;
 	private static final Log LOG = LogFactory.getLog(AbstractMainView.class);
@@ -27,6 +33,8 @@ public abstract class AbstractMainView<L extends AbstractMainViewListener, P ext
 	private final P provider;
 	private final DefaultAsync<L> async = new DefaultAsync<L>();
 	private boolean isInitialized = false;
+
+	private final PtBrushedMetalPanel mainPanel = new PtBrushedMetalPanel();
 	
 	public AbstractMainView(P provider, String windowTitle) {
 		this.provider = provider;
@@ -38,10 +46,24 @@ public abstract class AbstractMainView<L extends AbstractMainViewListener, P ext
 			public void windowClosing(WindowEvent e) {
 				onWindowClosing();
 			}
-//			public void windowDeactivated(WindowEvent e) {
-//			public void windowActivated(WindowEvent arg0) {
+            @Override
+			public void windowActivated(WindowEvent event) {
+            	windowDidActivate(true);
+            }
+            @Override
+			public void windowDeactivated(WindowEvent event) {
+            	windowDidActivate(false);
+            }
 		});
 	}
+    
+	void windowDidActivate(boolean didActivate) {
+    	LOG.debug("windowDidActivate(" + didActivate + ")");
+    	
+//    	this.activated = didActivate;
+    	this.mainPanel.setActive(didActivate);
+    	this.repaint();
+    }
 	
 	protected abstract Component initComponent(P provider);
 
@@ -59,7 +81,10 @@ public abstract class AbstractMainView<L extends AbstractMainViewListener, P ext
 	
 	private void initialize(Dimension enforcedSize) {
 		LOG.debug("initialize()");
-		this.getContentPane().add(this.initComponent(this.provider));
+		
+		mainPanel.setLayout(new BorderLayout());
+		mainPanel.add(this.initComponent(this.provider), BorderLayout.CENTER);
+		this.getContentPane().add(mainPanel);
 		
 		if(enforcedSize == null) {
 			this.pack();

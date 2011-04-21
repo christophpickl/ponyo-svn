@@ -76,7 +76,7 @@ public class User {
 	}
 	
 	@Override public String toString() {
-		return "User[uniqueId=" + this.uniqueId + ", openniId=" + this.openniId + ", color=" + this.color + "]";
+		return "User[uniqueId=" + this.uniqueId + ", openniId=" + this.openniId + ", state=" + this.state + ", color=" + this.color + "]";
 	}
 	
 }

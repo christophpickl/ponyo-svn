@@ -6,6 +6,7 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import net.sf.ponyo.jponyo.adminconsole.view.AdminDialog;
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
 import net.sf.ponyo.jponyo.common.pref.PreferencesPersister;
 import net.sf.ponyo.midirouter.logic.midi.MidiConnector;
@@ -14,7 +15,7 @@ import net.sf.ponyo.midirouter.logic.parser.MappingsParser;
 import net.sf.ponyo.midirouter.logic.parser.ParseErrors;
 import net.sf.ponyo.midirouter.view.MainView;
 import net.sf.ponyo.midirouter.view.MainViewListener;
-import net.sf.ponyo.midirouter.view.MidiPortsWindow;
+import net.sf.ponyo.midirouter.view.MidiPortsDialog;
 import net.sourceforge.jpotpourri.jpotface.dialog.PtErrorDialog;
 
 import org.apache.commons.logging.Log;
@@ -27,25 +28,24 @@ public class MainPresenter
 	private static final Log LOG = LogFactory.getLog(MainPresenter.class);
 	private final static String MODEL_PREF_ID = MainPresenter.class.getName() + "-MODEL_PREF_ID";
 
-	private final MidiConnector midiConnector = new MidiConnector();
 	private final MappingsParser parser = new MappingsParser();
-	private final RouterService router = new RouterService(this.midiConnector);
+	private final RouterService router;
 	private final Model model;
 	final MainView window;
-	private MidiPortsWindow midiPortsWindow;
-
+	private MidiPortsDialog midiPortsDialog;
+	private AdminDialog adminDialog;
 	private final PreferencesPersister persister = new PreferencesPersister();
 	
-	public MainPresenter(Model model, MainView window) {
+	public MainPresenter(Model model, MainView window, MidiConnector midiConnector) {
 		this.model = model;
 		this.window = window;
+		this.router = new RouterService(midiConnector);
+		
 		this.window.addListener(this);
 	}
 
 	public void show() {
 		LOG.info("show()");
-
-		this.model.setMidiDevices(this.midiConnector.loadAllDevices());
 		this.persister.init(this.model, MODEL_PREF_ID);
 		
 		SwingUtilities.invokeLater(new Runnable() {
@@ -120,6 +120,7 @@ public class MainPresenter
 	private void doStop() {
 		LOG.debug("doStop()");
 		this.router.stop();
+		
 		this.model.setActiveMappings(null);
 		this.model.setApplicationState(ApplicationState.IDLE);
 		this.model.setFrameCount(Integer.valueOf(0));
@@ -136,6 +137,16 @@ public class MainPresenter
 	public void onQuit() {
 		LOG.debug("onQuit()");
 		
+		if(this.midiPortsDialog != null) {
+			this.midiPortsDialog.setVisible(false);
+			this.midiPortsDialog.dispose();
+			this.midiPortsDialog = null;
+		}
+		if(this.adminDialog != null) {
+			this.adminDialog.setVisible(false);
+			this.adminDialog.dispose();
+			this.adminDialog = null;
+		}
 		this.window.setVisible(false);
 		this.window.dispose();
 		
@@ -147,11 +158,28 @@ public class MainPresenter
 	}
 
 	public void onToggleMidiPortsWindow() {
-		if(this.midiPortsWindow == null) {
-			this.midiPortsWindow = new MidiPortsWindow(this.model);
+		LOG.debug("onToggleMidiPortsWindow()");
+		if(this.midiPortsDialog == null) {
+			this.midiPortsDialog = new MidiPortsDialog(this.model);
 		}
 		
-		this.midiPortsWindow.setVisible(!this.midiPortsWindow.isVisible());
+		this.midiPortsDialog.setVisible(!this.midiPortsDialog.isVisible());
+	}
+
+	public void onToggleHelpWindow() {
+		LOG.debug("onToggleHelpWindow()");
+		Toolkit.getDefaultToolkit().beep();
+	}
+
+	public void onToggleAdminConsole() {
+		LOG.debug("onToggleAdminConsole()");
+		if(this.adminDialog == null) {
+			this.adminDialog = new AdminDialog();
+			this.router.manage(this.adminDialog);
+		}
+		
+		this.adminDialog.setVisible(!this.adminDialog.isVisible());
+		
 	}
 	
 }

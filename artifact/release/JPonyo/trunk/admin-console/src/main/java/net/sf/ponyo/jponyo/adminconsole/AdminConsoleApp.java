@@ -2,12 +2,12 @@ package net.sf.ponyo.jponyo.adminconsole;
 
 import java.awt.Dimension;
 import java.awt.Point;
+import java.util.Collection;
 
 import javax.swing.SwingUtilities;
 
-import net.sf.ponyo.jponyo.adminconsole.view.MainWindow;
-import net.sf.ponyo.jponyo.adminconsole.view.MainWindowListener;
-import net.sf.ponyo.jponyo.adminconsole.view.SkeletonNumberDialog;
+import net.sf.ponyo.jponyo.adminconsole.view.AdminPanelListener;
+import net.sf.ponyo.jponyo.adminconsole.view.SkeletonDataDialog;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
 import net.sf.ponyo.jponyo.core.GlobalSpace;
@@ -21,16 +21,15 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 public class AdminConsoleApp
-	implements MainWindowListener, UserChangeListener, MotionStreamListener {
+	implements AdminPanelListener, UserChangeListener, MotionStreamListener {
 
 	private static final Log LOG = LogFactory.getLog(AdminConsoleApp.class);
 	
-	public static UserState userState_HACK = UserState.LOST;
-	
 	private Context context;
 	private GlobalSpace space;
-	private MainWindow window;
-	private SkeletonNumberDialog skeletonDialog;
+	private AdminConsoleWindow window;
+	private SkeletonDataDialog skeletonDialog;
+	private User recentUser;
 	
 	public static void main(String[] args) {
 		System.out.println("main() START");
@@ -41,10 +40,12 @@ public class AdminConsoleApp
 	public void startUp() {
 		this.context = new ContextStarter().startOscReceiver();
 		this.space = this.context.getGlobalSpace();
-		this.window = new MainWindow(this.space, this);
-		this.skeletonDialog = new SkeletonNumberDialog();
+		this.window = new AdminConsoleWindow(this);
+		this.skeletonDialog = new SkeletonDataDialog();
 
+		this.checkUsers();
 		this.context.addUserChangeListener(this);
+		
 		this.context.getContinuousMotionStream().addListener(this);
 		
 	    this.window.setSize(800, 600);
@@ -71,10 +72,30 @@ public class AdminConsoleApp
 		this.context.shutdown();
 		System.exit(0);
 	}
-
+	
+	private void checkUsers() {
+		Collection<User> filteredUsers = this.space.getFilteredUsers(UserState.TRACKING);
+		
+		if(filteredUsers.isEmpty() == true) {
+			this.window.setUser(null);
+			this.recentUser = null;
+		} else {
+			User newUser = filteredUsers.iterator().next();
+			this.window.setUser(newUser);
+			this.recentUser = newUser;
+		}
+	}
+	
 	public void onUserChanged(User user, UserState state) {
 		LOG.debug("onUserChanged(user="+user+", state="+state+")");
-		AdminConsoleApp.userState_HACK = state;
+		
+		if(this.recentUser == null && state == UserState.TRACKING) {
+			this.window.setUser(user);
+			this.recentUser = user;
+			
+		} else if(this.recentUser == user && state == UserState.LOST) {
+			this.checkUsers();
+		}
 	}
 
 	public void onMotion(MotionData data) {

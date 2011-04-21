@@ -7,5 +7,9 @@ public interface MainMenuBarListener extends Listener {
 	void onMenuQuit();
 
 	void onMenuMidiPorts();
+	
+	void onMenuHelp();
+
+	void onMenuAdminConsole();
 
 }

@@ -74,6 +74,7 @@ public class Context implements ConnectionListener, UserManagerCallback {
 		if(state == UserState.NEW) {
 			this.space.addUser(user);
 		}
+//		System.out.println("broadcasting to: " + this.userChangeListeners.getListeners());
 		for(UserChangeListener listener : this.userChangeListeners.getListeners()) {
 			listener.onUserChanged(user, state);
 		}

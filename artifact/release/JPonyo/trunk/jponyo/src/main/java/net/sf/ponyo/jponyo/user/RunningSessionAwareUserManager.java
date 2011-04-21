@@ -38,6 +38,7 @@ public class RunningSessionAwareUserManager implements UserManager {
 			User previouslyStoredUser = this.userByOpenniId.put(Integer.valueOf(openniId), newUser);
 			if(previouslyStoredUser != null) {
 				LOG.warn("overwritten user " + previouslyStoredUser + " ===> artificial LOGOUT");
+				previouslyStoredUser.setState(UserState.LOST);
 				this.callback.processUserStateChange(previouslyStoredUser, UserState.LOST);
 			}
 			result = newUser;
@@ -93,7 +94,9 @@ public class RunningSessionAwareUserManager implements UserManager {
 	
 	private void loginUser(User newUser) {
 		this.callback.processUserStateChange(newUser, UserState.NEW);
+		newUser.setState(UserState.CALIBRATION_STARTED);
 		this.callback.processUserStateChange(newUser, UserState.CALIBRATION_STARTED);
+		newUser.setState(UserState.TRACKING);
 		this.callback.processUserStateChange(newUser, UserState.TRACKING);
 	}
 

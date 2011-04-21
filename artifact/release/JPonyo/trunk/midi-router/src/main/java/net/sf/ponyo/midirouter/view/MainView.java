@@ -7,20 +7,20 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 
 import javax.swing.BorderFactory;
-import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import net.sf.ponyo.jponyo.common.binding.BindingListener;
+import net.sf.ponyo.midirouter.MidiRouterApp;
 import net.sf.ponyo.midirouter.logic.Model;
 import net.sf.ponyo.midirouter.logic.midi.MidiMappings;
 import net.sf.ponyo.midirouter.refactor.ButtonBarListener;
 import net.sf.ponyo.midirouter.view.framework.AbstractMainView;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class MainView
 	extends AbstractMainView<MainViewListener, Model>
@@ -32,11 +32,12 @@ public class MainView
 	
 	public MainView(Model model) {
 		super(model, "Ponyo MIDI Router");
+        this.setIconImage(MidiRouterApp.IMAGE_FACTORY.getImage("frame_title_logo.png").getImage());
 	}
 	
 	@Override
 	protected final Component initComponent(Model model) {
-		MainMenuBar menuBar = new MainMenuBar();
+		MainMenuBar menuBar = new MainMenuBar(model);
 		menuBar.addListener(this);
 		this.setJMenuBar(menuBar);
 		
@@ -44,7 +45,9 @@ public class MainView
 		final JTable dataTable = this.initMidiMappingTable(model);
 		
 		JScrollPane tableScroll = new JScrollPane(dataTable);
+		tableScroll.setWheelScrollingEnabled(true);
 		JPanel tableWrapper = new JPanel(new BorderLayout());
+		tableWrapper.setOpaque(false);
 		tableWrapper.add(tableScroll, BorderLayout.CENTER);
 		tableWrapper.setBorder(BorderFactory.createEmptyBorder(FRAME_INNER_GAP, 0, FRAME_INNER_GAP, FRAME_INNER_GAP));
 		
@@ -52,6 +55,7 @@ public class MainView
 				this.createWestPanel(model), tableWrapper);
 		split.setDividerLocation(400);
 		split.setResizeWeight(0.0);
+		split.setOpaque(false);
 		return split;
 	}
 	
@@ -84,7 +88,9 @@ public class MainView
 		this.getRootPane().setDefaultButton(buttonBar.getDefaultButton());
 		buttonBar.addListener(this);
 		
-		JPanel westPanel = new JPanel(new GridBagLayout());
+		final JPanel westPanel = new JPanel();
+		westPanel.setOpaque(false);
+		westPanel.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
 		c.insets = new Insets(5, FRAME_INNER_GAP, 0, 0);
@@ -127,6 +133,20 @@ public class MainView
 		LOG.debug("onMenuMidiPorts()");
 		for (MainViewListener listener : this.getListeners()) {
 			listener.onToggleMidiPortsWindow();
+		}
+	}
+
+	public void onMenuHelp() {
+		LOG.debug("onMenuHelp()");
+		for (MainViewListener listener : this.getListeners()) {
+			listener.onToggleHelpWindow();
+		}
+	}
+
+	public void onMenuAdminConsole() {
+		LOG.debug("onMenuHelp()");
+		for (MainViewListener listener : this.getListeners()) {
+			listener.onToggleAdminConsole();
 		}
 	}
 	

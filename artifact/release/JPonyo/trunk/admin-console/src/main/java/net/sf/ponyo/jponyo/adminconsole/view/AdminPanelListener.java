@@ -1,5 +1,5 @@
 package net.sf.ponyo.jponyo.adminconsole.view;
 
-public interface MainWindowListener {
+public interface AdminPanelListener {
 	void onQuit();
 }

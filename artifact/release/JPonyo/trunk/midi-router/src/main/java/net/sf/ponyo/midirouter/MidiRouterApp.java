@@ -1,8 +1,16 @@
 package net.sf.ponyo.midirouter;
 
+import java.io.File;
+import java.util.Properties;
+
+import javax.swing.SwingUtilities;
+
+import net.sf.ponyo.jponyo.common.io.IoUtil;
 import net.sf.ponyo.midirouter.logic.MainPresenter;
 import net.sf.ponyo.midirouter.logic.MainPresenterListener;
 import net.sf.ponyo.midirouter.logic.Model;
+import net.sf.ponyo.midirouter.logic.midi.MidiConnector;
+import net.sf.ponyo.midirouter.refactor.MidiPrototypeApp;
 import net.sf.ponyo.midirouter.view.ImageFactory;
 import net.sf.ponyo.midirouter.view.MainView;
 import net.sf.ponyo.midirouter.view.framework.SplashScreen;
@@ -19,27 +27,55 @@ public class MidiRouterApp implements MainPresenterListener {
 	private MainPresenter presenter;
 	
 	public static void main(String[] args) {
-		SplashScreen splash = new SplashScreen(IMAGE_FACTORY.getImage("splashscreen_logo.png"), "Ponyo MIDI Router starting up ...");
-		splash.setVisible(true);
+    	LOG.info("-------------------------------------");
+		LOG.info("Running in Java VM: " + System.getProperty("java.version"));
+		LOG.info("Execution path: " + new File("").getAbsolutePath());
+    	LOG.info("-------------------------------------");
 		
 		new MidiRouterApp().startApplication();
-		
-		splash.setVisible(false);
-		splash.dispose();
+	}
+	
+	private void sleep(int milliseconds) {
+		try {
+			Thread.sleep(milliseconds);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void startApplication() {
 		LOG.info("startApplication()");
 		final Model model = new Model();
+		
+		final Properties appProperties = IoUtil.loadPropertiesFromClassPath(MidiRouterApp.class.getClassLoader(), "app.properties");
+		final String applicationVersion = appProperties.get("app_version").toString();
+		model.appVersion = applicationVersion;
+		
+		final SplashScreen splash = new SplashScreen(MidiRouterApp.IMAGE_FACTORY.getImage("splashscreen_logo.png"), "Ponyo MIDI Router v" + applicationVersion);
+		splash.setLoadingMessage("Starting up ...");
+		SwingUtilities.invokeLater(new Runnable() { public void run() {
+				splash.setVisible(true);
+		}});
+//		this.sleep(500);
+		
+		
+		MidiConnector midiConnector = new MidiConnector();
+		splash.setLoadingMessage("Loading MIDI devices ...");
+		model.setMidiDevices(midiConnector.loadAllDevices());
+//		this.sleep(500);
+		
 		final MainView window =  new MainView(model);
-		this.presenter = new MainPresenter(model, window);
+		this.presenter = new MainPresenter(model, window, midiConnector);
 		this.presenter.addListener(this);
 		this.presenter.show();
+
+		splash.setVisible(false);
+		splash.dispose();
 	}
 
 	public void onQuit() {
 		LOG.debug("onQuit()");
-		// TODO destroy connection, etc
+		System.exit(0); // force quit everything, just to be sure ;)
 	}
 
 }

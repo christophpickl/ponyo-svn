@@ -11,13 +11,13 @@ import net.sf.ponyo.midirouter.logic.MainPresenterListener;
 import net.sf.ponyo.midirouter.logic.Model;
 import net.sf.ponyo.midirouter.logic.midi.MidiConnector;
 import net.sf.ponyo.midirouter.view.ImageFactory;
-import net.sf.ponyo.midirouter.view.MainView;
 import net.sf.ponyo.midirouter.view.framework.SplashScreen;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.google.inject.Guice;
+import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 public class MidiRouterApp implements MainPresenterListener {
@@ -26,7 +26,9 @@ public class MidiRouterApp implements MainPresenterListener {
 
 	public static final ImageFactory IMAGE_FACTORY = new ImageFactory("/image/");
 	
-	private MainPresenter presenter;
+	private final MainPresenter presenter;
+	private final MidiConnector midiConnector;
+	private final Model model;
 	
 	public static void main(String[] args) {
 		LOG.debug("main() START");
@@ -36,6 +38,15 @@ public class MidiRouterApp implements MainPresenterListener {
 		LOG.debug("main() END");
 	}
 	
+	
+	@Inject
+	public MidiRouterApp(MainPresenter presenter, MidiConnector midiConnector, Model model) {
+		this.midiConnector = midiConnector;
+		this.presenter = presenter;
+		this.model = model;
+	}
+
+
 	private void sleep(int milliseconds) { // TODO outsource in common util
 		LOG.debug("sleep(milliseconds=" + milliseconds + ")");
 		try {
@@ -51,12 +62,10 @@ public class MidiRouterApp implements MainPresenterListener {
 		LOG.info("Running in Java VM: " + System.getProperty("java.version"));
 		LOG.info("Execution path: " + new File("").getAbsolutePath());
     	LOG.info("-------------------------------------");
-    	
-		final Model model = new Model();
-		
+
 		final Properties appProperties = IoUtil.loadPropertiesFromClassPath(MidiRouterApp.class.getClassLoader(), "app.properties");
 		final String applicationVersion = appProperties.get("app_version").toString();
-		model.appVersion = applicationVersion;
+		this.model.setAppVersion(applicationVersion);
 		
 		final SplashScreen splash = new SplashScreen(MidiRouterApp.IMAGE_FACTORY.getImage("splashscreen_logo.png"), "Ponyo MIDI Router v" + applicationVersion);
 		splash.setLoadingMessage("Starting up ...");
@@ -65,14 +74,13 @@ public class MidiRouterApp implements MainPresenterListener {
 		}});
 //		this.sleep(500);
 		
-		
-		MidiConnector midiConnector = new MidiConnector();
 		splash.setLoadingMessage("Loading MIDI devices ...");
-		model.setMidiDevices(midiConnector.loadAllDevices());
+		this.model.setMidiDevices(this.midiConnector.loadAllDevices());
 //		this.sleep(500);
 		
-		final MainView window =  new MainView(model);
-		this.presenter = new MainPresenter(model, window, midiConnector);
+		splash.setLoadingMessage("Starutp done.");
+		this.sleep(200);
+		
 		this.presenter.addListener(this);
 		this.presenter.show();
 

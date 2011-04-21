@@ -14,19 +14,29 @@ import net.sf.ponyo.midirouter.logic.ApplicationState;
 import net.sf.ponyo.midirouter.logic.Model;
 import net.sf.ponyo.midirouter.refactor.ButtonBarListener;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import com.google.inject.Inject;
+
 public class ButtonBar extends JPanel implements Async<ButtonBarListener> {
 
+	private static final Log LOG = LogFactory.getLog(ButtonBar.class);
+	
 	private static final long serialVersionUID = -4832983778195118152L;
 	
 	private final DefaultAsync<ButtonBarListener> async = new DefaultAsync<ButtonBarListener>();
 	private final JButton btnStartStop = new JButton("!NOT SET!");
 	
-	public ButtonBar(Model model) {
+	@Inject
+	public ButtonBar(final Model model) {
+		LOG.debug("new ButtonBar()");
 		this.setOpaque(false);
 		final JButton btnReload = new JButton("Reload");
 		
 		model.addListenerFor(Model.APPLICATION_STATE, new BindingListener() {
 			public void onValueChanged(Object newValue) {
+				LOG.debug("Model.APPLICATION_STATE onValueChanged: " + newValue);
 				ApplicationState newState = (ApplicationState) newValue;
 				
 				final String newStartStopLabel;

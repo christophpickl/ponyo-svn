@@ -58,7 +58,7 @@ public abstract class AbstractMainView<L extends AbstractMainViewListener, P ext
 	}
     
 	void windowDidActivate(boolean didActivate) {
-    	LOG.debug("windowDidActivate(" + didActivate + ")");
+    	LOG.trace("windowDidActivate(" + didActivate + ")");
     	
 //    	this.activated = didActivate;
     	this.mainPanel.setActive(didActivate);
@@ -82,8 +82,8 @@ public abstract class AbstractMainView<L extends AbstractMainViewListener, P ext
 	private void initialize(Dimension enforcedSize) {
 		LOG.debug("initialize()");
 		
-		mainPanel.setLayout(new BorderLayout());
-		mainPanel.add(this.initComponent(this.provider), BorderLayout.CENTER);
+		this.mainPanel.setLayout(new BorderLayout());
+		this.mainPanel.add(this.initComponent(this.provider), BorderLayout.CENTER);
 		this.getContentPane().add(mainPanel);
 		
 		if(enforcedSize == null) {

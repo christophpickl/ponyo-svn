@@ -22,7 +22,7 @@ public class MainMenuBar extends JMenuBar implements ActionListener, Async<MainM
 	
 	public MainMenuBar(Model model) {
 		JMenu menuApp = new JMenu("File");
-		MenuItemX menuAppItemVersion = new DisabledMenuItemX("Version: " + model.appVersion);
+		MenuItemX menuAppItemVersion = new DisabledMenuItemX("Version: " + model.getAppVersion());
 		
 		if(PtUserSniffer.isMacOSX() == false) {
 			MenuItemX menuAppItemExit = new MenuItemX("Exit", this) {

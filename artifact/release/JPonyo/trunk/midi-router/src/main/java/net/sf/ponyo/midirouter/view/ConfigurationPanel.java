@@ -3,9 +3,8 @@ package net.sf.ponyo.midirouter.view;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Set;
 
 import javax.sound.midi.MidiDevice;
 import javax.swing.BorderFactory;
@@ -17,16 +16,20 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
+import net.sf.ponyo.jponyo.common.binding.BindingListener;
 import net.sf.ponyo.jponyo.common.gui.BoundTextFieldListener;
 import net.sf.ponyo.jponyo.common.gui.ProviderKeyListener;
 import net.sf.ponyo.midirouter.logic.Model;
-import net.sourceforge.jpotpourri.jpotface.inputfield.AbstractTextSuggester;
+import net.sourceforge.jpotpourri.jpotface.inputfield.PtTextFieldSuggester;
+
+import com.google.inject.Inject;
 
 public class ConfigurationPanel extends JPanel {
 
 	private static final long serialVersionUID = -1166748256589496496L;
 	
-	public ConfigurationPanel(Model model) {
+	@Inject
+	ConfigurationPanel(Model model) {
 		this.setOpaque(false);
 		
 		final JTextArea inpMappings = new JTextArea();//14, 45);
@@ -36,7 +39,7 @@ public class ConfigurationPanel extends JPanel {
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints c = new GridBagConstraints();
 		
-		final JTextField inpPort = createTextField(model, Model.MIDI_PORT, "Enter a (receivable) MIDI Port Name");
+		final JTextField inpPort = createMidiPortTextField(model, Model.MIDI_PORT, "Enter a (receivable) MIDI Port Name");
 		
 		inpMappings.setToolTipText("Define MIDI Mappings, e.g.: 'l_hand(#torso), X, [0.0 .. 1.0 => 0 .. 127], 0, 1'");
 		inpMappings.setFont(Styles.FONT_MONOSPACED);
@@ -74,21 +77,23 @@ public class ConfigurationPanel extends JPanel {
 		c.fill = GridBagConstraints.BOTH;
 		this.add(mappingsScrollable, c);
 	}
-	public static JTextField createTextField(Model model, String key, String tooltip) {
-		List<MidiDevice> devices = model.getMidiDevices();
-		Set<String> deviceNames = new LinkedHashSet<String>();
-		for (MidiDevice midiDevice : devices) {
-			if(midiDevice.getMaxReceivers() != 0) {
-				deviceNames.add(midiDevice.getDeviceInfo().getName());
+	
+	private JTextField createMidiPortTextField(final Model model, String key, String tooltip) {
+		final PtTextFieldSuggester text = new PtTextFieldSuggester(new ArrayList<String>());
+		
+		model.addListenerFor(Model.MIDI_DEVICES, new BindingListener() {
+			public void onValueChanged(Object newValue) {
+				List<MidiDevice> devices = model.getMidiDevices();
+				List<String> deviceNames = new LinkedList<String>();
+				for (MidiDevice midiDevice : devices) {
+					if(midiDevice.getMaxReceivers() != 0) {
+						deviceNames.add(midiDevice.getDeviceInfo().getName());
+					}
+				}
+				text.setValues(deviceNames);
 			}
-		}
-		final List<String> deviceNameList = new ArrayList<String>(deviceNames);
-		JTextField text = new AbstractTextSuggester() {
-			@Override
-			protected List<String> getValues() {
-				return deviceNameList;
-			}
-		};
+		});
+		
 		model.addListenerFor(key, new BoundTextFieldListener(text));
 		text.addKeyListener(new ProviderKeyListener<Model>(model, key));
 		text.setToolTipText(tooltip);

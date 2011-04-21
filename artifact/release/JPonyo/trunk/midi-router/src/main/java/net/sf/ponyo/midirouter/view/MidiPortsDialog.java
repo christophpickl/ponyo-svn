@@ -22,6 +22,8 @@ import net.sf.ponyo.midirouter.logic.Model;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.google.inject.Inject;
+
 public class MidiPortsDialog extends JDialog {
 
 	private static final long serialVersionUID = 3921063116921815056L;
@@ -33,7 +35,9 @@ public class MidiPortsDialog extends JDialog {
 	
 	private final Font headerFont = new Font(Font.DIALOG, Font.BOLD, 12);
 	
-	public MidiPortsDialog(Model model) {
+	@Inject
+	MidiPortsDialog(Model model) {
+		LOG.debug("new MidiPortsDialg(..)");
 		this.setTitle("MIDI Ports");
 
 		this.getRootPane().putClientProperty("apple.awt.brushMetalLook", Boolean.TRUE);

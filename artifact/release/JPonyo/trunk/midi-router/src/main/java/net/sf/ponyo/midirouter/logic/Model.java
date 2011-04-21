@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.sound.midi.MidiDevice;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.sf.ponyo.jponyo.common.async.DefaultAsyncFor;
 import net.sf.ponyo.jponyo.common.binding.BindingListener;
 import net.sf.ponyo.jponyo.common.binding.BindingProvider;
@@ -13,6 +16,8 @@ import net.sf.ponyo.jponyo.common.pref.PersistAsPreference;
 import net.sf.ponyo.midirouter.logic.midi.MidiMappings;
 
 public class Model extends DefaultAsyncFor<String, BindingListener> implements BindingProvider {
+	
+	private static final Log LOG = LogFactory.getLog(Model.class);
 	
 	public static final String MIDI_PORT = "MIDI_PORT";
 	public static final String MIDI_MAPPINGS = "MIDI_MAPPINGS";
@@ -35,7 +40,11 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 	
 	private List<MidiDevice> midiDevices = new LinkedList<MidiDevice>();
 	
-	public String appVersion;
+	private String appVersion;
+	
+	public Model() {
+		LOG.debug("new Model()");
+	}
 	
 	public String getMidiPort() {
 		return this.midiPort;
@@ -85,6 +94,13 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 	@BindingSetter(Key = MIDI_DEVICES)
 	public void setMidiDevices(Object value) {
 		this.midiDevices = (List<MidiDevice>) value;
+	}
+	
+	public String getAppVersion() {
+		return this.appVersion;
+	}
+	public void setAppVersion(String appVersion) {
+		this.appVersion = appVersion;
 	}
 
 	

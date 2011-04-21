@@ -30,11 +30,11 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 	private String midiPort = "";
 	
 //	FIXME @PersistAsXml
-	private String midiMappings = "r_hand, X, [-300.0 .. 500.0 => 0 .. 127], 1, 1";
+	private String midiMappings = "";
 
-	private ApplicationState applicationState = ApplicationState.IDLE;
+	private ApplicationState applicationState;
 	
-	private MidiMappings activeMappings = null;
+	private MidiMappings activeMappings;
 	
 	private Integer frameCount = Integer.valueOf(0);
 	

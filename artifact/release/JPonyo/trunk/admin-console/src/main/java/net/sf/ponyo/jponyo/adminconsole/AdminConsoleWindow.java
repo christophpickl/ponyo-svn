@@ -14,9 +14,11 @@ import javax.swing.JPanel;
 import net.sf.ponyo.jponyo.adminconsole.view.AdminPanel;
 import net.sf.ponyo.jponyo.adminconsole.view.AdminPanelListener;
 import net.sf.ponyo.jponyo.core.GlobalSpace;
+import net.sf.ponyo.jponyo.stream.MotionData;
+import net.sf.ponyo.jponyo.stream.MotionStreamListener;
 import net.sf.ponyo.jponyo.user.User;
 
-public class AdminConsoleWindow extends JFrame {
+public class AdminConsoleWindow extends JFrame implements MotionStreamListener {
 
 	private static final long serialVersionUID = -7367551475234626321L;
 	
@@ -67,7 +69,7 @@ public class AdminConsoleWindow extends JFrame {
 		this.setVisible(true);
 	}
 	public void setUser(User user) {
-		this.adminPanel.setUser(user);
+		this.adminPanel.onCurrentUserChanged(user);
 	}
 
 	public void destroy() {
@@ -75,9 +77,9 @@ public class AdminConsoleWindow extends JFrame {
 		this.setVisible(false);
 		this.dispose();
 	}
-
-//	public void onJointUpdated() {
+	public void onMotion(MotionData data) {
+		// TODO 
 //		this.skeletonDialog.update(this.data);
-//	}
-	
+	}
+
 }

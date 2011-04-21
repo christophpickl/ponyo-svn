@@ -7,7 +7,6 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
-import net.sf.ponyo.jponyo.adminconsole.AdminConsoleApp;
 import net.sf.ponyo.jponyo.adminconsole.gl.GLUtil;
 import net.sf.ponyo.jponyo.adminconsole.gl.ObjectDrawer;
 import net.sf.ponyo.jponyo.entity.Joint;
@@ -25,7 +24,6 @@ public class SkeletonGLRenderer implements GLEventListener {
 	private static final float JOINT_SCALE = 0.3f;
 	private static final float SKEL_DEF_Z = -10.0f;
 	
-//	private final GlobalSpace data;
 	private User user;
 	
 	public void init(GLAutoDrawable drawable) {

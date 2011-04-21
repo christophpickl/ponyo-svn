@@ -10,7 +10,6 @@ import net.sf.ponyo.jponyo.adminconsole.view.AdminPanelListener;
 import net.sf.ponyo.jponyo.adminconsole.view.SkeletonDataDialog;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
-import net.sf.ponyo.jponyo.core.ContextStarterImpl;
 import net.sf.ponyo.jponyo.core.GlobalSpace;
 import net.sf.ponyo.jponyo.stream.MotionData;
 import net.sf.ponyo.jponyo.stream.MotionStreamListener;
@@ -26,7 +25,7 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 public class AdminConsoleApp
-	implements AdminPanelListener, UserChangeListener, MotionStreamListener {
+	implements AdminPanelListener, UserChangeListener {
 
 	private static final Log LOG = LogFactory.getLog(AdminConsoleApp.class);
 	
@@ -34,15 +33,16 @@ public class AdminConsoleApp
 	private Context context;
 	private GlobalSpace space;
 	private AdminConsoleWindow window;
-	private SkeletonDataDialog skeletonDialog;
 	private User recentUser;
 	
 	public static void main(String[] args) {
-		System.out.println("main() START");
+		LOG.debug("main() START");
+		
 		Injector injector = Guice.createInjector(new AdminConsoleModule());
 		AdminConsoleApp app = injector.getInstance(AdminConsoleApp.class);
 		app.startUp();
-		System.out.println("main() END");
+		
+		LOG.debug("main() END");
 	}
 
 	@Inject
@@ -54,12 +54,11 @@ public class AdminConsoleApp
 		this.context = this.contextStarter.startOscReceiver();
 		this.space = this.context.getGlobalSpace();
 		this.window = new AdminConsoleWindow(this);
-		this.skeletonDialog = new SkeletonDataDialog();
 
 		this.checkUsers();
 		this.context.addUserChangeListener(this);
 		
-		this.context.getContinuousMotionStream().addListener(this);
+		this.context.getContinuousMotionStream().addListener(this.window);
 		
 	    this.window.setSize(800, 600);
 	    SwingUtilities.invokeLater(new Runnable() {
@@ -70,19 +69,16 @@ public class AdminConsoleApp
 	}
 	
 	void onShowWindow() {
-		System.out.println("displaying window");
+		LOG.debug("displaying window");
 		
 		this.window.display();
-		Dimension windowSize = this.window.getSize();
-		Point windowLocation = this.window.getLocation();
-		this.skeletonDialog.setLocation(windowLocation.x + windowSize.width + 4, windowLocation.y);
-		this.skeletonDialog.setVisible(true);
 	}
 
 	public void onQuit() {
-		this.skeletonDialog.dispose();
+		this.context.getContinuousMotionStream().removeListener(this.window);
 		this.window.destroy();
 		this.context.shutdown();
+		
 		System.exit(0);
 	}
 	
@@ -111,7 +107,4 @@ public class AdminConsoleApp
 		}
 	}
 
-	public void onMotion(MotionData data) {
-		this.skeletonDialog.update(data);
-	}
 }

@@ -37,6 +37,9 @@ public class ButtonBar extends JPanel implements Async<ButtonBarListener> {
 		model.addListenerFor(Model.APPLICATION_STATE, new BindingListener() {
 			public void onValueChanged(Object newValue) {
 				LOG.debug("Model.APPLICATION_STATE onValueChanged: " + newValue);
+				if(newValue == null) {
+					return;
+				}
 				ApplicationState newState = (ApplicationState) newValue;
 				
 				final String newStartStopLabel;

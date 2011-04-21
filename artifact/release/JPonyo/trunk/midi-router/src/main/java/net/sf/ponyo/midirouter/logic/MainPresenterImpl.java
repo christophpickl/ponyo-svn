@@ -55,6 +55,8 @@ class MainPresenterImpl
 		
 		this.persister.init(this.model, MODEL_PREF_ID);
 		this.model.dispatchPersistentFieldsChange();
+		this.model.setApplicationState(ApplicationState.IDLE);
+		this.model.setMidiMappings("r_hand, X, [-300.0 .. 500.0 => 0 .. 127], 1, 1");
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {

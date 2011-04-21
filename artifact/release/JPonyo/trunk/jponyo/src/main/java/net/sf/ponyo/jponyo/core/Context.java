@@ -12,6 +12,9 @@ import net.sf.ponyo.jponyo.stream.ContinuousMotionStream;
 import net.sf.ponyo.jponyo.stream.MotionData;
 import net.sf.ponyo.jponyo.stream.MotionStream;
 import net.sf.ponyo.jponyo.stream.MotionStreamImpl;
+import net.sf.ponyo.jponyo.stream.MotionStreamListener;
+import net.sf.ponyo.jponyo.user.ContinuousUserProvider;
+import net.sf.ponyo.jponyo.user.ContinuousUserProviderImpl;
 import net.sf.ponyo.jponyo.user.User;
 import net.sf.ponyo.jponyo.user.UserChangeListener;
 import net.sf.ponyo.jponyo.user.UserManager;
@@ -37,6 +40,7 @@ public class Context implements ConnectionListener, UserManagerCallback {
 	private final DispatchThread dispatcher = new DispatchThread(this.jointQueue);
 	private final MotionStreamImpl motionStream = new MotionStreamImpl();
 	private ContinuousMotionStream continuousMotionStream;
+	private ContinuousUserProvider continuousUserProvider;
 	
 	Context(Connection connection) {
 		this.connection = connection;
@@ -49,6 +53,7 @@ public class Context implements ConnectionListener, UserManagerCallback {
 	}
 	
 	private int i = 0;
+
 	public void onJointMessage(JointMessage message) {
 		if(this.i++ == 1000) {
 			this.i = 0;
@@ -90,16 +95,6 @@ public class Context implements ConnectionListener, UserManagerCallback {
 		this.processUserStateChange(user, user.getState());
 	}
 	
-	private void initializeContinuousMotionStream() {
-		LOG.debug("Lazy initializing ContinuousMotionStream.");
-		
-		this.continuousMotionStream = new ContinuousMotionStream(this.motionStream, this.space);
-		this.continuousMotionStream.initAttachingToUser();
-		
-		this.userChangeListeners.addListener(this.continuousMotionStream);
-		this.dispatcher.addListener(this.continuousMotionStream);
-	}
-	
 	public void shutdown() {
 		if(this.connection == null) {
 			LOG.warn("Tried to shutdown but there is no connection to close!");
@@ -107,10 +102,13 @@ public class Context implements ConnectionListener, UserManagerCallback {
 		}
 		
 		this.dispatcher.removeListener(this.motionStream);
-		
+
 		if(this.continuousMotionStream != null) {
 			this.dispatcher.removeListener(this.continuousMotionStream);
 			this.userChangeListeners.removeListener(this.continuousMotionStream);
+		}
+		if(this.continuousUserProvider != null) {
+			this.userChangeListeners.removeListener(this.continuousUserProvider);
 		}
 		
 		try {
@@ -129,6 +127,32 @@ public class Context implements ConnectionListener, UserManagerCallback {
 			this.initializeContinuousMotionStream();
 		}
 		return this.continuousMotionStream;
+	}
+
+	public ContinuousUserProvider getContinuousUserProvider() {
+		if(this.continuousUserProvider == null) {
+			this.initializeContinuousUserProvider();
+		}
+		return this.continuousUserProvider;
+	}
+	
+	private void initializeContinuousMotionStream() {
+		LOG.debug("Lazy initializing ContinuousMotionStream.");
+		
+		this.continuousMotionStream = new ContinuousMotionStream(this.motionStream, this.space);
+		this.continuousMotionStream.initAttachingToUser();
+		
+		this.userChangeListeners.addListener(this.continuousMotionStream);
+		this.dispatcher.addListener(this.continuousMotionStream);
+	}
+	
+	private void initializeContinuousUserProvider() {
+		LOG.debug("Lazy initializing initializeContinuousUserProvider.");
+		
+		this.continuousUserProvider = new ContinuousUserProviderImpl(this.space);
+		this.continuousUserProvider.init();
+		
+		this.userChangeListeners.addListener(this.continuousUserProvider);
 	}
 	
 	public MotionStream getMotionStream() {

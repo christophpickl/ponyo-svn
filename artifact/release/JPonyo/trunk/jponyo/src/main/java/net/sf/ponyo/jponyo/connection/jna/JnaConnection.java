@@ -30,8 +30,7 @@ public class JnaConnection
 	
 	JnaConnection openByXmlConfig() {
 		this.jnaLib = new PnJNALibraryWrapper(this, this);
-		System.err.println("JnaConnection OUTCOMMENTED !!!!!!!!!!!!!!!!!!!");
-//		FIXME this.jnaLib.startByXmlConfig(this.configOrRecordingPath);
+		this.jnaLib.startByXmlConfig(this.configOrRecordingPath);
 		return this;
 	}
 	

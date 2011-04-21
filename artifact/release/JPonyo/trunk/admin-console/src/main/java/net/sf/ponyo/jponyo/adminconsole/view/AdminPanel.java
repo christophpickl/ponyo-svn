@@ -6,11 +6,12 @@ import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLCapabilities;
 import javax.swing.JPanel;
 
+import net.sf.ponyo.jponyo.user.ContinuousUserListener;
 import net.sf.ponyo.jponyo.user.User;
 
 import com.sun.opengl.util.Animator;
 
-public class AdminPanel extends JPanel {
+public class AdminPanel extends JPanel implements ContinuousUserListener {
 
 	private static final long serialVersionUID = 2357164011556061774L;
 
@@ -36,12 +37,12 @@ public class AdminPanel extends JPanel {
 		this.animator.start();
 	}
 	
-	public void setUser(User user) {
-		this.skeletonGLRenderer.setUser(user);
-	}
-	
 	public void stop() {
 		this.animator.stop();
+	}
+
+	public void onCurrentUserChanged(User user) {
+		this.skeletonGLRenderer.setUser(user);
 	}
 	
 }

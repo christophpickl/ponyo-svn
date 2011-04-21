@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.common.pref;
+package net.sf.ponyo.jponyo.common.simplepersist;
 
 import java.util.prefs.BackingStoreException;
 import java.util.prefs.Preferences;

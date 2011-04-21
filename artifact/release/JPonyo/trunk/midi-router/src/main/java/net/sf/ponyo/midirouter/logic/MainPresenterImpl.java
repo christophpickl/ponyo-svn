@@ -8,7 +8,7 @@ import javax.swing.SwingUtilities;
 
 import net.sf.ponyo.jponyo.adminconsole.view.AdminDialog;
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
-import net.sf.ponyo.jponyo.common.pref.PreferencesPersister;
+import net.sf.ponyo.jponyo.common.simplepersist.PreferencesPersister;
 import net.sf.ponyo.midirouter.logic.midi.MidiMappings;
 import net.sf.ponyo.midirouter.logic.parser.MappingsParser;
 import net.sf.ponyo.midirouter.logic.parser.ParseErrors;

@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import net.sf.ponyo.jponyo.common.gui.HtmlWindow;
-import net.sf.ponyo.jponyo.common.pref.PreferencesPersister;
+import net.sf.ponyo.jponyo.common.simplepersist.PreferencesPersister;
 import net.sf.ponyo.midirouter.refactor.LogUtil;
 import net.sf.ponyo.midirouter.refactor.MappingsParser;
 import net.sf.ponyo.midirouter.refactor.MidiMapping;

@@ -4,7 +4,7 @@ import net.sf.ponyo.jponyo.common.async.DefaultAsyncFor;
 import net.sf.ponyo.jponyo.common.binding.BindingListener;
 import net.sf.ponyo.jponyo.common.binding.BindingProvider;
 import net.sf.ponyo.jponyo.common.binding.BindingSetter;
-import net.sf.ponyo.jponyo.common.pref.PersistAsPreference;
+import net.sf.ponyo.jponyo.common.simplepersist.PersistAsPreference;
 
 public class Model extends DefaultAsyncFor<String, BindingListener> implements BindingProvider {
 

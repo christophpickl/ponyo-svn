@@ -1,5 +1,6 @@
 package net.sf.ponyo.midirouter;
 
+import net.sf.ponyo.jponyo.JPonyoModule;
 import net.sf.ponyo.jponyo.connection.jna.JnaModule;
 import net.sf.ponyo.jponyo.connection.osc.OscModule;
 import net.sf.ponyo.jponyo.core.CoreModule;
@@ -14,10 +15,7 @@ public class MidiRouterModule extends AbstractModule {
 
 	@Override
 	protected void configure() {
-		install(new UserModule());
-		install(new OscModule());
-		install(new JnaModule());
-		install(new CoreModule());
+		install(new JPonyoModule());
 		
 		install(new LogicModule()); // contains: MidiModule
 		install(new ViewModule());

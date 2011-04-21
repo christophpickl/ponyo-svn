@@ -145,4 +145,16 @@ public class Model extends DefaultAsyncFor<String, BindingListener> implements B
 			throw new RuntimeException("Unhandled property name [" + propertyName + "]!");
 		}
 	}
+
+	/** After data was loaded from pesister, we have to notify all listeners manually (pref persister injects via fields, not setter) */
+	public void dispatchPersistentFieldsChange() {
+		this.dispatch(MIDI_PORT, this.midiPort);
+//		this.dispatch(MIDI_MAPPINGS, this.midiMappings);
+		
+	}
+	private void dispatch(String key, Object value) {
+		for (BindingListener listener : this.getListenersFor(key)) {
+			listener.onValueChanged(value);
+		}
+	}
 }

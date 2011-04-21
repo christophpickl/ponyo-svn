@@ -1,8 +1,8 @@
 package net.sf.ponyo.jponyo.samples.context;
 
+import net.sf.ponyo.jponyo.JPonyoModule;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
-import net.sf.ponyo.jponyo.samples.SampleJPonyoModule;
 import net.sf.ponyo.jponyo.stream.MotionData;
 import net.sf.ponyo.jponyo.stream.MotionStreamListener;
 
@@ -16,7 +16,7 @@ public class ContinuousMotionStreamSample {
 	private final ContextStarter contextStarter;
 	
 	public static void main(String[] args) throws Exception {
-		Injector injector = Guice.createInjector(new SampleJPonyoModule());
+		Injector injector = Guice.createInjector(new JPonyoModule());
 		ContinuousMotionStreamSample sample = injector.getInstance(ContinuousMotionStreamSample.class);
 		sample.doit();
 	}

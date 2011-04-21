@@ -1,5 +1,6 @@
 package net.sf.ponyo.jponyo.samples;
 
+import net.sf.ponyo.jponyo.JPonyoModule;
 import net.sf.ponyo.jponyo.connection.jna.JnaByConfigConnectorFactory;
 import net.sf.ponyo.jponyo.connection.jna.JnaModule;
 import net.sf.ponyo.jponyo.connection.osc.OscConnector;
@@ -15,7 +16,7 @@ public class SomeSample {
 
 	public static void main(String[] args) {
 		System.out.println("main() START");
-		Injector injector = Guice.createInjector(new SampleJPonyoModule());
+		Injector injector = Guice.createInjector(new JPonyoModule());
 		
 		injector.getInstance(Sample.class);
 		

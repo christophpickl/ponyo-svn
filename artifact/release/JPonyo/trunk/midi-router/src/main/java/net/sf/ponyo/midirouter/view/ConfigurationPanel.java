@@ -16,6 +16,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.sf.ponyo.jponyo.common.binding.BindingListener;
 import net.sf.ponyo.jponyo.common.gui.BoundTextFieldListener;
 import net.sf.ponyo.jponyo.common.gui.ProviderKeyListener;
@@ -30,24 +33,25 @@ public class ConfigurationPanel extends JPanel {
 	
 	@Inject
 	ConfigurationPanel(Model model) {
-		this.setOpaque(false);
-		
-		final JTextArea inpMappings = new JTextArea();//14, 45);
-		model.addListenerFor(Model.MIDI_MAPPINGS, new BoundTextFieldListener(inpMappings));
-		inpMappings.addKeyListener(new ProviderKeyListener<Model>(model, Model.MIDI_MAPPINGS));
-		
-		this.setLayout(new GridBagLayout());
-		GridBagConstraints c = new GridBagConstraints();
-		
+
 		final JTextField inpPort = createMidiPortTextField(model, Model.MIDI_PORT, "Enter a (receivable) MIDI Port Name");
 		
+		final JTextArea inpMappings = new JTextArea();
+		model.addListenerFor(Model.MIDI_MAPPINGS, new BoundTextFieldListener(inpMappings));
+		inpMappings.addKeyListener(new ProviderKeyListener<Model>(model, Model.MIDI_MAPPINGS));
 		inpMappings.setToolTipText("Define MIDI Mappings, e.g.: 'l_hand(#torso), X, [0.0 .. 1.0 => 0 .. 127], 0, 1'");
+		
+		inpPort.setFont(Styles.FONT_MONOSPACED);
 		inpMappings.setFont(Styles.FONT_MONOSPACED);
 		
 		final JScrollPane mappingsScrollable = new JScrollPane(inpMappings);
 		inpMappings.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 		mappingsScrollable.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		
+		
+		this.setOpaque(false);
+		this.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
 
 		c.anchor = GridBagConstraints.WEST;
 		c.fill = GridBagConstraints.NONE;
@@ -97,7 +101,6 @@ public class ConfigurationPanel extends JPanel {
 		model.addListenerFor(key, new BoundTextFieldListener(text));
 		text.addKeyListener(new ProviderKeyListener<Model>(model, key));
 		text.setToolTipText(tooltip);
-		text.setFont(Styles.FONT_MONOSPACED);
 		return text;
 	}
 	

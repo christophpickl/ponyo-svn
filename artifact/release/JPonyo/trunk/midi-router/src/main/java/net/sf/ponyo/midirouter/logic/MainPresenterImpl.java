@@ -52,7 +52,9 @@ class MainPresenterImpl
 
 	public void show() {
 		LOG.info("show()");
+		
 		this.persister.init(this.model, MODEL_PREF_ID);
+		this.model.dispatchPersistentFieldsChange();
 		
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() {

@@ -18,17 +18,17 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
+import net.sf.ponyo.jponyo.JPonyoModule;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
 import net.sf.ponyo.jponyo.core.ContextStarterImpl;
-import net.sf.ponyo.jponyo.samples.SampleJPonyoModule;
 
 public class SimpleContextSample {
 	
 	private final ContextStarter contextStarter;
 	
 	public static void main(String[] args) {
-		Injector injector = Guice.createInjector(new SampleJPonyoModule());
+		Injector injector = Guice.createInjector(new JPonyoModule());
 		SimpleContextSample sample = injector.getInstance(SimpleContextSample.class);
 		sample.doit();
 	}

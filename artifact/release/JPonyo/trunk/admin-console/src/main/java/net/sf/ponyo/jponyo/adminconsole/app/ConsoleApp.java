@@ -2,16 +2,11 @@ package net.sf.ponyo.jponyo.adminconsole.app;
 
 import java.awt.Dimension;
 import java.awt.Point;
-import java.util.Collection;
 
 import javax.swing.SwingUtilities;
 
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
-import net.sf.ponyo.jponyo.core.GlobalSpace;
-import net.sf.ponyo.jponyo.user.User;
-import net.sf.ponyo.jponyo.user.UserChangeListener;
-import net.sf.ponyo.jponyo.user.UserState;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -20,17 +15,14 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public class ConsoleApp
-	implements ConsoleWindowListener, UserChangeListener {
+public class ConsoleApp implements ConsoleWindowListener {
 
 	private static final Log LOG = LogFactory.getLog(ConsoleApp.class);
 	
 	private final Model model;
 	private final ContextStarter contextStarter;
 	private Context context;
-	private GlobalSpace space;
 	private ConsoleWindow window;
-	private User recentUser;
 	
 	public static void main(String[] args) {
 		LOG.debug("main() START");
@@ -49,14 +41,16 @@ public class ConsoleApp
 	}
 
 	public void startUp() {
+//		System.err.println("startUp OUTCOMMENTED!!!!!!!!!");
+		
 		this.context = this.contextStarter.startOscReceiver();
-		this.space = this.context.getGlobalSpace();
+//		this.space = this.context.getGlobalSpace();
 		this.window = new ConsoleWindow(this.model);
 		this.window.addListener(this);
 
-		this.checkUsers();
-		this.context.addUserChangeListener(this);
+		this.window.onCurrentUserChanged(this.context.getContinuousUserProvider().getCurrentUser()); // initialize user
 		this.context.getContinuousMotionStream().addListener(this.window);
+		this.context.getContinuousUserProvider().addListener(this.window);
 		
 	    SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
@@ -66,43 +60,19 @@ public class ConsoleApp
 	}
 	
 	void onShowWindow() {
-		LOG.debug("displaying window");
-		
 		Point offset = new Point(-50, 0); // move a little bit to left
 		this.window.display(new Dimension(800, 600), offset);
 	}
 
 	public void onQuit() {
-		this.context.getContinuousMotionStream().removeListener(this.window);
 		this.window.destroy();
+
+		this.context.getContinuousMotionStream().removeListener(this.window);
+		this.context.getContinuousUserProvider().removeListener(this.window);
 		this.context.shutdown();
 		
 		System.exit(0);
 	}
 	
-	private void checkUsers() {
-		Collection<User> filteredUsers = this.space.getFilteredUsers(UserState.TRACKING);
-		
-		if(filteredUsers.isEmpty() == true) {
-			this.window.setUser(null);
-			this.recentUser = null;
-		} else {
-			User newUser = filteredUsers.iterator().next();
-			this.window.setUser(newUser);
-			this.recentUser = newUser;
-		}
-	}
-	
-	public void onUserChanged(User user, UserState state) {
-		LOG.debug("onUserChanged(user="+user+", state="+state+")");
-		
-		if(this.recentUser == null && state == UserState.TRACKING) {
-			this.window.setUser(user);
-			this.recentUser = user;
-			
-		} else if(this.recentUser == user && state == UserState.LOST) {
-			this.checkUsers();
-		}
-	}
 
 }

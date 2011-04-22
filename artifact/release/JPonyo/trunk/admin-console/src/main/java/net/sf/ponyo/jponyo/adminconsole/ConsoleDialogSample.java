@@ -2,7 +2,6 @@ package net.sf.ponyo.jponyo.adminconsole;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Collection;
 
 import javax.swing.SwingUtilities;
 
@@ -10,8 +9,6 @@ import net.sf.ponyo.jponyo.adminconsole.app.ConsoleModule;
 import net.sf.ponyo.jponyo.adminconsole.view.ConsoleDialog;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
-import net.sf.ponyo.jponyo.user.User;
-import net.sf.ponyo.jponyo.user.UserState;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;

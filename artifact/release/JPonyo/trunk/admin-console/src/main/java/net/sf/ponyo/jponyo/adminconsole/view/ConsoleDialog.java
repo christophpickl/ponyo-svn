@@ -13,7 +13,9 @@ import net.sf.ponyo.jponyo.stream.MotionStreamListener;
 import net.sf.ponyo.jponyo.user.ContinuousUserListener;
 import net.sf.ponyo.jponyo.user.User;
 
-public class ConsoleDialog extends JDialog implements MotionStreamListener, ContinuousUserListener {
+public class ConsoleDialog
+	extends JDialog
+		implements MotionStreamListener, ContinuousUserListener {
 
 	private static final long serialVersionUID = 1716630211270484837L;
 	

@@ -38,6 +38,8 @@ public class JointsDialogManager implements MotionStreamListener {
 	}
 
 	public void setVisible(boolean visible) {
+		LOG.debug("setVisible(visible=" + true + ")");
+		
 		if(this.jointsDialog != null) {
 			if(visible == this.jointsDialog.isVisible()) {
 				LOG.warn("Visibility already set to: " + visible);
@@ -49,7 +51,7 @@ public class JointsDialogManager implements MotionStreamListener {
 			this.jointsDialog = new JointsDialog();
 			Dimension windowSize = this.parent.getSize();
 			Point windowLocation = this.parent.getLocation();
-			this.jointsDialog.setLocation(windowLocation.x + windowSize.width + 4, windowLocation.y);
+			this.jointsDialog.setLocation(windowLocation.x + windowSize.width + 5, windowLocation.y);
 			this.jointsDialog.setVisible(true);
 		}
 		

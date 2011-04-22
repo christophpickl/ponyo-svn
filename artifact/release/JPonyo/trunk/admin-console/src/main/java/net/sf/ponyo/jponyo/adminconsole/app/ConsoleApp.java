@@ -6,12 +6,9 @@ import java.util.Collection;
 
 import javax.swing.SwingUtilities;
 
-import net.sf.ponyo.jponyo.adminconsole.view.JointsDialog;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
 import net.sf.ponyo.jponyo.core.GlobalSpace;
-import net.sf.ponyo.jponyo.stream.MotionData;
-import net.sf.ponyo.jponyo.stream.MotionStreamListener;
 import net.sf.ponyo.jponyo.user.User;
 import net.sf.ponyo.jponyo.user.UserChangeListener;
 import net.sf.ponyo.jponyo.user.UserState;
@@ -28,6 +25,7 @@ public class ConsoleApp
 
 	private static final Log LOG = LogFactory.getLog(ConsoleApp.class);
 	
+	private final Model model;
 	private final ContextStarter contextStarter;
 	private Context context;
 	private GlobalSpace space;
@@ -45,21 +43,21 @@ public class ConsoleApp
 	}
 
 	@Inject
-	public ConsoleApp(ContextStarter contextStarter) {
+	public ConsoleApp(Model model, ContextStarter contextStarter) {
+		this.model = model;
 		this.contextStarter = contextStarter;
 	}
 
 	public void startUp() {
 		this.context = this.contextStarter.startOscReceiver();
 		this.space = this.context.getGlobalSpace();
-		this.window = new ConsoleWindow(this);
+		this.window = new ConsoleWindow(this.model);
+		this.window.addListener(this);
 
 		this.checkUsers();
 		this.context.addUserChangeListener(this);
-		
 		this.context.getContinuousMotionStream().addListener(this.window);
 		
-	    this.window.setSize(800, 600);
 	    SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				ConsoleApp.this.onShowWindow();
@@ -70,7 +68,8 @@ public class ConsoleApp
 	void onShowWindow() {
 		LOG.debug("displaying window");
 		
-		this.window.setVisible(true);
+		Point offset = new Point(-50, 0); // move a little bit to left
+		this.window.display(new Dimension(800, 600), offset);
 	}
 
 	public void onQuit() {

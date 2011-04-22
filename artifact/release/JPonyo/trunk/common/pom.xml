@@ -43,6 +43,11 @@
 			<artifactId>jpotpourri</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>net.sourceforge.jpotpourri</groupId>
+			<artifactId>jpotface</artifactId>
+		</dependency>
+		
     </dependencies>
     
     

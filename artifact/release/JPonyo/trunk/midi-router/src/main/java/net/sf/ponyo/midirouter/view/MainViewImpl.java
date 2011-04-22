@@ -14,11 +14,11 @@ import javax.swing.JSplitPane;
 import javax.swing.JTable;
 
 import net.sf.ponyo.jponyo.common.binding.BindingListener;
+import net.sf.ponyo.jponyo.common.gui.AbstractMainView;
 import net.sf.ponyo.midirouter.MidiRouterApp;
 import net.sf.ponyo.midirouter.logic.Model;
 import net.sf.ponyo.midirouter.logic.midi.MidiMappings;
 import net.sf.ponyo.midirouter.refactor.ButtonBarListener;
-import net.sf.ponyo.midirouter.view.framework.AbstractMainView;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

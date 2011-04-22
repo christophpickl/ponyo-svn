@@ -1,8 +1,9 @@
-package net.sf.ponyo.midirouter.view.framework;
+package net.sf.ponyo.jponyo.common.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -13,8 +14,6 @@ import javax.swing.WindowConstants;
 import net.sf.ponyo.jponyo.common.async.Async;
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
 import net.sf.ponyo.jponyo.common.binding.BindingProvider;
-import net.sf.ponyo.jponyo.common.gui.GuiUtil;
-import net.sf.ponyo.jponyo.common.gui.OSXAdapter;
 import net.sourceforge.jpotpourri.jpotface.panel.brushed.PtBrushedMetalPanel;
 import net.sourceforge.jpotpourri.tools.PtUserSniffer;
 
@@ -63,26 +62,34 @@ public abstract class AbstractMainView<L extends AbstractMainViewListener, P ext
     	this.repaint();
     }
 	
-	protected abstract Component initComponent(P provider);
+	protected abstract Component initComponent(P sameProvider);
 
-	public void display() {
+	public final void display() {
 		this.display(null);
 	}
 	
-	public void display(Dimension enforcedSize) {
+	public final void display(Dimension enforcedSize) {
+		this.display(enforcedSize, null);
+	}
+	
+	public final void display(Dimension enforcedSize, Point offset) {
 		if(this.isInitialized == false) {
-			this.initialize(enforcedSize);
+			this.initialize(enforcedSize, offset);
 		}
 		
 		this.setVisible(true);
 	}
 	
-	private void initialize(Dimension enforcedSize) {
+	private void initialize(Dimension enforcedSize, Point offset) {
 		LOG.debug("initialize()");
 		
 		this.mainPanel.setLayout(new BorderLayout());
-		this.mainPanel.add(this.initComponent(this.provider), BorderLayout.CENTER);
-		this.getContentPane().add(mainPanel);
+		Component innerContent = this.initComponent(this.provider);
+		if(innerContent == null) {
+			throw new RuntimeException("initComponent() may not return null by: " + this.getClass().getName());
+		}
+		this.mainPanel.add(innerContent, BorderLayout.CENTER);
+		this.getContentPane().add(this.mainPanel);
 		
 		if(enforcedSize == null) {
 			this.pack();
@@ -90,7 +97,11 @@ public abstract class AbstractMainView<L extends AbstractMainViewListener, P ext
 			this.setSize(enforcedSize);
 		}
 		
-		GuiUtil.setCenterLocation(this);
+		if(offset == null) {
+			GuiUtil.setCenterLocation(this);
+		} else {
+			GuiUtil.setCenterLocation(this, offset.x, offset.y);
+		}
 		
 		if(PtUserSniffer.isMacOSX()) {
 			this.registerOsxListener();
@@ -126,7 +137,7 @@ public abstract class AbstractMainView<L extends AbstractMainViewListener, P ext
 		this.dispatchQuit();
 	}
 	
-	private void dispatchQuit() {
+	protected final void dispatchQuit() {
 		for (L listener : this.async.getListeners()) {
 			listener.onQuit();
 		}

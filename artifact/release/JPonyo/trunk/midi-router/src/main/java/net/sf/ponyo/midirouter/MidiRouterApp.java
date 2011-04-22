@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import javax.swing.SwingUtilities;
 
+import net.sf.ponyo.jponyo.common.gui.SplashScreen;
 import net.sf.ponyo.jponyo.common.io.IoUtil;
 import net.sf.ponyo.jponyo.common.simplepersist.SimplePersister;
 import net.sf.ponyo.jponyo.common.simplepersist.SimplePersisterImpl;
@@ -14,7 +15,6 @@ import net.sf.ponyo.midirouter.logic.MainPresenterListener;
 import net.sf.ponyo.midirouter.logic.Model;
 import net.sf.ponyo.midirouter.logic.midi.MidiConnector;
 import net.sf.ponyo.midirouter.view.ImageFactory;
-import net.sf.ponyo.midirouter.view.framework.SplashScreen;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

@@ -1,5 +1,6 @@
 package net.sf.ponyo.jponyo.adminconsole.app;
 
-public interface ConsoleWindowListener {
-	void onQuit();
+import net.sf.ponyo.jponyo.common.gui.AbstractMainViewListener;
+
+public interface ConsoleWindowListener extends AbstractMainViewListener {
 }

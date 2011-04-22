@@ -70,7 +70,7 @@ public class ConsoleApp
 	void onShowWindow() {
 		LOG.debug("displaying window");
 		
-		this.window.display();
+		this.window.setVisible(true);
 	}
 
 	public void onQuit() {

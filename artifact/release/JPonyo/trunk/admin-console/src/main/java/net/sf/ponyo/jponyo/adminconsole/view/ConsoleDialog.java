@@ -1,8 +1,6 @@
 package net.sf.ponyo.jponyo.adminconsole.view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -21,18 +19,17 @@ public class ConsoleDialog extends JDialog implements MotionStreamListener, Cont
 	
 	private final GLPanel adminPanel = new GLPanel();
 
-	private JointsDialog skeletonDialog;
+	final JointsDialogManager jointsMgr = new JointsDialogManager(this);
 
-//	this.skeletonDialog = new SkeletonDataDialog();
 	public ConsoleDialog() {
 		this.setTitle("Admin Console");
 
 		this.getRootPane().putClientProperty("apple.awt.brushMetalLook", Boolean.TRUE);
 		
 		JPanel commandPanel = new JPanel();
-		JButton btnToggleSkeletonDialog = new JButton("Toggle Skeleton Dialog");
+		JButton btnToggleSkeletonDialog = new JButton("Toggle Joints Dialog");
 		btnToggleSkeletonDialog.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent actionevent) {
-			onToggleSkeletonDialog();
+			ConsoleDialog.this.jointsMgr.onToggleSkeletonDialog();
 		}});
 		commandPanel.add(btnToggleSkeletonDialog);
 		
@@ -44,26 +41,13 @@ public class ConsoleDialog extends JDialog implements MotionStreamListener, Cont
 	    this.setSize(600, 430);
 	}
 	
-	void onToggleSkeletonDialog() {
-		if(this.skeletonDialog != null) {
-			this.skeletonDialog.setVisible(!this.skeletonDialog.isVisible());
-		} else {
-			this.skeletonDialog = new JointsDialog();
-			Dimension windowSize = this.getSize();
-			Point windowLocation = this.getLocation();
-			this.skeletonDialog.setLocation(windowLocation.x + windowSize.width + 4, windowLocation.y);
-			this.skeletonDialog.setVisible(true);
-		}
-	}
 
 	public void onCurrentUserChanged(User user) {
 		this.adminPanel.onCurrentUserChanged(user);
 	}
 
 	public void onMotion(MotionData data) {
-		if(this.skeletonDialog != null) {
-			this.skeletonDialog.onMotion(data);
-		}
+		this.jointsMgr.onMotion(data);
 	}
 
 	@Override
@@ -73,18 +57,12 @@ public class ConsoleDialog extends JDialog implements MotionStreamListener, Cont
 		} else {
 			this.adminPanel.stop();
 		}
-		
-		if(this.skeletonDialog != null) {
-			this.skeletonDialog.setVisible(visible);
-		}
-		
+		this.jointsMgr.setVisible(visible);
 		super.setVisible(visible);
 	}
 	
 	@Override
 	public void dispose() {
-		if(this.skeletonDialog != null) {
-			this.skeletonDialog.dispose();
-		}
+		this.jointsMgr.dispose();
 	}
 }

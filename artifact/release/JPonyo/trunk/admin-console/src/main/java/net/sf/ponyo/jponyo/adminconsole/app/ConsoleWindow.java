@@ -12,6 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import net.sf.ponyo.jponyo.adminconsole.view.GLPanel;
+import net.sf.ponyo.jponyo.adminconsole.view.JointsDialog;
+import net.sf.ponyo.jponyo.adminconsole.view.JointsDialogManager;
 import net.sf.ponyo.jponyo.core.GlobalSpace;
 import net.sf.ponyo.jponyo.stream.MotionData;
 import net.sf.ponyo.jponyo.stream.MotionStreamListener;
@@ -21,14 +23,13 @@ public class ConsoleWindow extends JFrame implements MotionStreamListener {
 
 	private static final long serialVersionUID = -7367551475234626321L;
 	
-//	private final SkeletonNumberDialog skeletonDialog = new SkeletonNumberDialog();
-	private final GLPanel adminPanel;
+	private final GLPanel adminPanel = new GLPanel();
+	final JointsDialogManager jointsMgr = new JointsDialogManager(this);
 	
 	public ConsoleWindow(final ConsoleWindowListener listener) {
 		super("Jogl Playground");
 		
 		JPanel panel = new JPanel(new BorderLayout());
-		this.adminPanel = new GLPanel();
 		panel.add(this.adminPanel, BorderLayout.CENTER);
 
 		JPanel cmdPanel = new JPanel();
@@ -56,29 +57,33 @@ public class ConsoleWindow extends JFrame implements MotionStreamListener {
 	        }
 	    });
 	}
-//	@Override public void setVisible(boolean visible) {
-//		super.setVisible(visible);
-//		Point p = this.getLocation();
-//		this.skeletonDialog.setLocation(p.x + this.getWidth() + 5/*gap*/, p.y);
-//		this.skeletonDialog.setVisible(visible);
-//	}
-	
-	public void display() {
-		this.adminPanel.start();
-		this.setVisible(true);
+
+	@Override
+	public void setVisible(boolean visible) {
+		if(visible) {
+			this.adminPanel.start();
+		} else {
+			this.adminPanel.stop();
+		}
+		this.jointsMgr.setVisible(visible);
+		super.setVisible(visible);
 	}
+	
 	public void setUser(User user) {
 		this.adminPanel.onCurrentUserChanged(user);
+	}
+	
+	public void onMotion(MotionData data) {
+		this.jointsMgr.onMotion(data);
 	}
 
 	public void destroy() {
 		this.adminPanel.stop();
+		
 		this.setVisible(false);
+		
+		this.jointsMgr.dispose();
 		this.dispose();
-	}
-	public void onMotion(MotionData data) {
-		// TODO 
-//		this.skeletonDialog.update(this.data);
 	}
 
 }

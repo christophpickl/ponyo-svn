@@ -1,5 +1,7 @@
 package net.sf.ponyo.jponyo.common.aop;
 
+import net.sf.ponyo.jponyo.common.log.LogLevel;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.aspectj.lang.Signature;

@@ -1,12 +1,12 @@
 package net.sf.ponyo.console;
 
 import net.sf.ponyo.jponyo.common.aop.LogAspectHelper;
-import net.sf.ponyo.jponyo.common.aop.LogLevel;
+import net.sf.ponyo.jponyo.common.log.LogLevel;
 
 public aspect ConsoleLogAspect extends LogAspectHelper {
 	
 	pointcut withinConsole():
-		within(net.sf.ponyo.jponyo.adminconsole..*);
+		within(net.sf.ponyo.console..*);
 
 	pointcut anyConstructor():
 		withinConsole() &&

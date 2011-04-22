@@ -1,7 +1,7 @@
 /**
  * 
  */
-package net.sf.ponyo.jponyo.common.aop;
+package net.sf.ponyo.jponyo.common.log;
 
 import org.apache.commons.logging.Log;
 

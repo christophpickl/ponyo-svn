@@ -2,7 +2,10 @@ package net.sf.ponyo.jponyo.samples;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.HashMap;
+import java.util.Map;
 
+import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -10,17 +13,15 @@ import javax.swing.WindowConstants;
 
 import net.sf.ponyo.jponyo.JPonyoModule;
 import net.sf.ponyo.jponyo.common.gui.GuiUtil;
+import net.sf.ponyo.jponyo.common.log.LogUtil;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
 import net.sf.ponyo.jponyo.pose.Pose;
+import net.sf.ponyo.jponyo.pose.PoseListener;
+import net.sf.ponyo.jponyo.pose.PoseRule;
 import net.sf.ponyo.jponyo.pose.PsiPose;
 import net.sf.ponyo.jponyo.user.ContinuousUserListener;
 import net.sf.ponyo.jponyo.user.User;
-
-import org.apache.log4j.Appender;
-import org.apache.log4j.ConsoleAppender;
-import org.apache.log4j.Logger;
-import org.apache.log4j.PatternLayout;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -28,25 +29,11 @@ import com.google.inject.Injector;
 
 public class PoseSample {
 	
-	private static PoseSample hack;
-
 	private final ContextStarter starter;
-	public static final JLabel LBL_1 = new JLabel("...");
-	
-	public static void HACK_foo(JLabel lbl, String msg) {
-		if(hack != null) {
-			lbl.setText(msg);
-		}
-	}
+	final Map<PoseRule, JLabel> ruleLabels = new HashMap<PoseRule, JLabel>();
 	
 	public static void main(String[] args) {
-		Logger log4jLog = Logger.getRootLogger();
-		if(log4jLog.getAllAppenders().hasMoreElements() == false) {
-			PatternLayout layout = new PatternLayout("%d [%t] [%-5p] %-30c{1} - %m%n");
-			Appender newAppender = new ConsoleAppender(layout);
-			log4jLog.addAppender(newAppender);
-		}
-		
+		LogUtil.ensureDefaultLogger();
 		Injector injector = Guice.createInjector(new JPonyoModule());
 		injector.getInstance(PoseSample.class).start();
 	}
@@ -54,15 +41,29 @@ public class PoseSample {
 	@Inject
 	public PoseSample(ContextStarter starter) {
 		this.starter = starter;
-		hack = this;
 	}
 	
 	private void start() {
 		final Pose pose = new PsiPose();
+		for(PoseRule rule : pose.getRules()) {
+			this.ruleLabels.put(rule, new JLabel("--------"));
+		}
+		pose.addListener(new PoseListener() {
+			public void onPoseRuleChanged(PoseRule rule) {
+				PoseSample.this.ruleLabels.get(rule).setText(rule.getLabel() + " ==> " + rule.isActive());
+			}
+			public void onPoseLeft() {
+				System.out.println("!!!!!!!!!!! LEFT");
+			}
+			public void onPoseEntered() {
+				System.out.println("!!!!!!!!!!! ENTERED");
+			}
+		});
 		
 		final Context context = this.starter.startOscReceiver();
 		context.getContinuousUserProvider().addListener(new ContinuousUserListener() {
 			public void onCurrentUserChanged(User user) {
+				System.out.println("onCurrentUserChanged(user="+user+")");
 				if(user == null && pose.isDetecting()) {
 					pose.stopDetecting();
 					return;
@@ -84,13 +85,16 @@ public class PoseSample {
 				context.shutdown();
 			}
 		});
+		
 		JPanel p = new JPanel();
-		p.add(this.LBL_1);
+		p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
+		for(JLabel lbl : this.ruleLabels.values()) {
+			p.add(lbl);
+		}
 		f.getContentPane().add(p);
 		f.setSize(700, 300);
 		GuiUtil.setCenterLocation(f);
 		f.setVisible(true);
-		
 	}
 	
 }

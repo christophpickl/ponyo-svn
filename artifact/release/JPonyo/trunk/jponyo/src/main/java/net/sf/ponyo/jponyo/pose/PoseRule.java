@@ -12,7 +12,13 @@ public abstract class PoseRule {
 		this.label = label;
 	}
 	
-	abstract boolean validate(Skeleton skeleton);
+	final boolean validateAndHasChanged(Skeleton skeleton) {
+		boolean oldActive = this.active;
+		this.active = this.validate(skeleton);
+		return oldActive != this.active;
+	}
+	
+	protected abstract boolean validate(Skeleton skeleton);
 
 	public final String getLabel() {
 		return this.label;

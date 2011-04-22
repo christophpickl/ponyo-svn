@@ -6,6 +6,7 @@ import java.awt.Point;
 import javax.swing.SwingUtilities;
 
 import net.sf.ponyo.console.gl.GLUtil;
+import net.sf.ponyo.jponyo.common.log.LogUtil;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
 
@@ -25,6 +26,17 @@ public class ConsoleApp implements ConsoleWindowListener {
 	}
 	
 	public static void main(String[] args) {
+		LogUtil.ensureDefaultLogger();
+		/* TODO set warn for all, and only trace for this project!
+		log4j.rootLogger=warn, stdout
+		
+		log4j.category.net.sf.ponyo.jponyo.adminconsole=trace, stdout
+		log4j.additivity.net.sf.ponyo.jponyo.adminconsole=false
+		
+		log4j.appender.stdout=org.apache.log4j.ConsoleAppender
+		log4j.appender.stdout.layout=org.apache.log4j.PatternLayout
+		log4j.appender.stdout.layout.ConversionPattern=%d [%-5p] [%-16t] %-30c - %m%n
+		 */
 		Injector injector = Guice.createInjector(new ConsoleModule());
 		ConsoleApp app = injector.getInstance(ConsoleApp.class);
 		app.startUp();

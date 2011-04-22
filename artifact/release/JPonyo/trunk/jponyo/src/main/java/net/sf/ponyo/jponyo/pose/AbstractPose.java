@@ -23,7 +23,7 @@ public abstract class AbstractPose
 	private User user;
 	private MotionStream stream;
 	private boolean detecting = false;
-	
+	private boolean allRulesActive = false;
 	
 	public AbstractPose(String label, Collection<PoseRule> rules) {
 		this.label = label;
@@ -31,23 +31,33 @@ public abstract class AbstractPose
 	}
 
 	public final void onMotion(MotionData data) {
+//		System.out.println("xxxxx!");
 		this.validateRules();
 	}
 	
 	private void validateRules() {
-		int i = 1;
+		boolean currentlyAllRulesActive = true;
 		for (PoseRule rule : this.rules) {
-			boolean ruleResult = rule.validate(this.user.getSkeleton());
-//			if(ruleResult == false) { // TODO safe performance: stop on very first rule break!
+			boolean hasChanged = rule.validateAndHasChanged(this.user.getSkeleton());
+			if(hasChanged) {
+				this.dispatchPoseRuleChanged(rule);
+			}
+			if(rule.isActive() == false) {
+				currentlyAllRulesActive = false;
+			}
+			
+//			if(rule.isActive() == false) { // TODO safe performance: stop on very first rule break!
 //				break;
 //			}
-			switch(i) {
-				case 1:
-					PoseSample.HACK_foo(PoseSample.LBL_1, rule.getLabel() + " => " + ruleResult);
-					break;
+		}
+		
+		if(currentlyAllRulesActive != this.allRulesActive) {
+			this.allRulesActive = currentlyAllRulesActive;
+			if(this.allRulesActive) {
+				this.dispatchPoseEntered();
+			} else {
+				this.dispatchPoseLeft();
 			}
-//			System.out.println("rule " + rule.getLabel() + " ===> " + ruleResult);
-			i++;
 		}
 	}
 
@@ -81,4 +91,26 @@ public abstract class AbstractPose
 	public final String getLabel() {
 		return this.label;
 	}
+
+	public final Collection<PoseRule> getRules() {
+		return this.rules;
+	}
+
+	
+	private void dispatchPoseRuleChanged(PoseRule rule) {
+		for (PoseListener listener : this.getListeners()) {
+			listener.onPoseRuleChanged(rule);
+		}
+	}
+	private void dispatchPoseEntered() {
+		for (PoseListener listener : this.getListeners()) {
+			listener.onPoseEntered();
+		}
+	}
+	private void dispatchPoseLeft() {
+		for (PoseListener listener : this.getListeners()) {
+			listener.onPoseLeft();
+		}
+	}
+	
 }

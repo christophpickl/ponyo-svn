@@ -1,37 +1,47 @@
 package net.sf.ponyo.jponyo;
 
 import net.sf.ponyo.jponyo.common.aop.LogAspectHelper;
-import net.sf.ponyo.jponyo.common.aop.LogLevel;
+import net.sf.ponyo.jponyo.common.log.LogLevel;
 
 public aspect JPonyoLogAspect extends LogAspectHelper {
 	
-	pointcut withinConsole():
+	pointcut withinJPonyo():
 		within(net.sf.ponyo.jponyo..*);
 
 	pointcut anyConstructor():
-		withinConsole() &&
+		withinJPonyo() &&
 		execution(*.new(..)) &&
-		!within(ConsoleLogAspect); // avoid pointcutting yourself ;)
+		!within(JPonyoLogAspect); // avoid pointcutting yourself ;)
 
 	pointcut infoMethod():
-		withinConsole() &&
+		withinJPonyo() &&
 		(
-			execution(public * *.ConsoleApp.*(..))
+				execution(* *.Context.start(..)) ||
+				execution(* *.Context.shutdown(..))
 		);
 
 	pointcut debugMethod():
-		withinConsole() &&
+		withinJPonyo() &&
 		(
-			execution(public * *.GLRenderer.setUser(..))
+			execution(public * *.GlobalSpace.*(..)) ||
+			execution(* *.AbstractPose.startDetecting(..)) ||
+			execution(* *.AbstractPose.stopDetecting(..)) ||
+			
+			execution(* *.Context.processUserStateChange(..)) ||
+			execution(* *.Context.onUserMessage(..)) ||
+			execution(* *.Context.initializeContinuousMotionStream(..))
 		);
 
-//	pointcut anyPublicMethod(): call(public * net.sf.ponyo.jponyo.adminconsole..*(..));
+	
+	before(): anyConstructor() {
+		this.maybeLog(thisJoinPoint.getSignature(), thisJoinPoint.getArgs(), LogLevel.TRACE);
+	}
 
 	before(): infoMethod() {
 		this.maybeLog(thisJoinPoint.getSignature(), thisJoinPoint.getArgs(), LogLevel.INFO);
 	}
-	
-	before(): anyConstructor() {
-		this.maybeLog(thisJoinPoint.getSignature(), thisJoinPoint.getArgs(), LogLevel.TRACE);
+
+	before(): debugMethod() {
+		this.maybeLog(thisJoinPoint.getSignature(), thisJoinPoint.getArgs(), LogLevel.DEBUG);
 	}
 }

@@ -4,8 +4,10 @@ import net.sf.ponyo.jponyo.common.async.Listener;
 
 public interface PoseListener extends Listener {
 	
-	void onPoseStart();
+	void onPoseEntered();
 	
-	void onPoseStop();
+	void onPoseLeft();
+	
+	void onPoseRuleChanged(PoseRule rule);
 	
 }

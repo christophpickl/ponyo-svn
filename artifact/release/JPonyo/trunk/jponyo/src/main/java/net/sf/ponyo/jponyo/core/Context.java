@@ -12,7 +12,6 @@ import net.sf.ponyo.jponyo.stream.ContinuousMotionStream;
 import net.sf.ponyo.jponyo.stream.MotionData;
 import net.sf.ponyo.jponyo.stream.MotionStream;
 import net.sf.ponyo.jponyo.stream.MotionStreamImpl;
-import net.sf.ponyo.jponyo.stream.MotionStreamListener;
 import net.sf.ponyo.jponyo.user.ContinuousUserProvider;
 import net.sf.ponyo.jponyo.user.ContinuousUserProviderImpl;
 import net.sf.ponyo.jponyo.user.User;
@@ -47,7 +46,6 @@ public class Context implements ConnectionListener, UserManagerCallback {
 	}
 
 	void start() {
-		LOG.debug("start()");
 		this.dispatcher.addListener(this.motionStream);
 		this.dispatcher.start();
 	}
@@ -74,7 +72,6 @@ public class Context implements ConnectionListener, UserManagerCallback {
 	}
 
 	public void processUserStateChange(User user, UserState state) {
-		LOG.debug("processUserStateChange(user="+user+", state="+state+")");
 		
 		if(state == UserState.NEW) {
 			this.space.addUser(user);
@@ -89,8 +86,6 @@ public class Context implements ConnectionListener, UserManagerCallback {
 	}
 	
 	public void onUserMessage(int openniId/*is 1-base indexed*/, int userStateId) {
-		LOG.debug("onUserMessage(openniId=" + openniId + ", userStateId=" + userStateId + ")");
-		
 		User user = this.userManager.lookupForUserMessage(openniId, userStateId);
 		this.processUserStateChange(user, user.getState());
 	}
@@ -137,8 +132,6 @@ public class Context implements ConnectionListener, UserManagerCallback {
 	}
 	
 	private void initializeContinuousMotionStream() {
-		LOG.debug("Lazy initializing ContinuousMotionStream.");
-		
 		this.continuousMotionStream = new ContinuousMotionStream(this.motionStream, this.space);
 		this.continuousMotionStream.initAttachingToUser();
 		

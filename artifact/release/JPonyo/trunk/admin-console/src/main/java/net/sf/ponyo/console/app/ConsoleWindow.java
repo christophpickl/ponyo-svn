@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.adminconsole.app;
+package net.sf.ponyo.console.app;
 
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import net.sf.ponyo.jponyo.adminconsole.view.GLPanel;
-import net.sf.ponyo.jponyo.adminconsole.view.JointsDialogManager;
+import net.sf.ponyo.console.view.GLPanel;
+import net.sf.ponyo.console.view.JointsDialogManager;
 import net.sf.ponyo.jponyo.common.gui.AbstractMainView;
 import net.sf.ponyo.jponyo.stream.MotionData;
 import net.sf.ponyo.jponyo.stream.MotionStreamListener;

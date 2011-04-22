@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.adminconsole.view;
+package net.sf.ponyo.console.view;
 
 import java.awt.BorderLayout;
 import java.util.Arrays;
@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import net.sf.ponyo.jponyo.adminconsole.gl.GLUtil;
+import net.sf.ponyo.console.gl.GLUtil;
 import net.sf.ponyo.jponyo.common.util.LibraryUtil;
 import net.sf.ponyo.jponyo.user.ContinuousUserListener;
 import net.sf.ponyo.jponyo.user.User;

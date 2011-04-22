@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.adminconsole.view;
+package net.sf.ponyo.console.view;
 
 import java.awt.Color;
 
@@ -7,8 +7,8 @@ import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.GLEventListener;
 import javax.media.opengl.glu.GLU;
 
-import net.sf.ponyo.jponyo.adminconsole.gl.GLUtil;
-import net.sf.ponyo.jponyo.adminconsole.gl.ObjectDrawer;
+import net.sf.ponyo.console.gl.GLUtil;
+import net.sf.ponyo.console.gl.ObjectDrawer;
 import net.sf.ponyo.jponyo.entity.Joint;
 import net.sf.ponyo.jponyo.user.User;
 import net.sf.ponyo.jponyo.user.UserState;

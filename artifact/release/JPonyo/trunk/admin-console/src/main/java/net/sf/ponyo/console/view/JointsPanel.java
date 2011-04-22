@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.adminconsole.view;
+package net.sf.ponyo.console.view;
 
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;

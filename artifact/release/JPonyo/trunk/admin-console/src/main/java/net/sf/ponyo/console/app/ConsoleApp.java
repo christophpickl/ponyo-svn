@@ -1,11 +1,11 @@
-package net.sf.ponyo.jponyo.adminconsole.app;
+package net.sf.ponyo.console.app;
 
 import java.awt.Dimension;
 import java.awt.Point;
 
 import javax.swing.SwingUtilities;
 
-import net.sf.ponyo.jponyo.adminconsole.gl.GLUtil;
+import net.sf.ponyo.console.gl.GLUtil;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
 

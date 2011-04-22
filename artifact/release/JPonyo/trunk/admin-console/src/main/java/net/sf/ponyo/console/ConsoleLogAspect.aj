@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.adminconsole;
+package net.sf.ponyo.console;
 
 import net.sf.ponyo.jponyo.common.aop.LogAspectHelper;
 import net.sf.ponyo.jponyo.common.aop.LogLevel;

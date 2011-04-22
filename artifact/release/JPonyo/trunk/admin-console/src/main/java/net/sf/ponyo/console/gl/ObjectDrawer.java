@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.adminconsole.gl;
+package net.sf.ponyo.console.gl;
 
 import java.awt.Color;
 

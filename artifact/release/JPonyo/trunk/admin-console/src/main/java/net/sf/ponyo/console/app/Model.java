@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.adminconsole.app;
+package net.sf.ponyo.console.app;
 
 import net.sf.ponyo.jponyo.common.aop.AopToString;
 import net.sf.ponyo.jponyo.common.aop.AopToStringField;

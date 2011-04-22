@@ -1,13 +1,13 @@
-package net.sf.ponyo.jponyo.adminconsole;
+package net.sf.ponyo.console;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 import javax.swing.SwingUtilities;
 
-import net.sf.ponyo.jponyo.adminconsole.app.ConsoleModule;
-import net.sf.ponyo.jponyo.adminconsole.gl.GLUtil;
-import net.sf.ponyo.jponyo.adminconsole.view.ConsoleDialog;
+import net.sf.ponyo.console.app.ConsoleModule;
+import net.sf.ponyo.console.gl.GLUtil;
+import net.sf.ponyo.console.view.ConsoleDialog;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
 

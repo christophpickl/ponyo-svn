@@ -5,7 +5,7 @@ import java.util.Properties;
 
 import javax.swing.SwingUtilities;
 
-import net.sf.ponyo.jponyo.adminconsole.gl.GLUtil;
+import net.sf.ponyo.console.gl.GLUtil;
 import net.sf.ponyo.jponyo.common.gui.SplashScreen;
 import net.sf.ponyo.jponyo.common.io.IoUtil;
 import net.sf.ponyo.jponyo.common.simplepersist.SimplePersister;

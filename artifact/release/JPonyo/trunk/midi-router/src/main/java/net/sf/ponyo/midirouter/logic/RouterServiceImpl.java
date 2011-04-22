@@ -1,6 +1,6 @@
 package net.sf.ponyo.midirouter.logic;
 
-import net.sf.ponyo.jponyo.adminconsole.view.ConsoleDialog;
+import net.sf.ponyo.console.view.ConsoleDialog;
 import net.sf.ponyo.jponyo.common.io.IoUtil;
 import net.sf.ponyo.jponyo.common.midi.ControllerMessage;
 import net.sf.ponyo.jponyo.core.Context;

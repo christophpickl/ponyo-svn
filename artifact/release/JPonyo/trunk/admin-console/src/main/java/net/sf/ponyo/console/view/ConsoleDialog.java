@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.adminconsole.view;
+package net.sf.ponyo.console.view;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;

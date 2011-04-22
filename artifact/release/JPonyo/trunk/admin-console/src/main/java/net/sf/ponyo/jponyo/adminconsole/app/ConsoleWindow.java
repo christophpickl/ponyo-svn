@@ -31,23 +31,29 @@ public class ConsoleWindow
 
 	@Override
 	protected Component initComponent(Model provider) {
-		
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(this.adminPanel, BorderLayout.CENTER);
-
-		JPanel cmdPanel = new JPanel();
+		panel.add(this.initCommandPanel(), BorderLayout.SOUTH);
+		return panel;
+	}
+	
+	private Component initCommandPanel() {
+		JButton btnToggleSkeletonDialog = new JButton("Toggle Joints Dialog");
+		btnToggleSkeletonDialog.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent actionevent) {
+			ConsoleWindow.this.jointsMgr.toggleDialog();
+		}});
+		
 		JButton btnQuit = new JButton("Quit");
 		btnQuit.addActionListener(new ActionListener() { @SuppressWarnings("synthetic-access")
 		public void actionPerformed(ActionEvent e) {
 			dispatchQuit();
 		}});
-		cmdPanel.add(btnQuit);
-		
-		panel.add(cmdPanel, BorderLayout.SOUTH);
-
 		this.getRootPane().setDefaultButton(btnQuit);
 		
-		return panel;
+		JPanel cmdPanel = new JPanel();
+		cmdPanel.add(btnToggleSkeletonDialog);
+		cmdPanel.add(btnQuit);
+		return cmdPanel;
 	}
 
 	@Override

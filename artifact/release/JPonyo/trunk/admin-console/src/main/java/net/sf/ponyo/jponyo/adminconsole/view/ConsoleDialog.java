@@ -31,7 +31,7 @@ public class ConsoleDialog
 		JPanel commandPanel = new JPanel();
 		JButton btnToggleSkeletonDialog = new JButton("Toggle Joints Dialog");
 		btnToggleSkeletonDialog.addActionListener(new ActionListener() { public void actionPerformed(ActionEvent actionevent) {
-			ConsoleDialog.this.jointsMgr.onToggleSkeletonDialog();
+			ConsoleDialog.this.jointsMgr.toggleDialog();
 		}});
 		commandPanel.add(btnToggleSkeletonDialog);
 		

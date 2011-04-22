@@ -23,7 +23,7 @@ public class JointsDialogManager implements MotionStreamListener {
 		this.parent = parent;
 	}
 
-	void onToggleSkeletonDialog() {
+	public void toggleDialog() {
 		if(this.jointsDialog == null) {
 			this.setVisible(true);
 		} else {

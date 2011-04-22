@@ -1,9 +1,13 @@
 =================================================
-TIMESHEET CP
+TIMESHEET
 =================================================
 
-              ~~146h~~
-21.04. - 19:00 -  2h - enhanced admin-console
+              ~~154h~~
+22.04. - 15:00 -   h - 
+22.04. - 12:00 -  3h - improved admin-console; introducing aop stuff: logging, tostring
+21.04. - 23:00 -  1h - native library loading (jogl)
+              ~~150h~~
+21.04. - 19:00 -  4h - enhanced admin-console
 21.04. - 16:00 -  3h - using guice again in rewritten jponyo (midi-router, admin-console)
 21.04. - 00:00 -  3h - pimping midi-router gui; using and improving admin-console for midi-router
               ~~140h~~

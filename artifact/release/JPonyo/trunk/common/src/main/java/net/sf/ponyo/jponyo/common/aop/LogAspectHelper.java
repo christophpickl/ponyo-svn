@@ -44,9 +44,15 @@ public class LogAspectHelper {
 			if(i != 0) logMessage.append(", ");
 			final String argName = argNames[i];
 			final Object argValue = argValues[i];
-			
-			final String argValueFormatted = String.valueOf(argValue).replace("\n", "\\n");
-			logMessage.append(argName).append("=[").append(argValueFormatted).append("]");
+
+			// MINOR does not work; null check fails ... :-(
+//			final String argValueFormatted;
+//			if(argValue == null) {
+//				argValueFormatted = "null";
+//			} else {
+//				argValueFormatted = String.valueOf(argValue).replace("\n", "\\n");
+//			}
+			logMessage.append(argName).append("=[").append(argValue).append("]");
 		}
 		logMessage.append(")");
 		

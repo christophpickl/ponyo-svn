@@ -11,6 +11,8 @@ public aspect JPonyoLogAspect extends LogAspectHelper {
 	pointcut anyConstructor():
 		withinJPonyo() &&
 		execution(*.new(..)) &&
+		!within(net.sf.ponyo.jponyo.user.UserState) &&
+		!within(net.sf.ponyo.jponyo.entity.Joint) &&
 		!within(JPonyoLogAspect); // avoid pointcutting yourself ;)
 
 	pointcut infoMethod():

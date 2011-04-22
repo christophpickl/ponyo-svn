@@ -27,7 +27,7 @@ import com.google.inject.Injector;
 public class MidiRouterApp implements MainPresenterListener {
 
 	static {
-		GLUtil.checkJoglLibs();
+		GLUtil.ensureJoglLibs();
 	}
 	
 	private static final Log LOG = LogFactory.getLog(MidiRouterApp.class);

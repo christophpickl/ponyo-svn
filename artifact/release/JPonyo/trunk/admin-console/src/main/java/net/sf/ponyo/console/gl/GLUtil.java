@@ -20,7 +20,7 @@ public final class GLUtil {
 	
 	private GLUtil() { /* utility class */ }
 
-	public static void checkJoglLibs() {
+	public static void ensureJoglLibs() {
 		LOG.info("Checking for mandatory JOGL libraries ...");
 		Collection<String> notFoundLibs = LibraryUtil.checkLibrariesExisting(LibraryUtil.JOGL_LIBS_MANDATORY);
 		
@@ -39,7 +39,6 @@ public final class GLUtil {
 					"3D Graphics libraries not found!", JOptionPane.ERROR_MESSAGE);
 		}
 		
-
 		LOG.debug("Checking for optional JOGL libraries ...");
 		Collection<String> notFoundOptionalLibs = LibraryUtil.checkLibrariesExisting(LibraryUtil.JOGL_LIBS_OPTIONAL);
 		if(notFoundOptionalLibs.isEmpty() == false) {

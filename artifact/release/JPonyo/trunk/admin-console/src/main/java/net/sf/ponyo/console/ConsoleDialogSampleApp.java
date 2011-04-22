@@ -18,7 +18,7 @@ import com.google.inject.Injector;
 public class ConsoleDialogSampleApp {
 
 	static {
-		GLUtil.checkJoglLibs();
+		GLUtil.ensureJoglLibs();
 	}
 	
 	public static void main(String[] args) {

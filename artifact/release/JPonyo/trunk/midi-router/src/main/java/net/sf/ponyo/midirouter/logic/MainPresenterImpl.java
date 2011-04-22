@@ -6,7 +6,7 @@ import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import net.sf.ponyo.jponyo.adminconsole.view.AdminDialog;
+import net.sf.ponyo.jponyo.adminconsole.view.ConsoleDialog;
 import net.sf.ponyo.jponyo.common.async.DefaultAsync;
 import net.sf.ponyo.midirouter.logic.midi.MidiMappings;
 import net.sf.ponyo.midirouter.logic.parser.MappingsParser;
@@ -35,7 +35,7 @@ class MainPresenterImpl
 	
 	final MainView window;
 	private MidiPortsDialog midiPortsDialog;
-	private AdminDialog adminDialog;
+	private ConsoleDialog adminDialog;
 	
 	@Inject
 	public MainPresenterImpl(Model model, MainView window, RouterService router, MidiPortsDialogProvider midiDialogProvider) {
@@ -169,7 +169,7 @@ class MainPresenterImpl
 	public void onToggleAdminConsole() {
 		LOG.debug("onToggleAdminConsole()");
 		if(this.adminDialog == null) {
-			this.adminDialog = new AdminDialog();
+			this.adminDialog = new ConsoleDialog();
 			this.router.manage(this.adminDialog);
 		}
 		

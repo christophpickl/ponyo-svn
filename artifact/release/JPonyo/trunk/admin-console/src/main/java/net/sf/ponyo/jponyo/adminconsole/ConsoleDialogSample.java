@@ -6,8 +6,8 @@ import java.util.Collection;
 
 import javax.swing.SwingUtilities;
 
-import net.sf.ponyo.jponyo.adminconsole.app.AdminConsoleModule;
-import net.sf.ponyo.jponyo.adminconsole.view.AdminDialog;
+import net.sf.ponyo.jponyo.adminconsole.app.ConsoleModule;
+import net.sf.ponyo.jponyo.adminconsole.view.ConsoleDialog;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
 import net.sf.ponyo.jponyo.user.User;
@@ -17,25 +17,25 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public class AdminDialogSample {
+public class ConsoleDialogSample {
 	
 	public static void main(String[] args) {
-		Injector injector = Guice.createInjector(new AdminConsoleModule());
-		injector.getInstance(AdminDialogSample.class).start();
+		Injector injector = Guice.createInjector(new ConsoleModule());
+		injector.getInstance(ConsoleDialogSample.class).start();
 	}
 	
 	private final ContextStarter contextStarter;
 
 	@Inject
-	public AdminDialogSample(ContextStarter contextStarter) {
+	public ConsoleDialogSample(ContextStarter contextStarter) {
 		this.contextStarter = contextStarter;
 	}
 	
 	public void start() {
 		final Context context = this.contextStarter.startOscReceiver();
 		
-		final AdminDialog dialog = new AdminDialog();
-		dialog.onCurrentUserChanged(context.getContinuousUserProvider().getCurrentUser());
+		final ConsoleDialog dialog = new ConsoleDialog();
+		dialog.onCurrentUserChanged(context.getContinuousUserProvider().getCurrentUser()); // initialize user
 		context.getContinuousMotionStream().addListener(dialog);
 		context.getContinuousUserProvider().addListener(dialog);
 		
@@ -57,7 +57,7 @@ public class AdminDialogSample {
 		});
 	}
 	
-	void onClose(Context context, AdminDialog dialog) {
+	void onClose(Context context, ConsoleDialog dialog) {
 		dialog.setVisible(false);
 		dialog.dispose();
 		

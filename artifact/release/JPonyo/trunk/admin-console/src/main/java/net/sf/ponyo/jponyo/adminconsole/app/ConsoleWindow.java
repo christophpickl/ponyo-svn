@@ -11,25 +11,24 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import net.sf.ponyo.jponyo.adminconsole.view.AdminPanel;
-import net.sf.ponyo.jponyo.adminconsole.view.AdminPanelListener;
+import net.sf.ponyo.jponyo.adminconsole.view.GLPanel;
 import net.sf.ponyo.jponyo.core.GlobalSpace;
 import net.sf.ponyo.jponyo.stream.MotionData;
 import net.sf.ponyo.jponyo.stream.MotionStreamListener;
 import net.sf.ponyo.jponyo.user.User;
 
-public class AdminConsoleWindow extends JFrame implements MotionStreamListener {
+public class ConsoleWindow extends JFrame implements MotionStreamListener {
 
 	private static final long serialVersionUID = -7367551475234626321L;
 	
 //	private final SkeletonNumberDialog skeletonDialog = new SkeletonNumberDialog();
-	private final AdminPanel adminPanel;
+	private final GLPanel adminPanel;
 	
-	public AdminConsoleWindow(final AdminPanelListener listener) {
+	public ConsoleWindow(final ConsoleWindowListener listener) {
 		super("Jogl Playground");
 		
 		JPanel panel = new JPanel(new BorderLayout());
-		this.adminPanel = new AdminPanel();
+		this.adminPanel = new GLPanel();
 		panel.add(this.adminPanel, BorderLayout.CENTER);
 
 		JPanel cmdPanel = new JPanel();

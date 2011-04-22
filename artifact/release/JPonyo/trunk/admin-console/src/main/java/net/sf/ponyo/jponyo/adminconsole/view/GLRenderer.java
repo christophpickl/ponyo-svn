@@ -16,9 +16,9 @@ import net.sf.ponyo.jponyo.user.UserState;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class SkeletonGLRenderer implements GLEventListener {
+public class GLRenderer implements GLEventListener {
 	
-	private static final Log LOG = LogFactory.getLog(SkeletonGLRenderer.class);
+	private static final Log LOG = LogFactory.getLog(GLRenderer.class);
 	private static final Color PRIMARY_COLOR_OFF = Color.GRAY;
 	private static final Color PRIMARY_COLOR_INIT = Color.GREEN;
 	private static final float JOINT_SCALE = 0.3f;

@@ -1,6 +1,6 @@
 package net.sf.ponyo.midirouter.logic;
 
-import net.sf.ponyo.jponyo.adminconsole.view.AdminDialog;
+import net.sf.ponyo.jponyo.adminconsole.view.ConsoleDialog;
 import net.sf.ponyo.jponyo.common.io.IoUtil;
 import net.sf.ponyo.jponyo.common.midi.ControllerMessage;
 import net.sf.ponyo.jponyo.core.Context;
@@ -31,7 +31,7 @@ class RouterServiceImpl implements MotionStreamListener, ContinuousUserListener,
 	private Context ponyoContext;
 	private MidiConnection midiConnection;
 	private MidiMappings mappings;
-	private AdminDialog adminDialog;
+	private ConsoleDialog adminDialog;
 	
 	
 	@Inject
@@ -114,7 +114,7 @@ class RouterServiceImpl implements MotionStreamListener, ContinuousUserListener,
 		}
 	}
 
-	public void manage(AdminDialog adminDialogToManager) {
+	public void manage(ConsoleDialog adminDialogToManager) {
 		this.adminDialog = adminDialogToManager;
 		
 		if(this.adminDialog != null && this.ponyoContext != null) {

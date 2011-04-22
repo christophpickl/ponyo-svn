@@ -15,16 +15,16 @@ import net.sf.ponyo.jponyo.stream.MotionStreamListener;
 import net.sf.ponyo.jponyo.user.ContinuousUserListener;
 import net.sf.ponyo.jponyo.user.User;
 
-public class AdminDialog extends JDialog implements MotionStreamListener, ContinuousUserListener {
+public class ConsoleDialog extends JDialog implements MotionStreamListener, ContinuousUserListener {
 
 	private static final long serialVersionUID = 1716630211270484837L;
 	
-	private final AdminPanel adminPanel = new AdminPanel();
+	private final GLPanel adminPanel = new GLPanel();
 
-	private SkeletonDataDialog skeletonDialog;
+	private JointsDialog skeletonDialog;
 
 //	this.skeletonDialog = new SkeletonDataDialog();
-	public AdminDialog() {
+	public ConsoleDialog() {
 		this.setTitle("Admin Console");
 
 		this.getRootPane().putClientProperty("apple.awt.brushMetalLook", Boolean.TRUE);
@@ -48,7 +48,7 @@ public class AdminDialog extends JDialog implements MotionStreamListener, Contin
 		if(this.skeletonDialog != null) {
 			this.skeletonDialog.setVisible(!this.skeletonDialog.isVisible());
 		} else {
-			this.skeletonDialog = new SkeletonDataDialog();
+			this.skeletonDialog = new JointsDialog();
 			Dimension windowSize = this.getSize();
 			Point windowLocation = this.getLocation();
 			this.skeletonDialog.setLocation(windowLocation.x + windowSize.width + 4, windowLocation.y);

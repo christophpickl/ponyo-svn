@@ -5,14 +5,14 @@ import javax.swing.JDialog;
 import net.sf.ponyo.jponyo.stream.MotionData;
 import net.sf.ponyo.jponyo.stream.MotionStreamListener;
 
-public class SkeletonDataDialog extends JDialog implements MotionStreamListener {
+public class JointsDialog extends JDialog implements MotionStreamListener {
 	
 	private static final long serialVersionUID = -7567626819040272422L;
 	
-	private final SkeletonDataPanel panel;
+	private final JointsPanel panel;
 	
-	public SkeletonDataDialog() {
-		this.panel = new SkeletonDataPanel();
+	public JointsDialog() {
+		this.panel = new JointsPanel();
 		this.setTitle(this.getClass().getSimpleName());
 		this.getContentPane().add(this.panel);
 		this.getRootPane().putClientProperty("Window.style", "small");

@@ -1,6 +1,6 @@
 package net.sf.ponyo.midirouter.logic;
 
-import net.sf.ponyo.jponyo.adminconsole.view.AdminDialog;
+import net.sf.ponyo.jponyo.adminconsole.view.ConsoleDialog;
 
 interface RouterService {
 	
@@ -10,6 +10,6 @@ interface RouterService {
 
 	void stop();
 
-	void manage(AdminDialog adminDialog);
+	void manage(ConsoleDialog adminDialog);
 	
 }

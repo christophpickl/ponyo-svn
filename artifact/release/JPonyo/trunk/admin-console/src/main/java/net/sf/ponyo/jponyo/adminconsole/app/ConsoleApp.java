@@ -6,8 +6,7 @@ import java.util.Collection;
 
 import javax.swing.SwingUtilities;
 
-import net.sf.ponyo.jponyo.adminconsole.view.AdminPanelListener;
-import net.sf.ponyo.jponyo.adminconsole.view.SkeletonDataDialog;
+import net.sf.ponyo.jponyo.adminconsole.view.JointsDialog;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
 import net.sf.ponyo.jponyo.core.GlobalSpace;
@@ -24,36 +23,36 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public class AdminConsoleApp
-	implements AdminPanelListener, UserChangeListener {
+public class ConsoleApp
+	implements ConsoleWindowListener, UserChangeListener {
 
-	private static final Log LOG = LogFactory.getLog(AdminConsoleApp.class);
+	private static final Log LOG = LogFactory.getLog(ConsoleApp.class);
 	
 	private final ContextStarter contextStarter;
 	private Context context;
 	private GlobalSpace space;
-	private AdminConsoleWindow window;
+	private ConsoleWindow window;
 	private User recentUser;
 	
 	public static void main(String[] args) {
 		LOG.debug("main() START");
 		
-		Injector injector = Guice.createInjector(new AdminConsoleModule());
-		AdminConsoleApp app = injector.getInstance(AdminConsoleApp.class);
+		Injector injector = Guice.createInjector(new ConsoleModule());
+		ConsoleApp app = injector.getInstance(ConsoleApp.class);
 		app.startUp();
 		
 		LOG.debug("main() END");
 	}
 
 	@Inject
-	public AdminConsoleApp(ContextStarter contextStarter) {
+	public ConsoleApp(ContextStarter contextStarter) {
 		this.contextStarter = contextStarter;
 	}
 
 	public void startUp() {
 		this.context = this.contextStarter.startOscReceiver();
 		this.space = this.context.getGlobalSpace();
-		this.window = new AdminConsoleWindow(this);
+		this.window = new ConsoleWindow(this);
 
 		this.checkUsers();
 		this.context.addUserChangeListener(this);
@@ -63,7 +62,7 @@ public class AdminConsoleApp
 	    this.window.setSize(800, 600);
 	    SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
-				AdminConsoleApp.this.onShowWindow();
+				ConsoleApp.this.onShowWindow();
 			}
 		});
 	}

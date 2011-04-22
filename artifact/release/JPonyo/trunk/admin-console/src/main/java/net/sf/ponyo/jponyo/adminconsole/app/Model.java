@@ -1,10 +1,15 @@
 package net.sf.ponyo.jponyo.adminconsole.app;
 
+import net.sf.ponyo.jponyo.common.aop.AopToString;
+import net.sf.ponyo.jponyo.common.aop.AopToStringField;
 import net.sf.ponyo.jponyo.common.binding.BindingListener;
 import net.sf.ponyo.jponyo.common.binding.BindingProvider;
 
 public class Model implements BindingProvider {
-
+	
+	@AopToStringField
+	private String foobar = "jaaaaaaa";
+	
 	public Object get(String propertyName) {
 		return null;
 	}
@@ -25,4 +30,5 @@ public class Model implements BindingProvider {
 
 	}
 
+	@AopToString @Override public String toString() { return null; }
 }

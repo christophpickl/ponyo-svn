@@ -5,9 +5,14 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import net.sourceforge.jpotpourri.tools.PtUserSniffer;
 
 public class LibraryUtil {
+	
+	private static final Log LOG = LogFactory.getLog(LibraryUtil.class);
 	
 	public static final Collection<String> JOGL_LIBS_MANDATORY = Collections.unmodifiableList(Arrays.asList(
 		"jogl",
@@ -15,7 +20,7 @@ public class LibraryUtil {
 	));
 
 	public static final Collection<String> JOGL_LIBS_OPTIONAL = Collections.unmodifiableList(Arrays.asList(
-		"jogl_cg",
+//		"jogl_cg", // MINOR although jogl_cg.jnilib is existing, java cant find it, but makes no difference anyway as it works somehow
 		"gluegen-rt"
 	));
 
@@ -41,7 +46,6 @@ public class LibraryUtil {
 		Collection<String> notFoundLibs = checkLibrariesExisting(LibraryUtil.JOGL_LIBS_MANDATORY);
 		if(notFoundLibs.isEmpty() == true) {
 			System.out.println("Everything okay!");
-			
 		} else {
 			System.out.println("ERROR: Not found libs: " + Arrays.toString(notFoundLibs.toArray()));
 		}
@@ -51,7 +55,6 @@ public class LibraryUtil {
 	
 	public static Collection<String> checkLibrariesExisting(Collection<String> libraryNames) {
 		Collection<String> notFoundLibraryNames = new LinkedList<String>();
-		
 		
 		for (String libName : libraryNames) {
 			boolean loaded = LibraryUtil.loadLibrary(libName);
@@ -66,13 +69,12 @@ public class LibraryUtil {
 	 * @return true if library was successfully loaded
 	 */
 	public static boolean loadLibrary(String libraryName) {
-		System.out.print("Checking library: " + libraryName + " ... ");
 		try {
 			System.loadLibrary(libraryName);
-			System.out.println("found.");
+			LOG.debug("Checking library: " + libraryName + " ... found");
 			return true;
 		} catch(UnsatisfiedLinkError e) {
-			System.out.println("NOT found!");
+			LOG.warn("Checking library: " + libraryName + " ... NOT found!!!");
 			return false;
 		}
 	}

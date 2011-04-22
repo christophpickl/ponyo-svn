@@ -1,11 +1,4 @@
-package net.sf.ponyo.jponyo.common.aop;
 
-
-/**
- * @since 0.1
- */
-public aspect LoggingAspect {
-	/*
 //	pointcut withinScope(Object someone): within(net.sf.josceleton.prototype.midi..*) && target(someone);
 //	pointcut callScope(Object someone): call(public net.sf.josceleton.prototype.midi.** *(..))
 //		&& target(someone);
@@ -48,6 +41,3 @@ public aspect LoggingAspect {
 		LogFactory.getLog(signature.getDeclaringType()).info(
 			buildLoggableMethodSignature(signature.getName(), signature.getParameterNames(), thisJoinPoint.getArgs()));
 	}
-	*/
-	
-}

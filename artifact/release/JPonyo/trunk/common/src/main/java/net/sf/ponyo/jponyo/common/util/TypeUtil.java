@@ -24,14 +24,16 @@ public class TypeUtil {
 		}
 	}
 	
-	public static Object getField(final Object instance, final Field field) {
-		field.setAccessible(true);
+	public static Object getFieldValue(final Object instance, final Field field) {
+		if(field.isAccessible() == false) {
+			field.setAccessible(true);
+		}
 		try {
 			return field.get(instance);
 		} catch (IllegalArgumentException e) {
-			throw new RuntimeException("Wow!", e);
+			throw new RuntimeException("Could not get value for field '" + field + "' and instance '" + instance + "'!", e);
 		} catch (IllegalAccessException e) {
-			throw new RuntimeException("Wow!", e);
+			throw new RuntimeException("Could not get value for field '" + field + "' and instance '" + instance + "'!", e);
 		}
 	}
 	

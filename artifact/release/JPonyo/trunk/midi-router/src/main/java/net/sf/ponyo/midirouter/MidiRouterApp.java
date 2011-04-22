@@ -5,6 +5,7 @@ import java.util.Properties;
 
 import javax.swing.SwingUtilities;
 
+import net.sf.ponyo.jponyo.adminconsole.gl.GLUtil;
 import net.sf.ponyo.jponyo.common.gui.SplashScreen;
 import net.sf.ponyo.jponyo.common.io.IoUtil;
 import net.sf.ponyo.jponyo.common.simplepersist.SimplePersister;
@@ -24,6 +25,10 @@ import com.google.inject.Inject;
 import com.google.inject.Injector;
 
 public class MidiRouterApp implements MainPresenterListener {
+
+	static {
+		GLUtil.checkJoglLibs();
+	}
 	
 	private static final Log LOG = LogFactory.getLog(MidiRouterApp.class);
 

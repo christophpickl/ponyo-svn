@@ -36,7 +36,7 @@ class PreferencesPersister extends AbstractPersister {
 		for(final Field field : filterPersistAnnotatedFields(instance, PersistAsPreference.class)) {
 			final TypeConverter converter = this.converters.getConverterFor(field);
 			final String fieldPrefKey = buildPrefKey(clazz, persistId, field);
-			Object value = TypeUtil.getField(instance, field);
+			Object value = TypeUtil.getFieldValue(instance, field);
 			LOG.trace("Persisting field: " + field + ", with value: [" + value + "]");
 			converter.store(preferencesManager, fieldPrefKey, value);
 		}

@@ -38,7 +38,6 @@ public class JointsDialogManager implements MotionStreamListener {
 	}
 
 	public void setVisible(boolean visible) {
-		LOG.debug("setVisible(visible=" + true + ")");
 		
 		if(this.jointsDialog != null) {
 			if(visible == this.jointsDialog.isVisible()) {

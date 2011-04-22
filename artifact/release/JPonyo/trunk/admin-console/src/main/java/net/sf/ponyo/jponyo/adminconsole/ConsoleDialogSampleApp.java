@@ -6,6 +6,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.SwingUtilities;
 
 import net.sf.ponyo.jponyo.adminconsole.app.ConsoleModule;
+import net.sf.ponyo.jponyo.adminconsole.gl.GLUtil;
 import net.sf.ponyo.jponyo.adminconsole.view.ConsoleDialog;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
@@ -14,17 +15,21 @@ import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
 
-public class ConsoleDialogSample {
+public class ConsoleDialogSampleApp {
+
+	static {
+		GLUtil.checkJoglLibs();
+	}
 	
 	public static void main(String[] args) {
 		Injector injector = Guice.createInjector(new ConsoleModule());
-		injector.getInstance(ConsoleDialogSample.class).start();
+		injector.getInstance(ConsoleDialogSampleApp.class).start();
 	}
 	
 	private final ContextStarter contextStarter;
 
 	@Inject
-	public ConsoleDialogSample(ContextStarter contextStarter) {
+	public ConsoleDialogSampleApp(ContextStarter contextStarter) {
 		this.contextStarter = contextStarter;
 	}
 	

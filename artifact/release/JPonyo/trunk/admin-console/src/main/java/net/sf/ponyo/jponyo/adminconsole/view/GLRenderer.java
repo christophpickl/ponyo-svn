@@ -18,7 +18,6 @@ import org.apache.commons.logging.LogFactory;
 
 public class GLRenderer implements GLEventListener {
 	
-	private static final Log LOG = LogFactory.getLog(GLRenderer.class);
 	private static final Color PRIMARY_COLOR_OFF = Color.GRAY;
 	private static final Color PRIMARY_COLOR_INIT = Color.GREEN;
 	private static final float JOINT_SCALE = 0.3f;
@@ -27,7 +26,6 @@ public class GLRenderer implements GLEventListener {
 	private User user;
 	
 	public void init(GLAutoDrawable drawable) {
-		LOG.debug("init(..)");
 		final GL gl = drawable.getGL();
 		gl.glShadeModel(GL.GL_SMOOTH);
 		gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -93,7 +91,6 @@ public class GLRenderer implements GLEventListener {
 	}
 
 	public void setUser(User user) {
-		LOG.debug("setUser(user="+user+")");
 		this.user = user;
 	}
 	
@@ -102,7 +99,6 @@ public class GLRenderer implements GLEventListener {
 	}
 	
 	public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
-		LOG.trace("reshape(drawable, x="+x+", y="+y+", width="+width+", height="+height+")");
 		final GL gl = drawable.getGL();
 		
 		gl.setSwapInterval(1);

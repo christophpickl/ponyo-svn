@@ -50,7 +50,7 @@ class XmlPersister extends AbstractPersister {
 		
 		for(final Field field : filterPersistAnnotatedFields(instance, PersistAsXml.class)) {
 			
-			Object loadedValue = TypeUtil.getField(loadedInstance, field);
+			Object loadedValue = TypeUtil.getFieldValue(loadedInstance, field);
 			TypeUtil.setField(instance, field, loadedValue);
 			LOG.trace("Initialized field: " + field + "; new value is [" + loadedValue + "]");
 		}

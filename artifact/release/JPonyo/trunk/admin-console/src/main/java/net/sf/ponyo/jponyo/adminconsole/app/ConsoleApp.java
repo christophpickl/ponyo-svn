@@ -5,11 +5,9 @@ import java.awt.Point;
 
 import javax.swing.SwingUtilities;
 
+import net.sf.ponyo.jponyo.adminconsole.gl.GLUtil;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -17,21 +15,19 @@ import com.google.inject.Injector;
 
 public class ConsoleApp implements ConsoleWindowListener {
 
-	private static final Log LOG = LogFactory.getLog(ConsoleApp.class);
-	
 	private final Model model;
 	private final ContextStarter contextStarter;
 	private Context context;
 	private ConsoleWindow window;
+
+	static {
+		GLUtil.checkJoglLibs();
+	}
 	
 	public static void main(String[] args) {
-		LOG.debug("main() START");
-		
 		Injector injector = Guice.createInjector(new ConsoleModule());
 		ConsoleApp app = injector.getInstance(ConsoleApp.class);
 		app.startUp();
-		
-		LOG.debug("main() END");
 	}
 
 	@Inject

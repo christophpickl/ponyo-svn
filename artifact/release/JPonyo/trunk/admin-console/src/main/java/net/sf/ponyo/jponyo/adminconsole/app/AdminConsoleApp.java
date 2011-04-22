@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.adminconsole;
+package net.sf.ponyo.jponyo.adminconsole.app;
 
 import java.awt.Dimension;
 import java.awt.Point;

@@ -35,6 +35,14 @@
 		    <artifactId>xstream</artifactId>
 		</dependency>
 		
+	    <!-- I N T E R N A L -->
+    	<!-- *********************************************************** -->
+    	
+		<dependency>
+			<groupId>net.sourceforge.jpotpourri</groupId>
+			<artifactId>jpotpourri</artifactId>
+		</dependency>
+		
     </dependencies>
     
     

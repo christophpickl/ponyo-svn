@@ -1,4 +1,4 @@
-package net.sf.ponyo.jponyo.adminconsole;
+package net.sf.ponyo.jponyo.adminconsole.app;
 
 import net.sf.ponyo.jponyo.JPonyoModule;
 

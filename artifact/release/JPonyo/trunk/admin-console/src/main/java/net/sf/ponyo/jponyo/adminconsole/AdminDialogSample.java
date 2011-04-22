@@ -6,6 +6,7 @@ import java.util.Collection;
 
 import javax.swing.SwingUtilities;
 
+import net.sf.ponyo.jponyo.adminconsole.app.AdminConsoleModule;
 import net.sf.ponyo.jponyo.adminconsole.view.AdminDialog;
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;

@@ -39,6 +39,8 @@
     	<version_javaosc>1.0-20060402-josceleton</version_javaosc>
     	<version_eclipse-plugin>2.8</version_eclipse-plugin><!-- TODO outsource to upper pom (?) -->
     	
+    	<version_jogl>1.1.1a-ponyo</version_jogl>
+    	<version_mmj>0_93-ponyo</version_mmj>
     </properties>
     
     
@@ -48,7 +50,32 @@
     
     <dependencyManagement>
     	<dependencies>
+        	
+	        <!-- E X T E R N A L -->
+    		<!-- *********************************************************** -->
+    	
+			<dependency>
+				<groupId>net.java.dev.jogl</groupId>
+				<artifactId>jogl</artifactId>
+				<version>${version_jogl}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.java.dev.gluegen</groupId>
+				<artifactId>gluegen-rt</artifactId>
+				<version>${version_jogl}</version>
+			</dependency>
+			
+			<!-- MIDI support on OS X -->
+	        <dependency>
+	            <groupId>de.humatic</groupId>
+	            <artifactId>mmj</artifactId>
+	            <version>${version_mmj}</version>
+	        </dependency>
+	        
 		        
+	        <!-- I N T E R N A L -->
+    		<!-- *********************************************************** -->
+    		
 			<dependency>
 				<groupId>net.sourceforge.jpotpourri</groupId>
 				<artifactId>jpotface</artifactId>

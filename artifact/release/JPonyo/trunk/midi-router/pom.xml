@@ -37,18 +37,14 @@
     
 	<dependencies>
         
-        <!-- FIXME get rid of pulse dependency and create own midi lib instead! -->
-<!--        <dependency>-->
-<!--        	<groupId>net.pulse-project.router</groupId>-->
-<!--        	<artifactId>router-midi</artifactId>-->
-<!--        	<version>0.1-SNAPSHOT</version>-->
-<!--        	<exclusions>-->
-<!--        		<exclusion>-->
-<!--				    <groupId>net.pulse-project.pom</groupId>-->
-<!--				    <artifactId>guice-dependencies</artifactId>-->
-<!--        		</exclusion>-->
-<!--        	</exclusions>-->
-<!--        </dependency>-->
+        <!-- E X T E R N A L -->
+   		<!-- *********************************************************** -->
+
+        <dependency>
+            <groupId>de.humatic</groupId>
+            <artifactId>mmj</artifactId>
+            <version>${version_mmj}</version>
+        </dependency>
     
 	    <!-- I N T E R N A L -->
     	<!-- *********************************************************** -->
@@ -75,11 +71,6 @@
 			<artifactId>jpotface</artifactId>
 <!--			<version>0.0.1-SNAPSHOT</version>-->
 		</dependency>
-		
-	    <!-- E X T E R N A L -->
-    	<!-- *********************************************************** -->
-		
-		<!-- none -->
 		
 	</dependencies>
     

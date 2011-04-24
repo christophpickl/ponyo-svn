@@ -1,20 +1,24 @@
 package net.sf.ponyo.playground.jogl.sample;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+
 import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.glu.GLU;
 
 import net.sf.ponyo.playground.jogl.glx.ObjectDrawer;
-import net.sf.ponyo.playground.jogl.sample.SampleStarter.Sample;
+import net.sf.ponyo.playground.jogl.sample.SampleInputs.RangeInput;
 
-public class Sample3Something implements Sample {
+public class Sample3Something extends AbstractSample {
 
-	private transient float userValue = 0.0f;
-	@Override public void setUserValue(float userValue) { this.userValue = userValue; }
-	@Override public float[] getUserValueMinMax() {
-		return new float[] { -2.0f, 2.0f };
+	private final RangeInput inpTranslateX = new RangeInput("Translate-X", -2.0f, 2.0f, 0.0f);
+	private final Collection<SampleInput> inputs = new ArrayList<SampleInput>(Arrays.asList(this.inpTranslateX));
+	@Override public Collection<SampleInput> getInputs() {
+		return this.inputs;
 	}
-	
+
 	@Override public void init(GLAutoDrawable drawable) {
 		GL gl = drawable.getGL();
 		gl.glShadeModel(GL.GL_SMOOTH);
@@ -30,7 +34,7 @@ public class Sample3Something implements Sample {
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
 		
 		gl.glLoadIdentity();
-		gl.glTranslatef(this.userValue, 0.0f, -7.0f);
+		gl.glTranslatef(this.inpTranslateX.getValue().floatValue(), 1.0f, -7.0f);
 		ObjectDrawer.drawCube(gl);
 	}
 

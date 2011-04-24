@@ -4,6 +4,7 @@ import javax.swing.SwingUtilities;
 
 import net.sf.ponyo.jponyo.core.Context;
 import net.sf.ponyo.jponyo.core.ContextStarter;
+import net.sf.ponyo.jponyo.core.ContextStarterImpl;
 import net.sf.ponyo.jponyo.core.GlobalSpace;
 
 @SuppressWarnings("synthetic-access")
@@ -13,16 +14,25 @@ public class App implements MainWindowListener {
 
 	public static boolean isTracking_HACK = false;
 	
+	private final ContextStarter contextStarter;
+	
 	private Context context;
 	private GlobalSpace data;
 	private MainWindow window;
 	
 	public static void main(String[] args) {
-		new App().startUp();
+		System.err.println("emtpy ;) as outcommented");
+//		new App().startUp();
 	}
 	
+	public App(ContextStarter contextStarter) {
+		this.contextStarter = contextStarter;
+	}
+
+
+
 	public void startUp() {
-		this.context = new ContextStarter().startOscReceiver();
+//		this.context = new ContextStarterImpl().startOscReceiver();
 		
 //		this.context.addUserChangeListener(new UserChangeListener() {
 //			public void onUserTracking(User user) {

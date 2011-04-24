@@ -4,9 +4,8 @@ import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.glu.GLU;
 
-import net.sf.ponyo.playground.jogl.sample.SampleStarter.SimpleSample;
 
-public class Sample1ItCouldNotBeSimpler extends SimpleSample {
+public class Sample1ItCouldNotBeSimpler extends AbstractSample {
 
 	
 	@Override public void init(GLAutoDrawable drawable) {

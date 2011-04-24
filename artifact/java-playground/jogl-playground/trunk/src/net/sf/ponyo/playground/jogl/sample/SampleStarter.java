@@ -8,32 +8,24 @@ import java.awt.event.WindowEvent;
 
 import javax.media.opengl.GLCanvas;
 import javax.media.opengl.GLCapabilities;
-import javax.media.opengl.GLEventListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import com.sun.opengl.util.Animator;
 
 public class SampleStarter {
 	
-	public interface Sample extends GLEventListener {
-		float[] getUserValueMinMax();
-		void setUserValue(float userValue);
-	}
-	public static abstract class SimpleSample implements Sample {
-		@Override  public void setUserValue(float userValue) { /*unused*/ }
-		@Override public float[] getUserValueMinMax() { return null; }
-	}
 	public static void main(String[] args) {
 //		start(new Sample1ItCouldNotBeSimpler());
 //		start(new Sample2Pyramide());
-		start(new Sample3Something());
+//		start(new Sample3Something());
+//		start(new Sample4Points());
+		
+		start(new Sample5Enabler());
 	}
 	
 	public static void start(final Sample sample) {
@@ -46,6 +38,7 @@ public class SampleStarter {
 		canvas.addGLEventListener(sample);
 		
 		final JFrame frame = new JFrame();
+		frame.setTitle(sample.getClass().getSimpleName());
 		frame.setSize(800, 600);
 		frame.setLocation(100, 40);
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -64,16 +57,13 @@ public class SampleStarter {
 		panel.add(canvas, BorderLayout.CENTER);
 
 		JPanel northPanel = new JPanel();
-		final float[] userValueMinMax = sample.getUserValueMinMax();
-		if(userValueMinMax != null) {
-			final JSlider slideUserValue = new JSlider();
-			northPanel.add(slideUserValue);
-			slideUserValue.setMinimum(Math.round(userValueMinMax[0] * 100));
-			slideUserValue.setMaximum(Math.round(userValueMinMax[1] * 100));
-			slideUserValue.addChangeListener(new ChangeListener() { @Override public void stateChanged(ChangeEvent event) {
-				float valueFloat = slideUserValue.getValue() / 100.0f;
-				sample.setUserValue(valueFloat);
-			}});
+		if(sample.getInputs() != null && sample.getInputs().isEmpty() == false) {
+			for (SampleInput input : sample.getInputs()) {
+				JPanel inputPanel = new JPanel();
+				inputPanel.add(new JLabel(input.getLabel() + ":"));
+				inputPanel.add(input.asComponent());
+				northPanel.add(inputPanel);
+			}
 		}
 		
 		panel.add(northPanel, BorderLayout.NORTH);

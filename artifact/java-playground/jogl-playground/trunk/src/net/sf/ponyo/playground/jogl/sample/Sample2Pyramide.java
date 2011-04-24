@@ -4,10 +4,9 @@ import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.glu.GLU;
 
-import net.sf.ponyo.playground.jogl.sample.SampleStarter.SimpleSample;
 
 
-public class Sample2Pyramide extends SimpleSample {
+public class Sample2Pyramide extends AbstractSample {
 
 	@Override public void init(GLAutoDrawable drawable) {
 		System.out.println("init()");

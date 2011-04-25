@@ -4,16 +4,16 @@ import javax.media.opengl.GL;
 import javax.media.opengl.GLAutoDrawable;
 import javax.media.opengl.glu.GLU;
 
-
-
 public class Sample2Pyramide extends AbstractSample {
 
 	@Override public void init(GLAutoDrawable drawable) {
-		System.out.println("init()");
 		GL gl = drawable.getGL();
-		gl.glShadeModel(GL.GL_SMOOTH);
+		gl.glShadeModel(GL.GL_SMOOTH); // enable smooth color transitions ... usually this is the default, but just to get sure
+//		gl.glShadeModel(GL.GL_FLAT);
+		
 		gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f); // black bg
 		gl.glClearDepth(1.0f);
+		
 		gl.glEnable(GL.GL_DEPTH_TEST);
 		gl.glDepthFunc(GL.GL_LEQUAL);
 		gl.glHint(GL.GL_PERSPECTIVE_CORRECTION_HINT, GL.GL_NICEST);
@@ -22,10 +22,24 @@ public class Sample2Pyramide extends AbstractSample {
 	@Override public void display(GLAutoDrawable drawable) {
 		final GL gl = drawable.getGL();
 		gl.glClear(GL.GL_COLOR_BUFFER_BIT | GL.GL_DEPTH_BUFFER_BIT);
+
+		gl.glPushMatrix();
+			gl.glLoadIdentity();
+			gl.glTranslatef(-2.0f, 0.0f, -7.0f);
+			gl.glRotatef(90.0f, 1.0f, 0.0f, 0.0f); // let it show to us
+			gl.glRotatef(-20.0f, 0.0f, 0.0f, 1.0f); // and a little bit to the right
+			drawRainbowPyramide(gl);
+		gl.glPopMatrix();
 		
-		gl.glLoadIdentity();
-			gl.glTranslatef(1.5f, 0.0f, -7.0f);				
-			gl.glBegin(GL.GL_TRIANGLES);					
+		gl.glPushMatrix();
+			gl.glLoadIdentity();
+			gl.glTranslatef(2.0f, 0.0f, -7.0f);
+			drawRainbowPyramide(gl);
+		gl.glPopMatrix();
+	}
+
+	private void drawRainbowPyramide(final GL gl) {
+		gl.glBegin(GL.GL_TRIANGLES);					
 			gl.glColor3f(1.0f,0.0f,0.0f);			
 			gl.glVertex3f( 0.0f, 1.0f, 0.0f);			
 			gl.glColor3f(0.0f,1.0f,0.0f);			
@@ -50,12 +64,12 @@ public class Sample2Pyramide extends AbstractSample {
 			gl.glVertex3f(-1.0f,-1.0f,-1.0f);			
 			gl.glColor3f(0.0f,1.0f,0.0f);			
 			gl.glVertex3f(-1.0f,-1.0f, 1.0f);			
-		gl.glEnd();	
+		gl.glEnd();
 	}
 
 	@Override public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
-		System.out.println("reshape()");
 		GL gl = drawable.getGL();
+		
 		gl.setSwapInterval(1);
 
 		gl.glViewport(0, 0, width, height);

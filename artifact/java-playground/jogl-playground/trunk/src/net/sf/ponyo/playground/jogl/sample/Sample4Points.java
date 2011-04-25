@@ -59,8 +59,9 @@ public class Sample4Points extends AbstractSample {
 		float colG = 0.0f;
 		float colB = 1.0f;
 //		gl.glColor3f(1.0f, 0.0f, 0.0f);
-		for(float angle = 0.0f; angle <= (2.0f * Math.PI) * 3.0f; angle += 0.1f) {
-			gl.glPointSize(currentSize); // must be outside of glBegin/End
+		for(float angle = 0.0f; angle <= (2.0f * Math.PI) * 3.0f; angle += 0.05f) {
+			gl.glPointSize(2.0f); // must be outside of glBegin/End
+//			gl.glPointSize(currentSize); // must be outside of glBegin/End
 			currentSize += 0.125f; // hardcoded step size
 			float x = 50.0f * ((float) Math.sin(angle));
 			float y = 50.0f * ((float) Math.cos(angle));

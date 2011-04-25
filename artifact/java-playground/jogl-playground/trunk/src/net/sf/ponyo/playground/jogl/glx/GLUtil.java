@@ -9,7 +9,16 @@ import net.sf.ponyo.jponyo.entity.Skeleton;
 
 public final class GLUtil {
 	
+	public static final float PI = 3.14159265f; // otherwise using Math.PI would result in some nasty things ;)
+	
 	private GLUtil() { /* utility class */ }
+	
+	public static float sinf(float value) {
+		return (float) Math.sin(value);
+	}
+	public static float cosf(float value) {
+		return (float) Math.cos(value);
+	}
 	
 	public static void setColor(GL gl, Color c) {
 		int r = c.getRed();

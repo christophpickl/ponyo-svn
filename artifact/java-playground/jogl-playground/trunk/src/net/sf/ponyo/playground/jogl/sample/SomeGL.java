@@ -5,6 +5,7 @@ import javax.media.opengl.GL;
 public class SomeGL {
 
 	private static final float RANGE = 100.0f;
+	
 	public static void setupCommonViewingVolume(GL gl, int width, int maybeZeroHeight) {
 		int height = maybeZeroHeight == 0 ? 1 : maybeZeroHeight;
 		gl.glViewport(0, 0, width, height);

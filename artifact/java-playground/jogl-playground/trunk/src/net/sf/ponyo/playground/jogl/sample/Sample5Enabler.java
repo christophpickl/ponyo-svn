@@ -126,10 +126,7 @@ public class Sample5Enabler extends AbstractSample {
 	@Override public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
 		SomeGL.setupCommonViewingVolume(drawable.getGL(), width, height);
 	}
-
-	@Override public Collection<SampleInput> getInputs() {
-		return this.inputs;
-	}
+	
 	@Override public void setKeyLeftPressed(boolean pressed) {
 		this.inpLeftRight -= 2.0f;
 	}
@@ -141,5 +138,9 @@ public class Sample5Enabler extends AbstractSample {
 	}
 	@Override public void setKeyDownPressed(boolean pressed) {
 		this.inpUpDown += 2.0f;
+	}
+
+	@Override public Collection<SampleInput> getInputs() {
+		return this.inputs;
 	}
 }

@@ -18,6 +18,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingUtilities;
 import javax.swing.WindowConstants;
 
@@ -32,7 +34,9 @@ public class SampleStarter {
 		
 //		start(new Sample4Points());
 //		start(new Sample5Enabler());
-		start(new Sample6Lights());
+//		start(new Sample6Lights());
+//		start(new Sample7LightSpot());
+		start(new Sample8Blending());
 	}
 	// or see: http://www.java-tips.org/other-api-tips/jogl/several-spheres-are-drawn-using-different-material-characteri-2.html
 	public static void start(final Sample sample) {
@@ -46,7 +50,7 @@ public class SampleStarter {
 		final JFrame frame = new JFrame();
 		frame.setTitle(sample.getClass().getSimpleName());
 		frame.setSize(800, 600);
-		frame.setLocation(100, 40);
+//		frame.setLocation(100, 40);
 		frame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		frame.addWindowListener(new WindowAdapter() { @Override public void windowClosing(WindowEvent e) {
 			new Thread(new Runnable() {
@@ -83,7 +87,6 @@ public class SampleStarter {
 		if(sample.getInputs() != null && sample.getInputs().isEmpty() == false) {
 			JPanel northPanel = new JPanel();
 			northPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-			northPanel.add(new JLabel("Sample Configuration: "));
 			
 			for (SampleInput input : sample.getInputs()) {
 				JPanel inputPanel = new JPanel();
@@ -91,8 +94,9 @@ public class SampleStarter {
 				inputPanel.add(input.asComponent());
 				northPanel.add(inputPanel);
 			}
-			
-			panel.add(northPanel, BorderLayout.NORTH);
+			JScrollPane scroll = new JScrollPane(northPanel);
+			scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+			panel.add(scroll, BorderLayout.NORTH);
 		}
 		
 		JPanel cmdPanel = new JPanel();

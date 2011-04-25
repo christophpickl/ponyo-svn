@@ -49,7 +49,7 @@ public abstract class AbstractSample implements Sample {
 	}
 	protected final boolean isKeyDownPressed() { return this.keyDownPressed; }
 	
-
+	protected float perspectiveFar = 1000.0f;
 	@Override public void reshape(GLAutoDrawable drawable, int x, int y, int width, int height) {
 		GL gl = drawable.getGL();
 		gl.setSwapInterval(1);
@@ -59,7 +59,7 @@ public abstract class AbstractSample implements Sample {
 		gl.glLoadIdentity();
 
 		GLU glu = new GLU();
-		glu.gluPerspective(45.0f, (double) width / (double) height, 0.1f, 1000.0f);
+		glu.gluPerspective(45.0f, (double) width / (double) height, 0.1f, this.perspectiveFar);
 
 		gl.glMatrixMode(GL.GL_MODELVIEW);
 		gl.glLoadIdentity();

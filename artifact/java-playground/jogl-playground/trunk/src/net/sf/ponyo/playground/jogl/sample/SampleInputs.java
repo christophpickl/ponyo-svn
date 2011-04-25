@@ -1,6 +1,7 @@
 package net.sf.ponyo.playground.jogl.sample;
 
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -72,6 +73,9 @@ public final class SampleInputs {
 			super(label);
 			this.value = Float.valueOf(initValue);
 			
+			this.slideUserValue.setPaintLabels(true);
+//			this.slideUserValue.setPaintTicks(true);
+			this.slideUserValue.setPreferredSize(new Dimension(120, 30));
 			this.slideUserValue.setMinimum(Math.round(min * 100));
 			this.slideUserValue.setMaximum(Math.round(max * 100));
 			this.slideUserValue.setValue(Math.round(initValue * 100));

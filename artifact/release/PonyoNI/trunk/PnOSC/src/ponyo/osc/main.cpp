@@ -67,10 +67,10 @@ void startServer() {
 
 	g_transmitSocket = new UdpTransmitSocket(IpEndpointName("127.0.0.1", 7000));
 
-	StartOniConfig config("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
-	g_facade.startRecording(config);
-//	StartXmlConfig config("/ponyo/niconfig.xml", &onUserStateChanged, &onJointPositionChanged);
-//	g_facade.startWithXml(config);
+//	StartOniConfig config("/ponyo/oni.oni", &onUserStateChanged, &onJointPositionChanged);
+//	g_facade.startRecording(config);
+	StartXmlConfig config("/ponyo/niconfig.xml", &onUserStateChanged, &onJointPositionChanged);
+	g_facade.startWithXml(config);
 
 	printf("PnOSC running ... terminate by hitting ENTER\n");
 	CommonUtils::waitHitEnter(false);

@@ -33,7 +33,7 @@ public:
 		this->callbackInstance = callbackInstance;
 		this->callbackMethod = callbackMethod;
 
-		LOG->info("Attention: If 'Bus error' occurs, try running as root ;)");
+		LOG->info("Attention: If 'Bus error' or 'Segmentation fault' now occurs, try running as root ;)");
 		this->updateThread = boost::thread(&UpdateThread::onThreadRun, this, context, exceptionCallback);
 	}
 

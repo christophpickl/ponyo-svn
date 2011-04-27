@@ -1,7 +1,11 @@
 #!/bin/bash
 
+# TODO duplicate version number specification (see cmake_common.txt)
+PN_VERSION="0.1-SNAPSHOT"
+
+#SCRIPT_DIR=`pwd`/`dirname $0`
 CWD=`pwd`
-echo CWD: ${CWD}
+echo "[DEBUG] CWD: ${CWD}"
 
 function exec {
 	echo "[INFO] >> ${1}"

@@ -1,0 +1,43 @@
+%=====> \documentclass[draft]{a4poster}
+% siehe: http://nxg.me.uk/docs/posters/
+
+\documentclass[a4paper,11pt]{scrartcl}
+\usepackage[austrian]{babel}
+\usepackage[latin1]{inputenc}
+
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyfoot{} % clear default style
+\renewcommand{\headrulewidth}{0.0pt} % nice hack to get rid of header line
+%\renewcommand{\footrulewidth}{0.4pt}
+%\fancyhead[LO] {\Large{WingTsun Techniken}}
+%\fancyfoot[RO] {\url{http://foobar.at}}
+
+\newcounter{CntTechnik}
+\newenvironment{techniken}
+	{
+		\begin{center}
+		\begin{tabular}{ll}
+	}
+	{
+		\end{tabular}
+		\end{center}
+	}
+\def\technik#1#2#3 {\noalign{\smallskip\smallskip\smallskip} \stepcounter{CntTechnik}\LARGE{\textbf{\theCntTechnik. #1}} & \LARGE{#2} \\ \noalign{\smallskip}}
+
+
+
+\begin{document}
+
+	\center{\Huge{\textbf{Positionen}}}
+	\input{techniken_positionen}
+	
+	%\vfill
+	%\smallskip\smallskip\smallskip\smallskip
+	\bigskip\bigskip\bigskip\bigskip
+	
+	\center{\Huge{\textbf{Bewegungen}}}
+	\input{techniken_bewegungen}
+
+\end{document}

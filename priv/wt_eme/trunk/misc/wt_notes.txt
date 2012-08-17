@@ -1,4 +1,37 @@
 
+buecher:
+- wing tsun kuen !!!!!! (44e)
+- kampflogik 3 !!!
+- Advanced Wing Chu !! (sehr wissenschaftlich, fuer fortgeschrittenen anfaenger)
+	http://www.amazon.de/Advanced-Wing-Chun-Mike-Lee/dp/0897501187/ref=sr_1_29?ie=UTF8&qid=1342098463&sr=8-29
+	40e, 250s
+- The Wing Chun Compendium, Volume One !
+	http://www.amazon.de/The-Wing-Chun-Compendium-Volume/dp/1583941290/ref=sr_1_2?ie=UTF8&qid=1342098361&sr=8-2
+	35e, 500s
+	+ The Wing Chun Compendium, Volume Two: 2 
+		http://www.amazon.de/The-Wing-Chun-Compendium-Volume/dp/1583942297/ref=pd_sim_eb_2
+		30e, 470s
+- Wu - Ein Deutscher bei den Meistern in China 
+	// allgemeiner ueberblick ueber wushu, wichtig fuer leute die wert legen auf traditionen
+	http://www.amazon.de/Wu-Ein-Deutscher-Meistern-China/dp/3938305126/ref=pd_sim_eb_3
+	23e, 360s
+- Ving Tsun Jo Fen: Anleitungen und Erlauterungen der Ving Tsun Tradition von Ip Man
+	http://www.amazon.de/Ving-Tsun-Fen-Anleitungen-Erlauterungen/dp/384420203X/ref=sr_1_39?ie=UTF8&qid=1342098515&sr=8-39
+	20e, 110s
+- Complete Wing Chun: The Definitive Guide to Wing Chun's History and Traditions
+	http://www.amazon.de/Complete-Wing-Chun-Definitive-Traditions/dp/0804831416/ref=sr_1_33?ie=UTF8&qid=1342098515&sr=8-33
+	15e, 160s
+- Wing-Chun Martial Arts: Principles & Techniques: Principles and 
+	// ist mehr hintergrund und philosophie, weniger techniken
+	http://www.amazon.de/Wing-Chun-Martial-Arts-Principles-Techniques/dp/0877287961/ref=sr_1_13?ie=UTF8&qid=1342098361&sr=8-13
+	10e, 120s
+- Der Weg der einschneidenden Faust 
+	http://www.amazon.de/Der-einschneidenden-Faust-Oliver-Gross/dp/386884130X/ref=sr_1_7?ie=UTF8&qid=1342098361&sr=8-7
+	20, 110s
+
+- Wing Chun Kung Fu: 1  ... NEIN (nur grundlagen, von bruce lee ueber JDK)
+
+
 mission statement:
 **************************************
 - nachschlagewerk, referenz
@@ -41,6 +74,70 @@ EWTO lehrer:
 	That's why it's called "wing tsun". That Chinese name for this art can be translated into English as "eternal springtime" or "forever young" because, as long as you practice it, you will never stop growing. You are always new, and so is your ever brand-new, personal brand of ... well, some call it "wing tsun" - but in the end, it's always just you.
 	That is the Way of Wing Tsun. You are constantly learning to discover and then reinvent yourself.
 	[http://www.houstonwingtsun.com/wing-tsun-training.html]
+
+	
+============================================
+WT principles [http://hopkinswingchun.wetpaint.com/page/Wing+Chun+Principles]
+
+Wing Chun was designed to satisfy two primary objectives (in bold), through the use of a number of principles (in italics). To apply these principles, there are a number of requirements that the practioner must satisfy (underlined).
+
+    Economise Time – The faster person wins.
+        Reduce time needed while attacking
+            Follow the straight line – the shortest path between two points
+            Simultaneous Attack and Defense – twice the speed
+                Attack down the Central line
+                    Requires Ambidexterity 
+        Reduce time needed while guarding
+            Guard the Centerline, where most weaknesses are
+                Keep your hands out in front of you and force your opponents to take the outside
+                Keep your elbows in and use the concept of the four gates 
+        Reduce reaction time
+            Watch lead elbow and back knee
+            Establishing bridge and relying on contact reflexes 
+        Reduce time needed to initiate your move and recovery time afterwards
+            Flow of movements – end of one movement is the start of another
+            Short Movements – short power (tricep force) vs. long power
+                Closest distance for fighting 
+            Relaxed Movements – allows more rapid movements
+                Use force only when necessary
+                    Tighten fist only at the end 
+    Economise Effort – Conserve your energy as much as possible. The less energy you use, the harder it is for the energy to be turned back on yourself.
+        Reduce effort needed to execute individual movements
+            Follow the path of least resistance – jammed hands move away, free hands move forward.
+                Requires Sensitivity
+                Requires Interruptibility
+                Requires Ambidexterity 
+            Make full use of available energy
+                Make use of your body’s momentum
+                    Synchronise the punch with the step 
+            Make use of the opponent’s energy
+            Do not use more energy than necessary
+                Requires Control 
+        Reduce effort needed to finish the whole fight
+            End fight as quickly as possible
+                Attack the most crucial areas (Effectiveness)
+                    Go straight for the head, ribs, eyes, shin, 
+            Deal irreversible damage
+                Arm breaks, knee breaks and eye jabs 
+            Do not use unnecessary movement
+                Gyeuk Moh Hoy Fat – The kick never misses 
+            Obtain positional advantage
+                Take the outside
+                Cramp taller people while keeping shorter people at bay
+                Wing Chun blocks – use the body to create simple machines like the inclined plane, axes and levers to conserve energy instead of relying on generating momentum
+                    Require Accuracy and Timing 
+
+
+WT STILE [http://www.amazon.de/Complete-Wing-Chun-Definitive-Traditions/dp/0804831416/ref=sr_1_33?ie=UTF8&qid=1342098515&sr=8-33]
+==================
+	Yip Man Wing Chun
+	Sum Nung’s Yuen Kay-San Wing Chun
+	Leung Jan’s Gu Lao Wing Chun
+	Cao De-An’s Nanyang Wing Chun
+	the Wing Chun of Pan Nam
+	the Pao Fa Lien style of Chu Chong
+	the Hung Suen Wing Chun of Garrett Gee
+	the Jee Shim Wing Chun of Wei Yan
 
 LINKS
 ============================================

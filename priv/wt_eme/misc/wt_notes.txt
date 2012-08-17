@@ -1,10 +1,9 @@
 
 TODO
 **************************************
-- index
-- layout verschoenern
-	* in etwa so wie der (mit memoir klassen): http://latex-my.blogspot.co.at/2009/11/customising-running-headers-and-footers.html
-
+- pflanzen hintergrund ersetzen mit yin-yang symbol bzw WingChun Schriftzeichen
+	// yinyang dann halt statt kugel wo
+-> use icons: http://www.iconfinder.com/icondetails/17834/128/alert_error_exclamation_mistake_warning_icon
 buecher:
 **************************************
 - wing tsun kuen !!!!!! (44e)

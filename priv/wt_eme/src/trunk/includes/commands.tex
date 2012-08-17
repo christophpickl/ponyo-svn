@@ -1,4 +1,6 @@
 
+%\definecolor{grey}{rgb}{0.9,0.9,0.9} 
+
 \def\WTCommonCite #1#2{
 	\begin{adjustwidth}{1cm}{1cm}
 	\textit{``#2''}
@@ -7,15 +9,31 @@
 }
 
 \def\WTCommonNoob #1
-	{\WTXCommonColorBox{F8E0E0}{Achtung Anf\"angerfehler!}{#1}}
-	
+	{\WTXCommonColorBox{FF6666}{common_noob_alert_sign}{Achtung Anf\"angerfehler!}{#1}}
+
+\def\WTCommonBegriff #1
+	{\WTXCommonColorBox{B9BEFF}{common_begriff_sign}{Technicus terminus!}{#1}}
+
+
 %\colorbox{red}{Black text on red background}
-\def\WTXCommonColorBox #1#2#3{
-	\begin{center}
-		\colorbox[HTML]{#1} {
-			\begin{minipage}[b]{380px}
-				\textbf{#2}\\ #3
-			\end{minipage}
-		}
-	\end{center} 
+\def\WTXCommonColorBox #1#2#3#4{
+	\begin{flushleft}
+		\begin{tabular}{lc}
+			\includegraphics[width=32px]{resources/images/icons/#2}
+			&
+			\colorbox[HTML]{#1} {
+				\begin{minipage}[b]{400px}
+					\textsf{\textbf{#3}\\ #4}
+				\end{minipage}
+			}
+		\end{tabular}
+	\end{flushleft} 
 }
+
+
+%\colorbox{grey}{
+%	\parbox[t]{1.0\linewidth}{
+%		\printtitle 
+%		\vspace*{0.7cm}
+%	}
+%}

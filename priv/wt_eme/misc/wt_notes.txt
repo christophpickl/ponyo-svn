@@ -1,5 +1,12 @@
 
+TODO
+**************************************
+- index
+- layout verschoenern
+	* in etwa so wie der (mit memoir klassen): http://latex-my.blogspot.co.at/2009/11/customising-running-headers-and-footers.html
+
 buecher:
+**************************************
 - wing tsun kuen !!!!!! (44e)
 - kampflogik 3 !!!
 - Advanced Wing Chu !! (sehr wissenschaftlich, fuer fortgeschrittenen anfaenger)

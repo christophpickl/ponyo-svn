@@ -1,0 +1,21 @@
+
+\def\WTCommonCite #1#2{
+	\begin{adjustwidth}{1cm}{1cm}
+	\textit{``#2''}
+	\flushright{--- #1}
+\end{adjustwidth}
+}
+
+\def\WTCommonNoob #1
+	{\WTXCommonColorBox{F8E0E0}{Achtung Anf\"angerfehler!}{#1}}
+	
+%\colorbox{red}{Black text on red background}
+\def\WTXCommonColorBox #1#2#3{
+	\begin{center}
+		\colorbox[HTML]{#1} {
+			\begin{minipage}[b]{380px}
+				\textbf{#2}\\ #3
+			\end{minipage}
+		}
+	\end{center} 
+}

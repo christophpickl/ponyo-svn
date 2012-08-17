@@ -1,0 +1,64 @@
+
+% \WTGaleryResetSlideshowCounter
+% \WTGalerySlideshowTwo{img1}{img2}
+% \WTGalerySlideshowThree{img1}{img2}{img3}
+% \WTGalerySlideshowFour{img1}{img2}{img3}{img4}
+% \WTGaleryImage{img}{6cm}{my caption}
+% \WTGaleryImageTwo{img1}{img2}{my caption}
+
+
+\def\WTGaleryResetSlideshowCounter{
+	\setcounter{WTXGalery_CNT_images}{1}
+}
+
+\def \WTGalerySlideshowTwo #1#2{
+	\begin{WTXGaleryImagesEnv}{cc}
+			\WTXGaleryIncludeImage{#1} & \WTXGaleryIncludeImage{#2} \\
+			\WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} & \WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images}  \\
+	\end{WTXGaleryImagesEnv}
+}
+\def \WTGalerySlideshowThree #1#2#3{
+	\begin{WTXGaleryImagesEnv}{ccc}
+		\WTXGaleryIncludeImage{#1} & \WTXGaleryIncludeImage{#2} & \WTXGaleryIncludeImage{#3} \\
+		\WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} & \WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} & \WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} \\
+	\end{WTXGaleryImagesEnv}
+}
+\def \WTGalerySlideshowFour #1#2#3#4{
+	\begin{WTXGaleryImagesEnv}{cccc}
+		\WTXGaleryIncludeImage{#1} & \WTXGaleryIncludeImage{#2} & \WTXGaleryIncludeImage{#3} & \WTXGaleryIncludeImage{#4} \\
+		\WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} & \WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} & \WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} & \WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} \\
+	\end{WTXGaleryImagesEnv}
+}
+
+
+\def\WTGaleryImage #1#2#3{
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[width=#2]{resources/images/#1}
+		\caption{#3}
+	\end{figure}
+}
+\def\WTGaleryImageTwo #1#2#3{
+	\begin{figure}[htbp]
+		\centering
+		\includegraphics[width=7cm]{resources/images/#1}
+		\includegraphics[width=7cm]{resources/images/#2}
+		\caption{#3}
+	\end{figure}
+}
+
+% INTERNAL
+
+\newcounter{WTXGalery_CNT_images}
+
+\newenvironment{WTXGaleryImagesEnv}[1]
+	{\begin{figure}[!h]\centering\begin{tabular}{#1}}
+	{\end{tabular}\end{figure}}
+	
+\def\WTXGaleryIncludeImage #1{
+	\includegraphics[width=3.3cm]{resources/images/#1}
+}
+\def\WTXGaleryUseAndIncrementCounter #1{
+	\alph{#1})
+	\stepcounter{#1}
+}

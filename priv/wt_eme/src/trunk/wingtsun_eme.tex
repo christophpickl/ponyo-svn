@@ -1,32 +1,26 @@
+\input{includes/header}
 
-\documentclass[a4paper,12pt]{scrartcl}
-\usepackage[austrian]{babel}
-\usepackage[latin1]{inputenc}
-\usepackage{hyperref}
-
-\usepackage{graphicx}
-\usepackage{url}
-\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
-
-\usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
-
-\title{WingTsun Einsteiger Kompendium}
-\author{Christoph Pickl}
 \begin{document}
 
 \maketitle
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \tableofcontents
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\newpage
+\include{chapters/formen}
+\include{chapters/positionen}
 
-\section{asdf}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-asdf
-%\begin{figure}[htbp]%	\centering%  	\includegraphics[width=8cm]{resources/images/positionen/bong_sao-front}%	\caption{Bong Sao -- Demonstration Frontal}
-%\end{figure}
-	
+
+\printindex
+
+
+%\begin{thebibliography}{99}
+%	\bibitem[BaSi01]{BaSi01}
+%		Daniel J.~Barrett und Richard E.~Silvermann: 
+%		\textit{SSH, the Secure Shell - The Definitive Guide, 1st Edition}. O'Reilly \& Associates Inc., 101 Morris Street, Sebastopol, CA 95472 USA, {\bf 2001} % ISBN: 0-596-0011-1
+%	\bibitem{zlib}
+%		\url{http://www.info-zip.org/pub/infozip/zlib/}, die Kompressionsbibliothek ``zlib''
+%\end{thebibliography}
+
+%\listoftables
+%\listoffigures
+
 \end{document}

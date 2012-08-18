@@ -4,6 +4,23 @@ TODO
 - pflanzen hintergrund ersetzen mit yin-yang symbol bzw WingChun Schriftzeichen
 	// yinyang dann halt statt kugel wo
 -> use icons: http://www.iconfinder.com/icondetails/17834/128/alert_error_exclamation_mistake_warning_icon
+- cheatsheets/poster erstellen;
+	- formen (offizielle IWTA konkurenz machen)
+	- positionen/bewegungen
+	- glossar(e) (familie; techniken, u.a. handflaechen)
+	- drills, zyklen, 12 angriffe
+
+- @index bspe:
+	Prinzipien
+		Kampf-				 3
+		Kraft-				 4
+	Verwurzeln				7, 12
+	Zentrallinie			13, 18, 22
+	Zyklus
+		Bein-				21
+		Gleichzeitigkeiten-	 9
+	
+
 buecher:
 **************************************
 - wing tsun kuen !!!!!! (44e)

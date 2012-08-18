@@ -12,21 +12,18 @@
 }
 
 \def \WTGalerySlideshowTwo #1#2{
-	\begin{WTXGaleryImagesEnv}{cc}
-			\WTXGaleryIncludeImage{#1} & \WTXGaleryIncludeImage{#2} \\
-			\WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} & \WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images}  \\
+	\begin{WTXGaleryImagesEnv}
+			\WTXGaleryIncludeImage{#1} \WTXGaleryIncludeImage{#2}
 	\end{WTXGaleryImagesEnv}
 }
 \def \WTGalerySlideshowThree #1#2#3{
-	\begin{WTXGaleryImagesEnv}{ccc}
-		\WTXGaleryIncludeImage{#1} & \WTXGaleryIncludeImage{#2} & \WTXGaleryIncludeImage{#3} \\
-		\WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} & \WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} & \WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} \\
+	\begin{WTXGaleryImagesEnv}
+		\WTXGaleryIncludeImage{#1} \WTXGaleryIncludeImage{#2} \WTXGaleryIncludeImage{#3}
 	\end{WTXGaleryImagesEnv}
 }
 \def \WTGalerySlideshowFour #1#2#3#4{
-	\begin{WTXGaleryImagesEnv}{cccc}
-		\WTXGaleryIncludeImage{#1} & \WTXGaleryIncludeImage{#2} & \WTXGaleryIncludeImage{#3} & \WTXGaleryIncludeImage{#4} \\
-		\WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} & \WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} & \WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} & \WTXGaleryUseAndIncrementCounter{WTXGalery_CNT_images} \\
+	\begin{WTXGaleryImagesEnv}
+		\WTXGaleryIncludeImage{#1} \WTXGaleryIncludeImage{#2} \WTXGaleryIncludeImage{#3} \WTXGaleryIncludeImage{#4}
 	\end{WTXGaleryImagesEnv}
 }
 
@@ -51,14 +48,21 @@
 
 \newcounter{WTXGalery_CNT_images}
 
-\newenvironment{WTXGaleryImagesEnv}[1]
-	{\begin{figure}[!h]\centering\begin{tabular}{#1}}
-	{\end{tabular}\end{figure}}
+\newenvironment{WTXGaleryImagesEnv}
+	{\begin{center}}
+	{\end{center}}
 	
 \def\WTXGaleryIncludeImage #1{
-	\includegraphics[width=3.3cm]{resources/images/#1}
+	\begin{picture}(110,80)
+		\put(0,0){\includegraphics[width=110px]{resources/images/#1}}
+		\put(0,3){\colorbox{black}{\color{black}{ \rule{4pt}{9pt} }}}
+		\put(4,4){\hbox{\textbf{\textcolor{red}{\WTXGaleryUseAndIncrementCounter}}}}
+%		\put(0,3){\framebox{\phantom{\rule{40pt}{40pt}}}} %Dummy box in place of an image.
+	\end{picture}
 }
-\def\WTXGaleryUseAndIncrementCounter #1{
-	\alph{#1})
-	\stepcounter{#1}
+
+\def\WTXGaleryUseAndIncrementCounter {
+	\small{\alph{WTXGalery_CNT_images})}
+%	\arabic{#1})
+	\stepcounter{WTXGalery_CNT_images}
 }

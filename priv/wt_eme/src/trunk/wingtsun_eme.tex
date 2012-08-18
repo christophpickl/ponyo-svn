@@ -1,20 +1,92 @@
 \input{includes/preambel}
 
+\AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{preheadings}}} 
+
 \begin{document}
-\pagestyle{headings}
+
+
+\pagestyle{preheadings}
+
+\frontmatter
 
 \maketitle
 
-%\renewcommand\chapterillustration{six-computers-chips-circuits}
-%\chapter{Foo}
-%\tableofcontents
+\setcounter{page}{1}
+
+%\newpage % leere seite nach deckblatt
+%Bleibt leer.
+%\newpage
+
+
+\tableofcontents
+
+%\cleardoublepage
+
+\newpage
+
+\section*{Vorwort}
+\addcontentsline{toc}{section}{Vorwort}
+
+Da di dum dum.
+
+\renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand{\thesection}{\arabic{section}}
+
+
+\mainmatter
+
+\pagestyle{headings}
 
 \include{chapters/formen}
 \include{chapters/positionen}
 
-\tableofcontents
 
-%\printindex
+
+%\begin{description}
+%	\item[Contenttemplate]
+%		Foobar
+%\end{description}
+
+
+% APPENDIX
+\renewcommand{\thechapter}{\Alph{chapter}}
+\appendix% ... resets chapter numbering, uses letters for chapter numbers and doesn't fiddle with page numbering
+%\setcounter{chapter}{0}
+
+%\renewcommand{\thesection}{\arabic{section}}
+%\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+
+\chapter{Appendix}
+
+Some appendix text TODO.
+
+
+\newpage
+
+\addcontentsline{toc}{section}{Tabellenverzeichnis}%\list(of)tablesname does not work
+\listoftables
+
+\addcontentsline{toc}{section}{\listfigurename}
+%\renewcommand\listfigurename{Abbildungsverzeichnis X}
+\listoffigures
+
+
+%\renewcommand{\indexname}{Index X}
+
+
+%\glossary{set: a collection of objects}
+%\glossary{name={entry name}, description={entry description}}
+%\printglossary
+
+
+	\titleformat{\chapter}{}{}{0pt}{\Huge{\textbf{Index}}\vspace{1.4cm}}
+	\titlespacing*{\chapter}{0pt}{0pt}{0pt}
+
+	\phantomsection
+	\cleardoublepage
+	\addcontentsline{toc}{section}{\indexname}
+\printindex
+%\printindex[3]{indexa}{\indexname}
 
 
 %\begin{thebibliography}{99}
@@ -25,7 +97,5 @@
 %		\url{http://www.info-zip.org/pub/infozip/zlib/}, die Kompressionsbibliothek ``zlib''
 %\end{thebibliography}
 
-%\listoftables
-%\listoffigures
 
 \end{document}

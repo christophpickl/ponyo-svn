@@ -4,7 +4,9 @@
 \documentclass[twoside]{book}%{article}
 \usepackage[hmarginratio=2:3]{geometry}%odd pages haben rechts einen groesseren abstand, even pages links
 
-\usepackage[austrian]{babel}
+ \renewcommand{\familydefault}{\sfdefault}
+
+\usepackage[austrian]{babel} % setzt zb ToC und listoffigures text
 \usepackage[latin1]{inputenc}
 \usepackage{hyperref}
 
@@ -20,6 +22,12 @@
 \setlist[WTalphenum,1]{label=\alph*)}
 \setlist[WTalphenum,2]{label=\roman*)}
 
+% funkt nicht \renewcommand{\figurename}{Bild}
+
+% control the design of table of contents, figures and tables
+\usepackage{tocloft}
+\setlength{\cftfignumwidth}{3em}
+%\renewcommand{\cftchapfont}{Steht vorm Kapitel im ToC }
 
 % to increase side margin; used for cite text
 \usepackage{changepage}
@@ -27,18 +35,47 @@
 \usepackage{xcolor}
 \usepackage{color}
 
-\usepackage{makeidx}
+%%%
+
+
+
+%\usepackage{imakeidx}
+%\makeindex[columns=2]
+%\makeindex[title=My custom index title,columns=2]
+
+%\usepackage{makeidx}
+%\usepackage[columns=2,totoc=false]{idxlayout}
+%\makeindex
+
+\usepackage{imakeidx}
 \makeindex
 
+
+
+
+%\usepackage{makeglos}
+%\usepackage{glossary}
+%\makeglossary
+
+
+%    \usepackage{etoolbox}
+%    \newcommand*{\patchlist}[1]{\patchcmd{#1}{\chapter*}{\section*}{}{}}
+%    \patchlist{\tableofcontents}
+%    \patchlist{\listoffigures}
+%    \patchlist{\listoftables}
+
+%%%
+
+
 %\renewcommand{\contentsname}{asdf does not work to rename toc title} 
-\setcounter{tocdepth}{1}
+\setcounter{tocdepth}{2} % only display chapters/sections that deep; TODO set to 1 afterwards
 
 
 %%
 % restliches
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{includes/commands}
+\input{includes/common}
 \input{includes/headerfooter}
 \input{includes/galery}
 

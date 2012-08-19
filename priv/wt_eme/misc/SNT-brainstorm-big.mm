@@ -113,8 +113,10 @@
 </node>
 </node>
 </node>
-<node CREATED="1345241768328" ID="ID_561416776" MODIFIED="1345241858333" POSITION="left" TEXT="1. Satz - Schneidende Arme">
-<node CREATED="1345241932978" ID="ID_312438626" MODIFIED="1345242037832" TEXT="Tan-Sau">
+<node CREATED="1345241768328" ID="ID_561416776" MODIFIED="1345396517584" POSITION="left" TEXT="1. Satz - Schneidende Arme">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345241932978" ID="ID_312438626" MODIFIED="1345396507451" TEXT="Tan-Sau">
+<icon BUILTIN="button_ok"/>
 <node CREATED="1345241964760" ID="ID_1317976477" MODIFIED="1345241967429" TEXT="Vorspannung"/>
 <node CREATED="1345242062120" ID="ID_885556334" MODIFIED="1345242070754" TEXT="Handgelenkslinien knapp sichtbar">
 <node CREATED="1345243349166" ID="ID_361423193" MODIFIED="1345243363996" TEXT="Handflaechen leicht spitzerer Winkel"/>
@@ -124,27 +126,32 @@
 </node>
 <node CREATED="1345243327695" ID="ID_1224173024" MODIFIED="1345243348166" TEXT="Ellbogen Schulterbreit"/>
 <node CREATED="1345243392746" ID="ID_502392997" MODIFIED="1345243401048" TEXT="Dadurch dass gekreuzt, ist eigentlich ein gewendeter Tan"/>
-<node CREATED="1345253414097" ID="ID_1828849246" MODIFIED="1345253442573" TEXT="Anwendung: Partner haltet zurueck, Schwerpunkt senken, Tan vorschieben aus Ruecken">
+<node CREATED="1345253414097" ID="ID_1828849246" MODIFIED="1345396558100" TEXT="Anwendung: Partner haltet zurueck, Schwerpunkt senken, Tan vorschieben aus Ruecken">
 <icon BUILTIN="attach"/>
+<icon BUILTIN="button_cancel"/>
 <node CREATED="1345241967784" ID="ID_128386180" MODIFIED="1345241982460" TEXT="&quot;tief Schieben&quot;"/>
 <node CREATED="1345242001213" ID="ID_567901743" MODIFIED="1345242008417" TEXT="Verwurzeln"/>
 <node CREATED="1345241983118" ID="ID_1042587542" MODIFIED="1345241990737" TEXT="Schultern/Schwerpunkt absenken"/>
 <node CREATED="1345242020315" ID="ID_260529826" MODIFIED="1345242025656" TEXT="nicht Vorlehnen"/>
 <node CREATED="1345241991325" ID="ID_559073829" MODIFIED="1345241998688" TEXT="nicht aus Armen, aus Ruecken druecken"/>
 </node>
-<node CREATED="1345243413129" ID="ID_1595095825" MODIFIED="1345243471720" TEXT="Anwendung: Partner drueckt in Tan-Wendung">
+<node CREATED="1345243413129" ID="ID_1595095825" MODIFIED="1345396556364" TEXT="Anwendung: Partner drueckt in Tan-Wendung">
 <icon BUILTIN="attach"/>
+<icon BUILTIN="button_cancel"/>
 </node>
 </node>
-<node CREATED="1345242031650" ID="ID_1671503703" MODIFIED="1345242035208" TEXT="Gaun-Sau">
+<node CREATED="1345242031650" ID="ID_1671503703" MODIFIED="1345396520007" TEXT="Gaun-Sau">
+<icon BUILTIN="button_ok"/>
 <node CREATED="1345242121939" ID="ID_752312287" MODIFIED="1345242126120" TEXT="locker fallen lassen"/>
 <node CREATED="1345242093317" ID="ID_33199074" MODIFIED="1345242105272" TEXT="gerade runter, keine Wischbewegung"/>
 <node CREATED="1345242107828" ID="ID_434060065" MODIFIED="1345242117641" TEXT="mit Elle schneiden (unterarme leicht nach vorne gedreht)"/>
-<node CREATED="1345242178366" ID="ID_613892969" MODIFIED="1345243468100" TEXT="Anwendung: Abwehr tief mit Wendung">
+<node CREATED="1345242178366" ID="ID_613892969" MODIFIED="1345396561179" TEXT="Anwendung: Abwehr tief mit Wendung">
 <icon BUILTIN="attach"/>
+<icon BUILTIN="button_cancel"/>
 </node>
 </node>
-<node CREATED="1345242041162" ID="ID_1402081304" MODIFIED="1345242043023" TEXT="Kwan-Sau">
+<node CREATED="1345242041162" ID="ID_1402081304" MODIFIED="1345396521848" TEXT="Kwan-Sau">
+<icon BUILTIN="button_ok"/>
 <node CREATED="1345242132106" ID="ID_427236163" MODIFIED="1345245379877" TEXT="Handgelenke bleiben gerade, winkeln nicht ab">
 <icon BUILTIN="stop-sign"/>
 </node>
@@ -154,8 +161,9 @@
 <icon BUILTIN="attach"/>
 </node>
 </node>
-<node CREATED="1345242045377" ID="ID_1332930234" MODIFIED="1345245419945" TEXT="Sau-Kuen">
+<node CREATED="1345242045377" ID="ID_1332930234" MODIFIED="1345396524175" TEXT="Sau-Kuen">
 <font NAME="SansSerif" SIZE="12"/>
+<icon BUILTIN="button_ok"/>
 <node CREATED="1345242154952" ID="ID_724229864" MODIFIED="1345242160723" TEXT="Dynamisch zurueckziehen">
 <node CREATED="1345291999125" ID="ID_785531910" MODIFIED="1345292003097" TEXT="Ellbogen stossen"/>
 </node>
@@ -165,19 +173,24 @@
 </node>
 </node>
 </node>
-<node CREATED="1345241772312" ID="ID_1053092205" MODIFIED="1345241868197" POSITION="left" TEXT="2. Satz - Fauststoss">
-<node CREATED="1345242197917" ID="ID_956287925" MODIFIED="1345242206385" TEXT="Drehen, Zur Mitte">
+<node CREATED="1345241772312" ID="ID_1053092205" MODIFIED="1345396550181" POSITION="left" TEXT="2. Satz - Fauststoss">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345242197917" ID="ID_956287925" MODIFIED="1345396527575" TEXT="Drehen, Zur Mitte">
+<icon BUILTIN="button_ok"/>
 <node CREATED="1345242206812" ID="ID_1596696979" MODIFIED="1345242210698" TEXT="Seine Mitte finden"/>
 <node CREATED="1345253200194" ID="ID_656280098" MODIFIED="1345253211313" TEXT="Auftreffflaeche zeigt bereits nach Vorne"/>
 </node>
-<node CREATED="1345244141293" ID="ID_548821175" MODIFIED="1345244143180" TEXT="Schlagen">
+<node CREATED="1345244141293" ID="ID_548821175" MODIFIED="1345396538485" TEXT="Schlagen">
+<icon BUILTIN="button_ok"/>
 <node CREATED="1345242221739" ID="ID_1212424254" MODIFIED="1345242229224" TEXT="Locker aus dem Trizeps/Ruecken schleudern"/>
 <node CREATED="1345243534005" ID="ID_1328821122" MODIFIED="1345243553453" TEXT="oberen drei Knoechel-Finger-Flaechen treffen auf"/>
-<node CREATED="1345253457398" ID="ID_1394940646" MODIFIED="1345253469194" TEXT="Pruefen: Stoss von vorne auf Faust soll ableitbar sein">
+<node CREATED="1345253457398" ID="ID_1394940646" MODIFIED="1345396532855" TEXT="Pruefen: Stoss von vorne auf Faust soll ableitbar sein">
 <icon BUILTIN="prepare"/>
+<icon BUILTIN="button_cancel"/>
 </node>
 </node>
-<node CREATED="1345242234825" ID="ID_146814239" MODIFIED="1345242240260" TEXT="siehe Anatomie des Fauststoss">
+<node CREATED="1345242234825" ID="ID_146814239" MODIFIED="1345396541397" TEXT="siehe Anatomie des Fauststoss">
+<icon BUILTIN="button_cancel"/>
 <node CREATED="1345242241513" ID="ID_1755761003" MODIFIED="1345242246511" TEXT="Ellbogen drehen"/>
 <node CREATED="1345242246961" ID="ID_67829518" MODIFIED="1345242253446" TEXT="locker, nur bei Aufprall gespannt">
 <node CREATED="1345242261335" ID="ID_832266972" MODIFIED="1345242269554" TEXT="bei Aufprall Gelenksdrehung"/>

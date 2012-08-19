@@ -1,0 +1,70 @@
+
+%\begin{description}
+%	\item[Contenttemplate]
+%		Foobar
+%\end{description}
+
+
+% APPENDIX
+\renewcommand{\thechapter}{\Alph{chapter}}
+\appendix% ... resets chapter numbering, uses letters for chapter numbers and doesn't fiddle with page numbering
+%\setcounter{chapter}{0}
+
+%\renewcommand{\thesection}{\arabic{section}}
+%\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+
+
+	
+\chapter{Appendix}
+
+Some appendix text TODO.
+
+
+\newpage
+
+\pagestyle{plain}
+
+\addcontentsline{toc}{section}{Tabellenverzeichnis}%\list(of)tablesname does not work
+\listoftables
+
+\addcontentsline{toc}{section}{\listfigurename}
+%\renewcommand\listfigurename{Abbildungsverzeichnis X}
+\listoffigures
+
+
+%\renewcommand{\indexname}{Index X}
+
+
+%\glossary{set: a collection of objects}
+%\glossary{name={entry name}, description={entry description}}
+%\printglossary
+
+
+	\titleformat{\chapter}{}{}{0pt}{\Huge{\textbf{Glossar}}\vspace{1.4cm}}
+	\titlespacing*{\chapter}{0pt}{0pt}{0pt}
+
+	\glsaddall%alle glossar eintraege dazu
+	\phantomsection
+	\cleardoublepage
+	\addcontentsline{toc}{section}{Glossar}
+	\printglossaries
+
+	\titleformat{\chapter}{}{}{0pt}{\Huge{\textbf{Index}}\vspace{1.4cm}}
+	\phantomsection
+	\cleardoublepage
+	\addcontentsline{toc}{section}{\indexname}
+
+	\printindex
+
+
+
+%\printindex[3]{indexa}{\indexname}
+
+
+%\begin{thebibliography}{99}
+%	\bibitem[BaSi01]{BaSi01}
+%		Daniel J.~Barrett und Richard E.~Silvermann: 
+%		\textit{SSH, the Secure Shell - The Definitive Guide, 1st Edition}. O'Reilly \& Associates Inc., 101 Morris Street, Sebastopol, CA 95472 USA, {\bf 2001} % ISBN: 0-596-0011-1
+%	\bibitem{zlib}
+%		\url{http://www.info-zip.org/pub/infozip/zlib/}, die Kompressionsbibliothek ``zlib''
+%\end{thebibliography}

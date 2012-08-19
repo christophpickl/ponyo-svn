@@ -52,6 +52,11 @@
 
 
 
+% [toc] [xindy] instead makeindex
+% [nonumberlist] notwendig wedgen \glsaddall
+\usepackage[nonumberlist]{glossaries} % http://en.wikibooks.org/wiki/LaTeX/Glossary
+\makeglossaries
+\include{includes/glossary}
 
 %\usepackage{makeglos}
 %\usepackage{glossary}
@@ -69,6 +74,8 @@
 
 %\renewcommand{\contentsname}{asdf does not work to rename toc title} 
 \setcounter{tocdepth}{2} % only display chapters/sections that deep; TODO set to 1 afterwards
+
+
 
 
 %%

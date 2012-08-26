@@ -5,6 +5,8 @@
 %\end{description}
 
 
+\def\WTAppendixSection#1{\addcontentsline{toc}{subsection}{#1}\section*{#1}}
+
 % APPENDIX
 \renewcommand{\thechapter}{\Alph{chapter}}
 \appendix% ... resets chapter numbering, uses letters for chapter numbers and doesn't fiddle with page numbering
@@ -24,6 +26,11 @@ Some appendix text TODO.
 
 \pagestyle{plain}
 
+
+% ===================================================================================================
+% TABELLEN + ABBILDUNGSVERZEICHNIS
+% ===================================================================================================
+
 \addcontentsline{toc}{section}{Tabellenverzeichnis}%\list(of)tablesname does not work
 \listoftables
 
@@ -32,34 +39,54 @@ Some appendix text TODO.
 \listoffigures
 
 
-%\renewcommand{\indexname}{Index X}
-
+% ===================================================================================================
+% GLOSSAR
+% ===================================================================================================
 
 %\glossary{set: a collection of objects}
 %\glossary{name={entry name}, description={entry description}}
 %\printglossary
 
 
-	\titleformat{\chapter}{}{}{0pt}{\Huge{\textbf{Glossar}}\vspace{1.4cm}}
-	\titlespacing*{\chapter}{0pt}{0pt}{0pt}
+\titleformat{\chapter}{}{}{0pt}{\Huge{\textbf{Glossar}}\vspace{1.4cm}}
+\titlespacing*{\chapter}{0pt}{0pt}{0pt}
 
-	\glsaddall%alle glossar eintraege dazu
-	\phantomsection
-	\cleardoublepage
-	\addcontentsline{toc}{section}{Glossar}
-	\printglossaries
+\glsaddall%alle glossar eintraege dazu
+\phantomsection
+\cleardoublepage
+\addcontentsline{toc}{section}{Glossar}
+\printglossaries
 
-	\titleformat{\chapter}{}{}{0pt}{\Huge{\textbf{Index}}\vspace{1.4cm}}
-	\phantomsection
-	\cleardoublepage
-	\addcontentsline{toc}{section}{\indexname}
+\WTAppendixSection{Anreden und Titeln}
 
-	\printindex
+\begin{center}
+	\begin{tabular}{l|l|l}
+		\textbf{Chinesisch}	& \textbf{Deutsch}	& \textbf{Beschreibung} \\ \hline \hline
+		Si-Fu				& Vater				& Bla \\ \hline
+		Si-Hing				& \"alterer Bruder	& Bla \\
+	\end{tabular}
+\end{center}
 
 
+% ===================================================================================================
+% INDEX
+% ===================================================================================================
+
+%\renewcommand{\indexname}{Index X}
+
+\titleformat{\chapter}{}{}{0pt}{\Huge{\textbf{Index}}\vspace{1.4cm}}
+\phantomsection
+\cleardoublepage
+\addcontentsline{toc}{section}{\indexname}
+
+\printindex
 
 %\printindex[3]{indexa}{\indexname}
 
+
+% ===================================================================================================
+% BIBLIOGRAPHIE
+% ===================================================================================================
 
 %\begin{thebibliography}{99}
 %	\bibitem[BaSi01]{BaSi01}
@@ -68,3 +95,5 @@ Some appendix text TODO.
 %	\bibitem{zlib}
 %		\url{http://www.info-zip.org/pub/infozip/zlib/}, die Kompressionsbibliothek ``zlib''
 %\end{thebibliography}
+
+

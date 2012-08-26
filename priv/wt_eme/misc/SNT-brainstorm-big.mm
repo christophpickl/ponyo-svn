@@ -202,7 +202,8 @@
 </node>
 </node>
 </node>
-<node CREATED="1345241774807" ID="ID_284035062" MODIFIED="1345241922934" POSITION="left" TEXT="3. Satz - Verehrung Buddha">
+<node CREATED="1345241774807" ID="ID_284035062" MODIFIED="1346006092347" POSITION="left" TEXT="3. Satz - Verehrung Buddha">
+<icon BUILTIN="button_ok"/>
 <node CREATED="1345242680261" ID="ID_71230896" MODIFIED="1345242687060" TEXT="Tan-Sao">
 <node CREATED="1345242687508" ID="ID_1697313786" MODIFIED="1345890413490" TEXT="ueber Mitte vor">
 <icon BUILTIN="button_ok"/>
@@ -217,19 +218,27 @@
 <icon BUILTIN="stop-sign"/>
 </node>
 </node>
-<node CREATED="1345242696244" ID="ID_863609606" MODIFIED="1345242705569" TEXT="Bon-Huen-Sao">
-<node CREATED="1345243604529" ID="ID_1127416392" MODIFIED="1345243608333" TEXT="Finger fuer Finger aufstellen"/>
-<node CREATED="1345243733853" ID="ID_286483468" MODIFIED="1345244710793" TEXT="zuerst bis Handgelenk sperrt, dann erst Ellbogen raus">
+<node CREATED="1345242696244" ID="ID_863609606" MODIFIED="1346005646120" TEXT="Bon-Huen-Sao">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345243604529" ID="ID_1127416392" MODIFIED="1346005613950" TEXT="Finger fuer Finger aufstellen">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345243733853" ID="ID_286483468" MODIFIED="1346005622241" TEXT="zuerst bis Handgelenk sperrt, dann erst Ellbogen raus">
 <icon BUILTIN="stop-sign"/>
-<node CREATED="1345243755628" ID="ID_618781858" MODIFIED="1345243771946" TEXT="leichte Druckbewegung mit Handkante">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345243755628" ID="ID_618781858" MODIFIED="1346005637417" TEXT="leichte Druckbewegung mit Handkante">
+<icon BUILTIN="button_ok"/>
 <node CREATED="1345243773419" ID="ID_1122732754" MODIFIED="1345243785214" TEXT="Anwendung: mit Handkante reindruecken">
 <icon BUILTIN="attach"/>
 </node>
 </node>
 </node>
 </node>
-<node CREATED="1345242705835" ID="ID_27457339" MODIFIED="1345242709454" TEXT="Wu-Sao">
-<node CREATED="1345243609272" ID="ID_574428983" MODIFIED="1345243617252" TEXT="Sieht  nur Kante (kleine Finger) im Spiegel"/>
+<node CREATED="1345242705835" ID="ID_27457339" MODIFIED="1346005648008" TEXT="Wu-Sao">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345243609272" ID="ID_574428983" MODIFIED="1346005644168" TEXT="Sieht  nur Kante (kleine Finger) im Spiegel">
+<icon BUILTIN="button_ok"/>
+</node>
 </node>
 <node CREATED="1345242711050" ID="ID_1865183237" MODIFIED="1345893571616" TEXT="Verehrung: Fook, Bon-Huen, Wu">
 <icon BUILTIN="button_ok"/>
@@ -275,50 +284,86 @@
 </node>
 <node CREATED="1345244029462" ID="ID_560338803" MODIFIED="1345244033326" TEXT="Augen folgen Hand"/>
 </node>
-<node CREATED="1345244055826" ID="ID_1751880216" MODIFIED="1345244061560" TEXT="zurueckziehen in die Mitte">
-<node CREATED="1345244062203" ID="ID_792770131" MODIFIED="1345244072353" TEXT="schon vorbereiten und Handflaeche vordrehen"/>
+<node CREATED="1345244055826" ID="ID_1751880216" MODIFIED="1346005746511" TEXT="zurueckziehen in die Mitte">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345244062203" ID="ID_792770131" MODIFIED="1346005748976" TEXT="schon vorbereiten und Handflaeche vordrehen">
+<icon BUILTIN="button_ok"/>
 </node>
-<node CREATED="1345242731280" ID="ID_1145922199" MODIFIED="1345242772917" TEXT="Ching-Cheung oder gerade Handflaeche">
+</node>
+<node CREATED="1345242731280" ID="ID_1145922199" MODIFIED="1346005763838" TEXT="Ching-Cheung oder gerade Handflaeche">
+<icon BUILTIN="button_ok"/>
 <node CREATED="1345244899270" ID="ID_1755823145" MODIFIED="1345244905204" TEXT="Dehnmoeglichkeit">
 <icon BUILTIN="smiley-angry"/>
 </node>
 </node>
 </node>
 <node CREATED="1345241778583" ID="ID_1092273480" MODIFIED="1345241929744" POSITION="left" TEXT="4. Satz - Lange Bruecke">
-<node CREATED="1345242477205" ID="ID_1745277509" MODIFIED="1345242485020" TEXT="Jor-/Yau-Gam-Sau">
+<node CREATED="1345242477205" ID="ID_1745277509" MODIFIED="1346006088412" TEXT="Jor-/Yau-Gam-Sau">
+<icon BUILTIN="button_ok"/>
 <node CREATED="1345244899270" ID="ID_90750157" MODIFIED="1345244905204" TEXT="Dehnmoeglichkeit">
 <icon BUILTIN="smiley-angry"/>
 </node>
 </node>
-<node CREATED="1345242486733" ID="ID_655718276" MODIFIED="1345242495235" TEXT="Hau-/Chin-Gam-Sau">
+<node CREATED="1345242486733" ID="ID_655718276" MODIFIED="1346006090252" TEXT="Hau-/Chin-Gam-Sau">
+<icon BUILTIN="button_ok"/>
 <node CREATED="1345244899270" ID="ID_740087731" MODIFIED="1345244905204" TEXT="Dehnmoeglichkeit">
 <icon BUILTIN="smiley-angry"/>
 </node>
 </node>
-<node CREATED="1345242496267" ID="ID_742328772" MODIFIED="1345242500106" TEXT="Shang-Lan-Sao">
-<node CREATED="1345245129531" ID="ID_367054131" MODIFIED="1345245132957" TEXT="Links ueber rechts"/>
-<node CREATED="1345253504906" ID="ID_489558050" MODIFIED="1345253511153" TEXT="Fingerspitzen enden mit Ellbogen"/>
-<node CREATED="1345253513113" ID="ID_650001063" MODIFIED="1345253524689" TEXT="Nicht ganz zu/offen, Koerperbehaarung fein spueren"/>
-<node CREATED="1345253525896" ID="ID_1043758333" MODIFIED="1345253533986" TEXT="Luecke genau auf Zentrallinie">
+<node CREATED="1345242496267" ID="ID_742328772" MODIFIED="1346008000318" TEXT="Shang-Lan-Sao">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345245129531" ID="ID_367054131" MODIFIED="1346008002847" TEXT="Links ueber rechts">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345253504906" ID="ID_489558050" MODIFIED="1346008004687" TEXT="Fingerspitzen enden mit Ellbogen">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345253513113" ID="ID_650001063" MODIFIED="1346008006199" TEXT="Nicht ganz zu/offen, Koerperbehaarung fein spueren">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345253525896" ID="ID_1043758333" MODIFIED="1346008008770" TEXT="Luecke genau auf Zentrallinie">
+<icon BUILTIN="button_ok"/>
 <node CREATED="1345253535296" ID="ID_960695403" MODIFIED="1345253545726" TEXT="Wenn einhaendig, dann genau auf Zentrallinie verschieben"/>
 </node>
 </node>
-<node CREATED="1345242569542" ID="ID_1949465028" MODIFIED="1345242574725" TEXT="Shang-Fak-Sau">
-<node CREATED="1345245082718" ID="ID_560756486" MODIFIED="1345245090216" TEXT="vorher aus Augen links-rechts schauen"/>
+<node CREATED="1345242569542" ID="ID_1949465028" MODIFIED="1346008010902" TEXT="Shang-Fak-Sau">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345245082718" ID="ID_560756486" MODIFIED="1346008013030" TEXT="vorher aus Augen links-rechts schauen">
+<icon BUILTIN="button_ok"/>
 </node>
-<node CREATED="1345242576381" ID="ID_270017271" MODIFIED="1345242579380" TEXT="Shang-Lan-Sao">
-<node CREATED="1345245096582" ID="ID_91362407" MODIFIED="1345245102867" TEXT="mit Ellbogen als erstes reinziehen"/>
-<node CREATED="1345245134251" ID="ID_784965292" MODIFIED="1345245137185" TEXT="Rechts ueber links"/>
+<node CREATED="1346008025083" ID="ID_122228838" MODIFIED="1346008043964" TEXT="zuerst ellbogen, dann handgelenk, dann finger">
+<icon BUILTIN="button_ok"/>
 </node>
-<node CREATED="1345242500628" ID="ID_1635406105" MODIFIED="1345245121211" TEXT="Shang-Djam-Sao">
-<node CREATED="1345245111132" ID="ID_1254840304" MODIFIED="1345245117682" TEXT="linke Hand fuehrt Schere an"/>
-<node CREATED="1345245170472" ID="ID_1584989280" MODIFIED="1345245181425" TEXT="eher ein H: geradlinig"/>
+<node CREATED="1346008033123" ID="ID_480667431" MODIFIED="1346008042275" TEXT="mehr zur seite, als nach hinten schiessen">
+<icon BUILTIN="button_ok"/>
+</node>
+</node>
+<node CREATED="1345242576381" ID="ID_270017271" MODIFIED="1346008050036" TEXT="Shang-Lan-Sao">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345245096582" ID="ID_91362407" MODIFIED="1346008050035" TEXT="mit Ellbogen als erstes reinziehen">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345245134251" ID="ID_784965292" MODIFIED="1346008050036" TEXT="Rechts ueber links">
+<icon BUILTIN="button_ok"/>
+</node>
+</node>
+<node CREATED="1345242500628" ID="ID_1635406105" MODIFIED="1346008067595" TEXT="Shang-Djam-Sao">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345245111132" ID="ID_1254840304" MODIFIED="1346008067594" TEXT="linke Hand fuehrt Schere an">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345245170472" ID="ID_1584989280" MODIFIED="1346008067594" TEXT="eher ein H: geradlinig">
+<icon BUILTIN="button_ok"/>
+</node>
 <node CREATED="1345253377316" ID="ID_1381546824" MODIFIED="1345253391285" TEXT="Pruefen: Man sollte von unten nicht aushebbar sein">
 <icon BUILTIN="prepare"/>
 </node>
 </node>
-<node CREATED="1345242505587" ID="ID_1291069950" MODIFIED="1345242824064" TEXT="Shang-Tok oder Tan-Sao">
-<node CREATED="1345245151257" ID="ID_1793960108" MODIFIED="1345245160871" TEXT="eher ein V: Ellbogen weiter drinnen"/>
+<node CREATED="1345242505587" ID="ID_1291069950" MODIFIED="1346008074505" TEXT="Shang-Tok oder Tan-Sao">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345245151257" ID="ID_1793960108" MODIFIED="1346008076409" TEXT="eher ein V: Ellbogen weiter drinnen">
+<icon BUILTIN="button_ok"/>
+</node>
 </node>
 <node CREATED="1345242595548" ID="ID_1273410875" MODIFIED="1345242606082" TEXT="Shang-Djat-Sao">
 <node CREATED="1345245186446" ID="ID_1345452698" MODIFIED="1345245196086" TEXT="Handflaechen runter drehen"/>
@@ -326,6 +371,7 @@
 </node>
 <node CREATED="1345242614218" ID="ID_1908978139" MODIFIED="1345245221592" TEXT="Shang-Biu-Tze-Sau oder Fingerstich">
 <node CREATED="1345245222307" ID="ID_346231278" MODIFIED="1345245233753" TEXT="Aus Ruecken raus Spannung entladen"/>
+<node CREATED="1346010396120" ID="ID_246396179" MODIFIED="1346010403887" TEXT="finger bleiben locker (sollen nachschlabbern)"/>
 </node>
 <node CREATED="1345242623593" ID="ID_1416178379" MODIFIED="1345242630168" TEXT="Cheung-Kiu-Gam-Sao">
 <node CREATED="1345242649080" ID="ID_958223677" MODIFIED="1345245253362" TEXT="= Lange-Bruecke-Gam-Sao"/>
@@ -370,9 +416,15 @@
 </node>
 <node CREATED="1345254584465" ID="ID_1214253767" MODIFIED="1345254595300" TEXT="Saetze rueckwaerts "/>
 <node CREATED="1345254602223" ID="ID_1030393989" MODIFIED="1345254610719" TEXT="Satz 1,4,8 mit Rechts fuehrend"/>
-<node CREATED="1345254612686" ID="ID_299787682" MODIFIED="1345254662567" TEXT="Schnell/Langsam, Hart/Weich"/>
-<node CREATED="1345254630005" ID="ID_1437016007" MODIFIED="1345254637009" TEXT="Koerper starr/total fluessig mitgehend"/>
+<node CREATED="1345254612686" ID="ID_299787682" MODIFIED="1346010879790" TEXT="Schnell/Langsam, Hart(dynamisch)/Weich"/>
+<node CREATED="1345254630005" ID="ID_1437016007" MODIFIED="1345254637009" TEXT="Koerper starr/total fluessig mitgehend">
+<node CREATED="1346010944147" ID="ID_1289390244" MODIFIED="1346010954606" TEXT="2. satz fauststoss, oder biu tse mit ruecken"/>
+</node>
 <node CREATED="1345254640860" ID="ID_606562806" MODIFIED="1345254656472" TEXT="vollkommen angespannt/Kraftlos"/>
+<node CREATED="1346010898776" ID="ID_1566639322" MODIFIED="1346010908693" TEXT="nicht mehr punktuell sondern fliessend (fuer profis)">
+<node CREATED="1346010923190" ID="ID_1113018179" MODIFIED="1346010932107" TEXT="7. satz b bong-tan-cheung"/>
+</node>
+<node CREATED="1346010909127" ID="ID_1278923775" MODIFIED="1346010914442" TEXT="von anderen stilen, zb sergio dvd"/>
 </node>
 </node>
 <node CREATED="1345244492976" ID="ID_165829951" MODIFIED="1345244494160" POSITION="right" TEXT="Motto">

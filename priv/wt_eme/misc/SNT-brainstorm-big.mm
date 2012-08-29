@@ -2,15 +2,26 @@
 <!-- To view this file, download free mind mapping software FreeMind from http://freemind.sourceforge.net -->
 <node CREATED="1345241761900" ID="ID_1584575276" MODIFIED="1345241767717" TEXT="Siu Nim Tao">
 <node CREATED="1345241783479" ID="ID_597480684" MODIFIED="1345241895448" POSITION="right" TEXT="5. Satz - Handflaechenstoesse">
-<node CREATED="1345242447320" ID="ID_1343944069" MODIFIED="1345242804815" TEXT="Djark-Cheung oder seitlicher Pak-Sau">
-<node CREATED="1345243917071" ID="ID_366043299" MODIFIED="1345243919677" TEXT="Augen schauen mit"/>
-<node CREATED="1345243931102" ID="ID_1128441770" MODIFIED="1345243954051" TEXT="versus Satz 3: groesserer Winkel, Handflaeche weiter weg"/>
-<node CREATED="1345244247329" ID="ID_1656361708" MODIFIED="1345244257424" TEXT="seine seitliche Grenze finden"/>
+<node CREATED="1345242447320" ID="ID_1343944069" MODIFIED="1346266602982" TEXT="Djark-Cheung oder seitlicher Pak-Sau">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345243917071" ID="ID_366043299" MODIFIED="1346266860224" TEXT="Augen schauen mit">
+<icon BUILTIN="button_ok"/>
 </node>
-<node CREATED="1345243964347" ID="ID_1674856442" MODIFIED="1345243968347" TEXT="zurueckziehen in die Mitte">
-<node CREATED="1345243995569" ID="ID_560783720" MODIFIED="1345244015364" TEXT="schon vorbereiten und seitlich legen"/>
+<node CREATED="1345243931102" ID="ID_1128441770" MODIFIED="1346266862551" TEXT="versus Satz 3: groesserer Winkel, Handflaeche weiter weg">
+<icon BUILTIN="button_ok"/>
 </node>
-<node CREATED="1345242466518" ID="ID_1698167387" MODIFIED="1345242783089" TEXT="Wang-Cheung oder liegende Handflaeche">
+<node CREATED="1345244247329" ID="ID_1656361708" MODIFIED="1346266864736" TEXT="seine seitliche Grenze finden">
+<icon BUILTIN="button_ok"/>
+</node>
+</node>
+<node CREATED="1345243964347" ID="ID_1674856442" MODIFIED="1346266867416" TEXT="zurueckziehen in die Mitte">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345243995569" ID="ID_560783720" MODIFIED="1346266869416" TEXT="schon vorbereiten und seitlich legen">
+<icon BUILTIN="button_ok"/>
+</node>
+</node>
+<node CREATED="1345242466518" ID="ID_1698167387" MODIFIED="1346266882359" TEXT="Wang-Cheung oder liegende Handflaeche">
+<icon BUILTIN="button_ok"/>
 <node CREATED="1345244859529" ID="ID_1890268634" MODIFIED="1345244880638" TEXT="Dehnmoeglichkeit">
 <icon BUILTIN="smiley-angry"/>
 </node>
@@ -19,24 +30,72 @@
 <icon BUILTIN="attach"/>
 </node>
 </node>
-<node CREATED="1345241786159" ID="ID_1773085626" MODIFIED="1345241889147" POSITION="right" TEXT="6. Satz - D malen">
-<node CREATED="1345242294781" ID="ID_1970422467" MODIFIED="1345895502969" TEXT="Tan-Sao">
-<node CREATED="1345895504497" ID="ID_1876275898" MODIFIED="1345895506957" TEXT="direkt nach vor"/>
-<node CREATED="1345244184128" ID="ID_1277442382" MODIFIED="1345244193183" TEXT="versus satz 3: nicht ueber Mitte gehen"/>
+<node CREATED="1345241786159" ID="ID_1773085626" MODIFIED="1346268643425" POSITION="right" TEXT="6. Satz - D malen">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345242294781" ID="ID_1970422467" MODIFIED="1346268598420" TEXT="Tan-Sao">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345895504497" ID="ID_1876275898" MODIFIED="1346268594316" TEXT="direkt nach vor">
+<icon BUILTIN="button_ok"/>
 </node>
-<node CREATED="1345242306796" ID="ID_171634242" MODIFIED="1345242311889" TEXT="Djam-Sao">
-<node CREATED="1345244196704" ID="ID_1563661716" MODIFIED="1345244206983" TEXT="nur Ellbogen sinkt, Handgelenk bleibt hoeher als Ellbogen"/>
+<node CREATED="1345244184128" ID="ID_1277442382" MODIFIED="1346268596196" TEXT="versus satz 3: nicht ueber Mitte gehen">
+<icon BUILTIN="button_ok"/>
 </node>
-<node CREATED="1345242313786" ID="ID_1595032176" MODIFIED="1345242316081" TEXT="Gwat-Sao">
-<node CREATED="1345244227405" ID="ID_538264285" MODIFIED="1345244238636" TEXT="bis Koerperende (Fersen) wischen"/>
-<node CREATED="1345244210031" ID="ID_1338173510" MODIFIED="1345244223911" TEXT="Ellbogen geht auch bissi mit raus"/>
 </node>
-<node CREATED="1345242316563" ID="ID_96365055" MODIFIED="1345242329176" TEXT="Lau-Sao"/>
-<node CREATED="1345242335425" ID="ID_348744917" MODIFIED="1345242338168" TEXT="Tai-Cheung">
-<node CREATED="1345242339105" ID="ID_1822474543" MODIFIED="1345242346604" TEXT="Ziel sind die unteren Rippen"/>
-<node CREATED="1345242347968" ID="ID_400312019" MODIFIED="1345242354622" TEXT="Handkante mehr betonen als Flaeche"/>
-<node CREATED="1345242361144" ID="ID_767060856" MODIFIED="1345253290980" TEXT="Pruefen: Zweiten Arm hinzu sollte genau auf Mitte sein">
+<node CREATED="1345242306796" ID="ID_171634242" MODIFIED="1346268600788" TEXT="Djam-Sao">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345244196704" ID="ID_1563661716" MODIFIED="1346268602540" TEXT="nur Ellbogen sinkt, Handgelenk bleibt hoeher als Ellbogen">
+<icon BUILTIN="button_ok"/>
+</node>
+</node>
+<node CREATED="1345242313786" ID="ID_1595032176" MODIFIED="1346268606907" TEXT="Gwat-Sao">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345244227405" ID="ID_538264285" MODIFIED="1346268604740" TEXT="bis Koerperende (Fersen) wischen">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345244210031" ID="ID_1338173510" MODIFIED="1346268622178" TEXT="Ellbogen geht auch bissi mit raus">
+<icon BUILTIN="button_ok"/>
+</node>
+</node>
+<node CREATED="1345242316563" ID="ID_96365055" MODIFIED="1346268640059" TEXT="Lau-Sao">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1346266954142" ID="ID_993810988" MODIFIED="1346268640061" TEXT="Handflaeche nach oben drehen (tan like)">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1346266966556" ID="ID_1157100505" MODIFIED="1346268640062" TEXT="Gerade nach oben ziehen">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1346266918634" ID="ID_1298694794" MODIFIED="1346266922522" TEXT="nicht zurueckziehen">
+<node CREATED="1346266929035" ID="ID_1228431998" MODIFIED="1346268640062" TEXT="Stock zu Hilfe nehmen">
+<icon BUILTIN="button_ok"/>
+</node>
+</node>
+<node CREATED="1346266974789" ID="ID_1212921559" MODIFIED="1346268640061" TEXT="Fingerspitzen zeigen nach vorne">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1346266985404" ID="ID_650634513" MODIFIED="1346268640061" TEXT="bis Ohrenhoehe">
+<icon BUILTIN="button_ok"/>
+</node>
+</node>
+</node>
+<node CREATED="1346266942133" ID="ID_1513239730" MODIFIED="1346268640060" TEXT="Huen-Sao">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1346266996389" ID="ID_1299843241" MODIFIED="1346268640060" TEXT="zuerst hand zu sich kippen">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1346267017506" ID="ID_1485577844" MODIFIED="1346268640060" TEXT="drehen und bereits handkante nach vorne zeigen">
+<icon BUILTIN="button_ok"/>
+</node>
+</node>
+<node CREATED="1345242335425" ID="ID_348744917" MODIFIED="1346268640060" TEXT="Tai-Cheung">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345242339105" ID="ID_1822474543" MODIFIED="1346268640058" TEXT="Ziel sind die unteren Rippen">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345242347968" ID="ID_400312019" MODIFIED="1346268640059" TEXT="Handkante mehr betonen als Flaeche">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345242361144" ID="ID_767060856" MODIFIED="1346268640058" TEXT="Pruefen: Zweiten Arm hinzu sollte genau auf Mitte sein">
 <icon BUILTIN="prepare"/>
+<icon BUILTIN="button_ok"/>
 </node>
 <node CREATED="1345244859529" ID="ID_698487219" MODIFIED="1345244880638" TEXT="Dehnmoeglichkeit">
 <icon BUILTIN="smiley-angry"/>
@@ -46,34 +105,57 @@
 <icon BUILTIN="attach"/>
 </node>
 </node>
-<node CREATED="1345241788014" ID="ID_517139113" MODIFIED="1345243026461" POSITION="right" TEXT="7. Satz - Fluegel ausbreiten">
-<node CREATED="1345242388189" ID="ID_42808653" MODIFIED="1345242391355" TEXT="Bong-Sao">
-<node CREATED="1345244729652" ID="ID_1752626147" MODIFIED="1345244738002" TEXT="Ellbogen eng vorfahren"/>
-<node CREATED="1345244745002" ID="ID_318247994" MODIFIED="1345244749356" TEXT="Handgelenk locker">
-<node CREATED="1345253310514" ID="ID_1683400568" MODIFIED="1345253326295" TEXT="zeigt Tatoo auf Handinnenseite dem Gegner"/>
+<node CREATED="1345241788014" ID="ID_517139113" MODIFIED="1346271542674" POSITION="right" TEXT="7. Satz - Fluegel ausbreiten">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345242388189" ID="ID_42808653" MODIFIED="1346269308507" TEXT="Bong-Sao">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345244729652" ID="ID_1752626147" MODIFIED="1346269308507" TEXT="Ellbogen eng vorfahren">
+<icon BUILTIN="button_ok"/>
 </node>
-<node CREATED="1345244750234" ID="ID_1354672261" MODIFIED="1345244757672" TEXT="135 Grad breiter Winkel"/>
-<node CREATED="1345244760881" ID="ID_861688080" MODIFIED="1345244774626" TEXT="Ellbogen hoeher Schulter, Handgelenk unter Ellbogen"/>
-<node CREATED="1345244777760" ID="ID_195715805" MODIFIED="1345244786518" TEXT="Ellbogen/Oberarme schaut nicht ueber Koerper hinaus"/>
-<node CREATED="1345244800310" ID="ID_602910503" MODIFIED="1345244803424" TEXT="Schulter bleibt unten"/>
+<node CREATED="1345244745002" ID="ID_318247994" MODIFIED="1346269308508" TEXT="Handgelenk locker">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345253310514" ID="ID_1683400568" MODIFIED="1346269308508" TEXT="zeigt Tatoo auf Handinnenseite dem Gegner">
+<icon BUILTIN="button_ok"/>
+</node>
+</node>
+<node CREATED="1345244750234" ID="ID_1354672261" MODIFIED="1346269308508" TEXT="135 Grad breiter Winkel">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345244760881" ID="ID_861688080" MODIFIED="1346269308507" TEXT="Ellbogen hoeher Schulter, Handgelenk unter Ellbogen">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345244777760" ID="ID_195715805" MODIFIED="1346269308507" TEXT="Ellbogen/Oberarme schaut nicht ueber Koerper hinaus">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345244800310" ID="ID_602910503" MODIFIED="1346269308507" TEXT="Schulter bleibt unten">
+<icon BUILTIN="button_ok"/>
+</node>
 <node CREATED="1345253334502" ID="ID_743435782" MODIFIED="1345253357322" TEXT="Pruefen: beim Runterdruecken mittels Sehnenspannung wieder hochschnellen">
 <icon BUILTIN="prepare"/>
 </node>
 </node>
-<node CREATED="1345242391845" ID="ID_1223105971" MODIFIED="1345242393762" TEXT="Tan-Sao">
-<node CREATED="1345244805765" ID="ID_1703512529" MODIFIED="1345244831714" TEXT="Handgelenk ist Rotationspunkt">
+<node CREATED="1345242391845" ID="ID_1223105971" MODIFIED="1346271542674" TEXT="Tan-Sao">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345244805765" ID="ID_1703512529" MODIFIED="1346271542675" TEXT="Handgelenk ist Rotationspunkt">
 <icon BUILTIN="stop-sign"/>
+<icon BUILTIN="button_ok"/>
 </node>
-<node CREATED="1345244839307" ID="ID_261101131" MODIFIED="1345244848539" TEXT="Ellbogen dreht nur nach unten"/>
+<node CREATED="1345244839307" ID="ID_261101131" MODIFIED="1346271542675" TEXT="Ellbogen dreht nur nach unten">
+<icon BUILTIN="button_ok"/>
 </node>
-<node CREATED="1345242395165" ID="ID_159141792" MODIFIED="1345242397067" TEXT="Fallen Lassen">
-<node CREATED="1345244859529" ID="ID_696647550" MODIFIED="1345244880638" TEXT="Dehnmoeglichkeit">
+</node>
+<node CREATED="1345242395165" ID="ID_159141792" MODIFIED="1346271548185" TEXT="Fallen Lassen">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345244859529" ID="ID_696647550" MODIFIED="1346271548185" TEXT="Dehnmoeglichkeit">
 <icon BUILTIN="smiley-angry"/>
+<icon BUILTIN="button_ok"/>
 </node>
 </node>
-<node CREATED="1345242397404" ID="ID_1682046717" MODIFIED="1345242399739" TEXT="Ong-Cheung">
-<node CREATED="1345244859529" ID="ID_1570283344" MODIFIED="1345244880638" TEXT="Dehnmoeglichkeit">
+<node CREATED="1345242397404" ID="ID_1682046717" MODIFIED="1346271548185" TEXT="Ong-Cheung">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345244859529" ID="ID_1570283344" MODIFIED="1346271548185" TEXT="Dehnmoeglichkeit">
 <icon BUILTIN="smiley-angry"/>
+<icon BUILTIN="button_ok"/>
 </node>
 </node>
 <node CREATED="1345243840389" ID="ID_479432786" MODIFIED="1345243847437" TEXT="Anwendung: ReakTsun maessig">
@@ -85,28 +167,53 @@
 </node>
 <node CREATED="1345241790686" ID="ID_1001013989" MODIFIED="1345241885241" POSITION="right" TEXT="8. Satz - Befreiung">
 <node CREATED="1345242404420" ID="ID_1704655487" MODIFIED="1345242411514" TEXT="Stich"/>
-<node CREATED="1345253056239" ID="ID_915911823" MODIFIED="1345253063081" TEXT="Zweite Hand hinzu (oder doch synchron?)">
-<node CREATED="1345253066638" ID="ID_1355584330" MODIFIED="1345253072169" TEXT="in Armbeuge"/>
-<node CREATED="1345253075221" ID="ID_596937625" MODIFIED="1345253122322" TEXT="Handflaeche oben"/>
+<node CREATED="1345253056239" ID="ID_915911823" MODIFIED="1346271555882" TEXT="Zweite Hand hinzu (oder doch synchron?)">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345253066638" ID="ID_1355584330" MODIFIED="1346271555881" TEXT="in Armbeuge">
+<icon BUILTIN="button_ok"/>
 </node>
-<node CREATED="1345242411827" ID="ID_615644876" MODIFIED="1345242425374" TEXT="Griffbefreiung/Tuet-Sao x3">
-<node CREATED="1345253129089" ID="ID_572252824" MODIFIED="1345253135311" TEXT="Handflaeche nach unten drehen"/>
-<node CREATED="1345245588104" ID="ID_1511399" MODIFIED="1345245592563" TEXT="Drei Sachen Simultan">
-<node CREATED="1345245596336" ID="ID_946417595" MODIFIED="1345245603946" TEXT="runter Schneiden">
-<node CREATED="1345245605518" ID="ID_713132878" MODIFIED="1345245619336" TEXT="mehr mit Handgelenk auftreffen als mit Finger - Verletzungsgefahr!"/>
-<node CREATED="1345245652011" ID="ID_335372187" MODIFIED="1345245664324" TEXT="Daumen vom Gegner (Schwachstelle) attackieren"/>
-<node CREATED="1345245667635" ID="ID_1110388380" MODIFIED="1345245702422" TEXT="beim Auftreffen Handkante betonen a la Satz 3 Huen-Sau"/>
+<node CREATED="1345253075221" ID="ID_596937625" MODIFIED="1346271555881" TEXT="Handflaeche oben">
+<icon BUILTIN="button_ok"/>
 </node>
-<node CREATED="1345245624742" ID="ID_1313453194" MODIFIED="1345245633343" TEXT="Arm nach aussen drehen"/>
-<node CREATED="1345245634237" ID="ID_355734965" MODIFIED="1345245645015" TEXT="Arm ruckartig nach hinten ziehen"/>
 </node>
-<node CREATED="1345253146600" ID="ID_843976168" MODIFIED="1345253154548" TEXT="Befreite Hand wieder in Armbeuge zurueck"/>
+<node CREATED="1345242411827" ID="ID_615644876" MODIFIED="1346271670919" TEXT="Griffbefreiung/Tuet-Sao x3">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345253129089" ID="ID_572252824" MODIFIED="1346271670919" TEXT="Handflaeche nach unten drehen">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345245588104" ID="ID_1511399" MODIFIED="1346271670920" TEXT="Drei Sachen Simultan">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345245596336" ID="ID_946417595" MODIFIED="1346271670919" TEXT="runter Schneiden">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345245605518" ID="ID_713132878" MODIFIED="1346271918387" TEXT="mehr mit Handgelenk auftreffen als mit Finger - Verletzungsgefahr!">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345245652011" ID="ID_335372187" MODIFIED="1346271918387" TEXT="Daumen vom Gegner (Schwachstelle) attackieren">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345245667635" ID="ID_1110388380" MODIFIED="1346271918387" TEXT="beim Auftreffen Handkante betonen a la Satz 3 Huen-Sau">
+<icon BUILTIN="button_ok"/>
+</node>
+</node>
+<node CREATED="1345245624742" ID="ID_1313453194" MODIFIED="1346271670919" TEXT="Arm nach aussen drehen">
+<icon BUILTIN="button_ok"/>
+</node>
+<node CREATED="1345245634237" ID="ID_355734965" MODIFIED="1346271670919" TEXT="Arm ruckartig nach hinten ziehen">
+<icon BUILTIN="button_ok"/>
+</node>
+</node>
+<node CREATED="1345253146600" ID="ID_843976168" MODIFIED="1346271918387" TEXT="Befreite Hand wieder in Armbeuge zurueck">
+<icon BUILTIN="button_ok"/>
+</node>
 <node CREATED="1345243816927" ID="ID_1894123120" MODIFIED="1345243829038" TEXT="Anwendung: Partner haltet einfach fest">
 <icon BUILTIN="attach"/>
 </node>
 </node>
-<node CREATED="1345253163878" ID="ID_994401310" MODIFIED="1345253181200" TEXT="nach 3. Mal zweite Hand Fauststoss vorbereiten">
-<node CREATED="1345253181893" ID="ID_535185169" MODIFIED="1345253187535" TEXT="Hoehe Ellbogen"/>
+<node CREATED="1345253163878" ID="ID_994401310" MODIFIED="1346271925043" TEXT="nach 3. Mal zweite Hand Fauststoss vorbereiten">
+<icon BUILTIN="button_ok"/>
+<node CREATED="1345253181893" ID="ID_535185169" MODIFIED="1346271925043" TEXT="Hoehe Ellbogen">
+<icon BUILTIN="button_ok"/>
+</node>
 </node>
 <node CREATED="1345242433241" ID="ID_733716406" MODIFIED="1345242440959" TEXT="Kettenfauststoesse x3">
 <node CREATED="1345243793297" ID="ID_1074851998" MODIFIED="1345243812976" TEXT="Anwendung: Polster an die Wand, darf nicht runterfallen">

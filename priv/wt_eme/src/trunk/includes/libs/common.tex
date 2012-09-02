@@ -1,6 +1,44 @@
 
 %\definecolor{grey}{rgb}{0.9,0.9,0.9} 
 
+
+%%
+% define custom enumeration style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newlist{WTalphenum}{enumerate}{2}
+\setlist[WTalphenum,1]{label=\alph*)}
+\setlist[WTalphenum,2]{label=\roman*)}
+
+\newenvironment{WTalphenumNarrow}{
+\begin{WTalphenum}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{2pt}
+  \setlength{\parsep}{0pt}
+}{\end{WTalphenum}}
+	
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\def \quote #1 {``#1''}
+\def \quoteit #1 {``\textit{#1}''}
+
+\newenvironment{enumerateNarrow}{
+\begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{2pt}
+  \setlength{\parsep}{0pt}
+}{\end{enumerate}}
+
+\newenvironment{itemizeNarrow}{
+\begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{2pt}
+  \setlength{\parsep}{0pt}
+}{\end{itemize}}
+
+
 \def\WTCommonCite #1#2{
 	\begin{adjustwidth}{1cm}{1cm}
 	\textit{``#2''}

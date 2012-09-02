@@ -31,12 +31,15 @@ Some appendix text TODO.
 % TABELLEN + ABBILDUNGSVERZEICHNIS
 % ===================================================================================================
 
-\addcontentsline{toc}{section}{Tabellenverzeichnis}%\list(of)tablesname does not work
-\listoftables
+
+\WTlistofvideos
 
 \addcontentsline{toc}{section}{\listfigurename}
 %\renewcommand\listfigurename{Abbildungsverzeichnis X}
 \listoffigures
+
+\addcontentsline{toc}{section}{Tabellenverzeichnis}%\list(of)tablesname does not work
+\listoftables
 
 
 % ===================================================================================================
@@ -95,5 +98,20 @@ Some appendix text TODO.
 %	\bibitem{zlib}
 %		\url{http://www.info-zip.org/pub/infozip/zlib/}, die Kompressionsbibliothek ``zlib''
 %\end{thebibliography}
+
+\titleformat{\chapter}{}{}{0pt}{\Huge{\textbf{Literaturverzeichnis}}\vspace{1.4cm}}
+
+\begin{thebibliography}{99}
+
+	\bibitem[Leu11]{WTBIBLeu11}
+		Leung Ting:
+		\emph{Siu-Nim-Tao --- Form, Theorie, Konzepte, Mottos und Anwendungen},
+		EWTO~Verlag, Deutschland,
+		4.~Auflage,
+		2011,
+		ISBN: 978-3-927553-59-0
+
+\end{thebibliography}
+
 
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
-TARGET=wingtsun_eme
-#TARGET=wingtsun_eme-minimal
+TARGET=wteme-full
+#TARGET=wteme-development
 ROOT=src/trunk/
 
 cd $ROOT

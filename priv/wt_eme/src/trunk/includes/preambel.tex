@@ -1,7 +1,7 @@
 
 \documentclass[twoside]{book}
 
-\title{Das Wing Tsun Ein-Mal-Eins}
+\title{Das WingTsun Ein-Mal-Eins}
 
 
 
@@ -23,6 +23,7 @@
 \usepackage{changepage}% to increase side margin; used for cite text
 \usepackage{tocloft}% control the design of toc, figures and tables; define own list-of-something
 \usepackage{sidecap}% for \begin{SCfigure}
+\usepackage{etoolbox}%\usepackage{ifthen}
 
 %%
 % misc adjustments
@@ -46,16 +47,9 @@
 
 
 
+\bibliographystyle{alpha}
 
 
-
-%%
-% define custom enumeration style
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\newlist{WTalphenum}{enumerate}{2}
-\setlist[WTalphenum,1]{label=\alph*)}
-\setlist[WTalphenum,2]{label=\roman*)}
 
 
 %%

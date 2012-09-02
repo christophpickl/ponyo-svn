@@ -1,0 +1,136 @@
+siu nim tau punkte
+==================================================
+
+(ausgehend von lockerem stand, fuesse zusammen)
+
+// eingangsform
+01 arme hochziehen
+02 in die knie
+03 zehen raus
+04 fersen raus
+
+// satz I
+05 handflaechen auf
+06 gekreuzter tan
+07 gan
+08 kwan
+09 sau kuen (simultan faeuste machen)
+
+// satz II
+10 faust drehen
+11 zur mitte
+12 schlag
+13 tan
+14 hand zu dir
+15 huen
+16 greifen
+17 sau kuen (simultan faust drehen)
+
+// satz II rechts
+18-25 ...
+
+// satz III
+26 linke hand auf
+27 tan ueber mitte
+28 hand zu dir
+29 halber huen runter
+30 aufstellen
+31 ellbogen raus
+32 wu zurueckziehen
+33 fallenlassen
+34 erster (zweiter/dritter) fook vor
+35 viertel huen runter
+36-41 == 30-35
+42-47 == 30-35
+47-49 == 30-32
+50 seitlicher pak
+51 mitte ziehen + eindrehen
+52 cheung
+53-57 schlusssequenz { tan, zu dir, huen, greifen, sau kuen }
+
+// satz III rechts
+58-89 ...
+
+// satz IV
+90 links auf
+91 linker gam
+92 rechts auf
+93 rechter gam
+94 nach hinten
+95 hinterer gam
+96 zum koerper
+97 nach vorne
+98 vorderer gam
+99 lan
+100 links schauen
+101 rechts schauen
+102 gerade schauen
+103 fak
+104 rechts ueber links lan
+105 links stellt auf
+106 djam
+107 aufdrehen
+108 tok
+109 runterdrehen
+110 djat
+111 fingerstich
+112 lange bruecke gam
+113 fallen lassen
+114 tai sao
+115 verkehrter huen (simultan faust machen)
+116 sau kuen
+
+// satz V
+117 seitlicher pak
+118 zur mitte
+119 cheung
+120-124 schlusssequenz { tan, zu dir, huen, greifen, sau kuen }
+
+// satz V rechts
+125-132 ...
+
+// satz VI
+121 links auf
+122 direkter tan
+123 djam
+124 kwad
+125 raufdrehen
+126 lau
+127 zu dir
+128 huen
+129 cheung
+
+130-134 schlusssequenz { tan, zu dir, huen, greifen, sau kuen }
+
+// satz VI rechts
+135-148 ...
+
+// satz VII
+149 bong
+150 tan
+151 fallen lassen
+152 cheung
+153-157 schlusssequenz { tan, zu dir, huen, greifen, sau kuen }
+
+// satz VII rechts
+158-166 ...
+
+// satz VIII
+167 linker gan
+168 rechts dazu
+169 runterdrehen
+170 tuet
+171 runterdrehen
+172 tuent
+173 runterdrehen
+174 tuet + linke faust zur mitte
+175 schlag links
+176 schlag rechts
+177 schlag links + rechts sau kuen
+178-182 schlusssequenz { tan, zu dir, huen, greifen, sau kuen }
+
+// ausgangsform
+183 rechter fuss gerade
+184 linker hinzu
+185 aufstehen
+186 arme runter

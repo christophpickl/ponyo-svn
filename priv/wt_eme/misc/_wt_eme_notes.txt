@@ -1,0 +1,212 @@
+@WT EME
+* ganz am anfang "keywords" section
+* bereich "preambel" ist zwischen documentclass und begin.document
+*  In case of Flash, this can be a local SWF file, or a URL, such as a YouTube video
+	=> wuerde bedeuten man muesste online sein, sodass es funkt
+===> varianten bis dato:
+	1. rein statisch
+	2. dyanmisch mit flash only
+	3. dynamisch mit flash + video embedded
+	4. full: dynamisch mit flash + video remote
+	5. package: alle PDF varianten + poster und separate movies
+
+
+
+
+
+
+!! die a) b) zeichen direkt ins bild reinplatzieren (unten/oben-links/rechts konfigurierbar)
+!! diverse seitenlayouts ausarbeiten (wie in kernspecht buechern, mal wo wo ein bild die ganze seite fuellt, oder eine bilder reihe im vordergrund steht; fast so wie slidemasters bei praesis
+! bzgl glossar: http://www.ctan.org/tex-archive/macros/latex/contrib/makeglos
+-- verschiedene ausgabeformate: { normal(full) vs. ohne drumherum (simple), mit/ohne SWF/Video, A4/A5, gleichseitig/twosided, 1/2/4 seiten pro blatt }
+@indezes: http://en.wikibooks.org/wiki/LaTeX/Indexing
+
+
+
+
+
+
+
+
+
+* man kann lustig mit einem ring ueben:
+	http://www.shenmartialarts.com/blog.asp?flag=1&month=3&year=2006
+	
+
+* @graduierung:
+	http://www.wingtsun.de/graduierung/wingtsun-schuelergrad.html
+	http://www.wt-seifert.de/ewtokleider.html
+
+
+TODO
+**************************************
+- pflanzen hintergrund ersetzen mit yin-yang symbol bzw WingChun Schriftzeichen
+	// yinyang dann halt statt kugel wo
+-> use icons: http://www.iconfinder.com/icondetails/17834/128/alert_error_exclamation_mistake_warning_icon
+- cheatsheets/poster erstellen;
+	- formen (offizielle IWTA konkurenz machen)
+	- positionen/bewegungen
+	- glossar(e) (familie; techniken, u.a. handflaechen)
+	- drills, zyklen, 12 angriffe
+
+- @index bspe:
+	Prinzipien
+		Kampf-				 3
+		Kraft-				 4
+	Verwurzeln				7, 12
+	Zentrallinie			13, 18, 22
+	Zyklus
+		Bein-				21
+		Gleichzeitigkeiten-	 9
+	
+
+buecher:
+**************************************
+- wing tsun kuen !!!!!! (44e)
+- kampflogik 3 !!!
+- Advanced Wing Chu !! (sehr wissenschaftlich, fuer fortgeschrittenen anfaenger)
+	http://www.amazon.de/Advanced-Wing-Chun-Mike-Lee/dp/0897501187/ref=sr_1_29?ie=UTF8&qid=1342098463&sr=8-29
+	40e, 250s
+- The Wing Chun Compendium, Volume One !
+	http://www.amazon.de/The-Wing-Chun-Compendium-Volume/dp/1583941290/ref=sr_1_2?ie=UTF8&qid=1342098361&sr=8-2
+	35e, 500s
+	+ The Wing Chun Compendium, Volume Two: 2 
+		http://www.amazon.de/The-Wing-Chun-Compendium-Volume/dp/1583942297/ref=pd_sim_eb_2
+		30e, 470s
+- Wu - Ein Deutscher bei den Meistern in China 
+	// allgemeiner ueberblick ueber wushu, wichtig fuer leute die wert legen auf traditionen
+	http://www.amazon.de/Wu-Ein-Deutscher-Meistern-China/dp/3938305126/ref=pd_sim_eb_3
+	23e, 360s
+- Ving Tsun Jo Fen: Anleitungen und Erlauterungen der Ving Tsun Tradition von Ip Man
+	http://www.amazon.de/Ving-Tsun-Fen-Anleitungen-Erlauterungen/dp/384420203X/ref=sr_1_39?ie=UTF8&qid=1342098515&sr=8-39
+	20e, 110s
+- Complete Wing Chun: The Definitive Guide to Wing Chun's History and Traditions
+	http://www.amazon.de/Complete-Wing-Chun-Definitive-Traditions/dp/0804831416/ref=sr_1_33?ie=UTF8&qid=1342098515&sr=8-33
+	15e, 160s
+- Wing-Chun Martial Arts: Principles & Techniques: Principles and 
+	// ist mehr hintergrund und philosophie, weniger techniken
+	http://www.amazon.de/Wing-Chun-Martial-Arts-Principles-Techniques/dp/0877287961/ref=sr_1_13?ie=UTF8&qid=1342098361&sr=8-13
+	10e, 120s
+- Der Weg der einschneidenden Faust 
+	http://www.amazon.de/Der-einschneidenden-Faust-Oliver-Gross/dp/386884130X/ref=sr_1_7?ie=UTF8&qid=1342098361&sr=8-7
+	20, 110s
+
+- Wing Chun Kung Fu: 1  ... NEIN (nur grundlagen, von bruce lee ueber JDK)
+
+
+mission statement:
+**************************************
+- nachschlagewerk, referenz
+- einfuehrung fuer praktizierende
+- notiz-/tagebuch
+
+mentale provokation:
+**************************************
+
+EWTO lehrer:
+**************************************
+- bei pruefungen: lange form (perfektion)
+- bei lehrgaengen: tritte, messer
+- sifu matthias: timing, da sein ohne da zu sein
+- kleiner thomas: 12er angriffe, im gelenk nachgeben
+- ademir: bewegungen/schlaege spuerbar haerter, beweglichkeit im ganzen koerper
+- robert: im ellbogen nachgeben (4 richtungen), tritte, vom boden auf
+- gernot: pure effektivitaet, stabiler bong, kniespannung, resch trainierne/schlagen
+- martin: psycho krieg (vorkampf), am boden liegen
+- mario: details bei form, form anwendungen, einarmig kaempfen
+- gerhard: anwendungen fitfight
+- stefan: nachgibigkeit, beweglichkeit, flexibilitaet
+- herbert: (ellbogen) mit druck reingehen
+- grosser matthias: angriff an gegner anpassen (hoch vs tief)
+- kostadin: jeder kontakt == (schneidender) angriff, stossen/druck uebungen
+- ernst: etikette, aus der huefte, griffe, aus handschnellen rauskommen
+- james: ?
+
+
+============================================
+
+* gutes zitat (bleib bei den basics, die aber dafuer umso besser lernen):
+	Forget about the “what ifs” and so-called set responses many often waste hours practising for. The basics are what we need to survive, so it’s the basics that we should be concentrating on, not just when we are training alone, but also when we have partners to train with. Instead of trying to get clever with fancy movements or experimenting with sequences that will never find a situation to be applied to, the intelligent Wing Chun practitioner should drill the basics of the system until they are as natural and automatic as breathing.
+	Who cares if your friends think that you are spending too much time on the “simple” things, or that your techniques just aren’t “pretty” enough. When it’s all said and done, the house that remains standing after the storm is the one which has the best foundations under the ground, not the one that looks the flashiest up on top. 
+	[http://www.wslwingchun.com/2011/drilling-the-basics]
+
+* wingtsun namensherkunft; lernen hoert niemals auf:
+	So, once you "finish" the system, you have only completed your first cycle, and you go back to Siu Nim Tau and recognize, for the first time ever, how much of the most advanced concepts in WT are already in there. From there, with your new understanding of what is actually in these forms and how to apply it, you go back through Chum Kiu and Biu Tze, the Dummy and Weapons forms again, and again, developing an ever higher-level idea of what these are really all about. Naturally, this time, it won't take you five years to get through the cycle because you have long since become an instructor yourself.
+	In the process of all this, you literally and truly make Wing Tsun a part of you. That process becomes an endless cycle. Every time you cycle through the system, you go one step higher - and higher - and higher still. It never stops.
+	That's why it's called "wing tsun". That Chinese name for this art can be translated into English as "eternal springtime" or "forever young" because, as long as you practice it, you will never stop growing. You are always new, and so is your ever brand-new, personal brand of ... well, some call it "wing tsun" - but in the end, it's always just you.
+	That is the Way of Wing Tsun. You are constantly learning to discover and then reinvent yourself.
+	[http://www.houstonwingtsun.com/wing-tsun-training.html]
+
+	
+============================================
+WT principles [http://hopkinswingchun.wetpaint.com/page/Wing+Chun+Principles]
+
+Wing Chun was designed to satisfy two primary objectives (in bold), through the use of a number of principles (in italics). To apply these principles, there are a number of requirements that the practioner must satisfy (underlined).
+
+    Economise Time – The faster person wins.
+        Reduce time needed while attacking
+            Follow the straight line – the shortest path between two points
+            Simultaneous Attack and Defense – twice the speed
+                Attack down the Central line
+                    Requires Ambidexterity 
+        Reduce time needed while guarding
+            Guard the Centerline, where most weaknesses are
+                Keep your hands out in front of you and force your opponents to take the outside
+                Keep your elbows in and use the concept of the four gates 
+        Reduce reaction time
+            Watch lead elbow and back knee
+            Establishing bridge and relying on contact reflexes 
+        Reduce time needed to initiate your move and recovery time afterwards
+            Flow of movements – end of one movement is the start of another
+            Short Movements – short power (tricep force) vs. long power
+                Closest distance for fighting 
+            Relaxed Movements – allows more rapid movements
+                Use force only when necessary
+                    Tighten fist only at the end 
+    Economise Effort – Conserve your energy as much as possible. The less energy you use, the harder it is for the energy to be turned back on yourself.
+        Reduce effort needed to execute individual movements
+            Follow the path of least resistance – jammed hands move away, free hands move forward.
+                Requires Sensitivity
+                Requires Interruptibility
+                Requires Ambidexterity 
+            Make full use of available energy
+                Make use of your body’s momentum
+                    Synchronise the punch with the step 
+            Make use of the opponent’s energy
+            Do not use more energy than necessary
+                Requires Control 
+        Reduce effort needed to finish the whole fight
+            End fight as quickly as possible
+                Attack the most crucial areas (Effectiveness)
+                    Go straight for the head, ribs, eyes, shin, 
+            Deal irreversible damage
+                Arm breaks, knee breaks and eye jabs 
+            Do not use unnecessary movement
+                Gyeuk Moh Hoy Fat – The kick never misses 
+            Obtain positional advantage
+                Take the outside
+                Cramp taller people while keeping shorter people at bay
+                Wing Chun blocks – use the body to create simple machines like the inclined plane, axes and levers to conserve energy instead of relying on generating momentum
+                    Require Accuracy and Timing 
+
+
+WT STILE [http://www.amazon.de/Complete-Wing-Chun-Definitive-Traditions/dp/0804831416/ref=sr_1_33?ie=UTF8&qid=1342098515&sr=8-33]
+==================
+	Yip Man Wing Chun
+	Sum Nung’s Yuen Kay-San Wing Chun
+	Leung Jan’s Gu Lao Wing Chun
+	Cao De-An’s Nanyang Wing Chun
+	the Wing Chun of Pan Nam
+	the Pao Fa Lien style of Chu Chong
+	the Hung Suen Wing Chun of Garrett Gee
+	the Jee Shim Wing Chun of Wei Yan
+
+LINKS
+============================================
+
+* allgemein; gute infos
+	http://en.wikipedia.org/wiki/Wing_Tsun
+* formen
+	http://www.wslwingchun.com/2011/the-wing-chun-forms-a-brief-overview
+* ewto "hauptseite"
+	http://www.wingtsunwelt.com/index.php

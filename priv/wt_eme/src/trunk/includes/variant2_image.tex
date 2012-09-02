@@ -1,0 +1,15 @@
+
+
+\newcommand{\WTlistofvideos}{}
+
+% param #1 = caption, not used for images for table of videos
+\newenvironment{WTXMediaImageOrVideo}[1]
+{
+	\def\WTXTMPMediaCaption{#1}% create temporary variable so param can be used in end part
+	\begin{figure}
+		\begin{center}
+} {
+		\caption{\WTXTMPMediaCaption}
+		\end{center}
+	\end{figure}
+}

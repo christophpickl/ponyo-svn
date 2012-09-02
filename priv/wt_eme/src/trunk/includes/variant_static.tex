@@ -1,0 +1,26 @@
+
+\input{includes/variant2_image}
+
+%%
+% REFERENCE CONSTANTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \WTMediaRefSNT {\WTXMediaVariantStaticPath{snt_yipman}}
+
+%%
+% INTERNAL INTERFACE IMPLEMENTATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\WTXMediaVariantCaption#1#2{#1}
+
+\def\WTXMediaVariantInclude#1{
+	\includegraphics[width=0.8\linewidth]{#1}
+}
+
+
+%%
+% VARIANT CUSTOM
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \WTXMediaVariantStaticPath #1{resources/images/videosubstitutes/#1}
+

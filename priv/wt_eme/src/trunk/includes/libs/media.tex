@@ -1,0 +1,13 @@
+
+\usepackage{media9}
+
+
+% sample usage:
+% \WTMediaInclude{\WTMediaRefSNT}{my caption}{1:30}
+
+\def\WTMediaInclude#1#2#3{
+	\begin{WTXMediaImageOrVideo}{\WTXMediaVariantCaption{#2}{#3}}
+		\WTXMediaVariantInclude{#1}
+%		\caption{\WTXMediaVariantCaption{#2}{#3}}
+	\end{WTXMediaImageOrVideo}
+}

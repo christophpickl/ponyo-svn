@@ -1,0 +1,25 @@
+\input{includes/preambel}
+
+\AtBeginDocument{\addtocontents{toc}{\protect\thispagestyle{preheadings}}} 
+
+\begin{document}
+
+
+\WTIncludePreface
+
+%%
+% MAIN CHAPTER CONTENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% change chapter and section listing item for chapters
+\renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand{\thesection}{\arabic{section}}
+
+
+\mainmatter
+
+\pagestyle{headings} % change header back to default for chapters
+
+\WTIncludeChapters
+
+\end{document}

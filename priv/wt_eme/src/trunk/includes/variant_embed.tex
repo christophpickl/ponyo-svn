@@ -1,0 +1,34 @@
+
+\input{includes/variant2_video}
+
+%%
+% REFERENCE CONSTANTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \WTMediaRefSNT {\WTXMediaVariantStaticPath{snt_yipman}}
+
+%%
+% INTERNAL INTERFACE IMPLEMENTATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\WTXMediaVariantCaption#1#2{#1}
+
+\def\WTXMediaVariantInclude#1{
+	\includemedia[
+	  activate=pageopen,
+	  width=480pt,height=360pt,
+	  addresource=#1,
+	  flashvars={%
+	src=#1
+	&scaleMode=stretch}
+	]{}{StrobeMediaPlayback.swf}
+}
+
+
+
+%%
+% INTERNAL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \WTXMediaVariantStaticPath #1{resources/videos/#1.mp4}
+

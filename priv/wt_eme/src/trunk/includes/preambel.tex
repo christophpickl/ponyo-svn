@@ -1,56 +1,80 @@
 
-%\documentclass[a4paper,12pt]{scrartcl}
+\documentclass[twoside]{book}
 
-\documentclass[twoside]{book}%{article}
-\usepackage[hmarginratio=2:3]{geometry}%odd pages haben rechts einen groesseren abstand, even pages links
+\title{Das Wing Tsun Ein-Mal-Eins}
 
- \renewcommand{\familydefault}{\sfdefault}
 
+
+%%
+% common packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage[hmarginratio=2:3]{geometry}% odd pages haben rechts einen groesseren abstand, even pages links
 \usepackage[austrian]{babel} % setzt zb ToC und listoffigures text
 \usepackage[latin1]{inputenc}
 \usepackage{hyperref}
-
-\usepackage{graphicx}
 \usepackage{url}
+\usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{graphicx}% fuer DeclareGraphicsRule
+	%\usepackage[pdftex]{graphicx}
+\usepackage{changepage}% to increase side margin; used for cite text
+\usepackage{tocloft}% control the design of toc, figures and tables; define own list-of-something
+\usepackage{sidecap}% for \begin{SCfigure}
+
+%%
+% misc adjustments
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% change default font family to sans-serif
+\renewcommand{\familydefault}{\sfdefault}
+
+%\renewcommand{\contentsname}{asdf does not work to rename toc title} 
+% only display chapters/sections that deep;
+\setcounter{tocdepth}{2} % TODO set tocdepth to 1 afterwards; or create 2nd (mini)toc with full/less details
+
+% include von graphics definieren
 \DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
 
-\usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
 
-\usepackage{enumitem}
+% TODO funkt nicht \renewcommand{\figurename}{Bild}
+
+\setlength{\cftfignumwidth}{3em}% hat was zu tun mit tocloft package
+%\renewcommand{\cftchapfont}{Steht vorm Kapitel im ToC }
+
+
+
+
+
+
+%%
+% define custom enumeration style
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newlist{WTalphenum}{enumerate}{2}
 \setlist[WTalphenum,1]{label=\alph*)}
 \setlist[WTalphenum,2]{label=\roman*)}
 
-% funkt nicht \renewcommand{\figurename}{Bild}
 
-% control the design of table of contents, figures and tables
-\usepackage{tocloft}
-\setlength{\cftfignumwidth}{3em}
-%\renewcommand{\cftchapfont}{Steht vorm Kapitel im ToC }
+%%
+% define own list of videos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-% to increase side margin; used for cite text
-\usepackage{changepage}
+\newcommand{\listvideo}{Videoverzeichnis}
+\newlistof{video}{exp}{\listvideo}
 
-\usepackage{xcolor}
-\usepackage{color}
-
-%%%
+\newcommand{\WTVideo}[1]{%
+\refstepcounter{video}
+\addcontentsline{exp}{video}
+{\protect\numberline{\thevideo}#1}\par}
 
 
 
-%\usepackage{imakeidx}
-%\makeindex[columns=2]
-%\makeindex[title=My custom index title,columns=2]
-
-%\usepackage{makeidx}
-%\usepackage[columns=2,totoc=false]{idxlayout}
-%\makeindex
-
-\usepackage{imakeidx}
-\makeindex
-
-
+%%
+% glossar erstellen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 % [toc] [xindy] instead makeindex
 % [nonumberlist] notwendig wedgen \glsaddall
@@ -63,29 +87,31 @@
 %\makeglossary
 
 
-%    \usepackage{etoolbox}
-%    \newcommand*{\patchlist}[1]{\patchcmd{#1}{\chapter*}{\section*}{}{}}
-%    \patchlist{\tableofcontents}
-%    \patchlist{\listoffigures}
-%    \patchlist{\listoftables}
+%%
 
-%%%
+% index erstellen
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\usepackage{imakeidx}
+\makeindex
 
-%\renewcommand{\contentsname}{asdf does not work to rename toc title} 
-\setcounter{tocdepth}{2} % only display chapters/sections that deep; TODO set to 1 afterwards
+%\usepackage{imakeidx}
+%\makeindex[columns=2]
+%\makeindex[title=My custom index title,columns=2]
 
+%\usepackage{makeidx}
+%\usepackage[columns=2,totoc=false]{idxlayout}
+%\makeindex
 
 
 
 %%
-% restliches
+% includes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\input{includes/common}
+\input{includes/libs/common}
+\input{includes/libs/galery}
+\input{includes/libs/media}
 \input{includes/headerfooter}
-\input{includes/galery}
 
-\title{WingTsun Einsteiger Kompendium}
-\author{Christoph Pickl}
 

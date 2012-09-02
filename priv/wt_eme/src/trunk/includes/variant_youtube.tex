@@ -1,0 +1,38 @@
+
+\input{includes/variant2_video}
+
+%%
+% REFERENCE CONSTANTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \WTMediaRefSNT {\WTXMediaVariantYoutubeUrl{uy3_nSXpBLw}}
+
+%%
+% INTERNAL INTERFACE IMPLEMENTATION
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\WTXMediaVariantCaption#1#2{#1 (\texttt{#2})}
+
+\def\WTXMediaVariantInclude#1{
+	\includemedia[
+%		width=0.6\linewidth,height=0.45\linewidth,
+		width=478pt,height=359pt,
+		activate=pageopen,
+		flashvars={
+		modestbranding=1 % no YT logo in control bar
+		&autohide=1 % controlbar autohide
+		&showinfo=0 % no title and other info before start
+		&rel=0 % no related videos after end
+		},
+		url % Flash loaded from URL
+	]{}{#1}%http://www.youtube.com/v/uy3_nSXpBLw?rel=0
+}
+
+
+
+%%
+% YOUTUBE INTERNAL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def \WTXMediaVariantYoutubeUrl #1{http://www.youtube.com/v/#1?rel=0}
+

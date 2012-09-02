@@ -1,0 +1,12 @@
+
+\newcommand{\WTlistofvideos}{\listofvideo}
+	
+\newenvironment{WTXMediaImageOrVideo}[1]
+{
+	\def\WTXTMPMediaCaption{#1}% create temporary variable so param can be used in end part
+	\begin{center}
+		\WTVideo{#1}% add entry to table of videos
+} {
+		\par\noindent\small{\textbf{Video \thevideo:} \textit{\WTXTMPMediaCaption}}
+	\end{center}
+}

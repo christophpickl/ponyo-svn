@@ -1,0 +1,27 @@
+
+\newcommand{\WTIncludeChapters}{
+	\include{chapters/formen}
+	\include{chapters/positionen}
+	\include{chapters/drillszyklen}
+	\include{chapters/theorie}
+	\include{chapters/kuenkuit}
+
+	\input{includes/appendix}
+}
+
+\newcommand{\WTIncludePreface}{
+	\pagestyle{preheadings} % change header other than usual for very first pages
+	\frontmatter
+	\maketitle
+	\setcounter{page}{1}
+
+	%\newpage % leere seite nach deckblatt
+	%Diese Seite wurde absichtlich leer gelassen.
+	%\newpage
+
+	\tableofcontents
+	%\cleardoublepage
+	\newpage
+	\input{chapters/vorwort}
+
+}

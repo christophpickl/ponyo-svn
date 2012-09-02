@@ -1,0 +1,16 @@
+\documentclass[12pt,landscape]{article}
+\usepackage{geometry}
+\geometry{verbose,letterpaper}
+
+\usepackage{movie15}
+%said to be the next-gen lib for this purpose: \usepackage{media9}
+
+\usepackage{hyperref}
+\begin{document}
+\begin{figure}[h!]
+\includemovie[
+%  poster=flashposter.jpg,
+  text={\Large\bf Click to start\hspace*{400pt}}
+]{550pt}{400pt}{feature.swf}
+\end{figure}
+\end{document}

@@ -1,0 +1,64 @@
+%media9 unterstuetzt nur swf, flv und mp4
+% how to convert an avi to mp4
+% => ffmpeg -i Sample.avi -vcodec libx264 Sample.mp4
+
+%\documentclass{article}
+\documentclass[12pt,landscape]{article}
+\usepackage{geometry}
+
+\usepackage{media9}
+\usepackage{hyperref}
+
+%\usepackage[dvipdfmx]{media9} % only for latex->dvipdfmx
+\begin{document}
+
+% FUNKTIONIERT!!!!!
+%\includemedia[addresource=asdf.mp4,activate=pageopen,width=5cm, height=4cm,flashvars={source=asdf.mp4&autoPlay=false}]{\fbox{my alternate text}}{VPlayer.swf}
+% statt alternativen fboxed-text: \includegraphics{FlashPoster.jpg}
+% or: activate=onclick
+
+
+
+\includemedia[
+  activate=pageopen,
+  width=640pt,height=480pt,
+  addresource=itsme.mov,
+  flashvars={%
+src=itsme.mov
+&scaleMode=stretch}
+]{}{StrobeMediaPlayback.swf}
+
+
+
+
+
+
+
+
+
+%\includemedia[
+%  activate=pageopen,
+%  width=640pt,height=480pt,
+%]{}{Busta.mp4}
+
+%\includemedia[
+%width=\paperwidth,height=0.7\linewidth,
+%activate=pageopen,
+%flashvars={movie.mp4 &autoPlay=true}
+%]{}{Busta.mp4}
+
+%\addmediapath{/Users/phudy/_computer/latex/_old_projects/tex_and_mp4}
+%\includemedia[activate=onclick,width=480pt,height=360pt]{me}{/Users/phudy/_computer/latex/_old_projects/tex_and_mp4/asdf.mp4}
+
+
+%\begin{figure}[h!]
+%	\includemedia[width=640,height=480}]
+		%{text={\Large\bf Click to start\hspace*{480pt}}
+%		{Busta.mp4}
+%addresource=path/to/video.mp4
+%flashvars={vid=path/to/video.mp4&...}
+%activate=onclick | pageopen | pagevisible
+%deactivate=onclick | pageclose | pageinvisible
+%\end{figure}
+
+\end{document}

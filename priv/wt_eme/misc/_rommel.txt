@@ -1,3 +1,15 @@
+@WT EME
+* ganz am anfang "keywords" section
+* bereich "preambel" ist zwischen documentclass und begin.document
+*  In case of Flash, this can be a local SWF file, or a URL, such as a YouTube video
+	=> wuerde bedeuten man muesste online sein, sodass es funkt
+===> varianten bis dato:
+	1. rein statisch
+	2. dyanmisch mit flash only
+	3. dynamisch mit flash + video embedded
+	4. full: dynamisch mit flash + video remote
+	5. package: alle PDF varianten + poster und separate movies
+
 
 
 

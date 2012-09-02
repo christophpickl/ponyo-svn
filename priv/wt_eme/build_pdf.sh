@@ -1,6 +1,8 @@
 #!/bin/bash
 
-TARGET=wteme-full
+TARGET=wteme-minimal
+#TARGET=wteme-slim
+#TARGET=wteme-full
 #TARGET=wteme-development
 ROOT=src/trunk/
 

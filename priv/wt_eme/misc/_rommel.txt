@@ -1,0 +1,104 @@
+
+@verschiedene stile: "Kommerzgedanke und der Kampf um Marktanteile bis heute das Bild der Szene bestimmen und dieser Umstand zum Erliegen eines fruchtbaren Erfahrungsaustausches beitrŠgt"
+	†berlieferten Anekdoten zufolge lehnte er es ab, seinem spŠter zu Weltruhm kommenden SchŸler BRUCE LEE, in die letzten Geheimnisse des Systems einzuweihen, da dieser die Kunst in den USA an AuslŠnder weitergab
+	[http://www.dragoswingtsun.com/index.php/geheimkult-und-verfall-der-werte.html]
+
+
+grundsaetzliche gute seite
+	http://www.wingchunpedia.org/pmwiki/pmwiki.php?n=Main.HomePage
+
+@EWTO schulgraduierung:
+	http://www.legacyjkd.com/ranking.html
+
+@WT FORUM
+	http://www.kampfkunst-board.info/forum/f134/
+
+
+
+@WT EME
+* ganz am anfang "keywords" section
+* bereich "preambel" ist zwischen documentclass und begin.document
+*  In case of Flash, this can be a local SWF file, or a URL, such as a YouTube video
+	=> wuerde bedeuten man muesste online sein, sodass es funkt
+===> varianten bis dato:
+	1. rein statisch
+	2. dyanmisch mit flash only
+	3. dynamisch mit flash + video embedded
+	4. full: dynamisch mit flash + video remote
+	5. package: alle PDF varianten + poster und separate movies
+
+
+
+
+
+
+!! die a) b) zeichen direkt ins bild reinplatzieren (unten/oben-links/rechts konfigurierbar)
+!! diverse seitenlayouts ausarbeiten (wie in kernspecht buechern, mal wo wo ein bild die ganze seite fuellt, oder eine bilder reihe im vordergrund steht; fast so wie slidemasters bei praesis
+! bzgl glossar: http://www.ctan.org/tex-archive/macros/latex/contrib/makeglos
+-- verschiedene ausgabeformate: { normal(full) vs. ohne drumherum (simple), mit/ohne SWF/Video, A4/A5, gleichseitig/twosided, 1/2/4 seiten pro blatt }
+@indezes: http://en.wikibooks.org/wiki/LaTeX/Indexing
+
+
+
+
+Multiple indices
+
+\usepackage{multind}
+\makeindex{books}
+\makeindex{authors}
+...
+\index{books}{A book to index}
+\index{authors}{Put this author in the index}
+...
+\printindex{books}{The Books index}
+\printindex{authors}{The Authors index}
+
+
+
+
+\usepackage{multicol,multind}
+
+\makeatletter
+\def\number@of@cols{2}
+\renewcommand{\printindex}[3][2]{%
+  \section*{#3}%
+  \@mkboth{\MakeUppercase{#3}}{\MakeUppercase{#3}}%
+  \addcontentsline{toc}{section}{#3}%
+  \parindent\z@ \def\number@of@cols{#1}%
+  \@input{#2.ind}%
+}
+\renewenvironment{theindex}
+  {\begin{multicols}{\number@of@cols}
+   \parskip\z@ \@plus .3\p@\relax
+   \columnseprule \z@
+   \columnsep 35\p@
+   \let\item\@idxitem}
+  {\end{multicols}}
+\makeatother
+
+\makeindex{indexa}
+\makeindex{indexb}
+
+
+
+bild spiegeln
+============================
+\begin{figure}[h!]
+  \centering
+    \reflectbox{%
+      \includegraphics[width=0.5\textwidth]{gull}}
+  \caption{A picture of the same gull
+           looking the other way!}
+\end{figure}
+
+
+
+sidecaptions
+============================ [https://en.wikibooks.org/wiki/LaTeX/Floats,_Figures_and_Captions]
+It is sometimes desirable to have a caption appear on the side of a float, rather than above or below. The sidecap package can be used to place a caption beside a figure or table. The following example demonstrates this for a figure by using a SCfigure environment in place of the figure environment.
+- Wrapping text around figures
+
+!! Subfloats von \usepackage{subcaption}
+	\begin{figure}
+	        \begin{subfigure}[b]{0.3\textwidth}
+

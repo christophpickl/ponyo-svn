@@ -15,7 +15,6 @@
 
 
 
-\def\WTXKurzSatzImageTop#1{\vtop{\null\hbox{#1}}}
 
 %\newtoggle{WTToggleKurzSatz}
 % #1=nummer, #2=satz-titel, #3=beschreibung
@@ -28,7 +27,7 @@
 	\end{tabular} \\
 }
 
-\newcommand{\WTXKurzSatzGraphic}[1]{\WTXKurzSatzImageTop{\includegraphics[width=100pt]{resources/images/siunimtau/kurzsatz/#1}}}
+\newcommand{\WTXKurzSatzGraphic}[1]{\WTXCommonImageTop{\includegraphics[width=100pt]{resources/images/siunimtau/kurzsatz/#1}}}
 
 \newcommand{\WTXKurzSatzText}[1]{\raisebox{-1.2cm}{\parbox{0.7\linewidth}{#1}}}
 

@@ -31,7 +31,7 @@ siu nim tau punkte
 
 // satz III
 26 linke hand auf
-27 tan ueber mitte
+27 tan ueber mitte (handgelenk zuerst zur mitte)
 28 hand zu dir
 29 halber huen runter
 30 aufstellen
@@ -43,9 +43,9 @@ siu nim tau punkte
 36-41 == 30-35
 42-47 == 30-35
 47-49 == 30-32
-50 seitlicher pak
+50 seitlicher pak (djark cheung)
 51 mitte ziehen + eindrehen
-52 cheung
+52 ching cheung
 53-57 schlusssequenz { tan, zu dir, huen, greifen, sau kuen }
 
 // satz III rechts
@@ -76,6 +76,7 @@ siu nim tau punkte
 111 fingerstich
 112 lange bruecke gam
 113 fallen lassen
+113b daumen greifen
 114 tai sao
 115 verkehrter huen (simultan faust machen)
 116 sau kuen
@@ -83,7 +84,7 @@ siu nim tau punkte
 // satz V
 117 seitlicher pak
 118 zur mitte
-119 cheung
+119 wang-cheung
 120-124 schlusssequenz { tan, zu dir, huen, greifen, sau kuen }
 
 // satz V rechts
@@ -98,7 +99,7 @@ siu nim tau punkte
 126 lau
 127 zu dir
 128 huen
-129 cheung
+129 dai-cheung
 
 130-134 schlusssequenz { tan, zu dir, huen, greifen, sau kuen }
 

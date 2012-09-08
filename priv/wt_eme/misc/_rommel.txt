@@ -1,4 +1,103 @@
 
+* im text ueberall umschreiben:
+	2+ ellbogen => ellboegen
+	2+ (handflaechen-)stoss => stoesse
+
+* im text ueberall chinesisches mit - trennen
+	siu  nim tao => siu-nim-tao
+
+ The first form, Siu Nim Tao, is often translated as ‘Little Idea.’Very much like, “Here’s a little idea on what Wing Chun is about.” Very playful and open – and I think it’s important to not lose sight of this.
+
+
+- weiche vs harte kampfkunste
+	* verglichen mit anderen
+		- tai chi, bagua, hsing-i, boxen
+		- JKD, escrima, karate, judo, krav maga
+
+- fuer eigene illustrationen
+	* animation mit click startbar
+	* zuerst wird animation gezeigt wo falsch (rotes X drueber)
+	* dann wird gezeigt wie richtig (gruener haken)
+	// fuer statische variante: einfach fertiges bild anzeigen
+
+
+
+http://www.lmkungfu.com/styles.html
+	kungfu styles
+
+siu/sil nim/lum/lim/lien tao/tau/tou
+
+* form heisst auf chinesisch "taolu"
+
+* Sam Pai Fut/Saam Kei Fat
+% Siu Nim Tao practice:
+    defines the centreline and teaches students where their hands should be relative to it
+    teaches students how to execute Wing Chun strikes correctly
+    reinforces the correct elbow position
+    instills correct breathing patterns
+    facilitates force generation in short range Wing Chun strikes
+Great emphasis is put on relaxation while performing Siu Nim Tao. This facilitates efficiency of movement and hand speed
+
+=> SNT varianten: http://www.mukjongwoodendummy.com/2010/10/siu-lim-tao-or-little-idea.html
+
+
+http://www.vtgraz.at/index-Dateien/Page673.htm
+	- bzgl wie koennte eigene illustration aussehen
+	- bzgl wie koennten grafiken fuer schrittarbeit aussehen!
+	- gute infos bzgl WT kick
+
+
+
+
+1. Schülergrad (Weiss) - das unbeschriebene Blatt Siu Lim Tao – Teil 1
+
+2. Schülergrad (Gelb) – der fruchtbare Boden für weiteres Wachstum Siu Lim Tao komplett
+
+3. Schülergrad (Orange) – der Samen, der in den Boden gepflanzt wird Chum Kiu komplett
+
+4. Schülergrad (Grün) – Die Pflanze, die aus dem Samen hervorgeht Muk Yan Chong komplett
+
+5. Schülergrad (Blau) - Die Pflanze, die größer wird und zum Himmel wächst Biu Gee komplett
+
+6. Schülergrad (Braun) - Die Pflanze wird zu einem Baum Luk Dim Boon Kwun komplett
+
+1. Lehrergrad (Schwarz) - Die Reife! Das System wurde vollständig gelernt! Baat Cham Dao komplett
+
+2. Lehrergrad (Schwarz) – Umfassendes Verständnis des  Ip Man Wing Chun-Systems in Theorie und Praxis
+
+3. Lehrergrad (Schwarz) - Umfassendes Verständnis der Kampfkunst und der anderen Wing Chun-Stile
+
+Philosoph (Weiß) - die Leere und zurück zum Ursprung - Umfassendes Verständnis der Kampfkunst
+
+
+
+
+
+
+
+
+TODO
+* heisst wie schreibt man Sao Chong??
+
+
+
+bruce lee zitat:
+	it is like a finger, pointing away to the moon.
+dont concentrate on the finger, or you will miss all that heavenly glory.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @verschiedene stile: "Kommerzgedanke und der Kampf um Marktanteile bis heute das Bild der Szene bestimmen und dieser Umstand zum Erliegen eines fruchtbaren Erfahrungsaustausches beiträgt"
 	Überlieferten Anekdoten zufolge lehnte er es ab, seinem später zu Weltruhm kommenden Schüler BRUCE LEE, in die letzten Geheimnisse des Systems einzuweihen, da dieser die Kunst in den USA an Ausländer weitergab
 	[http://www.dragoswingtsun.com/index.php/geheimkult-und-verfall-der-werte.html]

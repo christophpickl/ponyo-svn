@@ -1,0 +1,3 @@
+to put it simple, ponyo is about the microsoft kinect motion capturing device (as well as other OpenNI compliant devices) and all tools -more or less- necessary to rapidly implement gesture based applications.
+
+more coming soon...

@@ -1,0 +1,54 @@
+# this document can be viewed online at: http://code.google.com/p/ponyo-svn/wiki/RoadMap
+
+# Sub projects #
+  * **PonyoNI** ... provides core functionality based on OpenNI; mainly C++ and some JNI/JNA bridge to Java
+  * **JPonyo** ... Java middleware; he is really a big boy
+  * **PonyoMIDI** Router ... route Skeleton information as MIDI to generate audio (a.k.a. old Pulse "_MKinector_")
+  * **PonyoTrainer** ... a Virtual Personal Trainer; detect right/wrong movement of certain Aikido technique(s)
+  * **PonyoTracker** ... a Surveillance System; multiple Kinects using custom object detection algorithms to track people
+
+## PonyoNI - Version 0.0 ##
+_Get to know OpenNI_
+  * get familiar with provided coordinates
+  * get familiar with OpenNI API: draw diagram, read OpenNI sample code, read forum
+
+## PonyoNI - Version 0.1 ##
+_Initial version of PonyoNI_
+  * keep everything as simple as possible: only user management and skeleton tracking
+  * based on existing PonyoNI prototype
+  * enhance C++ infrastructure: memory, logging, exception
+
+## JPonyo - Version 0.1 ##
+_Complete rewrite of old Josceleton codebase_
+  * rewrite josceleton core/connection libraries
+  * API abstracts connection type {PonyoNI, PonyoOSC; maybe even openkinect}
+
+## PonyoMIDI - Version 0.x ##
+_Minor enhancements using ?old? logic_
+  * implement BeatStabilizer
+  * fix minor GUI stuff
+  * consistent 0/1 base indexing
+  * fix quit bug
+
+## PonyoTrainer - Version 0.0 ##
+_Write something that just works, kind of throw-away code_
+  * implement rule set engine to detect proper movement
+  * e.g.: detect shi-ho-nage
+
+## PonyoNI - Version 0.2 ##
+_N/A_
+  * improve C++ infrastructure: add cxxunit, enhance logging, rework cmake, add doxygen, ...
+  * programatic configuration (no more XML necessary)
+
+# Far far away #
+
+## Future TODOs ##
+  * learn and use advanced OpenGL techniques
+  * multiple kinects
+  * investigate openkinect/libFreeNect
+  * rewrite JNA to JNI wrapper
+
+## Future Sub projects ##
+  * **PonyoOSC** Router ... route Skeleton information as OSC protocol
+  * **PonyoMEX** ... provide caMatlab bridge via mex library
+  * **ASPonyo** ... Flash/Flex bridge via Merapi
